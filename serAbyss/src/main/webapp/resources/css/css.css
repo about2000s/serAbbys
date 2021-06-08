@@ -1,0 +1,14 @@
+@charset "UTF-8";
+
+.topmenubar { width:100%;  }
+.topmenubar .toplogo { width:15%;border:0px solid black; }
+.navi { width:100%; border:1px solid red;}
+.navi ul li { font-size:10px;  margin-right:3%; display:inline; font-size:22px; list-style:none;}
+.navi ul li a { text-decoration: none;}
+
+.leftmenu { width:200px;  border:1px solid blue;float:left; } 
+.leftmenu ul {list-style:none;}
+.leftmenu ul li {  padding-bottom:15px; } 
+.leftmenu ul li a { text-decoration: none; }
+
+.container { width:100%; border:1px solid purple; float:left; }
