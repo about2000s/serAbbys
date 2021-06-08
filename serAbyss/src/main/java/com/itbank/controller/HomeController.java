@@ -16,6 +16,11 @@ import com.itbank.service.PersonService;
 @RequestMapping("common")
 public class HomeController {
 	
+	@GetMapping("/")
+	public String home() {
+		return "home";
+	}
+	
 	@Autowired private PersonService ps;
 	
 	@PostMapping("/personLogin")
