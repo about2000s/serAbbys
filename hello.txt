@@ -1,3 +1,1 @@
 first by master
-second by develop
-third by master
