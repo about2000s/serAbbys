@@ -6,5 +6,5 @@
 	<p>${msg }</p>
 	<button onclick = "${cpath}/common/login">로그인하러 가기</button>
 </div>
-
+<!--  -->
 <%@ include file="../layout/footer.jsp" %>
