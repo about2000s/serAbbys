@@ -13,7 +13,7 @@ service_engineer   글 작성시 '없음', 이후 기사가 배정 버튼 눌렀
 service_viewcount   default 0
 
 */
-public class ServiceBoardDTO {
+public class OrderDTO {
 	private int service_idx, service_viewCount;
 	private String service_id, service_title, service_content, service_status, service_address, service_reg, service_engineer;
 	
