@@ -8,13 +8,26 @@ public interface PersonDAO {
 
 	@Select("select count(*) from person where person_id=#{id}")
 	int selectOne(String id);
-
-	@Select("select count* from person where membre_id=#{membre_id} and member_pw=#{member_pw}")
+	//오타났네여 membre -> person으로 변경했습니다.
+	@Select("select * from person where person_id=#{person_id} and person_pw=#{person_pw}")
 	PersonDTO personLogin(PersonDTO dto);
-
-	@Select("select count* from person where membre_id=#{membre_id} and member_pw=#{member_pw} and belong is not null")
+	//오타났네여 membre -> person로 변경했습니다.
+	@Select("select * from person where person_id=#{person_id} and person_pw=#{person_pw} and belong is not null")
 	PersonDTO companyLogin(PersonDTO dto);
 
 	int join(PersonDTO inputData);
 
+	@Select("select person_id from person where person_name=#{person_name} and person_phone=#{person_phone}")
+	String findIdByPhone(PersonDTO inputData);
+	
+	@Select("select person_id from person where person_name=#{person_name} and person_phone=#{person_phone}")
+	String findIdByEmail(PersonDTO inputData);
+	
+	
+	@Select("select * from person where person_id=#{person_id} and person_phone=#{person_phone}")
+	PersonDTO repwByPhone(PersonDTO inputData);
+	
+	@Select("select * from person where person_id=#{person_id} and person_email=#{person_email}")
+	PersonDTO repwByEmail(PersonDTO inputData);
+	
 }
