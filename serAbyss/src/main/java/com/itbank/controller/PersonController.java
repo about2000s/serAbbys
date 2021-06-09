@@ -131,11 +131,48 @@ public class PersonController {
 	public String myPage() {
 		return "common/myPage";
 	}
+	
+	@GetMapping("updateInfo")
+	public String updateInfo() {
+		return "common/updateInfo";
+	}
+	
+	@PostMapping("updateInfo")
+	public ModelAndView updateInfo(PersonDTO inputData) {
+		ModelAndView mav = new ModelAndView();
+		return mav;
+	}
+	
+	@GetMapping("updatePw")
+	public String updatePw() {
+		return "common/updatePw";
+	}
+	@PostMapping("updatePw")
+	public ModelAndView updatePw(PersonDTO inputData) {
+		ModelAndView mav = new ModelAndView();
+		
+		int row = ps.selectOneCheckIdPw(inputData);
+		if(row != 0) {
+			mav.setViewName("common/realUpdatePw");
+		}
+		else {
+			String msg = "비밀번호가 일치하지 않습니다";
+			mav.addObject("msg", msg);
+			mav.setViewName("alert");
+		}
+		return mav;
+	}
+	
+	@PostMapping("pwUpdateResult")
+	public ModelAndView pwUpdateResult(PersonDTO inputData, HttpSession session) {
+		ModelAndView mav = new ModelAndView("alert");
+		int row = ps.updatePw(inputData);
+		session.invalidate();//비밀번호가 변경되었으므로 세션을 끊고 다시 로그인하게 한다.
+		String msg = "비밀번호가 변경되었습니다. 다시 로그인하세요";
+		mav.addObject("msg", msg);
+		return mav;
+	}
 }
-
-
-
-
 
 
 

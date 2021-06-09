@@ -12,6 +12,7 @@
 	</settings>
 	
 	<typeAliases>
+		<typeAlias type="com.itbank.dto.PersonDTO" alias="person"/>
 	</typeAliases>
 	
 </configuration>

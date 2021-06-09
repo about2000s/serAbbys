@@ -73,4 +73,14 @@ public class PersonService {
 		dto.setperson_pw(getHash(randomPw));//그 임시비밀번호를 해시처리 후 dto에 셋팅.
 		return randomPw;
 	}
+
+	public int selectOneCheckIdPw(PersonDTO inputData) {
+		return dao.selectOneCheckIdPw(inputData);
+	}
+
+	public int updatePw(PersonDTO inputData) {
+		String hash = getHash(inputData.getperson_pw());
+		inputData.setperson_pw(getHash(hash));
+		return dao.updatePw(inputData);
+	}
 }
