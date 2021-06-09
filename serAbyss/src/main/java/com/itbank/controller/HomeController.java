@@ -20,6 +20,8 @@ public class HomeController {
 	public String home() {
 		return "home";
 	}
+  
+
 	
 	@Autowired private PersonService ps;
 	
@@ -73,4 +75,5 @@ public class HomeController {
 		return mav;
 	}
 	
+
 }
