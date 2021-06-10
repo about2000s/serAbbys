@@ -83,4 +83,8 @@ public class PersonService {
 		inputData.setperson_pw(getHash(hash));
 		return dao.updatePw(inputData);
 	}
+
+	public int idCheck(PersonDTO dto) {
+		return dao.idCheck(dto);
+	}
 }
