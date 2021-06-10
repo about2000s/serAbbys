@@ -26,11 +26,9 @@
 			)
 	</insert>
 	
-	<select id="selectOneCheckIdPw" parameterType="int">
-		select count(*) from person where person_id=#{person_id} and person_pw=#{person_pw} 
-		<if test="person_check != null">
-			and person_check=#{person_check}
-		</if>
+	<select id="selectOneCheckIdPw" parameterType="person" resultType="int">
+		select count(*) from person 
+		where person_id=#{person_id} and person_pw=#{person_pw} and person_check=#{person_check}
 	</select>
 </mapper>
 

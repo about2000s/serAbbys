@@ -4,8 +4,8 @@
 <h2>비밀번호를 수정하려고 왔다. 기존의 비밀번호를 입력하세요.</h2>
 <div>
 	<form method = "post">
-		<input type = "hidden" name = "person_belong"><!-- value = "${login.person_belong }" -->
-		<input type = "hidden" name = "person_id"><!-- value = "${login.person_id }" -->
+		<input type = "hidden" name = "person_check" value = "${login.person_check }">
+		<input type = "hidden" name = "person_id" value = "${login.person_id }">
 		<p><input type = "password" name = "person_pw"></p>
 		<input type = "submit" value = "다음">
 	</form>

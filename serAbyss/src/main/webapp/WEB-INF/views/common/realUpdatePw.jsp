@@ -4,7 +4,7 @@
 <h2>비밀번호 수정하는 페이지!</h2>
 <div>
 	<form id = "repwCheck" method = "post" action = "pwUpdateResult">
-		<p><input type = "hidden" name = "person_id"></p>
+		<p><input type = "hidden" name = "person_id" value = "${login.person_id }"></p>
 		<p>새 비밀번호 입력: <input type = "password" name = "person_pw"></p>
 		<p>새 비밀번호 확인: <input type = "password" name = "person_pw2"></p>
 		<input type = "submit" value = "다음">

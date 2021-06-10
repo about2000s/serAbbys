@@ -24,6 +24,19 @@ public class PersonController {
 	
 	@Autowired private PersonService ps;
 	
+	//로그인 페이지로 이동하기.
+	@GetMapping("/login")
+	public String login() {
+		return "common/login";
+	}
+	
+	//로그아웃 처리하기
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "home";
+	}
+	
 	//개인회원 로그인
 	@PostMapping("/personLogin")
 	public ModelAndView personLogin(PersonDTO inputData, HttpSession session) {
@@ -31,6 +44,7 @@ public class PersonController {
 		PersonDTO login = ps.personLogin(inputData);
 		if(login != null) {
 			session.setAttribute("login", login);
+			mav.setViewName("home");
 		}
 		else {
 			String msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
@@ -46,7 +60,7 @@ public class PersonController {
 		ModelAndView mav = new ModelAndView();
 		PersonDTO login = ps.companyLogin(inputData);
 		if(login != null) {
-			session.setAttribute("common/login", login);
+			session.setAttribute("login", login);
 			mav.setViewName("home");
 		}
 		else {
@@ -139,24 +153,27 @@ public class PersonController {
 		return "common/myPage";
 	}
 	
-	@GetMapping("updateInfo")
+	@GetMapping("/updateInfo")
 	public String updateInfo() {
 		return "common/updateInfo";
 	}
 	
-	@PostMapping("updateInfo")
+	@PostMapping("/updateInfo")
 	public ModelAndView updateInfo(PersonDTO inputData) {
 		ModelAndView mav = new ModelAndView();
 		return mav;
 	}
 	
-	@GetMapping("updatePw")
+	@GetMapping("/updatePw")
 	public String updatePw() {
 		return "common/updatePw";
 	}
-	@PostMapping("updatePw")
+	@PostMapping("/updatePw")
 	public ModelAndView updatePw(PersonDTO inputData) {
 		ModelAndView mav = new ModelAndView();
+		System.out.println(inputData.getPerson_id());
+		System.out.println(inputData.getPerson_pw());
+		System.out.println(inputData.getPerson_check());
 		
 		int row = ps.selectOneCheckIdPw(inputData);
 		if(row != 0) {
@@ -170,7 +187,7 @@ public class PersonController {
 		return mav;
 	}
 	
-	@PostMapping("pwUpdateResult")
+	@PostMapping("/pwUpdateResult")
 	public ModelAndView pwUpdateResult(PersonDTO inputData, HttpSession session) {
 		ModelAndView mav = new ModelAndView("alert");
 		int row = ps.updatePw(inputData);

@@ -30,20 +30,26 @@
 	<div class="toplogo"><a href="${cpath }"><img src="${cpath }/resources/img/logo.png"></a></div>
 	<div class="navi">
 		<ul>
-			<li><a href="">기본정보관리</a></li>
+			<li><a href="${cpath }/common/myPage">기본정보관리</a></li>
 			<li><a href="${cpath }/order/service_list_all">서비스관리</a></li>
 			
 			<!-- 여기서부터 재훈이가 수정했습니다. -->
 			<c:if test="${login != null}">
-			<li><a href="">Logout</a></li>
+				<li><a href="${cpath }/common/logout">Logout</a></li>
 			</c:if>
+			
 			<c:if test="${login == null}">
-			<li><a href="${cpath }/common/login">Login</a></li>
+				<li><a href="${cpath }/common/login">Login</a></li>
+				<li><a href="${cpath }/common/join">회원가입</a></li>
 			</c:if>
 			<!-- 여기까지 -->
-			
-			<li><a href="">회원가입</a></li>
 			<li><a href="${cpath }/board/review_list_all">리뷰 관리하기</a></li>
+			
+			<!-- 여기서부터 재훈이가 수정했습니다. -->
+			<c:if test="">
+				<li><a href="${cpath }/board/review_list_all">소속기사 관리 / 접수 관리</a></li>
+			</c:if>
+			<!-- 여기까지 -->
 		</ul>
 	</div>
 </div>

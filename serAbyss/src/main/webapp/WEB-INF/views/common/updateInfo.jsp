@@ -7,7 +7,7 @@
 	<!-- 수정 버튼 누르면 취소 버튼으로 탈바꿈한다. 그때 또 취소 버튼을 누르면 div가 hiddenNone된다. -->
 	
 		<p>
-			이메일: <input type = "email" name = "email">
+			이메일: <input type = "email" name = "person_email" value = "${login.person_email }">
 			<a class = "email">수정</a>
 		</p>
 		<div class = "email main hiddenNone">
@@ -18,7 +18,7 @@
 			</p>
 		</div>
 		
-		<p>폰번호: <input type = "text" name = "person_phone"><a class = "phone">수정</a></p>
+		<p>폰번호: <input type = "text" name = "person_phone" value = "${login.person_phone }"><a class = "phone">수정</a></p>
 		<div class = "phone main hiddenNone">
 			<h2>폰번호 변경을 위해서 인증이 필요합니다</h2>
 			<p>
@@ -27,19 +27,23 @@
 			</p>
 		</div>
 		
-		<p>유선전화번호: <input type = "text" name = "person_call"><a class = "call">수정</a></p>
-		<div class = "call main hiddenNone">
-			<p><input type = "text" name = "newCall" placeholder="새로운 유선전화 입력"></p>
-			<input type = "submit" value = "다음">
-		</div>
+		<c:if test="${login.person_call != null }">
+			<p>유선전화번호: <input type = "text" name = "person_call" value = "${login.person_call }"><a class = "call">수정</a></p>
+			<div class = "call main hiddenNone">
+				<p><input type = "text" name = "newCall" placeholder="새로운 유선전화 입력"></p>
+				<input type = "submit" value = "다음">
+			</div>
+		</c:if>
 		
-		<p>팩스: <input type = "text" name = "person_fax"><a class = "fax">수정</a></p>
-		<div class = "fax main hiddenNone">
-			<p><input type = "text" name = "newPax" placeholder="새로운 팩스 입력"></p>
-			<input type = "submit" value = "다음">
-		</div>
+		<c:if test="${login.person_fax != null }">
+			<p>팩스: <input type = "text" name = "person_fax" value = "${login.person_fax }"><a class = "fax">수정</a></p>
+			<div class = "fax main hiddenNone">
+				<p><input type = "text" name = "newPax" placeholder="새로운 팩스 입력"></p>
+				<input type = "submit" value = "다음">
+			</div>
+		</c:if>
 		
-		<p>주소: <a class = "address">수정</a></p>
+		<p>주소: <input type = "text" name = "person_address" value = "${login.person_address }"><a class = "address" >수정</a></p>
 		<div class = "address main hiddenNone">
 			<h2>주소 수정 API</h2>
 		</div>

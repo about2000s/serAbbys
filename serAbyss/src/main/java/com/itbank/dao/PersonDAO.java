@@ -9,11 +9,11 @@ public interface PersonDAO {
 
 	@Select("select count(*) from person where person_id=#{id}")
 	int selectOne(String id);
-	//오타났네여 membre -> person으로 변경했습니다.
-	@Select("select * from person where person_id=#{person_id} and person_pw=#{person_pw}")
+	
+	@Select("select * from person where person_id=#{person_id} and person_pw=#{person_pw} and person_check='n'")
 	PersonDTO personLogin(PersonDTO dto);
-	//오타났네여 membre -> person로 변경했습니다.
-	@Select("select * from person where person_id=#{person_id} and person_pw=#{person_pw} and belong is not null")
+	
+	@Select("select * from person where person_id=#{person_id} and person_pw=#{person_pw} and person_check='y'")
 	PersonDTO companyLogin(PersonDTO dto);
 
 	//sqlmap-person.xml에 있습니다

@@ -79,8 +79,8 @@ public class PersonService {
 	}
 
 	public int updatePw(PersonDTO inputData) {
-		String hash = getHash(inputData.getPerson_pw());
-		inputData.setPerson_pw(getHash(hash));
+//		String hash = getHash(inputData.getPerson_pw());
+//		inputData.setPerson_pw(getHash(hash));
 		return dao.updatePw(inputData);
 	}
 
