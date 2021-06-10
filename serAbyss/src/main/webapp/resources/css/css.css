@@ -14,15 +14,14 @@
 .leftmenu ul li a { text-decoration: none; }
 
 
-.container { width:100%; border:1px solid purple; float:left; }
-.container {border:0px solid purple; float:left; }
-.container table {position:relative; width:890px; border:1px solid black; border-collapse:collapse;}
+.container { }
+.container div {  width:100%; border:0px solid purple; float:left; } 
+.container table { position:relative; width:890px; border:1px solid black; border-collapse:collapse;}
 .container table th {padding:8px; border-right:1px solid black; border-bottom:1px solid black; font-size:12px;}
-.container table td { }
+.container table tr td {border-right:1px solid black; font-size:12px; align:center;padding:8px; }
 
 
-<<<<<<< HEAD
-=======
+
 /*정재훈  updateInfo, join파일에서 hidden처리*/
 .hiddenNone { display:none; }
->>>>>>> refs/remotes/origin/master
+
