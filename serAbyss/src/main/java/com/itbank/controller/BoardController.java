@@ -19,7 +19,7 @@ public class BoardController {
 	public String boardListAll() {
 		
 		BoardDTO dto = bs.boardListAll();
-		
+		//테스트 깃
 
 		return "board/review_list_all";
 		}
