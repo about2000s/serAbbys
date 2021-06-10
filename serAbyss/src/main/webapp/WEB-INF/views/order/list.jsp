@@ -24,7 +24,7 @@
 	<c:forEach var="dto" items="${list }">
 		<tr>
 			<td>${dto.service_idx }</td>
-			<td><a href="${cpath }/order/registRead/${dto.service_idx}">${dto.service_title }</a></td>
+			<td><a href="${cpath }/order/read/${dto.service_idx}">${dto.service_title }</a></td>
 			<td>${dto.service_id }</td>
 			<td>${dto.service_viewCount }</td>
 			<td>${dto.service_reg }</td>
