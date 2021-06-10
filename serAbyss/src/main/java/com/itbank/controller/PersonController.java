@@ -4,9 +4,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 //
 import com.itbank.dto.PersonDTO;
@@ -24,7 +27,7 @@ public class PersonController {
 		ModelAndView mav = new ModelAndView();
 		PersonDTO login = ps.personLogin(inputData);
 		if(login != null) {
-			session.setAttribute("common/login", login);
+			session.setAttribute("login", login);
 		}
 		else {
 			String msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
@@ -171,6 +174,11 @@ public class PersonController {
 		String msg = "비밀번호가 변경되었습니다. 다시 로그인하세요";
 //		mav.addObject("msg", msg);
 		return mav;
+	}
+	
+	@RequestMapping(value = "/idCheck", method = { RequestMethod.GET, RequestMethod.POST})
+	public @ResponseBody int idCheck(PersonDTO dto, Model model) {
+		return ps.idCheck(dto);
 	}
 }
 
