@@ -2,16 +2,22 @@
 
 .topmenubar { width:100%;  }
 .topmenubar .toplogo { width:15%;border:0px solid black; }
-.navi { width:100%; border:1px solid red;}
+.navi { width:100%; border:0px solid red;}
 .navi ul li { font-size:10px;  margin-right:3%; display:inline; font-size:22px; list-style:none;}
 .navi ul li a { text-decoration: none;}
 
-.leftmenu { width:200px;  border:1px solid blue;float:left; } 
+.leftmenu { width:200px;  border:0px solid blue;float:left; font-size:12px;} 
 .leftmenu ul {list-style:none;}
 .leftmenu ul li {  padding-bottom:15px; } 
 .leftmenu ul li a { text-decoration: none; }
 
+
 .container { width:100%; border:1px solid purple; float:left; }
+.container {border:0px solid purple; float:left; }
+.container table {position:relative; width:890px; border:1px solid black; border-collapse:collapse;}
+.container table th {padding:8px; border-right:1px solid black; border-bottom:1px solid black; font-size:12px;}
+.container table td { }
+
 
 /*정재훈  updateInfo, join파일에서 hidden처리*/
 .hiddenNone { display:none; }

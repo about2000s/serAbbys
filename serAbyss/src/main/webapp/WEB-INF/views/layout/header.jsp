@@ -34,6 +34,7 @@
 			<li><a href="${cpath }/order/service_list_all">서비스관리</a></li>
 			<li><a href="">Login/Logout</a></li>
 			<li><a href="">회원가입</a></li>
+			<li><a href="${cpath }/board/review_list_all">리뷰 관리하기</a></li>
 		</ul>
 	</div>
 </div>
