@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>Insert title here</title>
 <style>
 	.left-box{
@@ -32,7 +32,16 @@
 		<ul>
 			<li><a href="">기본정보관리</a></li>
 			<li><a href="${cpath }/order/service_list_all">서비스관리</a></li>
-			<li><a href="">Login/Logout</a></li>
+			
+			<!-- 여기서부터 재훈이가 수정했습니다. -->
+			<c:if test="${login != null}">
+			<li><a href="">Logout</a></li>
+			</c:if>
+			<c:if test="${login == null}">
+			<li><a href="${cpath }/common/login">Login</a></li>
+			</c:if>
+			<!-- 여기까지 -->
+			
 			<li><a href="">회원가입</a></li>
 			<li><a href="${cpath }/board/review_list_all">리뷰 관리하기</a></li>
 		</ul>

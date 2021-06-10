@@ -4,27 +4,27 @@
 			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 			
 <mapper namespace="com.itbank.dao.PersonDAO">
-<!-- 	<insert id="join" parameterType="person"> -->
-<!-- 		insert into person  -->
-<!-- 		(person_idx, person_id, person_pw, person_name, person_birth,  -->
-<!-- 		person_email, person_address, person_phone, person_call, person_fax,  -->
-<!-- 		person_check, person_belong) values ( -->
-<!-- 			person_seq.nextval, #{person_id}, #{person_pw}, #{person_name}, #{person_birth}, #{person_email}, #{person_address}, #{person_phone},  -->
-<!-- 			<if test="person_phone == null"> -->
-<!-- 			null,  -->
-<!-- 			</if> -->
-<!-- 			<if test="person_phone != null"> -->
-<!-- 			#{person_phone},  -->
-<!-- 			</if> -->
-<!-- 			#{person_fax}, #{person_check},  -->
-<!-- 			<if test="person_belong == null"> -->
-<!-- 			null -->
-<!-- 			</if> -->
-<!-- 			<if test="person_belong != null"> -->
-<!-- 			#{person_belong} -->
-<!-- 			</if> -->
-<!-- 			) -->
-<!-- 	</insert> -->
+	<insert id="join" parameterType="person">
+		insert into person 
+		(person_idx, person_id, person_pw, person_name, person_birth, 
+		person_email, person_address, person_phone, person_call, person_fax, 
+		person_check, person_belong) values (
+			person_seq.nextval, #{person_id}, #{person_pw}, #{person_name}, #{person_birth}, #{person_email}, #{person_address}, #{person_phone}, 
+			<if test="person_phone == null">
+			null, 
+			</if>
+			<if test="person_phone != null">
+			#{person_phone}, 
+			</if>
+			#{person_fax}, #{person_check}, 
+			<if test="person_belong == null">
+			null
+			</if>
+			<if test="person_belong != null">
+			#{person_belong}
+			</if>
+			)
+	</insert>
 	
 	<select id="selectOneCheckIdPw" parameterType="int">
 		select count(*) from person where person_id=#{person_id} and person_pw=#{person_pw} 

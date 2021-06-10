@@ -62,7 +62,7 @@ public class PersonService {
 	public String repwByPhone(PersonDTO inputData) {
 		PersonDTO dto = dao.repwByPhone(inputData);
 		String randomPw = randomPw();//UUID 써서 임시 비밀번호 만들고
-		dto.setperson_pw(getHash(randomPw));//그 임시비밀번호를 해시처리 후 dto에 셋팅.
+		dto.setPerson_pw(getHash(randomPw));//그 임시비밀번호를 해시처리 후 dto에 셋팅.
 		return randomPw;
 	}
 	//메소드가 완전히 겹치지만... dao에서는 다르게 처리하기 때문에 일단 분리해뒀습니다.
@@ -70,7 +70,7 @@ public class PersonService {
 	public String repwByEmail(PersonDTO inputData) {
 		PersonDTO dto = dao.repwByEmail(inputData);
 		String randomPw = randomPw();//UUID 써서 임시 비밀번호 만들고
-		dto.setperson_pw(getHash(randomPw));//그 임시비밀번호를 해시처리 후 dto에 셋팅.
+		dto.setPerson_pw(getHash(randomPw));//그 임시비밀번호를 해시처리 후 dto에 셋팅.
 		return randomPw;
 	}
 
@@ -79,8 +79,8 @@ public class PersonService {
 	}
 
 	public int updatePw(PersonDTO inputData) {
-		String hash = getHash(inputData.getperson_pw());
-		inputData.setperson_pw(getHash(hash));
+		String hash = getHash(inputData.getPerson_pw());
+		inputData.setPerson_pw(getHash(hash));
 		return dao.updatePw(inputData);
 	}
 

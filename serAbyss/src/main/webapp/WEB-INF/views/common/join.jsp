@@ -16,31 +16,33 @@
 	</p>
 	
 	<div class = "company main hiddenNone">
-		<label><input type = "radio" name = "radios" value = "radio1" class = "radio1" >개인사업자</label>
-		<label><input type = "radio" name = "radios" value = "radio2" class = "radio2">법인사업자</label>
-		<label><input type = "radio" name = "radios" value = "radio3" class = "radio3">법인소속직원(기사)</label>
+		<label><input type = "radio" name = "any" class = "radio1" >개인사업자</label>
+		<label><input type = "radio" name = "any" class = "radio2">법인사업자</label>
+		<label><input type = "radio" name = "any" class = "radio3">법인소속직원(기사)</label>
 		<div class = "radio2 hiddenNone">
 			<h2>법인사업자 폼</h2>
-			<input type = "text" name = "person_belong" placeholder="회사명 입력">
 		</div>
 		
 		<div class = "radio3 hiddenNone">
 			<h2>법인소속직원(기사) 폼</h2>
+		</div>
+		<div class = "commonContent hiddenNone">
 			<input type = "text" name = "person_belong" placeholder="회사명 입력">
 		</div>
 	</div>
 	<!--sdf das -->
 	<p>사용자 ID는 6~20자 사이의 영문+숫자로 이루어져야 하며 영문으로 시작되어야 합니다.</p>
 	<p>
-		<input type = "text" name = "person_id" placeholder="ID입력">
+		<input type = "text" name = "person_id" placeholder="ID입력"
+		required class = "id" oninput="checkId()" id = "checkaa">
 	</p>
 	<!-- 정규표현식도 나중에 구현하겠습니다. -->
-	<div id = "idCheckMsg"></div>입력한 결과에 따라 부적합 여부를 실시간으로 띄워주는 div
+<!-- 	<div id = "idCheckMsg"></div>입력한 결과에 따라 부적합 여부를 실시간으로 띄워주는 div -->
 	<p>
 		<input type = "password" name = "person_pw" placeholder="PW 입력" required>
 	</p>
 	<p>비밀번호는 영문, 숫자 포함한 6~20자로 되어야 합니다.</p>
-	<p><input type = "password" name = "person_pw2" placeholder="PW 다시 입력" required></p>
+<!-- 	<p><input type = "password" name = "person_pw2" placeholder="PW 다시 입력" required></p> -->
 	<p><input type = "text" name = "person_name" placeholder="이름 입력" required></p>
 	<p><input type = "text" name = "person_email" placeholder="foo@bar.com" required></p>
 	<p><input type = "text" name = "person_address" placeholder="주소 입력" required></p>
@@ -49,7 +51,7 @@
 	<p><input type = "text" name = "person_call" placeholder="유선전화번호 입력"></p>
 	<p><input type = "text" name = "person_fax" placeholder="팩스 전화 입력" required></p>
 	
-	<button type = "submit" class = "signUpBtn">회원가입</button>
+	<button type = "submit" class = "signUpBtn" disabled="disabled">회원가입</button>
 </form>
 </div>
 
@@ -69,14 +71,17 @@
 		const className = event.target.className
 		
 		if(className == 'radio1'){
+			document.querySelector('div.' + 'commonContent').classList.add('hiddenNone')
 			document.querySelector('div.' + 'radio2').classList.add('hiddenNone')
 			document.querySelector('div.' + 'radio3').classList.add('hiddenNone')
 		}
 		if(className == 'radio2'){
+			document.querySelector('div.' + 'commonContent').classList.remove('hiddenNone')
 			document.querySelector('div.' + 'radio2').classList.remove('hiddenNone')
 			document.querySelector('div.' + 'radio3').classList.add('hiddenNone')
 		}
 		if(className == 'radio3'){
+			document.querySelector('div.' + 'commonContent').classList.remove('hiddenNone')
 			document.querySelector('div.' + 'radio3').classList.remove('hiddenNone')
 			document.querySelector('div.' + 'radio2').classList.add('hiddenNone')
 		}
@@ -97,22 +102,22 @@
 // 		url : '${cpath}/common/idCheck',
 // 		success : function(data){
 // 			if(inputed == '' && data == '0'){
-// 				$('.signUpBtn').prop('disabled', true)
-// 				$('.signUpBtn').css('background-color', '#aaaaaa')
-// 				$('#checkaa').css('background-color', '#FFCECE')
+// 				$('.signUpBtn').prop('disabled', true);
+// 				$('.signUpBtn').css('background-color', '#aaaaaa');
+// 				$('#checkaa').css('background-color', '#FFCECE');
 // 				idCheck = 0
 // 			} else if (data == '0'){
-// 				$('#checkaa').css('background-color', '#B0F6AC')
+// 				$('#checkaa').css('background-color', '#B0F6AC');
 // 				idCheck = 1
 // 				if(idCheck == 1){
-// 					$('.signUpBtn').prop('disabled', false)
-// 					$('.signUpBtn').css('background-color', '#4CAF50')
+// 					$('.signUpBtn').prop('disabled', false);
+// 					$('.signUpBtn').css('background-color', '#4CAF50');
 					
 // 				}
 // 			} else if(data == '1'){
-// 				$('.signUpBtn').prop('disabled', true)
-// 				$('.signUpBtn').css('background-color', '#aaaaaa')
-// 				$('#checkaa').css('background-color', '#FFCECE')
+// 				$('.signUpBtn').prop('disabled', true);
+// 				$('.signUpBtn').css('background-color', '#aaaaaa');
+// 				$('#checkaa').css('background-color', '#FFCECE');
 // 				idCheck = 0
 // 			}
 // 		}

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 //
@@ -61,21 +62,20 @@ public class PersonController {
 	public String join() {
 		return "common/join";
 	}
-	
+//	@RequestParam HashMap<String, String> map
 	//회원가입 처리
 	@PostMapping("/join")
-	public ModelAndView join(HashMap<String, String> map) {
-//		System.out.println("inputData: " + inputCData.getperson_id());
-		System.out.println("map: " + map);
+	public ModelAndView join(PersonDTO inputData) {
+		System.out.println("person.belong: " + inputData.getPerson_belong());
 		ModelAndView mav = new ModelAndView("alert");
 		String msg = null;
-//		int row = ps.join(inputData);
-//		if(row != 0) {
-//			msg = "회원가입 성공";
-//		}
-//		else {
-//			msg = "회원가입 실패";
-//		}
+		int row = ps.join(inputData);
+		if(row != 0) {
+			msg = "회원가입 성공";
+		}
+		else {
+			msg = "회원가입 실패";
+		}
 		mav.addObject("msg", msg);
 		return mav;
 	}
@@ -182,6 +182,7 @@ public class PersonController {
 	
 	@RequestMapping(value = "/idCheck", method = { RequestMethod.GET, RequestMethod.POST})
 	public @ResponseBody int idCheck(PersonDTO dto, Model model) {
+		System.out.println("personId: " + dto.getPerson_id());
 		return ps.idCheck(dto);
 	}
 }
