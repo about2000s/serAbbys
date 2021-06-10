@@ -8,6 +8,6 @@
 <hr>
 =======
 
-
+<button onclick = "location.href='${cpath}/common/updateInfo'">마이페이지</button>
 
 <%@ include file = "layout/footer.jsp" %>

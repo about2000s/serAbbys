@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+			"-//mybatis.org//DTD Mapper 3.0//EN" 
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+			
+<mapper namespace="com.itbank.dao.PersonDAO">
+	<insert id="join" parameterType="person">
+		insert into person values (
+		
+		)
+	</insert>
+	
+	<select id="selectOneCheckIdPw" parameterType="int">
+		select count(*) from person where person_id=#{person_id} and person_pw=#{person_pw} 
+		<if test="person_check != null">
+			and person_check=#{person_check}
+		</if>
+	</select>
+</mapper>
+
+
+
+
