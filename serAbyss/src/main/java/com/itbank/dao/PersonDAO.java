@@ -38,4 +38,7 @@ public interface PersonDAO {
 	@Update("update person set person_pw=#{person_pw} where person_id=#{person_id}")
 	int updatePw(PersonDTO inputData);
 	
+	@Select("select nvl(count(*), 0) from person where person_id=#{person_id}")
+	int idCheck(PersonDTO dto);
+	
 }

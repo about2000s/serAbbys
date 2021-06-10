@@ -12,3 +12,6 @@
 .leftmenu ul li a { text-decoration: none; }
 
 .container { width:100%; border:1px solid purple; float:left; }
+
+/*정재훈  updateInfo, join파일에서 hidden처리*/
+.hiddenNone { display:none; }
