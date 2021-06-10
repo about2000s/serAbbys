@@ -1,5 +1,7 @@
 package com.itbank.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,16 +64,18 @@ public class PersonController {
 	
 	//회원가입 처리
 	@PostMapping("/join")
-	public ModelAndView join(PersonDTO inputData) {
+	public ModelAndView join(HashMap<String, String> map) {
+//		System.out.println("inputData: " + inputCData.getperson_id());
+		System.out.println("map: " + map);
 		ModelAndView mav = new ModelAndView("alert");
 		String msg = null;
-		int row = ps.join(inputData);
-		if(row != 0) {
-			msg = "회원가입 성공";
-		}
-		else {
-			msg = "회원가입 실패";
-		}
+//		int row = ps.join(inputData);
+//		if(row != 0) {
+//			msg = "회원가입 성공";
+//		}
+//		else {
+//			msg = "회원가입 실패";
+//		}
 		mav.addObject("msg", msg);
 		return mav;
 	}
