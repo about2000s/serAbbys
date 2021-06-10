@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+
+/* header.jsp */
 .topmenubar { width:100%;  }
 .topmenubar .toplogo { width:15%;border:0px solid black; }
 .navi { width:100%; border:0px solid red;}
@@ -15,3 +17,5 @@
 .container table {position:relative; width:890px; border:1px solid black; border-collapse:collapse;}
 .container table th {padding:8px; border-right:1px solid black; border-bottom:1px solid black; font-size:12px;}
 .container table td { }
+
+
