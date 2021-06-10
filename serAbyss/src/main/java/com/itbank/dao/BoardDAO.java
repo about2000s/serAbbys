@@ -6,7 +6,7 @@ import com.itbank.dto.BoardDTO;
 
 public interface BoardDAO {
 
-	@Select("select * from reviewboard where service_idx  = #{service_idx }")
+	@Select("select * from reviewboard where review_idx='1'")
 	BoardDTO boardListAll();
 
 }
