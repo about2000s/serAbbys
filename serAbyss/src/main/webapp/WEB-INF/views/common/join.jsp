@@ -48,9 +48,9 @@
 		<label><input type = "radio" class = "radio3">법인소속직원(기사)</label>
 	</div>
 	
-	<div class = >
-	
-	</div>
+<!-- 	<div class = > -->
+		
+<!-- 	</div> -->
 	
 </form>
 </div>
