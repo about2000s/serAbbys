@@ -29,7 +29,7 @@
 			<input type = "text" name = "belong" placeholder="회사명 입력">
 		</div>
 	</div>
-	
+	<!--  -->
 	<p>사용자 ID는 6~20자 사이의 영문+숫자로 이루어져야 하며 영문으로 시작되어야 합니다.</p>
 	<p>
 		<input type = "text" name = "id" placeholder="ID입력" 
