@@ -204,6 +204,11 @@ public class PersonController {
 		System.out.println("personId: " + dto.getPerson_id());
 		return ps.idCheck(dto);
 	}
+	
+	@GetMapping("timePlus")
+	public void timePlus() {
+		ps.timePlus();
+	}
 }
 
 

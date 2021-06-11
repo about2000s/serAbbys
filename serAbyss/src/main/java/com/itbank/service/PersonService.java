@@ -4,9 +4,9 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
 import java.util.UUID;
 
-import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -109,5 +109,22 @@ public class PersonService {
 
 	public int companyAdd(String person_belong) {
 		return dao.companyAdd(person_belong);
+	}
+
+	public void timePlus() {//월 일 시
+		int i = 1;
+		int j = 1;
+		int k = 1;
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+		for(i=6;i<=12;i++) {
+			for(j=1;j<=31;j++) {
+				for(k=8;k<=22;k+=2) {
+					map.put("i", i);
+					map.put("j", j);
+					map.put("k", k);
+					int row = dao.timePlus(map);
+				}
+			}
+		}
 	}
 }

@@ -1,5 +1,7 @@
 package com.itbank.dao;
 
+import java.util.HashMap;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -47,5 +49,8 @@ public interface PersonDAO {
 
 	@Insert("insert into companyList (companyList_idx, companyList_name) values (companyList_seq.nextval, #{person_belong})")
 	int companyAdd(String person_belong);
+
+	@Insert("insert into reserve (year, month, day, hour) values (2021, #{i}, #{j}, #{k})")
+	int timePlus(HashMap<String, Integer> map);
 	
 }
