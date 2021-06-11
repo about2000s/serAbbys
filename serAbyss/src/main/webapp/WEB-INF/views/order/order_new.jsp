@@ -2,32 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
 <%@ include file="../layout/leftmenu.jsp" %>
-<style>
-	.order {
-		width: 100%;
-		max-width: 1000px;
-		margin: auto;
-		padding: 10px 0px;
-		display: flex;
-		justify-content: space-between;
-	}
-	.content {
-		border: 2px solid #dadada;
-		max-width: 1000px;
-		width: 100%;
-		margin: auto;
-		padding: 20px;
-	}
-	.write-area {
-		border: 0;
-		width: 100%;
-		min-height: 200px;
-		text-align: left;
-		font-size: 16px;
-		resize: none;
-	}
-</style>
+
 <!-- sad -->
+<div class="container">
 <form method="post" enctype="multipart/form-data">
 	<div class="order">
 		<div>
@@ -70,4 +47,5 @@
 		<input type="submit" value="신청하기">
 	</div>
 </form>
+</div>
 <%@ include file="../layout/footer.jsp" %>

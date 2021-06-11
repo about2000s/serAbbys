@@ -3,18 +3,9 @@
 <%@ include file="../layout/header.jsp" %>
 <%@ include file="../layout/leftmenu.jsp" %>
 
-<style>
-.list {
-	width: 100%;
-	display: flex;
-	flex-flow: column;
-	align-items: center;
-	padding-top: 50px;
-}
-</style>
 
 <div class="container">
-	<div>
+	
 	<table>
 		<tr>
 			<th>글번호</th>
@@ -39,5 +30,5 @@
 		</c:if>
 	</table>
 	 </div>
- </div>
+
 <%@ include file="../layout/footer.jsp" %>
