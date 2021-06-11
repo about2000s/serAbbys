@@ -3,16 +3,6 @@
 <%@ include file="../layout/header.jsp" %>
 <%@ include file="../layout/leftmenu.jsp" %>
 
-<style>
-.list {
-	width: 100%;
-	display: flex;
-	flex-flow: column;
-	align-items: center;
-	padding-top: 50px;
-}
-</style>
-
 <table class="list">
 	<tr>
 		<th>글번호</th>
@@ -24,7 +14,7 @@
 	<c:forEach var="dto" items="${list }">
 		<tr>
 			<td>${dto.service_idx }</td>
-			<td><a href="${cpath }/order/read/${dto.service_idx}">${dto.service_title }</a></td>
+			<td><a href="${cpath }/order/select/${dto.service_idx}?value=read">${dto.service_title }</a></td>
 			<td>${dto.service_id }</td>
 			<td>${dto.service_viewCount }</td>
 			<td>${dto.service_reg }</td>
