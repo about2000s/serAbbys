@@ -26,7 +26,7 @@
 		<div class = "radio3 hiddenNone">
 			<h2>법인소속직원(기사) 폼</h2>
 		</div>
-		<div class = "commonContent hiddenNone">
+		<div class = "commonContent hiddenNone"><!-- 이 부분은 나중에 생각합시다. 소속 직원이 검색할때.. -->
 			<input type = "text" name = "person_belong" placeholder="회사명 입력">
 		</div>
 	</div>
@@ -49,9 +49,9 @@
 	<p><input type = "text" name = "person_birth" placeholder="생년월일 입력 ex)980819" required></p>
 	<p><input type = "text" name = "person_phone" placeholder="핸드폰번호 입력" required><button>인증번호 받기</button></p>
 	<p><input type = "text" name = "person_call" placeholder="유선전화번호 입력"></p>
-	<p><input type = "text" name = "person_fax" placeholder="팩스 전화 입력" required></p>
+	<p><input type = "text" name = "person_fax" placeholder="팩스 전화 입력"></p>
 	
-	<button type = "submit" class = "signUpBtn" disabled="disabled">회원가입</button>
+	<button type = "submit" class = "signUpBtn">회원가입</button>
 </form>
 </div>
 

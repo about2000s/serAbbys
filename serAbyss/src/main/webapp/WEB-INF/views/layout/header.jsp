@@ -46,8 +46,11 @@
 			<li><a href="${cpath }/board/review_list_all">리뷰 관리하기</a></li>
 			
 			<!-- 여기서부터 재훈이가 수정했습니다. -->
-			<c:if test="">
-				<li><a href="${cpath }/board/review_list_all">소속기사 관리 / 접수 관리</a></li>
+			<c:if test="${iamCeo }">
+				<li><a href="${cpath }/board/myCompList/${login.person_belong}">소속기사 관리</a></li>
+			</c:if>
+			<c:if test="${!iamCeo }">
+				<li><a href="${cpath }/board/myList/${login.person_id}">내 접수목록 관리</a></li>
 			</c:if>
 			<!-- 여기까지 -->
 		</ul>

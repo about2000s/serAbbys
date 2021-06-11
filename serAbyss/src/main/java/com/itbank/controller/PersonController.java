@@ -1,7 +1,5 @@
 package com.itbank.controller;
 
-import java.util.HashMap;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 //
@@ -59,8 +56,11 @@ public class PersonController {
 	public ModelAndView companyLogin(PersonDTO inputData, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		PersonDTO login = ps.companyLogin(inputData);
+		
 		if(login != null) {
+			boolean iamCeo = ps.iamCeo(login);
 			session.setAttribute("login", login);
+			session.setAttribute("iamCeo", iamCeo);
 			mav.setViewName("home");
 		}
 		else {
@@ -80,10 +80,12 @@ public class PersonController {
 	//회원가입 처리
 	@PostMapping("/join")
 	public ModelAndView join(PersonDTO inputData) {
-		System.out.println("person.belong: " + inputData.getPerson_belong());
 		ModelAndView mav = new ModelAndView("alert");
 		String msg = null;
 		int row = ps.join(inputData);
+		if(inputData.getPerson_belong() != null) {//회사대표계정 회원가입시 진행됨.
+			int row2 = ps.companyAdd(inputData.getPerson_belong());
+		}
 		if(row != 0) {
 			msg = "회원가입 성공";
 		}

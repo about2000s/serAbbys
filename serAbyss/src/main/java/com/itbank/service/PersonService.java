@@ -6,6 +6,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.UUID;
 
+import org.apache.ibatis.annotations.Select;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -86,5 +87,27 @@ public class PersonService {
 
 	public int idCheck(PersonDTO dto) {
 		return dao.idCheck(dto);
+	}
+	
+	//자기 회사의 최소 인덱스 구하는 메서드(이 인덱스번호와 일치하는 계정은, 대표계정임을 알 수 있음)
+	public int getMinIdx(String person_belong) {
+		return dao.getMinIdx(person_belong);
+	}
+
+	//내가 로그인한 계정이 회사의 대표계정이냐의 여부를 판별해주는 메서드
+	public boolean iamCeo(PersonDTO login) {
+		int minIdx = getMinIdx(login.getPerson_belong());
+		if(login.getPerson_idx() != minIdx) {
+			System.out.println("회사 대표계정이 아닌 직원이네요");
+			return false;
+		}
+		else {
+			System.out.println("회사 대표계정이네요!");
+			return true;
+		}
+	}
+
+	public int companyAdd(String person_belong) {
+		return dao.companyAdd(person_belong);
 	}
 }

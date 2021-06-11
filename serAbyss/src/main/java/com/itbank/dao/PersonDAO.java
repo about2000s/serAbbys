@@ -1,5 +1,6 @@
 package com.itbank.dao;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -40,5 +41,11 @@ public interface PersonDAO {
 	
 	@Select("select nvl(count(*), 0) from person where person_id=#{person_id}")
 	int idCheck(PersonDTO dto);
+
+	@Select("select min(person_idx) from person where person_belong=#{person_belong}")
+	int getMinIdx(String person_belong);
+
+	@Insert("insert into companyList (companyList_idx, companyList_name) values (companyList_seq.nextval, #{person_belong})")
+	int companyAdd(String person_belong);
 	
 }
