@@ -14,7 +14,7 @@
 		<c:forEach var = "dto" items = "${list }">
 			<tr>
 				<td>${dto.serCen_idx }</td>
-				<td><a href = "${cpath }/board/noticeRead/${dto.serCen_idx}">${dto.serCen_title }</a></td>
+				<td><a href = "${cpath }/board/serCenRead?serCen_idx=${dto.serCen_idx}&serCen_belong=${dto.serCen_belong}">${dto.serCen_title }</a></td>
 				<td>${dto.serCen_id }</td>
 				<td>${dto.serCen_reg }</td>
 				<td>${dto.serCen_viewCount }</td>

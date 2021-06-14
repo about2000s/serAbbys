@@ -1,7 +1,7 @@
 package com.itbank.dto;
 
 public class PersonDTO {
-	private int person_idx;
+	private int person_idx, person_busiNum;
 	private String person_id, person_pw, person_name, person_birth, person_email, person_address, person_phone, person_call, person_fax, person_check, person_belong;
 	public int getPerson_idx() {
 		return person_idx;
@@ -75,6 +75,14 @@ public class PersonDTO {
 	public void setPerson_belong(String person_belong) {
 		this.person_belong = person_belong;
 	}
+	int getPerson_busiNum() {
+		return person_busiNum;
+	}
+	void setPerson_busiNum(int person_busiNum) {
+		this.person_busiNum = person_busiNum;
+	}
+	
+	
 	
 //	@Override
 //	public String toString() {

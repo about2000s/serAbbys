@@ -13,6 +13,7 @@
 	
 	<typeAliases>
 		<typeAlias type="com.itbank.dto.PersonDTO" alias="person"/>
+		<typeAlias type="com.itbank.dto.SerCenDTO" alias="serCen"/>
 	</typeAliases>
 	
 </configuration>
