@@ -3,14 +3,18 @@
 /* botero color 
 skyblue greenyellow   salgu    orange  brown
 #99b6bd #b3a86a       #ecc9a0 #d4613e #bb9568*/
-
+/*작업중*/
+@media screen and (max-width:1200px) {  }
+@media screen and (max-width:768px) {  }
+@media screen and (max-width:480px) { }
 
 /* header.jsp 남 */
 .topmenubar { width:100%;  }
 .topmenubar .toplogo { width:15%;border:0px solid black; }
-.navi { width:100%; border:0px solid red;}
-.navi ul li { font-size:10px;  margin-right:3%; display:inline; font-size:22px; list-style:none;}
-.navi ul li a { text-decoration: none;}
+.navi { width:100%; height:50px; line-height:50px; border:0px solid red; background-color:#99b6bd;}
+.navi ul li { font-size:10px; color:white;  margin-right:3%; display:inline; font-size:22px; list-style:none;}
+.navi ul li a { text-decoration: none; color:white;}
+.navi ul li a:hover { color:#ecc9a0; }
 
 
 
@@ -20,7 +24,7 @@ skyblue greenyellow   salgu    orange  brown
 .container table tr td { border-right:1px solid #dcdcdc; font-size:12px; align:center;padding:8px; }
 /* order_new */
 .container input { width:250px;height:30px; }
-.container order { width: 100%;max-width: 1000px;margin: auto; padding: 10px 0px;display: flex;justify-content: space-between;}
+.container order { width: 100%;max-width: 1000px; margin: auto; padding: 10px 0px;display: flex;justify-content: space-between;}
 .container content { border: 2px solid #dadada;max-width: 1000px;width: 100%;margin: auto; padding: 20px; }
 .container write-area { border: 0;width: 100%;min-height: 200px; text-align: left;font-size: 16px;resize: none; }
 
@@ -28,13 +32,45 @@ skyblue greenyellow   salgu    orange  brown
 /* 정재훈  updateInfo, join파일에서 hidden처리*/
 .hiddenNone { display:none; }
 
-/* leftmeny : 남형진*/
-.leftmenu { width:200px;  border:0px solid blue;float:left; font-size:12px;} 
-.leftmenu ul {list-style:none;}
-.leftmenu ul li {  padding-bottom:15px; } 
+/* leftmenu : 남형진*/
+.leftmenu { width:100px;  background-color:#ececec; border:1px solid blue; float:left; font-size:12px;} 
+.leftmenu ul { padding:0; margin:0; list-style:none;}
+.leftmenu ul li { padding:5px; "border:collapse; margin:0;border-bottom:1px solid black;} 
 .leftmenu ul li a { text-decoration: none; }
 
 /* 로그인 페이지 common/login : 남형진*/
+.logincontainer { display:block; margin-top:200px; margin:auto; width:600px; border:1px solid black;} 
+.logincontainer input[type="text"] {width:200px;height:50px;}
+.logincontainer input[type="password"] {width:200px;height:50px;}
+.logincontainer input[type="submit"] { width:100px;height:35px;background-color:#d4613e;font:12px; color:white;border:none; border-radius:5px;padding:5px; }
+.logincontainer .leftbox {float:left;border:0px solid black;}
+.logincontainer .rightbox {float:right;border:0px solid red;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

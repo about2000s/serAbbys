@@ -7,19 +7,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8" name = "viewport" content = "width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=1, user-scalable=yes,initial-scale=1.0" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>Insert title here</title>
-<style>
-	.left-box{
-		float: left;
-	}
-	.right-box{
-		float: right;
-	}
-</style>
 
-<link href="${cpath }/resources/css/css.css" rel="stylesheet">
+
+<link href="${cpath }/resources/css/css.css" rel="stylesheet" type="text/css">
 <!--  <link href="/bootstrap-3.3.2-dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="/bootstrap-3.3.2-dist/js/bootstrap.min.js"></script> -->
 
