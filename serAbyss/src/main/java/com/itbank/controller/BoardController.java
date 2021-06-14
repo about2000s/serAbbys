@@ -72,5 +72,10 @@ public class BoardController {
 		mav.addObject("list", list);
 		return mav;
 	}
+	
+//	@GetMapping("noticeRead/{serCen_idx}")
+//	public ModelAndView noticeRead(@PathVariable int serCen_idx) {
+//		SerCenDTO dto = bs.selectOneNotice(serCen_idx);
+//	}
 
 }
