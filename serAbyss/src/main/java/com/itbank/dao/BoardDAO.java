@@ -26,6 +26,9 @@ public interface BoardDAO {
 	@Select("select * from serCen where belong=#{notice}")
 	List<SerCenDTO> noticeList();
 
+	@Select("select * from serCen where belong=#{notice} and ")
+	SerCenDTO selectOneNotice(int serCen_idx);
+
 	
 
 }

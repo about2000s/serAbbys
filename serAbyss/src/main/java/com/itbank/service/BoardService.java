@@ -34,5 +34,9 @@ public class BoardService {
 	public List<SerCenDTO> noticeList() {
 		return dao.noticeList();
 	}
+
+	public SerCenDTO selectOneNotice(int serCen_idx) {
+		return dao.selectOneNotice(serCen_idx);
+	}
 	
 }
