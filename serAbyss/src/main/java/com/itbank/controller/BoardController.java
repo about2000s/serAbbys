@@ -38,7 +38,6 @@ public class BoardController {
 
 		return mav;
 	}
-	
 
 	//여기서 부터 재훈이가 건드렸습니다
 	@GetMapping("/myCompList/{person_belong}")
@@ -73,6 +72,5 @@ public class BoardController {
 		mav.addObject("list", list);
 		return mav;
 	}
-	
 
 }
