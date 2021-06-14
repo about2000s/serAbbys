@@ -17,21 +17,29 @@ import com.itbank.service.BoardService;
 @Controller
 @RequestMapping("/board")
 public class BoardController {
-	
+
 	@Autowired
-	private BoardService bs; 
-	
-	@GetMapping	("/review_list_all")
-	public String boardListAll() {
-		
+	private BoardService bs;
+
+	@GetMapping("/review_list_all")
+	public ModelAndView boardListAll() {
+		ModelAndView mav = new ModelAndView();
 		BoardDTO dto = bs.boardListAll();
-		
-
-		return "board/review_list_all";
+		int starScore = dto.getReview_starScore();
+		String star = "";
+		for (int i = 0; i < starScore; i++) {
+			star += "★";
 		}
+		for (int i = 0; i < 10 - starScore; i++) {
+			star += "☆";
+		}
+		mav.addObject("dto", dto);
+		mav.addObject("star", star);
 
+		return mav;
+	}
 	
-	
+
 	//여기서 부터 재훈이가 건드렸습니다
 	@GetMapping("/myCompList/{person_belong}")
 	public ModelAndView myCompList(@PathVariable String person_belong) {
@@ -66,4 +74,5 @@ public class BoardController {
 		return mav;
 	}
 	
+
 }

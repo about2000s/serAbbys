@@ -47,7 +47,7 @@ public class PersonController {
 		else {
 			String msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
 			mav.addObject("msg", msg);
-			mav.setViewName("alert");
+//			mav.setViewName("alert");
 		}
 		return mav;
 	}
@@ -67,7 +67,7 @@ public class PersonController {
 		else {
 			String msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
 			mav.addObject("msg", msg);
-			mav.setViewName("alert");
+//			mav.setViewName("alert");
 		}
 		return mav;
 	}
@@ -195,7 +195,7 @@ public class PersonController {
 		else {
 			String msg = "비밀번호가 일치하지 않습니다";
 			mav.addObject("msg", msg);
-			mav.setViewName("alert");
+//			mav.setViewName("alert");
 		}
 		return mav;
 	}
@@ -206,7 +206,7 @@ public class PersonController {
 		int row = ps.updatePw(inputData);
 		session.invalidate();//비밀번호가 변경되었으므로 세션을 끊고 다시 로그인하게 한다.
 		String msg = "비밀번호가 변경되었습니다. 다시 로그인하세요";
-		mav.addObject("msg", msg);
+//		mav.addObject("msg", msg);
 		return mav;
 	}
 	

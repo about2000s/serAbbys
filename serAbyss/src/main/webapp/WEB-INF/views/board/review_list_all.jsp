@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%@ include file ="../layout/header.jsp" %>
-<%@ include file ="../layout/reviewleftmenu.jsp" %>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ include file="../layout/header.jsp"%>
+<%@ include file="../layout/reviewleftmenu.jsp"%>
 
 
 <!--  
@@ -21,30 +21,31 @@ create table reviewboard (
 );
 
  -->
- 
- <style>
- 
- </style>
+
+
 <h2>리뷰보기</h2>
 <div class="container">
-<table>
-	<tr>
-		<th width="5%">no</th>
-		<th width="50%">제목</th>
-		<th width="10%">담당 엔지니어</th>
-		<th width="10%">날짜</th>
-		<th width="10%">평점</th>
-		<th width="10%">조회수</th>
-		</tr>
-	<tr>
-		<td>${dto.review_idx}</td>
-		<td>${dto.review_title}</td>
-		<td>${dto.review_engineer}</td>
-		<td>${dto.review_reg }</td>
-		<td>${dto.review_starScore }</td>
-		<td>${dto.review_viewCount }</td>
-		</tr>
-</table>
+		<table>
+			<tr>
+				<th width="5%">no</th>
+				<th width="10%">평점</th>
+				<th width="50%">제목</th>
+				<th width="10%">담당 엔지니어</th>
+				<th width="10%">날짜</th>
+				<th width="10%">조회수</th>
+			</tr>
+
+
+			<tr>
+				<td>${dto.review_idx}</td>
+				<td>${star }</td>
+				<td><a href="">${dto.review_title}</a></td>
+				<td>${dto.review_engineer}</td>
+				<td>${dto.review_reg }</td>
+				<td>${dto.review_viewCount }</td>
+			</tr>
+
+		</table>
 </div>
 
-<%@ include file ="../layout/footer.jsp" %>
+<%@ include file="../layout/footer.jsp"%>

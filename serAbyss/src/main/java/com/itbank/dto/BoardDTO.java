@@ -5,24 +5,29 @@ import org.springframework.web.multipart.MultipartFile;
 /*
  *    review
 
-review_idx      PK, 외래키 service_idx
-review_id      service_id값 받아와서 저장
-review_engineer      service_engineer값 받아와서 저장
-review_title      not null
-review_content      not null
-review_reg      default to_string('sysdate', 'yyyy-mm-dd')
-review_count      (0~10) 별 갯수 * 2로 설정, 별 0개~5개(viewCount와 구분하기 위해 starCount)
-review_viewcount   default 0
- +  review_uploadFile
+ 
+ --만들어짐
+create table review (
+	review_idx number primary key references service(service_idx),--인덱스(service글을 참조하되, 단 하나만)
+	review_id varchar2(20) not null,--게시글 작성자
+	review_engineer varchar2(20),--수리기사(service 글의 engineer) @@@@@나의 생각: 이건 외래키를 써도 되지 않을 까요??
+	review_uploadfile varchar2(200),--업로드 파일()
+	review_title varchar2(50) not null,--리뷰글 제목
+	review_content varchar2(2000) not null,--리뷰글 내용
+	review_reg varchar2(20)		DEFAULT to_char(sysdate, 'yyyy-MM-dd hh24:mi'),
+	review_starScore number not null,--별점(0.5 , 1.0 ... 4.5 , 5.0)*2 => (1, ... , 10)
+	review_viewCount number default 0--조회수
+);
 
  */
 
 
 public class BoardDTO {
 
-	private int review_idx, review_viewCount, review_starCount;
+	private int review_idx, review_viewCount, review_starScore;
 	private String review_id, review_engineer, review_title, review_content, review_reg, review_uploadFile;
 	private MultipartFile file;
+	
 	public int getReview_idx() {
 		return review_idx;
 	}
@@ -35,11 +40,11 @@ public class BoardDTO {
 	public void setReview_viewCount(int review_viewCount) {
 		this.review_viewCount = review_viewCount;
 	}
-	public int getReview_starCount() {
-		return review_starCount;
+	public int getReview_starScore() {
+		return review_starScore;
 	}
-	public void setReview_starCount(int review_starCount) {
-		this.review_starCount = review_starCount;
+	public void setReview_starScore(int review_starScore) {
+		this.review_starScore = review_starScore;
 	}
 	public String getReview_id() {
 		return review_id;
@@ -83,15 +88,13 @@ public class BoardDTO {
 	public void setFile(MultipartFile file) {
 		this.file = file;
 	}
-	
 	@Override
 	public String toString() {
-		return "BoardDTO [review_idx=" + review_idx + ", review_viewCount=" + review_viewCount + ", review_starCount="
-				+ review_starCount + ", review_id=" + review_id + ", review_engineer=" + review_engineer
+		return "BoardDTO [review_idx=" + review_idx + ", review_viewCount=" + review_viewCount + ", review_starScore="
+				+ review_starScore + ", review_id=" + review_id + ", review_engineer=" + review_engineer
 				+ ", review_title=" + review_title + ", review_content=" + review_content + ", review_reg=" + review_reg
 				+ ", review_uploadFile=" + review_uploadFile + ", file=" + file + "]";
 	}
-	
-	
+
 	
 }
