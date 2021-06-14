@@ -12,11 +12,17 @@
 	<context:component-scan base-package="com.itbank.service"/>
 	<mybatis-spring:scan base-package="com.itbank.dao"/>
 	
+	<bean id="multipartResolver" 
+		  class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		  <property name="maxUploadSize" value="10485760" />
+		  <property name="maxInMemorySize" value="10485760" />
+		  <property name="defaultEncoding" value="utf-8" />
+    </bean>
 	
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
-		<!-- <property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.0.86:1521:xe" /> -->
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe" />
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@221.164.9.200:11521:xe" />
+<!-- 		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe" /> -->
 		<property name="user" value="c##itbank" />
 		<property name="password" value="it" />
 		<property name="maxPoolSize" value="100" />
@@ -30,6 +36,8 @@
 		<property name="configLocation" value = "classpath:config/mybatis-config.xml"/>
 		<property name="mapperLocations">
 			<list>
+				<value>classpath:config/sqlmap-person.xml</value>
+				<value>classpath:config/sqlmap-board.xml</value>
 			</list>
 		</property>
 	</bean>
@@ -37,8 +45,5 @@
 	<bean id = "sqlSessionTemplate" class = "org.mybatis.spring.SqlSessionTemplate" destroy-method="close">
 		<constructor-arg ref = "sqlSessionFactory"/>
 	</bean>
-	
-	
-	
 	
 </beans>

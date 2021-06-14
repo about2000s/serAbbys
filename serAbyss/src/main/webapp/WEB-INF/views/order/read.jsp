@@ -3,23 +3,6 @@
 <%@ include file="../layout/header.jsp" %>
 <%@ include file="../layout/leftmenu.jsp" %>
 
-<style>
-	.order {
-		width: 100%;
-		max-width: 1000px;
-		padding: 10px 0px;
-		display: flex;
-		justify-content: space-between;
-	}
-	.content {
-		border: 2px solid #dadada;
-		max-width: 1000px;
-		width: 100%;
-		margin: auto;
-		padding: 20px;
-	}
-</style>
-
 <div class="order">
 	<div>No. ${dto.service_idx } | <b>${dto.service_title }</b> | ${dto.service_id }</div>
 	<div>${dto.service_reg } | 조회수 : ${dto.service_viewCount }</div>
@@ -38,10 +21,21 @@
 	</div>
 <%-- 	<c:if test="${dto.service_id == (login.person_id or 'admin')}"> --%>
 		<div>
-			<a href="${cpath }/order/modify/${dto.service_idx}"><button>수정</button></a>
-			<a href="${cpath }/order/delete/${dto.service_idx}"><button id="deleteBtn">삭제</button></a>
+			<a href="${cpath }/order/select/${dto.service_idx}?value=modify"><button>수정</button></a>
+			<button id="deleteBtn">삭제</button>
 		</div>
 <%-- 	</c:if> --%>
 </div>
+
+<script>
+	const deleteUrl = '${cpath }/order/delete/${dto.service_idx}';
+	document.getElementById('deleteBtn').onclick = function(event) {
+		if(confirm("정말 삭제하시겠습니까?") == true) {
+			location.href = deleteUrl + "?" + '${login.person_check}';
+		} else {
+			return;
+		}
+	}
+</script>
 
 <%@ include file="../layout/footer.jsp" %>
