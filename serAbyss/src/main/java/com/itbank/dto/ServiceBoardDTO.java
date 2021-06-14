@@ -15,7 +15,7 @@ service_viewcount   default 0
 */
 public class ServiceBoardDTO {
 	private int service_idx, service_viewCount;
-	private String service_id, service_title, service_content, service_status, service_address, service_reg, service_engineer;
+	private String service_custId, service_title, service_content, service_status, service_address, service_reg, service_engiId, service_compBelong;
 	
 	public int getService_idx() {
 		return service_idx;
@@ -29,11 +29,11 @@ public class ServiceBoardDTO {
 	public void setService_viewCount(int service_viewCount) {
 		this.service_viewCount = service_viewCount;
 	}
-	public String getService_id() {
-		return service_id;
+	public String getService_custId() {
+		return service_custId;
 	}
-	public void setService_id(String service_id) {
-		this.service_id = service_id;
+	public void setService_id(String service_custId) {
+		this.service_custId = service_custId;
 	}
 	public String getService_title() {
 		return service_title;
@@ -65,11 +65,17 @@ public class ServiceBoardDTO {
 	public void setService_reg(String service_reg) {
 		this.service_reg = service_reg;
 	}
-	public String getService_engineer() {
-		return service_engineer;
+	public String getService_engiId() {
+		return service_engiId;
 	}
-	public void setService_engineer(String service_engineer) {
-		this.service_engineer = service_engineer;
+	public void setService_engiengiId(String service_engiId) {
+		this.service_engiId = service_engiId;
+	}
+	public String getService_compBelong() {
+		return service_compBelong;
+	}
+	public void setService_compBelong(String service_compBelong) {
+		this.service_compBelong = service_compBelong;
 	}
 	
 	

@@ -63,7 +63,7 @@ public class OrderController {
 		mav.addObject("dto", dto);
 		return mav;
 	}
-	
+
 	@PostMapping("/select/{idx}")
 	public ModelAndView modify(@PathVariable int idx, OrderDTO dto) {
 		String msg;
@@ -96,4 +96,5 @@ public class OrderController {
 		mav.addObject("value", "delete");
 		return mav;
 	}
+
 }
