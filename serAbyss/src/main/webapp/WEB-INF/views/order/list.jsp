@@ -30,6 +30,7 @@
 			</tr>
 		</c:if>
 	</table>
+	<!-- 테스트용 주석 -->
 </div>
 
 <%@ include file="../layout/footer.jsp" %>
