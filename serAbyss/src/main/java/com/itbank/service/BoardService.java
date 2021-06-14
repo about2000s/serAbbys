@@ -1,5 +1,6 @@
 package com.itbank.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +28,21 @@ public class BoardService {
 		return dao.myList(person_id);
 	}
 
-	public List<SerCenDTO> faqList() {
-		return dao.faqList();
+	public List<SerCenDTO> faqList(HashMap<String, String> map) {
+		return dao.faqList(map);
 	}
 
 	public List<SerCenDTO> noticeList() {
 		return dao.noticeList();
 	}
 
-	public SerCenDTO selectOneNotice(int serCen_idx) {
-		return dao.selectOneNotice(serCen_idx);
+	public SerCenDTO selectOneNotice(HashMap<String, String> map) {
+		return dao.selectOneNotice(map);
 	}
+
+	public int selectBoardCountFaq(HashMap<String, String> map) {
+		return dao.selectBoardCountFaq(map);
+	}
+
 	
 }

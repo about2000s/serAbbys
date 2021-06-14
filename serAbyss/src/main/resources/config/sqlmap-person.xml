@@ -8,7 +8,7 @@
 		insert into person 
 		(person_idx, person_id, person_pw, person_name, person_birth, 
 		person_email, person_address, person_phone, person_call, person_fax, 
-		person_check, person_belong) values (
+		person_check, person_belong, person_busiNum) values (
 			person_seq.nextval, #{person_id}, #{person_pw}, #{person_name}, #{person_birth}, #{person_email}, #{person_address}, #{person_phone}, 
 			<if test="person_call == null">
 			null
@@ -29,6 +29,13 @@
 			</if>
 			<if test="person_belong != null">
 			#{person_belong}
+			</if>
+			,
+			<if test="person_busiNum == null">
+			null
+			</if>
+			<if test="person_busiNum != null">
+			#{person_busiNum}
 			</if>
 			)
 	</insert>

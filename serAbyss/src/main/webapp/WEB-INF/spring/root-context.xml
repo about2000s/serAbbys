@@ -37,6 +37,7 @@
 		<property name="mapperLocations">
 			<list>
 				<value>classpath:config/sqlmap-person.xml</value>
+				<value>classpath:config/sqlmap-board.xml</value>
 			</list>
 		</property>
 	</bean>
