@@ -4,13 +4,14 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.itbank.dto.CompDTO;
 //
 import com.itbank.dto.PersonDTO;
 import com.itbank.service.PersonService;
@@ -79,13 +80,23 @@ public class PersonController {
 //	@RequestParam HashMap<String, String> map
 	//회원가입 처리
 	@PostMapping("/join")
-	public ModelAndView join(PersonDTO inputData) {
+	public ModelAndView join(PersonDTO inputData, String any, String address, String detailAddress) {
+		String fullAddress = address + " " + detailAddress;
+		inputData.setPerson_address(fullAddress);
 		ModelAndView mav = new ModelAndView("alert");
+		if(any != null) {
+			if(any.equals("comp")) {//회사대표계정 회원가입시 진행됨.
+				inputData.setPerson_belong(inputData.getPerson_belong().split(",")[0]);
+				CompDTO comp = new CompDTO(inputData.getPerson_belong(), fullAddress);
+				int row2 = ps.companyAdd(comp);
+			}
+			if(any.equals("empl")) {//회사직원 가입시 진행됨
+				inputData.setPerson_belong(inputData.getPerson_belong().split(",")[1]);
+			}
+		}
 		String msg = null;
 		int row = ps.join(inputData);
-		if(inputData.getPerson_belong() != null) {//회사대표계정 회원가입시 진행됨.
-			int row2 = ps.companyAdd(inputData.getPerson_belong());
-		}
+		
 		if(row != 0) {
 			msg = "회원가입 성공";
 		}
@@ -199,10 +210,16 @@ public class PersonController {
 		return mav;
 	}
 	
-	@RequestMapping(value = "/idCheck", method = { RequestMethod.GET, RequestMethod.POST})
-	public @ResponseBody int idCheck(PersonDTO dto, Model model) {
-		System.out.println("personId: " + dto.getPerson_id());
-		return ps.idCheck(dto);
+	@GetMapping(value = "/idCheck")
+	@ResponseBody
+	public int idCheck(@RequestParam("person_id") String person_id) {
+		return ps.idCheck(person_id);
+	}
+	
+	@GetMapping(value = "/emailCheck")
+	@ResponseBody
+	public int emailCheck(@RequestParam("person_email") String person_email) {
+		return ps.emailCheck(person_email);
 	}
 	
 	@GetMapping("timePlus")

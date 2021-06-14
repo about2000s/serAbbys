@@ -1,11 +1,13 @@
 package com.itbank.dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
+import com.itbank.dto.CompDTO;
 import com.itbank.dto.PersonDTO;
 
 public interface PersonDAO {
@@ -42,15 +44,22 @@ public interface PersonDAO {
 	int updatePw(PersonDTO inputData);
 	
 	@Select("select nvl(count(*), 0) from person where person_id=#{person_id}")
-	int idCheck(PersonDTO dto);
+	int idCheck(String person_id);
 
 	@Select("select min(person_idx) from person where person_belong=#{person_belong}")
 	int getMinIdx(String person_belong);
 
-	@Insert("insert into companyList (companyList_idx, companyList_name) values (companyList_seq.nextval, #{person_belong})")
-	int companyAdd(String person_belong);
+	@Insert("insert into companyList (companyList_idx, companyList_name, companyList_address) "
+			+ "values (companyList_seq.nextval, #{companyList_name}, #{companyList_address})")
+	int companyAdd(CompDTO comp);
 
 	@Insert("insert into reserve (year, month, day, hour) values (2021, #{i}, #{j}, #{k})")
 	int timePlus(HashMap<String, Integer> map);
+
+	@Select("select nvl(count(*), 0) from person where person_email=#{person_email}")
+	int emailCheck(String person_email);
+
+	@Select("select * from companyList where companyList_name like '%${companyList_name}%'")
+	List<HashMap<String, String>> compSearchList(String companyList_name);
 	
 }

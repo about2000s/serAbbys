@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8" name = "viewport" content = "width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>Insert title here</title>
 <style>
@@ -52,6 +52,8 @@
 			<c:if test="${!iamCeo }">
 				<li><a href="${cpath }/board/myList/${login.person_id}">내 접수목록 관리</a></li>
 			</c:if>
+			
+			<li><a href = "${cpath }/common/board/serCen">고객센터</a></li>
 			<!-- 여기까지 -->
 		</ul>
 	</div>

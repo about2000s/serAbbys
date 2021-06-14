@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Select;
 
 import com.itbank.dto.BoardDTO;
+import com.itbank.dto.SerCenDTO;
 import com.itbank.dto.ServiceBoardDTO;
 
 public interface BoardDAO {
@@ -18,6 +19,12 @@ public interface BoardDAO {
 
 	@Select("select * from service where service_engiId=#{person_id}")
 	List<ServiceBoardDTO> myList(String person_id);
+
+	@Select("select * from serCen where belong=#{faq}")
+	List<SerCenDTO> faqList();
+
+	@Select("select * from serCen where belong=#{notice}")
+	List<SerCenDTO> noticeList();
 
 	
 

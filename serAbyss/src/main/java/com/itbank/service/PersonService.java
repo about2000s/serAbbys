@@ -5,12 +5,14 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itbank.dao.PersonDAO;
+import com.itbank.dto.CompDTO;
 import com.itbank.dto.PersonDTO;
 
 @Service
@@ -85,8 +87,8 @@ public class PersonService {
 		return dao.updatePw(inputData);
 	}
 
-	public int idCheck(PersonDTO dto) {
-		return dao.idCheck(dto);
+	public int idCheck(String person_id) {
+		return dao.idCheck(person_id);
 	}
 	
 	//자기 회사의 최소 인덱스 구하는 메서드(이 인덱스번호와 일치하는 계정은, 대표계정임을 알 수 있음)
@@ -107,8 +109,8 @@ public class PersonService {
 		}
 	}
 
-	public int companyAdd(String person_belong) {
-		return dao.companyAdd(person_belong);
+	public int companyAdd(CompDTO comp) {
+		return dao.companyAdd(comp);
 	}
 
 	public void timePlus() {//월 일 시
@@ -126,5 +128,13 @@ public class PersonService {
 				}
 			}
 		}
+	}
+
+	public int emailCheck(String person_email) {
+		return dao.emailCheck(person_email);
+	}
+
+	public List<HashMap<String, String>> compSearchList(String companyList_name) {
+		return dao.compSearchList(companyList_name);
 	}
 }

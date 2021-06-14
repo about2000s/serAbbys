@@ -10,13 +10,20 @@
 		person_email, person_address, person_phone, person_call, person_fax, 
 		person_check, person_belong) values (
 			person_seq.nextval, #{person_id}, #{person_pw}, #{person_name}, #{person_birth}, #{person_email}, #{person_address}, #{person_phone}, 
-			<if test="person_phone == null">
-			null, 
+			<if test="person_call == null">
+			null
 			</if>
-			<if test="person_phone != null">
-			#{person_phone}, 
+			<if test="person_call != null">
+			#{person_call}
 			</if>
-			#{person_fax}, #{person_check}, 
+			, 
+			<if test="person_fax == null">
+			null
+			</if>
+			<if test="person_fax != null">
+			#{person_fax}
+			</if>
+			, #{person_check}, 
 			<if test="person_belong == null">
 			null
 			</if>
