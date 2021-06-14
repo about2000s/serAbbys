@@ -80,6 +80,10 @@ public class OrderService {
 	public int modify(OrderDTO dto) {
 		return dao.modify(Filename(dto));
 	}
+
+	public int delete(int idx) {
+		return dao.delete(idx);
+	}
 	
 //	public int order(OrderDTO dto) {
 //		if(dto.ready()) {

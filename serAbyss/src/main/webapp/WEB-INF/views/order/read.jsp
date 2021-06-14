@@ -22,9 +22,20 @@
 <%-- 	<c:if test="${dto.service_id == (login.person_id or 'admin')}"> --%>
 		<div>
 			<a href="${cpath }/order/select/${dto.service_idx}?value=modify"><button>수정</button></a>
-			<a href="${cpath }/order/delete/${dto.service_idx}"><button id="deleteBtn">삭제</button></a>
+			<button id="deleteBtn">삭제</button>
 		</div>
 <%-- 	</c:if> --%>
 </div>
+
+<script>
+	const deleteUrl = '${cpath }/order/delete/${dto.service_idx}';
+	document.getElementById('deleteBtn').onclick = function(event) {
+		if(confirm("정말 삭제하시겠습니까?") == true) {
+			location.href = deleteUrl + "?" + '${login.person_check}';
+		} else {
+			return;
+		}
+	}
+</script>
 
 <%@ include file="../layout/footer.jsp" %>

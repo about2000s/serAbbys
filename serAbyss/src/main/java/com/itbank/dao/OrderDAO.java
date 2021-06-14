@@ -2,6 +2,7 @@ package com.itbank.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -29,5 +30,8 @@ public interface OrderDAO {
 			+ "service_uploadFile='${service_uploadFile}', service_address=#{service_address}, service_reg=to_char(sysdate, 'yyyy-MM-dd hh24:mi') "
 			+ "where service_idx=#{service_idx}")
 	int modify(OrderDTO dto);
+
+	@Delete("delete from service where service_idx=#{idx}")
+	int delete(int idx);
 
 }

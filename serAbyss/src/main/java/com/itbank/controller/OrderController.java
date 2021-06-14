@@ -43,7 +43,7 @@ public class OrderController {
 	
 	@PostMapping("/order_new")
 	public ModelAndView order(OrderDTO dto) {
-		ModelAndView mav = new ModelAndView("/order/order_write");
+		ModelAndView mav = new ModelAndView("/order/order_result");
 		String msg;
 		int row = os.order(dto);
 		if(row != 0) {
@@ -75,9 +75,25 @@ public class OrderController {
 		else {
 			msg = "수정에 실패했습니다. 다시 시도해주세요";
 		}
-		ModelAndView mav = new ModelAndView("/order/order_write");
+		ModelAndView mav = new ModelAndView("/order/order_result");
 		mav.addObject("msg", msg);
 		mav.addObject("value", "modify");
+		return mav;
+	}
+	
+	@GetMapping("/delete/{idx}")
+	public ModelAndView delete(@PathVariable int idx) {
+		int row = os.delete(idx);
+		String msg;
+		if(row != 0) {
+			msg = "삭제가 완료되었습니다";
+		}
+		else {
+			msg = "삭제에 실패했습니다. 다시 시도해주세요";
+		}
+		ModelAndView mav = new ModelAndView("/order/order_result");
+		mav.addObject("msg", msg);
+		mav.addObject("value", "delete");
 		return mav;
 	}
 }
