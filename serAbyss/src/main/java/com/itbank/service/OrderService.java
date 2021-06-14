@@ -25,6 +25,26 @@ public class OrderService {
 		}
 	}
 	
+	public OrderDTO Filename(OrderDTO dto) {
+		if(dto.getFile().getOriginalFilename().equals("") == false) {
+			String fileName = UUID.randomUUID().toString().replaceAll("-", "");
+			int beginIndex = dto.getFile().getOriginalFilename().indexOf(".");
+			String extName = dto.getFile().getOriginalFilename().substring(beginIndex);
+			fileName += extName;
+			
+			File f = new File(uploadPath, fileName);
+			
+			try {
+				dto.getFile().transferTo(f);
+				
+			} catch (IllegalStateException | IOException e) {
+				System.out.println("업로드 문제 발생 : " + e);
+			}
+			dto.setService_uploadFile(fileName);
+		} else dto.setService_uploadFile(null);
+		return dto;
+	}
+	
 	public List<OrderDTO> selectall() {
 		return dao.selectall();
 	}
@@ -55,6 +75,14 @@ public class OrderService {
 			dto.setService_uploadFile(fileName);
 		} else dto.setService_uploadFile(null);
 		return dao.order(dto);
+	}
+
+	public int modify(OrderDTO dto) {
+		return dao.modify(Filename(dto));
+	}
+
+	public int delete(int idx) {
+		return dao.delete(idx);
 	}
 	
 //	public int order(OrderDTO dto) {
