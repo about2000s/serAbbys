@@ -1,5 +1,6 @@
 package com.itbank.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,7 @@ import com.itbank.dto.BoardDTO;
 import com.itbank.dto.SerCenDTO;
 import com.itbank.dto.ServiceBoardDTO;
 import com.itbank.service.BoardService;
+import com.itbank.service.Paging;
 
 @Controller
 @RequestMapping("/board")
@@ -58,24 +60,47 @@ public class BoardController {
 	}
 	
 	@GetMapping("/serCen")
-	public ModelAndView serCen() {
-		ModelAndView mav = new ModelAndView("board/serCen");
-		List<SerCenDTO> list = bs.faqList();
+	public ModelAndView serCen(String type, String keyword, int page) {
+		ModelAndView mav = new ModelAndView("board/faq");
+		if(keyword == null || keyword.equals("")) {
+			type = "serCen_title";
+			keyword = "";
+		}//map에 type, keyword, page, offset, nowD를 담을 거임
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		int boardCountFaq = bs.selectBoardCountFaq(map);
+		Paging paging = new Paging(page, boardCountFaq);
+		map.put("offset", paging.getOffset() + "");
+		map.put("nowD", paging.getNowD() + "");
+		
+		List<SerCenDTO> list = bs.faqList(map);
+		mav.addObject("paging", paging);
+		mav.addObject("page", page);
 		mav.addObject("list", list);
+		mav.addObject("type", type);
+		mav.addObject("keyword", keyword);
+		mav.setViewName("board/faq");
+		
 		return mav;
 	}
 	
-	@GetMapping("/notice")
-	public ModelAndView notice() {
-		ModelAndView mav = new ModelAndView("board/notice");
-		List<SerCenDTO> list = bs.noticeList();
-		mav.addObject("list", list);
+	
+	@GetMapping("/serCenRead")
+	public ModelAndView noticeRead(int serCen_idx, String serCen_belong) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("serCen_idx", serCen_idx + "");
+		map.put("serCen_belong", serCen_belong);
+		ModelAndView mav = new ModelAndView("board/serCenRead");
+		SerCenDTO dto = bs.selectOneNotice(map);
+		mav.addObject("dto", dto);
 		return mav;
 	}
 	
-//	@GetMapping("noticeRead/{serCen_idx}")
-//	public ModelAndView noticeRead(@PathVariable int serCen_idx) {
-//		SerCenDTO dto = bs.selectOneNotice(serCen_idx);
+//	@GetMapping("/notice")
+//	public ModelAndView notice(String type, String keyword, int page) {
+//		
 //	}
+	
 
 }
