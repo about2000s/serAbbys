@@ -1,5 +1,6 @@
 package com.itbank.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
@@ -11,11 +12,9 @@ import com.itbank.dto.OrderDTO;
 
 public interface OrderDAO {
 
-	@Select("select * from service order by service_idx")
-	List<OrderDTO> selectall();
+	List<OrderDTO> selectall(HashMap<String, String> param);
 
-	@Select("select * from service where service_status=#{status} order by service_idx")
-	List<OrderDTO> selectStatus(String status);
+	List<OrderDTO> selectStatus(HashMap<String, String> param);
 
 	@Select("select * from service where service_idx=#{idx}")
 	OrderDTO selectOne(int idx);

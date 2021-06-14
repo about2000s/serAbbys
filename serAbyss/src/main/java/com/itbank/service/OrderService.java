@@ -2,6 +2,7 @@ package com.itbank.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -45,12 +46,12 @@ public class OrderService {
 		return dto;
 	}
 	
-	public List<OrderDTO> selectall() {
-		return dao.selectall();
+	public List<OrderDTO> selectall(HashMap<String, String> param) {
+		return dao.selectall(param);
 	}
 	
-	public List<OrderDTO> selectStatus(String status) {
-		return dao.selectStatus(status);
+	public List<OrderDTO> selectStatus(HashMap<String, String> param) {
+		return dao.selectStatus(param);
 	}
 
 	public OrderDTO selectOne(int idx) {

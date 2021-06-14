@@ -1,5 +1,6 @@
 package com.itbank.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +20,9 @@ import com.itbank.service.OrderService;
 public class OrderController {
 
 	@GetMapping("/service_list_all")
-	public ModelAndView ListAll() {
+	public ModelAndView ListAll(@RequestParam HashMap<String, String> param) {
 		ModelAndView mav = new ModelAndView("/order/list");
-		List<OrderDTO> list = os.selectall();
+		List<OrderDTO> list = os.selectall(param);
 		mav.addObject("list", list);
 		return mav;
 	}
@@ -29,9 +30,10 @@ public class OrderController {
 	@Autowired OrderService os;
 	
 	@GetMapping("/statusList")
-	public ModelAndView registList(@RequestParam String status) {
+	public ModelAndView registList(@RequestParam HashMap<String, String> param, String status) {
 		ModelAndView mav = new ModelAndView("/order/list");
-		List<OrderDTO> list = os.selectStatus(status);
+		param.put("status", status);
+		List<OrderDTO> list = os.selectStatus(param);
 		mav.addObject("list", list);
 		return mav;
 	}

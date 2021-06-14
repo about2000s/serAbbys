@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+			"-//mybatis.org//DTD Mapper 3.0//EN" 
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+			
+<mapper namespace="com.itbank.dao.OrderDAO">
+
+	<select id="selectall" parameterType="hashmap" resultType="order">
+		select * from service order by service_idx 
+		<if test="#{type}.equals('title')">
+			where service_title like '%${search}%'
+		</if>
+		<if test="#{type}.equals('content')">
+			where service_title like '%${search}%'
+		</if>
+		<if test="#{type}.equals('both')">
+			where service_title like '%${search}%' or service_content like '%${search}'
+		</if>
+	</select>
+	
+	<select id="selectStatus" parameterType="hashmap" resultType="order">
+		select * from service where service_status=#{status} order by service_idx
+		<if test="#{type}.equals('title')">
+			where service_title like '%${search}%'
+		</if>
+		<if test="#{type}.equals('content')">
+			where service_title like '%${search}%'
+		</if>
+		<if test="#{type}.equals('both')">
+			where service_title like '%${search}%' or service_content like '%${search}'
+		</if>
+	</select>
+</mapper>
+
+
+
+
