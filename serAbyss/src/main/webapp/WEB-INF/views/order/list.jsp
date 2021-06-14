@@ -3,10 +3,8 @@
 <%@ include file="../layout/header.jsp" %>
 <%@ include file="../layout/leftmenu.jsp" %>
 
-
 <div class="container">
-	
-	<table>
+	<table class="list">
 		<tr>
 			<th>글번호</th>
 			<th>제목</th>
@@ -29,6 +27,6 @@
 			</tr>
 		</c:if>
 	</table>
-	 </div>
+</div>
 
 <%@ include file="../layout/footer.jsp" %>
