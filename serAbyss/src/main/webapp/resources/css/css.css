@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
+/* botero color 
+skyblue greenyellow   salgu    orange  brown
+#99b6bd #b3a86a       #ecc9a0 #d4613e #bb9568*/
+
 
 /* header.jsp 남 */
 .topmenubar { width:100%;  }
@@ -8,10 +12,6 @@
 .navi ul li { font-size:10px;  margin-right:3%; display:inline; font-size:22px; list-style:none;}
 .navi ul li a { text-decoration: none;}
 
-.leftmenu { width:200px;  border:0px solid blue;float:left; font-size:12px;} 
-.leftmenu ul {list-style:none;}
-.leftmenu ul li {  padding-bottom:15px; } 
-.leftmenu ul li a { text-decoration: none; }
 
 
 .container { border:0px solid red;}
@@ -28,7 +28,13 @@
 /* 정재훈  updateInfo, join파일에서 hidden처리*/
 .hiddenNone { display:none; }
 
+/* leftmeny : 남형진*/
+.leftmenu { width:200px;  border:0px solid blue;float:left; font-size:12px;} 
+.leftmenu ul {list-style:none;}
+.leftmenu ul li {  padding-bottom:15px; } 
+.leftmenu ul li a { text-decoration: none; }
 
+/* 로그인 페이지 common/login : 남형진*/
 
 
 

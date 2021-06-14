@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
 <h2>마이페이지 입니다</h2>
-<div>
+<div class="container">
 	<p>아이디: ${login.person_id }</p>
 	<p>이메일: ${login.person_email }</p>
 	<p>주소: ${login.person_address }</p>
