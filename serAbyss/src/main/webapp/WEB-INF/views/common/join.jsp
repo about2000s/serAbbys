@@ -30,7 +30,7 @@
 		
 		<div class = "radio3 hiddenNone">
 			<h2>법인소속직원(기사) 폼</h2><!-- compList에서 검색하는 폼 -->
-			<input type = "text" id = "person_belong" name = "person_belong" readonly><!-- 여기 나중에 검색결과 채워넣을 거임 -->
+			<input type = "text" id = "person_belong" name = "person_belong" readonly>
 			<button onclick = "document.getElementById('id01').style.display='block'"
 			class = "w3-button w3-black">회사 검색</button>
 		</div>
