@@ -4,7 +4,10 @@
 <%@ include file="../layout/leftmenu.jsp" %>
 
 <div class="container">
+	<h1>서비스 신청</h1>
+
 	<table class="list">
+		
 		<tr>
 			<th>글번호</th>
 			<th>제목</th>

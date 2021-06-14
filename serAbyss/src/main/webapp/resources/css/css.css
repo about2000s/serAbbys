@@ -1,17 +1,30 @@
 @charset "UTF-8";
 
 /* botero color 
-skyblue greenyellow   salgu    orange  brown
-#99b6bd #b3a86a       #ecc9a0 #d4613e #bb9568*/
+skyblue #99b6bd
+greenyellow   #b3a86a 
+salgu    #ecc9a0
+orange  #d4613e 
+brown #bb9568
+ */
 /*작업중*/
-@media screen and (max-width:1200px) {  }
-@media screen and (max-width:768px) {  }
-@media screen and (max-width:480px) { }
+html {font-family: 'Alfa Slab One', cursive; font-family: 'Noto Sans KR', sans-serif; }
+body {background-color:#ffffff; }
 
-/* header.jsp 남 */
-.topmenubar { width:100%;  }
+
+@media screen and(max-width:768px) {
+	body { background-color:green; }
+}
+
+@media screen and(max-width:320px) {
+	body { background-color:red; }
+}
+
+
+/* header.jsp  */
+.topmenubar { width:1900px;  }
 .topmenubar .toplogo { width:15%;border:0px solid black; }
-.navi { width:100%; height:50px; line-height:50px; border:0px solid red; background-color:#99b6bd;}
+.navi { width:100%; height:50px; line-height:50px; border:0px solid red; background-color:#99b6bd; border-radius:10px;margin-bottom:25px;}
 .navi ul li { font-size:10px; color:white;  margin-right:3%; display:inline; font-size:22px; list-style:none;}
 .navi ul li a { text-decoration: none; color:white;}
 .navi ul li a:hover { color:#ecc9a0; }
@@ -20,7 +33,7 @@ skyblue greenyellow   salgu    orange  brown
 
 .container { border:0px solid red;}
 .container table { width:60%; border:1px solid #dcdcdc; border-collapse:collapse;}
-.container table th { background-color:#ececec; padding:8px; border-right:1px solid #dcdcdc; border-bottom:1px solid #dcdcdc; font-size:12px;}
+.container table th { background-color:#ececec; padding:8px; border-right:1px solid #ececec; border-bottom:1px solid #dcdcdc; font-size:12px;}
 .container table tr td { border-right:1px solid #dcdcdc; font-size:12px; align:center;padding:8px; }
 /* order_new */
 .container input { width:250px;height:30px; }
@@ -33,10 +46,12 @@ skyblue greenyellow   salgu    orange  brown
 .hiddenNone { display:none; }
 
 /* leftmenu : 남형진*/
-.leftmenu { width:100px;  background-color:#ececec; border:1px solid blue; float:left; font-size:12px;} 
+.leftmenu { width:190px; background-color:#f7f7f7; border:1px solid #ececec; 
+			float:left; font-size:13px;text-align:center;border-radius:0px;margin-right:10px; } 
 .leftmenu ul { padding:0; margin:0; list-style:none;}
-.leftmenu ul li { padding:5px; "border:collapse; margin:0;border-bottom:1px solid black;} 
+.leftmenu ul li { padding:10px; border:collapse; margin:0; border-bottom:1px solid white;} 
 .leftmenu ul li a { text-decoration: none; }
+.leftmenu ul li a:hover { color:black; text-decoration: underline; }
 
 /* 로그인 페이지 common/login : 남형진*/
 .logincontainer { display:block; margin-top:200px; margin:auto; width:600px; border:1px solid black;} 

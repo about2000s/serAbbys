@@ -21,7 +21,7 @@
 	
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
 		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.0.93:1521:xe" />
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@221.164.9.200:11521:xe" />
 <!-- 		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe" /> -->
 		<property name="user" value="c##itbank" />
 		<property name="password" value="it" />
