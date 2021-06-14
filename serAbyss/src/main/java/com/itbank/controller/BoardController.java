@@ -34,6 +34,6 @@ public class BoardController {
 		return mav;
 	}
 	
-	//마스터 업로드 테스트
+	
 
 }
