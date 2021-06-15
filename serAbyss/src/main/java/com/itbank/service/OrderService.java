@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.itbank.dao.OrderDAO;
 import com.itbank.dto.OrderDTO;
+import com.itbank.dto.ReserveDTO;
 
 @Service
 public class OrderService {
@@ -83,6 +84,10 @@ public class OrderService {
 
 	public int delete(int idx) {
 		return dao.delete(idx);
+	}
+
+	public ReserveDTO selectReserveOne(ReserveDTO inputData) {
+		return dao.selectReserveOne(inputData);
 	}
 	
 //	public int order(OrderDTO dto) {

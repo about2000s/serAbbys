@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.itbank.dto.OrderDTO;
+import com.itbank.dto.ReserveDTO;
 
 public interface OrderDAO {
 
@@ -33,5 +34,11 @@ public interface OrderDAO {
 
 	@Delete("delete from service where service_idx=#{idx}")
 	int delete(int idx);
+
+	@Select("select * from reserve where "
+			+ "reserve_year=#{reserve_year} and reserve_month=#{reserve_month} and "
+			+ "reserve_day=#{reserve_day} and reserve_hour=#{reserve_hour} and "
+			+ "reserve_engiId=#{reserve_engiId} and reserve_custId=#{reserve_custId}")
+	ReserveDTO selectReserveOne(ReserveDTO inputData);
 
 }

@@ -10,7 +10,7 @@
 	<table>
 		<tr>
 			<th>고객아이디입력</th>
-			<td><input type="text" name="service_id" placeholder="고객id입력" required></td>
+			<td><input type="text" name="service_custId" placeholder="고객id입력" required></td>
 		</tr>
 		<tr>
 			<th>제목입력</th>
@@ -30,7 +30,7 @@
 		</tr>
 		<tr>
 			<th>담당엔지니어</th>
-			<td><input type="text" name="service_engineer" value="없음" readonly></td>
+			<td><input type="text" name="service_engiId" value="없음" readonly></td>
 		</tr>
 		<tr>
 			<td colspan='2'><input type="submit" value="신청하기"></td>

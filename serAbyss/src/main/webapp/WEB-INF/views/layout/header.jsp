@@ -52,6 +52,8 @@
 			
 			<li><a href="${cpath }/board/serCen?page=1">고객센터(자주묻는질몬)</a></li>
 			<!-- 여기까지 -->
+			
+			<li><a href="${cpath }/order/order_new_for_cust">고객이 서비스 신청하러 가기!</a></li>
 		</ul>
 	</div>
 </div>
