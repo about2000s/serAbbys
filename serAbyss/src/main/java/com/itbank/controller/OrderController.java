@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.dto.OrderDTO;
+import com.itbank.dto.PersonDTO;
 import com.itbank.dto.ReserveDTO;
 import com.itbank.service.OrderService;
 
@@ -102,24 +105,10 @@ public class OrderController {
 		return mav;
 	}
 	
-	
-//	ModelAndView mav = new ModelAndView("board/writeFaq");
-//	SimpleDateFormat format1 = new SimpleDateFormat ("dd");
-//	Date date = new Date();
-//	String time1 = format1.format(date);
-//	int day = Integer.parseInt(time1);
-//	List<Integer> list = new ArrayList<Integer>();
-//	for(int i=0;i<14;i++) {
-//		list.add(i, day + i);
-//	}
-//	mav.addObject("list", list);
-//	return mav;
-	
 	@GetMapping("/order_new_for_cust")
 	public ModelAndView order_new_for_cust() {
 		ModelAndView mav = new ModelAndView("/order/order_new_for_cust");
 		
-//		SimpleDateFormat nalzza = new SimpleDateFormat("yyyyMMdd");
 		SimpleDateFormat yyyy = new SimpleDateFormat("yyyy");
 		SimpleDateFormat MM = new SimpleDateFormat("MM");
 		SimpleDateFormat dd = new SimpleDateFormat("dd");
@@ -127,83 +116,97 @@ public class OrderController {
 		String year = yyyy.format(date); // 2021
 		String month = MM.format(date);
 		String day = dd.format(date);
-		int yearToInt = Integer.parseInt(year);
 		int monthToInt = Integer.parseInt(month);
 		int dayToInt = Integer.parseInt(day);
 		int hour = 8;
 		
-		String engiId = "kim123";
-		String custId = "lee123";
+		List<String> engiIdList = os.selectEngiIdAll();
+		System.out.println("engiList: " + engiIdList);
 		
-		List<String> monthList = new ArrayList<String>(); // 06, 07
-		for(int i=0;i<1;i++) {
+		List<String> monthList = new ArrayList<String>(); // 06
+		for(int i=0;i<2;i++) {
 			monthList.add(i, (monthToInt + i) + "");
 			if(monthList.get(i).length() == 1) {
 				monthList.set(i, "0" + monthList.get(i));
 			}
 		}
 		
-		List<String> dayList = new ArrayList<String>(); // 16, 17 ...
-		for(int i=0;i<7;i++) {
+		List<String> dayList = new ArrayList<String>(); // 16, 17
+		for(int i=0;i<3;i++) {
 			dayList.add(i, (dayToInt + i + 1) + "");
 			if(dayList.get(i).length() == 1) {
 				dayList.set(i, "0" + dayList.get(i));
 			}
 		}
 		
+//		List<List<String>> hList = new ArrayList<List<String>>();
+		List<List<List<List<String>>>> aList = new ArrayList<List<List<List<String>>>>();
 		
-//		List<HashMap<String, String>> hashList = new ArrayList<HashMap<String,String>>();
+		// hour에 대한 리스트
 		
-		List<List<String>> hList = new ArrayList<List<String>>();
+		//day에 대응되는 hour리스트가 담긴 map1
 		
-//		List<String> nalzzaList = new ArrayList<String>(); // 2021061608, 2021061610, ...
-		for(int i=0;i<monthList.size();i++) {
-			for(int j=0;j<dayList.size();j++) {
-				List<String> dList = new ArrayList<String>();
+		//month에 대응되는 map1이 담긴 map2
+		
+		//engiId에 대응되는 map2가 담긴 map3
+		HashMap<String, HashMap<String, HashMap<String, List<String>>>> aMap = new HashMap<String, HashMap<String,HashMap<String,List<String>>>>();
+		
+		//지옥의 반복문 시작
+		for(int a=0;a<engiIdList.size();a++) {
+//			List<List<List<String>>> bList = new ArrayList<List<List<String>>>();
+			HashMap<String, HashMap<String, List<String>>> bMap = new HashMap<String, HashMap<String,List<String>>>();
+			
+			for(int b=0;b<monthList.size();b++) {
+//				List<List<String>> cList = new ArrayList<List<String>>();
+				HashMap<String, List<String>> cMap = new HashMap<String, List<String>>();
 				
-				List<String> hourList = new ArrayList<String>(); //반복문을 돌릴 때마다 새로운 hourList를 만든다!
-				for(int s=0;s<8;i++) {
-					hourList.add(s, (hour + s*2) + "");
-					if(hourList.get(s).length() == 1) {
-						hourList.set(s, "0" + hourList.get(s));
+				for(int c=0;c<dayList.size();c++) {
+					
+					List<String> dList = new ArrayList<String>(); //반복문을 돌릴 때마다 새로운 dList를 만든다!
+					for(int d=0;d<8;d++) {	// 08 10 12 14 16 18 20 22
+						dList.add(d, (hour + d*2) + "");
+						if(dList.get(d).length() == 1) { // 길이가 1인 것(8)은 앞에 0을 붙여 08로 만든다
+							dList.set(d, "0" + dList.get(d));
+						}
 					}
-				}
-				for(int k=0;k<hourList.size();k++) {
-//					nalzzaList.add(year + monthList.get(i) + dayList.get(j) + hourList.get(k));
-					String reserve_year = year;
-					String reserve_month = monthList.get(i);
-					String reserve_day = dayList.get(j);
-					String reserve_hour = hourList.get(k);
-					String reserve_engiId = engiId;
-					String reserve_custId = custId;
 					
-					HashMap<String, String> map = new HashMap<String, String>();
-					map.put("reserve_year", reserve_year);
-					map.put("reserve_month", reserve_month);
-					map.put("reserve_day", reserve_day);
-					map.put("reserve_hour", reserve_hour);
-					map.put("reserve_engiId", reserve_engiId);
-					map.put("reserve_custId", reserve_custId);
-					
-					ReserveDTO inputData = new ReserveDTO(reserve_year, reserve_month, reserve_day, reserve_hour, reserve_engiId, reserve_custId);
-					
-					ReserveDTO dto = os.selectReserveOne(inputData);
-					if(dto == null) {
-						hourList.remove(dto.getReserve_hour());
+					for(int e=0;e<dList.size();e++) {
+						String reserve_year = year;
+						String reserve_month = monthList.get(b);
+						String reserve_day = dayList.get(c);
+						String reserve_hour = dList.get(e);
+						String reserve_engiId = engiIdList.get(a);
+						ReserveDTO inputData = new ReserveDTO(reserve_year, reserve_month, reserve_day, reserve_hour, reserve_engiId);
+						
+						ReserveDTO dto = os.selectReserveOne(inputData);
+						if(dto != null) {
+							dList.remove(dto.getReserve_hour());
+						}
 					}
-					hList.add(hourList);
+//					cList.add(dList);
+					cMap.put(dayList.get(c), dList);
 				}
+//				bList.add(cList);
+				bMap.put(monthList.get(b), cMap);
 			}
+//			aList.add(bList);
+			aMap.put(engiIdList.get(a), bMap);
 		}
+		int startDay = dayToInt + 1;
 		
+		mav.addObject("aMap", aMap);
+		
+		
+		
+		mav.addObject("aList", aList);
+		mav.addObject("engiIdList", engiIdList);
+		mav.addObject("engiIdListSize", engiIdList.size());
 		mav.addObject("monthList", monthList);
+		mav.addObject("monthListSize", monthList.size());
 		mav.addObject("dayList", dayList);
-		
-		mav.addObject("hList", hList);
-		
-//		for(int i=0;i<dayList.size();i++) {
-//			mav.addObject("hourOf" + dayList.get(i), hList.get(i));
-//		}
+		mav.addObject("dayListSize", dayList.size());
+		mav.addObject("dayCount", dayList.size());
+		mav.addObject("startDay", startDay);
 		
 		return mav;
 	}

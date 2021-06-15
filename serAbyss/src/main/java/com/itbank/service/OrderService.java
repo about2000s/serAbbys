@@ -89,6 +89,10 @@ public class OrderService {
 	public ReserveDTO selectReserveOne(ReserveDTO inputData) {
 		return dao.selectReserveOne(inputData);
 	}
+
+	public List<String> selectEngiIdAll() {
+		return dao.selectEngiIdAll();
+	}
 	
 //	public int order(OrderDTO dto) {
 //		if(dto.ready()) {
