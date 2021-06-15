@@ -15,8 +15,29 @@ service_viewcount   default 0
 */
 public class ServiceBoardDTO {
 	private int service_idx, service_viewCount;
-	private String service_custId, service_title, service_content, service_status, service_address, service_reg, service_engiId, service_compBelong;
+	private String service_custId, service_title, service_content, service_status, 
+	service_address, service_reg, service_engiId, service_compBelong, service_name, service_phone;
 	
+	
+	
+	public void setService_custId(String service_custId) {
+		this.service_custId = service_custId;
+	}
+	public void setService_engiId(String service_engiId) {
+		this.service_engiId = service_engiId;
+	}
+	public String getService_name() {
+		return service_name;
+	}
+	public void setService_name(String service_name) {
+		this.service_name = service_name;
+	}
+	public String getService_phone() {
+		return service_phone;
+	}
+	public void setService_phone(String service_phone) {
+		this.service_phone = service_phone;
+	}
 	public int getService_idx() {
 		return service_idx;
 	}
