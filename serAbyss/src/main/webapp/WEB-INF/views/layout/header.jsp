@@ -48,7 +48,7 @@
 				<c:if test="${!iamCeo }">
 					<li><a href="${cpath }/board/myList/${login.person_id}">내 접수목록 관리</a></li>
 				</c:if>
-				
+				<li><a href="${cpath }/customer/crm">고객응대하기</a></li>
 				<li><a href="${cpath }/board/serCen?page=1">고객센터(자주 묻는 질문)</a></li>
 				<!-- 여기까지 -->
 			</ul>
