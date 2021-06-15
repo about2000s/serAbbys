@@ -28,6 +28,15 @@ public class OrderController {
 		return mav;
 	}
 	
+	@PostMapping("/service_list_all")
+	public ModelAndView postListAll(@RequestParam HashMap<String, String> param) {
+		ModelAndView mav = new ModelAndView("/order/list");
+		List<OrderDTO> list = os.selectall(param);
+		mav.addObject("list", list);
+		mav.addObject("param", param);
+		return mav;
+	}
+	
 	@Autowired OrderService os;
 	
 	@GetMapping("/statusList")
@@ -38,6 +47,16 @@ public class OrderController {
 		mav.addObject("list", list);
 		mav.addObject("param", param);
 		mav.addObject("status", status);
+		return mav;
+	}
+	
+	@PostMapping("/statusList")
+	public ModelAndView postRegistList(@RequestParam HashMap<String, String> param) {
+		System.out.println("작동은 하는가 확인 : " + param.get("type") + "/" + param.get("search") + "/" + param.get("status"));
+		ModelAndView mav = new ModelAndView("/order/list");
+		List<OrderDTO> list = os.selectStatus(param);
+		mav.addObject("list", list);
+		mav.addObject("param", param);
 		return mav;
 	}
 	

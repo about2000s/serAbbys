@@ -7,27 +7,27 @@
 
 	<select id="selectall" parameterType="hashmap" resultType="order">
 		select * from service order by service_idx 
-		<if test="#{type}.equals('title') == true">
+		<if test="'${type}' == 'title'">
 			where service_title like '%${search}%'
 		</if>
-		<if test="#{type}.equals('content') == true">
-			where service_title like '%${search}%'
+		<if test="'${type}' == 'content'">
+			where service_content like '%${search}%'
 		</if>
-		<if test="#{type}.equals('both') == true">
-			where service_title like '%${search}%' or service_content like '%${search}'
+		<if test="'${type}' == 'both'">
+			where service_title like '%${search}%' or service_content like '%${search}%'
 		</if>
 	</select>
 	
 	<select id="selectStatus" parameterType="hashmap" resultType="order">
-		select * from service where service_status=#{status} order by service_idx
-		<if test="#{type}.equals('title') == true">
+		select * from service where service_status='${status}' order by service_idx
+		<if test="'${type}' == 'title'">
 			where service_title like '%${search}%'
 		</if>
-		<if test="#{type}.equals('content') == true">
-			where service_title like '%${search}%'
+		<if test="'${type}' == 'content'">
+			where service_content like '%${search}%'
 		</if>
-		<if test="#{type}.equals('both') == true">
-			where service_title like '%${search}%' or service_content like '%${search}'
+		<if test="'${type}' == 'both'">
+			where service_title like '%${search}%' or service_content like '%${search}%'
 		</if>
 	</select>
 </mapper>

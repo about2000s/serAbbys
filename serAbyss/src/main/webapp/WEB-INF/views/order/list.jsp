@@ -32,15 +32,15 @@
 	</table>
 	<div class="sb">
 		<div>
-			<form>
+			<form method="post" action="${cpath}/order/statusList">
 				<input type="hidden" name="page" value="1">
-				<input type="hidden" name="status" value="${param.status}">
 				<select name="type">
 					<option value="title">제목</option>
 					<option value="content">내용</option>
 					<option value="both">제목+내용</option>
 				</select>
 				<input type="text" name="search" value="${param.search }" placeholder="검색어를 입력하세요">
+				<input type="hidden" name="status" value="${param.status}">
 				<input type="submit" value="검색">
 			</form>
 		</div>
