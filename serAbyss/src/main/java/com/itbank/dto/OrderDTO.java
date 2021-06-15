@@ -5,7 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 /*
  service
 
-service_custidx(PK)      sequence
+service_idx(PK)      sequence
 service_custid      session 유저 id값 받아와서 저장
 service_title      not null
 service_content      not null
@@ -17,7 +17,7 @@ service_viewcount   default 0
 
 */
 public class OrderDTO {
-	private int service_custidx, service_viewCount;
+	private int service_idx, service_viewCount;
 	private String service_custid, service_title, service_content, service_status, service_address, service_reg, service_engiId, asComment;
 	private String service_uploadFile1;
 	private MultipartFile file;
@@ -35,11 +35,11 @@ public class OrderDTO {
 //		return false;
 //	}
 	
-	public int getService_custidx() {
-		return service_custidx;
+	public int getservice_idx() {
+		return service_idx;
 	}
-	public void setService_custidx(int service_custidx) {
-		this.service_custidx = service_custidx;
+	public void setservice_idx(int service_idx) {
+		this.service_idx = service_idx;
 	}
 	public String getAsComment() {
 		return asComment;

@@ -6,7 +6,7 @@
 <mapper namespace="com.itbank.dao.OrderDAO">
 
 	<select id="selectall" parameterType="hashmap" resultType="order">
-		select * from service order by service_custidx 
+		select * from service order by service_idx 
 		<if test="#{type}.equals('title') == true">
 			where service_title like '%${search}%'
 		</if>
@@ -19,7 +19,7 @@
 	</select>
 	
 	<select id="selectStatus" parameterType="hashmap" resultType="order">
-		select * from service where service_status=#{status} order by service_custidx
+		select * from service where service_status=#{status} order by service_idx
 		<if test="#{type}.equals('title') == true">
 			where service_title like '%${search}%'
 		</if>

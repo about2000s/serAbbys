@@ -16,10 +16,10 @@ public interface OrderDAO {
 
 	List<OrderDTO> selectStatus(HashMap<String, String> param);
 
-	@Select("select * from service where service_custidx=#{idx}")
+	@Select("select * from service where service_idx=#{idx}")
 	OrderDTO selectOne(int idx);
 
-	@Insert("insert into service (service_custidx, service_custid, service_title, service_content, "
+	@Insert("insert into service (service_idx, service_custid, service_title, service_content, "
 			+ "service_address, service_engiId, service_uploadFile1, service_status)"
 			+ "values (service_seq.nextval, #{service_custid}, #{service_title}, #{service_content}, "
 			+ "#{service_address}, #{service_engiId}, '${service_uploadFile1}', #{service_status})")
@@ -27,10 +27,10 @@ public interface OrderDAO {
 
 	@Update("update service set service_title=#{service_title}, service_content=#{service_content}, "
 			+ "service_uploadFile1='${service_uploadFile1}', service_address=#{service_address}, service_reg=to_char(sysdate, 'yyyy-MM-dd hh24:mi') "
-			+ "where service_custidx=#{service_custidx}")
+			+ "where service_idx=#{service_idx}")
 	int modify(OrderDTO dto);
 
-	@Delete("delete from service where service_custidx=#{idx}")
+	@Delete("delete from service where service_idx=#{idx}")
 	int delete(int idx);
 
 }

@@ -17,8 +17,8 @@
 		</tr>
 		<c:forEach var="dto" items="${list }">
 			<tr>
-				<td>${dto.service_custidx }</td>
-				<td><a href="${cpath }/order/select/${dto.service_custidx}?value=read">${dto.service_title }</a></td>
+				<td>${dto.service_idx }</td>
+				<td><a href="${cpath }/order/select/${dto.service_idx}?value=read">${dto.service_title }</a></td>
 				<td>${dto.service_custid }</td>
 				<td>${dto.service_viewCount }</td>
 				<td>${dto.service_reg }</td>
@@ -35,10 +35,10 @@
 			<form>
 				<input type="hidden" name="page" value="1">
 				<input type="hidden" name="status" value="${param.status}">
-				<select name="${param.type}">
-					<option  value="title">제목</option>
-					<option  value="content">내용</option>
-					<option  value="both">제목+내용</option>
+				<select name="type">
+					<option value="title">제목</option>
+					<option value="content">내용</option>
+					<option value="both">제목+내용</option>
 				</select>
 				<input type="text" name="search" value="${param.search }" placeholder="검색어를 입력하세요">
 				<input type="submit" value="검색">

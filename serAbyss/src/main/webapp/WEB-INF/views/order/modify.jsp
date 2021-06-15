@@ -4,7 +4,7 @@
 <%@ include file="../layout/leftmenu.jsp" %>
 
 <form method="post" enctype="multipart/form-data">
-	<input type="hidden" name="service_custidx" value="${dto.service_custidx }">
+	<input type="hidden" name="service_idx" value="${dto.service_idx }">
 	<div class="order">
 		<div>
 			<p>
