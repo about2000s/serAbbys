@@ -6,27 +6,27 @@
 <mapper namespace="com.itbank.dao.OrderDAO">
 
 	<select id="selectall" parameterType="hashmap" resultType="order">
-		select * from service order by service_idx 
-		<if test="#{type}.equals('title')">
+		select * from service order by service_custidx 
+		<if test="#{type}.equals('title') == true">
 			where service_title like '%${search}%'
 		</if>
-		<if test="#{type}.equals('content')">
+		<if test="#{type}.equals('content') == true">
 			where service_title like '%${search}%'
 		</if>
-		<if test="#{type}.equals('both')">
+		<if test="#{type}.equals('both') == true">
 			where service_title like '%${search}%' or service_content like '%${search}'
 		</if>
 	</select>
 	
 	<select id="selectStatus" parameterType="hashmap" resultType="order">
-		select * from service where service_status=#{status} order by service_idx
-		<if test="#{type}.equals('title')">
+		select * from service where service_status=#{status} order by service_custidx
+		<if test="#{type}.equals('title') == true">
 			where service_title like '%${search}%'
 		</if>
-		<if test="#{type}.equals('content')">
+		<if test="#{type}.equals('content') == true">
 			where service_title like '%${search}%'
 		</if>
-		<if test="#{type}.equals('both')">
+		<if test="#{type}.equals('both') == true">
 			where service_title like '%${search}%' or service_content like '%${search}'
 		</if>
 	</select>

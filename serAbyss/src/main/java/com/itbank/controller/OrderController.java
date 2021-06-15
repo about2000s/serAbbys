@@ -24,6 +24,7 @@ public class OrderController {
 		ModelAndView mav = new ModelAndView("/order/list");
 		List<OrderDTO> list = os.selectall(param);
 		mav.addObject("list", list);
+		mav.addObject("param", param);
 		return mav;
 	}
 	
@@ -35,6 +36,8 @@ public class OrderController {
 		param.put("status", status);
 		List<OrderDTO> list = os.selectStatus(param);
 		mav.addObject("list", list);
+		mav.addObject("param", param);
+		mav.addObject("status", status);
 		return mav;
 	}
 	
@@ -55,6 +58,7 @@ public class OrderController {
 			msg = "주문 접수에 실패했습니다. 다시 시도해주세요";
 		}
 		mav.addObject("msg", msg);
+		mav.addObject("value", "order_new");
 		return mav;
 	}
 	
@@ -69,7 +73,6 @@ public class OrderController {
 	@PostMapping("/select/{idx}")
 	public ModelAndView modify(@PathVariable int idx, OrderDTO dto) {
 		String msg;
-		dto.setService_idx(idx);
 		int row = os.modify(dto);
 		if(row != 0) {
 			msg = "수정이 완료되었습니다";
@@ -80,6 +83,7 @@ public class OrderController {
 		ModelAndView mav = new ModelAndView("/order/order_result");
 		mav.addObject("msg", msg);
 		mav.addObject("value", "modify");
+		mav.addObject("idx", idx);
 		return mav;
 	}
 	

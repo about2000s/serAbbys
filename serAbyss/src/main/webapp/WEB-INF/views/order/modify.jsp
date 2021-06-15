@@ -4,11 +4,11 @@
 <%@ include file="../layout/leftmenu.jsp" %>
 
 <form method="post" enctype="multipart/form-data">
-	<input type="hidden" name="service_idx" value="${dto.service_idx }">
+	<input type="hidden" name="service_custidx" value="${dto.service_custidx }">
 	<div class="order">
 		<div>
 			<p>
-				<input type="text" name="service_id" value="${dto.service_id}" readonly>
+				<input type="text" name="service_custid" value="${dto.service_custid}" readonly>
 			</p>
 			<p>
 				<input type="text" name="service_title" value="${dto.service_title}" required>
@@ -27,7 +27,7 @@
 		<p><input type="text" name="service_address" value="${dto.service_address}" required></p>
 	</div>
 	<div class="order">
-		<p><input type="text" name="service_engineer" value="${dto.service_engineer}" readonly></p>
+		<p><input type="text" name="service_engiId" value="${dto.service_engiId}" readonly></p>
 	</div>
 	<div class="order">
 		<input type="submit" value="수정하기">
