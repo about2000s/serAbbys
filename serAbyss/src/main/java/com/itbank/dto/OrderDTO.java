@@ -18,7 +18,7 @@ service_viewcount   default 0
 */
 public class OrderDTO {
 	private int service_custidx, service_viewCount;
-	private String service_custid, service_title, service_content, service_status, service_address, service_reg, service_engiId;
+	private String service_custid, service_title, service_content, service_status, service_address, service_reg, service_engiId, asComment;
 	private String service_uploadFile1;
 	private MultipartFile file;
 	
@@ -40,6 +40,12 @@ public class OrderDTO {
 	}
 	public void setService_custidx(int service_custidx) {
 		this.service_custidx = service_custidx;
+	}
+	public String getAsComment() {
+		return asComment;
+	}
+	public void setAsComment(String asComment) {
+		this.asComment = asComment;
 	}
 	public int getService_viewCount() {
 		return service_viewCount;

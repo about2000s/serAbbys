@@ -11,7 +11,7 @@ import com.itbank.dto.ServiceBoardDTO;
 
 public interface BoardDAO {
 
-	@Select("select * from reviewboard where review_idx='1'")
+	@Select("select * from review where review_idx='1'")
 	BoardDTO boardListAll();
 
 	//회사 대표계정만이 자기 소속 회사 직원들이 올린 글들을 모두 볼 수 있다.

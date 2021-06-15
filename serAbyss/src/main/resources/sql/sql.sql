@@ -136,3 +136,23 @@ insert into serCen ( serCen_idx,  serCen_id,  serCen_title,  serCen_content,  se
 
 
 commit;
+
+
+create table customer(
+	customer_idx number references service(service_idx),  -- service 테이블 idx 외래키 겁니다~
+	customer_comments varchar2(2000) not null,
+	customer_reg varchar2(50) default to_char(sysdate, 'yyyy-MM-dd hh24:mi')
+);
+
+--이름으로 고객정보 쿼리 --
+select * from person where person_name = '관리자정재훈';
+
+--서비스 테이블 name 칼럼 추가
+alter table service add service_name varchar(50);
+alter table service add service_phone varchar(20);
+
+
+
+create sequence customer_idx start with 1 maxvalue 999999 increment by 1 nocache;
+
+commit; 

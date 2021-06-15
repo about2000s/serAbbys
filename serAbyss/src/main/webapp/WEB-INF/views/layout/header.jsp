@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-
 <c:set var = "cpath" value = "${pageContext.request.contextPath }"/>
 
 <!DOCTYPE html>
@@ -9,7 +8,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<title>Insert title here</title>
+<title>엔지니어에게 경의를!</title>
 
 
 <link href="${cpath }/resources/css/css.css" rel="stylesheet" type="text/css">
@@ -25,7 +24,7 @@
 
 <div class="topmenubar">
 	<div class="toplogo"><a href="${cpath }"><img src="${cpath }/resources/img/logo.png"></a></div>
-	<div class="navi">
+	<div class="menubar">
 		<ul>
 			<li><a href="${cpath }/common/myPage">기본정보관리</a></li>
 			<li><a href="${cpath }/order/service_list_all?type=&search=">서비스관리</a></li>
@@ -49,11 +48,12 @@
 			<c:if test="${!iamCeo }">
 				<li><a href="${cpath }/board/myList/${login.person_id}">내 접수목록 관리</a></li>
 			</c:if>
-			
-			<li><a href="${cpath }/board/serCen?page=1">고객센터(자주묻는질몬)</a></li>
+			<li><a href="${cpath }/customer/crm">고객응대하기</a></li>
+			<li><a href="${cpath }/board/serCen?page=1">고객센터(자주 묻는 질문)</a></li>
 			<!-- 여기까지 -->
 		</ul>
 	</div>
+	<div class="navi"></div>
 </div>
 
 </head>
