@@ -1,7 +1,12 @@
 package com.itbank.controller;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.dto.OrderDTO;
+import com.itbank.dto.PersonDTO;
+import com.itbank.dto.ReserveDTO;
 import com.itbank.service.OrderService;
 import com.itbank.service.Paging;
 
@@ -113,5 +120,36 @@ public class OrderController {
 		mav.addObject("value", "delete");
 		return mav;
 	}
+	
+	@GetMapping("/order_new_for_cust")
+	public ModelAndView order_new_for_cust() {
+		ModelAndView mav = new ModelAndView("/order/order_new_for_cust");
+		
+//		HashMap<String, Object> map = os.complicateJob();
+//		
+//		mav.addObject("aMap", map.get("aMap"));
+//		mav.addObject("engiIdList", map.get("engiIdList"));
+//		mav.addObject("monthList", map.get("monthList"));
+//		mav.addObject("dayList", map.get("dayList"));
+		
+		return mav;
+	}
+	
+//	@PostMapping("/order_new_for_cust")
+//	public ModelAndView order_new_for_cust(OrderDTO orderDTO, ReserveDTO reserveDTO) {
+//		ModelAndView mav = new ModelAndView("/order/order_result");
+//		int row = os.order(orderDTO);
+//		int row2 = os.setReserve(reserveDTO);
+//		String msg;
+//		if(row != 0) {
+//			msg = "주문이 접수되었습니다";
+//		}
+//		else {
+//			msg = "주문 접수에 실패했습니다. 다시 시도해주세요";
+//		}
+//		mav.addObject("msg", msg);
+//		
+//		return mav;
+//	}
 
 }

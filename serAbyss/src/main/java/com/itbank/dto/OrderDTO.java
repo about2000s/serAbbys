@@ -18,7 +18,8 @@ service_viewcount   default 0
 */
 public class OrderDTO {
 	private int service_idx, service_viewCount;
-	private String service_custid, service_title, service_content, service_status, service_address, service_reg, service_engiId, asComment;
+	private String service_custid, service_title, service_content, service_status, service_address, service_reg, service_engiId, asComment,
+			service_name, service_phone;
 	private String service_uploadFile1;
 	private MultipartFile file;
 	
@@ -35,11 +36,23 @@ public class OrderDTO {
 //		return false;
 //	}
 	
-	public int getservice_idx() {
+	public int getService_idx() {
 		return service_idx;
 	}
-	public void setservice_idx(int service_idx) {
+	public void setService_idx(int service_idx) {
 		this.service_idx = service_idx;
+	}
+	public String getService_name() {
+		return service_name;
+	}
+	public void setService_name(String service_name) {
+		this.service_name = service_name;
+	}
+	public String getService_phone() {
+		return service_phone;
+	}
+	public void setService_phone(String service_phone) {
+		this.service_phone = service_phone;
 	}
 	public String getAsComment() {
 		return asComment;
@@ -53,10 +66,10 @@ public class OrderDTO {
 	public void setService_viewCount(int service_viewCount) {
 		this.service_viewCount = service_viewCount;
 	}
-	public String getservice_custid() {
+	public String getService_custid() {
 		return service_custid;
 	}
-	public void setservice_custid(String service_custid) {
+	public void setService_custid(String service_custid) {
 		this.service_custid = service_custid;
 	}
 	public String getService_title() {

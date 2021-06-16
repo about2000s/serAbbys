@@ -119,6 +119,7 @@ public class PersonService {
 		int k = 1;
 		HashMap<String, Integer> map = new HashMap<String, Integer>();
 		for(i=6;i<=12;i++) {
+			if(i == 6 || i == 9 || i == 11) continue;
 			for(j=1;j<=31;j++) {
 				for(k=8;k<=22;k+=2) {
 					map.put("i", i);
