@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.itbank.dto.OrderDTO;
+import com.itbank.dto.ReserveDTO;
 
 public interface OrderDAO {
 
@@ -33,6 +34,18 @@ public interface OrderDAO {
 	@Delete("delete from service where service_idx=#{idx}")
 	int delete(int idx);
 
+	@Select("select * from reserve where "
+			+ "reserve_year=#{reserve_year} and reserve_month=#{reserve_month} and "
+			+ "reserve_day=#{reserve_day} and reserve_hour=#{reserve_hour} and "
+			+ "reserve_engiId=#{reserve_engiId}")
+	ReserveDTO selectReserveOne(ReserveDTO inputData);
+
+	@Select("select person_id from person where person_check='y'")
+	List<String> selectEngiIdAll();
+
+//	@Insert("insert into reserve (reserve_idx, reserve_year, reserve_month, reserve_day, reserve_hour, reserve_engiId,  reserve_custId) " + 
+//			"    values(reserve_seq.nextval, '2021', '06', '16', '14', 'kim123', 'lee123');")
+//	int setReserve(ReserveDTO reserveDTO);
 	int selectBoardCountList(HashMap<String, String> param);
 
 }

@@ -53,9 +53,7 @@
 	<input type = "text" name = "keyword" value = "${keyword }" placeholder = "검색">
 	<input type = "submit" value ="검색">
 </form>
-<c:if test="${login.check == 'a' }">
-<%-- 	 | <div><button onclick = "location.href='${cpath }/board/write?page=${page }'">새 글 작성</button></div> --%>
-</c:if>
+	 | <div><button onclick = "location.href='${cpath }/board/writeFaq?page=${page }'">새 글 작성</button></div>
 
 
 <c:if test="${page > paging.pageD }">

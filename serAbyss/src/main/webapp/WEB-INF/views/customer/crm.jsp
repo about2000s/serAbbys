@@ -18,7 +18,7 @@ button { width:80px;height:35px}
 	<select name="selectedWord" style="height:35px;">
 		<option value="service_name">고객명</option>
 		<option value="service_phone">전화번호</option>
-		<option value="service_address">주소의 일부</option>0
+		<option value="service_address">주소의 일부</option>
 		<option value="service_engiid">담당 엔지니어</option>
 		<option value="service_idx">서비스번호</option>
 	</select>
@@ -53,21 +53,19 @@ service_viewcount   default 0
 		<th width="10%">phone</th>
 		<th width="5%">응대기록</th>
 	</tr>
-	<c:forEach var="list" items="${list }">
+	<c:forEach var="dto" items="${list }">
 	<tr>
-		<td>${list.service_reg}</td>
-		<td>${list.service_idx }</td>
-		<td>${list.service_status }</td>
-		<td>${list.service_name }</td>
-		<td>${list.service_engineer }</td>
-		<td>${list.service_address }</td>
-		<td>${list.service_phone } +sms +copy </td>
+		<td>${dto.service_idx }</td>
+		<td>${dto.service_reg}</td>
+		<td>${dto.service_status }</td>
+		<td>${dto.service_name }</td>
+		<td>${dto.service_engineer }</td>
+		<td>${dto.service_address }</td>
+		<td>${dto.service_phone } + sms + copy </td>
 		
 		<td>
-		<form>
-			<input type="hidden" id = "customer_service_idx" name="customer_service_idx" value="${list.service_idx }">
-			<button id = "gao">가져오기</button>
-		</form>
+			<p><input class = "gao${dto.service_idx }" type = "hidden" name = "service_idx" value = "${dto.service_idx }"></p>
+			<input class = "gao${dto.service_idx }" id = "gao${dto.service_idx }" type = "button" value = "고객응대내역보러가기 ㄱㄱ">
 		</td>
 	</tr>
 	</c:forEach>
@@ -94,9 +92,10 @@ service_viewcount   default 0
 <!-- 		</form> -->
 </div>
 <script>
-document.getElementById('gao').onclick = function(event){
-	event.preventDefault()
-	const service_idx = document.getElementById('customer_service_idx').value
+document.querySelectorAll('td > input').forEach(input => input.onclick = function(event){
+	const className = event.target.className
+	const service_idx = document.querySelector('input.' + className).value
+	
 	const url = '${cpath}/crm/' + service_idx
 	const opt = { 
 			method : 'GET'
@@ -106,11 +105,10 @@ document.getElementById('gao').onclick = function(event){
 		if(document.querySelector('table.' + 'counterListTable') != null){
 			document.querySelector('table.' + 'counterListTable').remove()
 		}
-		if(document.querySelector('div.' + 'noCompComment') != null){
-			document.querySelector('div.' + 'noCompComment').remove()
+		if(document.querySelector('div.' + 'noServComment') != null){
+			document.querySelector('div.' + 'noServComment').remove()
 		}
 	if(json != ''){
-		
 		const table = document.createElement('table')
 		table.classList.add('counterListTable')
 		const headTr = document.createElement('tr')
@@ -128,7 +126,6 @@ document.getElementById('gao').onclick = function(event){
 			
 			var customer_reg = json[i].CUSTOMER_REG
 			regTd.innerText = customer_reg
-			console.log(customer_reg)
 			
 			var customer_comments = json[i].CUSTOMER_COMMENTS
 			commentsTd.innerText = customer_comments
@@ -142,12 +139,12 @@ document.getElementById('gao').onclick = function(event){
 	}
 	else{
 		const div = document.createElement('div')
-		div.classList.add('noCompComment')
+		div.classList.add('noServComment')
 		div.innerText = '검색결과가 없습니다'
 		document.querySelector('div.' + 'gender').appendChild(div)
 	}
 	})
-}
+})
 
 </script>
 
