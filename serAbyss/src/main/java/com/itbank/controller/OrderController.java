@@ -14,49 +14,40 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.dto.OrderDTO;
 import com.itbank.service.OrderService;
+import com.itbank.service.Paging;
 
 @Controller
 @RequestMapping("/order")
 public class OrderController {
-
-	@GetMapping("/service_list_all")
-	public ModelAndView ListAll(@RequestParam HashMap<String, String> param) {
-		ModelAndView mav = new ModelAndView("/order/list");
-		List<OrderDTO> list = os.selectall(param);
-		mav.addObject("list", list);
-		mav.addObject("param", param);
-		return mav;
-	}
-	
-	@PostMapping("/service_list_all")
-	public ModelAndView postListAll(@RequestParam HashMap<String, String> param) {
-		ModelAndView mav = new ModelAndView("/order/list");
-		List<OrderDTO> list = os.selectall(param);
-		mav.addObject("list", list);
-		mav.addObject("param", param);
-		return mav;
-	}
 	
 	@Autowired OrderService os;
 	
 	@GetMapping("/statusList")
-	public ModelAndView registList(@RequestParam HashMap<String, String> param, String status) {
+	public ModelAndView registList(@RequestParam HashMap<String, String> param, int page) {
 		ModelAndView mav = new ModelAndView("/order/list");
-		param.put("status", status);
+		int orderCountList = os.selectBoardCountList(param);
+		Paging paging = new Paging(page, orderCountList);
+		param.put("offset", paging.getOffset() + "");
+		param.put("nowD", paging.getNowD() + "");
 		List<OrderDTO> list = os.selectStatus(param);
+		mav.addObject("page", page);
 		mav.addObject("list", list);
 		mav.addObject("param", param);
-		mav.addObject("status", status);
+		mav.addObject("paging", paging);
 		return mav;
 	}
 	
 	@PostMapping("/statusList")
 	public ModelAndView postRegistList(@RequestParam HashMap<String, String> param) {
-		System.out.println("작동은 하는가 확인 : " + param.get("type") + "/" + param.get("search") + "/" + param.get("status"));
 		ModelAndView mav = new ModelAndView("/order/list");
+		int orderCountList = os.selectBoardCountList(param);
+		Paging paging = new Paging(Integer.parseInt(param.get("page")), orderCountList);
+		param.put("offset", paging.getOffset() + "");
+		param.put("nowD", paging.getNowD() + "");
 		List<OrderDTO> list = os.selectStatus(param);
 		mav.addObject("list", list);
 		mav.addObject("param", param);
+		mav.addObject("paging", paging);
 		return mav;
 	}
 	
@@ -82,8 +73,9 @@ public class OrderController {
 	}
 	
 	@GetMapping("/select/{idx}")
-	public ModelAndView read(@PathVariable int idx, String value) {
-		ModelAndView mav = new ModelAndView("/order/" + value);
+	public ModelAndView read(@PathVariable int idx, HashMap<String, String> param, String value) {
+		param.put("value", value);
+		ModelAndView mav = new ModelAndView("/order/" + param.get("value"));
 		OrderDTO dto = os.selectOne(idx);
 		mav.addObject("dto", dto);
 		return mav;

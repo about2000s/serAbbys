@@ -20,7 +20,10 @@
 	</div>
 	<div class="order">
 		<p>
-			<input type="file" name="file" value="${dto.file }">
+			<input type="file" name="file" >
+			<c:if test="${not empty dto.service_uploadFile1 }">
+				<div><img src="${cpath }/upload/${dto.service_uploadFile1 }" height="200px"></div>
+			</c:if>
 		</p>
 	</div>
 	<div class="order">

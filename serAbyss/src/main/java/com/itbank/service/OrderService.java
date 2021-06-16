@@ -69,6 +69,10 @@ public class OrderService {
 	public int delete(int idx) {
 		return dao.delete(idx);
 	}
+
+	public int selectBoardCountList(HashMap<String, String> param) {
+		return dao.selectBoardCountList(param);
+	}
 	
 //	public int order(OrderDTO dto) {
 //		if(dto.ready()) {
