@@ -20,7 +20,7 @@ public class CustomerService {
 		return dao.crmOrder(param);
 	}
 
-	public List<CustomerDTO> selectList(int service_idx) {
+	public List<HashMap<String, String>> selectList(int service_idx) {
 		return dao.selectList(service_idx);
 	}
 
