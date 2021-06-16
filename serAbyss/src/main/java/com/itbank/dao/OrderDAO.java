@@ -33,4 +33,6 @@ public interface OrderDAO {
 	@Delete("delete from service where service_idx=#{idx}")
 	int delete(int idx);
 
+	int selectBoardCountList(HashMap<String, String> param);
+
 }
