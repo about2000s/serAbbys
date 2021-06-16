@@ -15,12 +15,12 @@ button { width:80px;height:35px}
 	<h2>응대 기록 검색하기<br/></h2>
 	
 	<form method="POST">
-	<select name="c_word" style="height:35px;">
-		<option value="c_name">고객명</option>
-		<option value="c_phone">전화번호</option>
-		<option value="c_adress">주소의 일부</option>0
-		<option value="c_engineer">담당 엔지니어</option>
-		<option value="c_serviceNum">서비스번호</option>
+	<select name="selectedWord" style="height:35px;">
+		<option value="service_name">고객명</option>
+		<option value="service_phone">전화번호</option>
+		<option value="service_address">주소의 일부</option>0
+		<option value="service_engiid">담당 엔지니어</option>
+		<option value="service_idx">서비스번호</option>
 	</select>
 	 <input type="text" name="word"/>
 	 <%--	select * from TABLE where ${c_word} = #{word} --%> 
