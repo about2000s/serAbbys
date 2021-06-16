@@ -4,20 +4,20 @@
 <%@ include file="../layout/leftmenu.jsp" %>
 
 <div class="order">
-	<div>No. ${dto.service_idx } | <b>${dto.service_title }</b> | ${dto.service_id }</div>
+	<div>No. ${dto.service_idx } | <b>${dto.service_title }</b> | ${dto.service_custid }</div>
 	<div>${dto.service_reg } | 조회수 : ${dto.service_viewCount }</div>
 </div>
 
 <div class="content" style="flex-flow: column;">
-	<c:if test="${not empty dto.service_uploadFile }">
-		<div><img src="${cpath }/upload/${dto.service_uploadFile }" height="300px"></div>
+	<c:if test="${not empty dto.service_uploadFile1 }">
+		<div><img src="${cpath }/upload/${dto.service_uploadFile1 }" height="300px"></div>
 	</c:if>
 	<pre>${dto.service_content }</pre>
 </div>
 
 <div class="order"> 
 	<div>
-		<a href="${cpath }/order/statusList/?status=${dto.service_status}"><button>목록</button></a>
+		<a href="${cpath }/order/statusList/?type=${param.type}&search=${param.search}&status=${param.status}"><button>목록</button></a>
 	</div>
 <%-- 	<c:if test="${dto.service_id == (login.person_id or 'admin')}"> --%>
 		<div>
