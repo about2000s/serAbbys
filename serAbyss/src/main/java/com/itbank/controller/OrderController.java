@@ -1,11 +1,8 @@
 package com.itbank.controller;
 
-<<<<<<< HEAD
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-=======
->>>>>>> branch 'develop' of https://github.com/about2000s/serAbbys.git
 import java.util.HashMap;
 import java.util.List;
 

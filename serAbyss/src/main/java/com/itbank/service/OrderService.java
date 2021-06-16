@@ -2,12 +2,9 @@ package com.itbank.service;
 
 import java.io.File;
 import java.io.IOException;
-<<<<<<< HEAD
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-=======
->>>>>>> branch 'develop' of https://github.com/about2000s/serAbbys.git
 import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
@@ -77,7 +74,6 @@ public class OrderService {
 		return dao.delete(idx);
 	}
 
-<<<<<<< HEAD
 	public ReserveDTO selectReserveOne(ReserveDTO inputData) {
 		return dao.selectReserveOne(inputData);
 	}
@@ -201,11 +197,9 @@ public class OrderService {
 //		return dao.setReserve(reserveDTO);
 //	}
 	
-=======
 	public int selectBoardCountList(HashMap<String, String> param) {
 		return dao.selectBoardCountList(param);
 	}
->>>>>>> branch 'develop' of https://github.com/about2000s/serAbbys.git
 	
 //	public int order(OrderDTO dto) {
 //		if(dto.ready()) {
