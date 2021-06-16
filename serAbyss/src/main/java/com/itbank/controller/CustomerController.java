@@ -1,12 +1,15 @@
 package com.itbank.controller;
 
-import java.util.Map;
+import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.dto.OrderDTO;
@@ -23,20 +26,38 @@ public class CustomerController {
 	public void crm() {}
 	
 	@PostMapping("/crm")
-	public String crm( Map<String,String> param ) {
+	public ModelAndView crm(@RequestParam HashMap<String,String> param ) {
+		ModelAndView mav = new ModelAndView();
+		List<OrderDTO> list = cs.crmOrder(param); 
+		mav.addObject("list", list);
+		return mav;
+	}
+	
+	@GetMapping("/crm?customer_service_idx=${customer_service_idx}")
+	public String selectRecord(@PathVariable Integer customer_service_idx) {
 		
-		System.out.println(param.get(param));
-//		
-//		ModelAndView mav = new ModelAndView();
-//		
-////		OrderDTO dto = cs.crmOrder(param); 
-//		
-////		System.out.println(selectedWord +  word);
-////		System.out.println(dto);
-////		mav.addObject("dto", dto);
-//
+		System.out.println(customer_service_idx);
+		
+		
+		
 		return "customer/crm";
 	}
-//	
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
