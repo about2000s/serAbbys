@@ -31,6 +31,7 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView();
 		BoardDTO dto = bs.boardListAll();
 		int starScore = dto.getReview_starScore();
+		
 		String star = "";
 		for (int i = 0; i < starScore; i++) {
 			star += "★";
