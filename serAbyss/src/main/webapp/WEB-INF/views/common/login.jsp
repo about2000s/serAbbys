@@ -25,7 +25,8 @@
 		</form>
 	</div>
 	<div class="">
-		<p><button>ID 찾기</button> | <button>비밀번호 재발급</button></p>
+		<p><button onclick = "location.href='${cpath}/common/selectIndiComp?say=id'">ID 찾기</button> | 
+		<button onclick = "location.href='${cpath}/common/selectIndiComp?say=pw'">비밀번호 재발급</button></p>
 		<p>회원이 아니세요? <button onclick = "location.href='${cpath}/common/join'">회원가입</button></p>
 	</div>
 
