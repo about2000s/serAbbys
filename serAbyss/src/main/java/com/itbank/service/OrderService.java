@@ -2,6 +2,7 @@ package com.itbank.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,17 +41,17 @@ public class OrderService {
 			} catch (IllegalStateException | IOException e) {
 				System.out.println("업로드 문제 발생 : " + e);
 			}
-			dto.setService_uploadFile(fileName);
-		} else dto.setService_uploadFile(null);
+			dto.setService_uploadFile1(fileName);
+		} else dto.setService_uploadFile1(null);
 		return dto;
 	}
 	
-	public List<OrderDTO> selectall() {
-		return dao.selectall();
+	public List<OrderDTO> selectall(HashMap<String, String> param) {
+		return dao.selectall(param);
 	}
 	
-	public List<OrderDTO> selectStatus(String status) {
-		return dao.selectStatus(status);
+	public List<OrderDTO> selectStatus(HashMap<String, String> param) {
+		return dao.selectStatus(param);
 	}
 
 	public OrderDTO selectOne(int idx) {
@@ -58,23 +59,7 @@ public class OrderService {
 	}
 
 	public int order(OrderDTO dto) {
-		if(dto.getFile().getOriginalFilename().equals("") == false) {
-			String fileName = UUID.randomUUID().toString().replaceAll("-", "");
-			int beginIndex = dto.getFile().getOriginalFilename().indexOf(".");
-			String extName = dto.getFile().getOriginalFilename().substring(beginIndex);
-			fileName += extName;
-			
-			File f = new File(uploadPath, fileName);
-			
-			try {
-				dto.getFile().transferTo(f);
-				
-			} catch (IllegalStateException | IOException e) {
-				System.out.println("업로드 문제 발생 : " + e);
-			}
-			dto.setService_uploadFile(fileName);
-		} else dto.setService_uploadFile(null);
-		return dao.order(dto);
+		return dao.order(Filename(dto));
 	}
 
 	public int modify(OrderDTO dto) {
@@ -83,6 +68,10 @@ public class OrderService {
 
 	public int delete(int idx) {
 		return dao.delete(idx);
+	}
+
+	public int selectBoardCountList(HashMap<String, String> param) {
+		return dao.selectBoardCountList(param);
 	}
 	
 //	public int order(OrderDTO dto) {
