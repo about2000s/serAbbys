@@ -13,8 +13,8 @@ public interface CustomerDAO {
 	@Select("select * from service where ${selectedWord} = #{word}" )
 	List<OrderDTO> crmOrder(HashMap<String, String> param);
 
-	@Select("select * from customer where customer_service_idx=#{service_idx}")
-	List<CustomerDTO> selectList(int service_idx);
+	@Select("select * from customer where customer_service_idx=${service_idx}")
+	List<HashMap<String, String>> selectList(int service_idx);
 
 
 //	List<CustomerDTO> csCommentWrite(HashMap<String, String> param);

@@ -107,10 +107,20 @@ public class PersonController {
 		return mav;
 	}
 	
-	//아이디 찾기 폼으로 이동
-	@GetMapping("/findId")
-	public String findId() {
-		return "common/findId";
+	@GetMapping("/selectIndiComp")
+	public ModelAndView selectIndiComp() {
+		ModelAndView mav = new ModelAndView("common/selectIndiComp");
+		return mav;
+	}
+	@PostMapping("/selectIndiComp")
+	public ModelAndView selectIndiComp(String say, String person_check) {
+		System.out.println("say: " + say);
+		System.out.println("person_check: " + person_check);
+		ModelAndView mav = new ModelAndView();
+		if(say.equals("id,")) mav.setViewName("common/findId");
+		if(say.equals("pw,")) mav.setViewName("common/rePw");
+		mav.addObject("person_check", person_check);
+		return mav;
 	}
 	
 	//폰번호 입력에 의한 아이디 찾기 데이터 받아와서 처리
@@ -135,11 +145,11 @@ public class PersonController {
 		return mav;
 	}
 	
-	//비밀번호 재발급 폼으로 이동
-	@GetMapping("/rePw")
-	public String rePw() {
-		return "common/rePw";
-	}
+//	//비밀번호 재발급 폼으로 이동
+//	@GetMapping("/rePw")
+//	public String rePw() {
+//		return "common/rePw";
+//	}
 	
 	//폰번호 입력에 의한 비밀번호 재발급 데이터 받아와서 처리
 	@PostMapping("/repwByPhone")

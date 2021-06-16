@@ -32,8 +32,7 @@ public class PersonRestController {
 	
 	@GetMapping(value = "/crm/{service_idx}", produces = "application/json; charset=utf-8")
 	public String crm(@PathVariable int service_idx) throws JsonProcessingException {
-		List<CustomerDTO> list = cs.selectList(service_idx);
-		System.out.println(list);
+		List<HashMap<String, String>> list = cs.selectList(service_idx);
 		String json = mapper.writeValueAsString(list);
 		return json;
 	}
