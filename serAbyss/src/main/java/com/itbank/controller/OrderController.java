@@ -1,8 +1,11 @@
 package com.itbank.controller;
 
+<<<<<<< HEAD
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+=======
+>>>>>>> branch 'develop' of https://github.com/about2000s/serAbbys.git
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,26 +24,40 @@ import com.itbank.dto.OrderDTO;
 import com.itbank.dto.PersonDTO;
 import com.itbank.dto.ReserveDTO;
 import com.itbank.service.OrderService;
+import com.itbank.service.Paging;
 
 @Controller
 @RequestMapping("/order")
 public class OrderController {
-
-	@GetMapping("/service_list_all")
-	public ModelAndView ListAll() {
-		ModelAndView mav = new ModelAndView("/order/list");
-		List<OrderDTO> list = os.selectall();
-		mav.addObject("list", list);
-		return mav;
-	}
 	
 	@Autowired OrderService os;
 	
 	@GetMapping("/statusList")
-	public ModelAndView registList(@RequestParam String status) {
+	public ModelAndView registList(@RequestParam HashMap<String, String> param, int page) {
 		ModelAndView mav = new ModelAndView("/order/list");
-		List<OrderDTO> list = os.selectStatus(status);
+		int orderCountList = os.selectBoardCountList(param);
+		Paging paging = new Paging(page, orderCountList);
+		param.put("offset", paging.getOffset() + "");
+		param.put("nowD", paging.getNowD() + "");
+		List<OrderDTO> list = os.selectStatus(param);
+		mav.addObject("page", page);
 		mav.addObject("list", list);
+		mav.addObject("param", param);
+		mav.addObject("paging", paging);
+		return mav;
+	}
+	
+	@PostMapping("/statusList")
+	public ModelAndView postRegistList(@RequestParam HashMap<String, String> param) {
+		ModelAndView mav = new ModelAndView("/order/list");
+		int orderCountList = os.selectBoardCountList(param);
+		Paging paging = new Paging(Integer.parseInt(param.get("page")), orderCountList);
+		param.put("offset", paging.getOffset() + "");
+		param.put("nowD", paging.getNowD() + "");
+		List<OrderDTO> list = os.selectStatus(param);
+		mav.addObject("list", list);
+		mav.addObject("param", param);
+		mav.addObject("paging", paging);
 		return mav;
 	}
 	
@@ -61,12 +78,14 @@ public class OrderController {
 			msg = "주문 접수에 실패했습니다. 다시 시도해주세요";
 		}
 		mav.addObject("msg", msg);
+		mav.addObject("value", "order_new");
 		return mav;
 	}
 	
 	@GetMapping("/select/{idx}")
-	public ModelAndView read(@PathVariable int idx, String value) {
-		ModelAndView mav = new ModelAndView("/order/" + value);
+	public ModelAndView read(@PathVariable int idx, HashMap<String, String> param, String value) {
+		param.put("value", value);
+		ModelAndView mav = new ModelAndView("/order/" + param.get("value"));
 		OrderDTO dto = os.selectOne(idx);
 		mav.addObject("dto", dto);
 		return mav;
@@ -75,7 +94,6 @@ public class OrderController {
 	@PostMapping("/select/{idx}")
 	public ModelAndView modify(@PathVariable int idx, OrderDTO dto) {
 		String msg;
-		dto.setService_idx(idx);
 		int row = os.modify(dto);
 		if(row != 0) {
 			msg = "수정이 완료되었습니다";
@@ -86,6 +104,7 @@ public class OrderController {
 		ModelAndView mav = new ModelAndView("/order/order_result");
 		mav.addObject("msg", msg);
 		mav.addObject("value", "modify");
+		mav.addObject("idx", idx);
 		return mav;
 	}
 	

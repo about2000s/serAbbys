@@ -23,7 +23,7 @@ public class Paging {
 		endNum = startNum + (pageD - 1);
 		
 		// 밑에 페이지를 1부터 10까지 띄워야 하는데 부득이하게 마지막 페이지가 8 까지라면 그 8을 endNum으로 한다.
-		if(pageCount < endNum) endNum = pageCount;
+		if(pageCount <= endNum) endNum = pageCount;
 	}
 	
 	public int getPageCount() {

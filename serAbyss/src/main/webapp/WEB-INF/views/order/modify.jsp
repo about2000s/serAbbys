@@ -8,7 +8,7 @@
 	<div class="order">
 		<div>
 			<p>
-				<input type="text" name="service_id" value="${dto.service_id}" readonly>
+				<input type="text" name="service_custid" value="${dto.service_custid}" readonly>
 			</p>
 			<p>
 				<input type="text" name="service_title" value="${dto.service_title}" required>
@@ -20,14 +20,17 @@
 	</div>
 	<div class="order">
 		<p>
-			<input type="file" name="file" value="${dto.file }">
+			<input type="file" name="file" >
+			<c:if test="${not empty dto.service_uploadFile1 }">
+				<div><img src="${cpath }/upload/${dto.service_uploadFile1 }" height="200px"></div>
+			</c:if>
 		</p>
 	</div>
 	<div class="order">
 		<p><input type="text" name="service_address" value="${dto.service_address}" required></p>
 	</div>
 	<div class="order">
-		<p><input type="text" name="service_engineer" value="${dto.service_engineer}" readonly></p>
+		<p><input type="text" name="service_engiId" value="${dto.service_engiId}" readonly></p>
 	</div>
 	<div class="order">
 		<input type="submit" value="수정하기">

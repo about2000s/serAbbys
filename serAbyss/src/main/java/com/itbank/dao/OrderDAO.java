@@ -1,5 +1,6 @@
 package com.itbank.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Delete;
@@ -12,29 +13,28 @@ import com.itbank.dto.ReserveDTO;
 
 public interface OrderDAO {
 
-	@Select("select * from service order by service_idx")
-	List<OrderDTO> selectall();
+	List<OrderDTO> selectall(HashMap<String, String> param);
 
-	@Select("select * from service where service_status=#{status} order by service_idx")
-	List<OrderDTO> selectStatus(String status);
+	List<OrderDTO> selectStatus(HashMap<String, String> param);
 
 	@Select("select * from service where service_idx=#{idx}")
 	OrderDTO selectOne(int idx);
 
-	@Insert("insert into service (service_idx, service_id, service_title, service_content, "
-			+ "service_address, service_engiId, service_uploadFile, service_status)"
-			+ "values (service_seq.nextval, #{service_id}, #{service_title}, #{service_content}, "
-			+ "#{service_address}, #{service_engineer}, '${service_uploadFile}', #{service_status})")
+	@Insert("insert into service (service_idx, service_custid, service_title, service_content, "
+			+ "service_address, service_engiId, service_uploadFile1, service_status)"
+			+ "values (service_seq.nextval, #{service_custid}, #{service_title}, #{service_content}, "
+			+ "#{service_address}, #{service_engiId}, '${service_uploadFile1}', #{service_status})")
 	int order(OrderDTO dto);
 
 	@Update("update service set service_title=#{service_title}, service_content=#{service_content}, "
-			+ "service_uploadFile='${service_uploadFile}', service_address=#{service_address}, service_reg=to_char(sysdate, 'yyyy-MM-dd hh24:mi') "
+			+ "service_uploadFile1='${service_uploadFile1}', service_address=#{service_address}, service_reg=to_char(sysdate, 'yyyy-MM-dd hh24:mi') "
 			+ "where service_idx=#{service_idx}")
 	int modify(OrderDTO dto);
 
 	@Delete("delete from service where service_idx=#{idx}")
 	int delete(int idx);
 
+<<<<<<< HEAD
 	@Select("select * from reserve where "
 			+ "reserve_year=#{reserve_year} and reserve_month=#{reserve_month} and "
 			+ "reserve_day=#{reserve_day} and reserve_hour=#{reserve_hour} and "
@@ -47,5 +47,8 @@ public interface OrderDAO {
 //	@Insert("insert into reserve (reserve_idx, reserve_year, reserve_month, reserve_day, reserve_hour, reserve_engiId,  reserve_custId) " + 
 //			"    values(reserve_seq.nextval, '2021', '06', '16', '14', 'kim123', 'lee123');")
 //	int setReserve(ReserveDTO reserveDTO);
+=======
+	int selectBoardCountList(HashMap<String, String> param);
+>>>>>>> branch 'develop' of https://github.com/about2000s/serAbbys.git
 
 }
