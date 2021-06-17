@@ -11,8 +11,13 @@ import java.util.Random;
 import java.util.UUID;
 
 import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -162,12 +167,25 @@ public class PersonService {
 			
 			@Override
 			protected PasswordAuthentication getPasswordAuthentication() {
-				// TODO Auto-generated method stub
-				return super.getPasswordAuthentication();
+				return new PasswordAuthentication(un, pw);
 			}
-		})
+		});
+		mailSession.setDebug(true);
 		
-		return null;
+		Message mimeMessage = new MimeMessage(mailSession);
+		
+		try {
+			mimeMessage.setFrom(new InternetAddress(username + "@naver.com"));
+			mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(person_email));
+			mimeMessage.setSubject(subject);
+			mimeMessage.setText(body);
+			Transport.send(mimeMessage);
+			
+		} catch(MessagingException e) {
+			return "주소가 잘못되었습니다";
+		}
+		
+		return authNumber;
 	}
 }
 
