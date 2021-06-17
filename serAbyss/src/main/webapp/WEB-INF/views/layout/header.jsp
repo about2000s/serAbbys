@@ -26,7 +26,7 @@
 	<div class="menubar">
 		<ul>
 				<li><a href="${cpath }/common/myPage">기본정보관리</a></li>
-				<li><a href="${cpath }/order/service_list_all">서비스관리</a></li>
+				<li><a href="${cpath }/order/statusList?page=1&type=&search=&status=">서비스관리</a></li>
 				
 				<!-- 여기서부터 재훈이가 수정했습니다. -->
 				<c:if test="${login != null}">
