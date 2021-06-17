@@ -19,7 +19,7 @@
 		<label><input type = "radio" name = "any" value = "empl" class = "radio3">법인소속직원(기사)</label>
 		
 		<div class = "radio2 hiddenNone">
-			<h2>법인사업자 폼</h2><!-- 회사명 입력하는 폼 -->
+			<h2>법인사업자 폼</h2>회사명 입력하는 폼
 			<input type = "text" name = "person_belong" placeholder="회사명 입력">
 		</div>
 		
@@ -29,7 +29,7 @@
 		</div>
 		
 		<div class = "radio3 hiddenNone">
-			<h2>법인소속직원(기사) 폼</h2><!-- compList에서 검색하는 폼 -->
+			<h2>법인소속직원(기사) 폼</h2>compList에서 검색하는 폼
 			<input type = "text" id = "person_belong" name = "person_belong" readonly>
 			<button onclick = "document.getElementById('id01').style.display='block'"
 			class = "w3-button w3-black">회사 검색</button>
@@ -69,9 +69,6 @@
 		<input type = "text" id = "person_name" name = "person_name" required>
 		<div class = "check_font" id = "name_check"></div>
 		
-		<label>이메일</label><br>
-		<input type = "text" id = "person_email" name = "person_email" required>
-		<div class = "check_font" id = "email_check"></div>
 		
 		<label>생년월일 ex)980819</label><br>
 		<input type = "text" id = "person_birth" name = "person_birth" required>
@@ -85,7 +82,10 @@
 		<input type = "text" name = "person_fax">
 		<div class = "check_font" id = "fax_check"></div>
 		
-		<p><input type = "text" name = "person_phone" placeholder="핸드폰번호 입력" required><button>인증번호 받기</button></p>
+		<p>
+		<input type = "text" name = "person_phone" placeholder="핸드폰번호 입력" required>
+		<button>인증번호 받기</button>
+		</p>
 		
 		<div>
 			<label>주소</label><br>
@@ -96,10 +96,55 @@
 			<input type="text" id="extraAddress" placeholder="참고항목">
 		</div>
 	</div>
-	
+		<h2>이메일 입력</h2>
+		<input type = "text" id = "person_email" name = "person_email" required>
+		<button id = "receiveAuthBtn">인증번호 받기</button>
+		
+		<div class = "check_font" id = "email_checkDiv"></div>
+		
+		<div class = "hiddenNone" id = "authMailDiv">
+			<h2>인증번호 입력</h2>
+			<div>
+				<input type = "text" name = "auth" placeholder="인증번호를 입력하시오">
+				<button id = "injung">인증하기</button>
+			</div>
+		</div>
 	<button type = "submit" id = "reg_submit">회원가입</button>
 </form>
 </div>
+
+<script>
+const email_checkDiv = document.getElementById('email_checkDiv')
+const authMailDiv = document.getElementById('authMailDiv')
+
+const sendMailHandler = function(event){
+// 	event.preventDefault()
+	const person_email = document.getElementById('person_email').value
+	console.log(person_email)
+	const url = '${cpath}/mailto/' + person_email + '/'
+	const opt = {
+			method: 'GET'
+	}
+	fetch(url, opt).then(resp => resp.text())
+	.then(text => {
+		console.log(text)
+		if(text.length == 128){
+			email_checkDiv.innerText = '이메일 전송에 성공'
+			authMailDiv.classList.remove('hiddenNone')
+		}
+		else{
+			
+			email_checkDiv.innerText = '이메일 전송에 실패'
+		}
+	})
+}
+document.getElementById('receiveAuthBtn').onclick = sendMailHandler
+</script>
+
+
+
+
+
 
 <script>
 document.getElementById('compSearchBtn').onclick = function(event){
@@ -246,31 +291,31 @@ $('#person_name').blur(function(){
 })
 
 //이메일 체크
-$('#person_email').blur(function(){
-	const emailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
-	const person_email = $('#person_email').val()
-	$.ajax({
-		url: '${cpath}/common/emailCheck?person_email=' + person_email,
-		type: 'get',
-		success: function(data){
-			if(emailJ.test(person_email)){
-				if(data == 1){
-					$('#email_check').text('이미 사용중인 이메일입니다')
-					$('#email_check').css('color', 'red')
-				}
-				else{
-					$('#email_check').text('사용 가능한 이메일입니다')
-					$('#email_check').css('color', 'blue')
-				}
-			}else if(!emailJ.test(person_email)){
-				$('#email_check').text('이메일 형식에 적합하지 않습니다')
-				$('#email_check').css('color', 'red')
-			}
-		}, error: function(){
-			console.log('실패')
-		}
-	})
-})
+// $('#person_email').blur(function(){
+// 	const emailJ = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+// 	const person_email = $('#person_email').val()
+// 	$.ajax({
+// 		url: '${cpath}/common/emailCheck?person_email=' + person_email,
+// 		type: 'get',
+// 		success: function(data){
+// 			if(emailJ.test(person_email)){
+// 				if(data == 1){
+// 					$('#email_check').text('이미 사용중인 이메일입니다')
+// 					$('#email_check').css('color', 'red')
+// 				}
+// 				else{
+// 					$('#email_check').text('사용 가능한 이메일입니다')
+// 					$('#email_check').css('color', 'blue')
+// 				}
+// 			}else if(!emailJ.test(person_email)){
+// 				$('#email_check').text('이메일 형식에 적합하지 않습니다')
+// 				$('#email_check').css('color', 'red')
+// 			}
+// 		}, error: function(){
+// 			console.log('실패')
+// 		}
+// 	})
+// })
 
 //생년월일 체크
 //보류
