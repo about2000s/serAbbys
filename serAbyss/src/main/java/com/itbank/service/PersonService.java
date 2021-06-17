@@ -10,6 +10,10 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.UUID;
 
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -151,6 +155,17 @@ public class PersonService {
 		props.put("mail.smtp.auth", "true");
 		props.put("mail.smtp.ssl.enable", "true");
 		props.put("mail.smtp.trust", host);
+		
+		Session mailSession = Session.getDefaultInstance(props, new Authenticator() {
+			String un = username;
+			String pw = password;
+			
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				// TODO Auto-generated method stub
+				return super.getPasswordAuthentication();
+			}
+		})
 		
 		return null;
 	}
