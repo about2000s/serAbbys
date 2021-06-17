@@ -4,9 +4,18 @@
 <%@ include file="../layout/leftmenu.jsp" %>
 
 <div class="container">
-
-	<h1>서비스 신청</h1>
-
+	<h1>
+		<c:if test="${param.status eq ''}">전체 목록</c:if>
+		<c:if test="${param.status eq 'register'}">접수 목록</c:if>
+		<c:if test="${param.status eq 'accept'}">기사 배정</c:if>
+		<c:if test="${param.status eq 'fixing'}">수리 진행 중</c:if>
+		<c:if test="${param.status eq 'fixed'}">수리 완료(미결제)</c:if>
+		<c:if test="${param.status eq 'payBefore'}">결제 진행 중</c:if>
+		<c:if test="${param.status eq 'payAfter'}">결제 완료 목록</c:if>
+		<c:if test="${param.status eq 'cancleRegister'}">환불 진행 중</c:if>
+		<c:if test="${param.status eq 'cancleComplete'}">환불 완료 목록</c:if>
+		<c:if test="${param.status eq 'success'}">처리 완료 목록</c:if>
+	</h1>
 	<table class="list">
 		
 		<tr>

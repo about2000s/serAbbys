@@ -41,6 +41,9 @@
 			<a href="${cpath }/order/statusList/?page=${param.page }&type=${param.type}&search=${param.search}&status=${param.status}"><button>목록</button></a>
 			<a href="${cpath }/order/select/${dto.service_idx}?value=modify"><button>수정</button></a>
 			<button id="deleteBtn">삭제</button>
+			<c:if test="${param.status eq 'register'} && ${login.person_check eq 'y'}">
+				<button id="registerChange" onclick="location.href='${cpath}/order/registerChange?engiId=${login.person_id }'">기사 배정</button>
+			</c:if>
 		</td></tr>
 		
 
