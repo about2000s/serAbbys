@@ -58,12 +58,14 @@ body {background-color:#ffffff; margin:0;}
 .leftmenu ul li a:hover { color:black; text-decoration: underline; }
 
 /* 로그인 페이지 common/login : 남형진*/
-.logincontainer { display:block; margin-top:200px; margin:auto; width:600px; border:1px solid black;} 
+.logincontainer { display:block; margin-top:500px; margin:auto; width:600px; border:1px solid black;} 
 .logincontainer input[type="text"] {width:200px;height:50px;}
 .logincontainer input[type="password"] {width:200px;height:50px;}
 .logincontainer input[type="submit"] { width:100px;height:35px;background-color:#d4613e;font:12px; color:white;border:none; border-radius:5px;padding:5px; }
 .logincontainer .leftbox {float:left;border:0px solid black;}
 .logincontainer .rightbox {float:right;border:0px solid red;}
+
+
 
 
 
