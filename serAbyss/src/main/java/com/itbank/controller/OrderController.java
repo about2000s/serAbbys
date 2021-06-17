@@ -125,7 +125,22 @@ public class OrderController {
 	public ModelAndView order_new_for_cust() {
 		ModelAndView mav = new ModelAndView("/order/order_new_for_cust");
 		
-//		HashMap<String, Object> map = os.complicateJob();
+		HashMap<String, List<String>> map = os.complicateJob();
+		
+		SimpleDateFormat dd = new SimpleDateFormat("dd");
+		Date date = new Date();
+		String day = dd.format(date);
+		int dayToInt = Integer.parseInt(day);
+		List<String> dayList = new ArrayList<String>();
+		for(int i=0;i<7;i++) {
+			dayToInt++;
+			dayList.add(dayToInt + "");
+		}
+		
+		mav.addObject("dayList", dayList);
+		mav.addObject("map", map);
+		//			engiId   
+		List<HashMap<String, HashMap<String, String>>> newMap = new ArrayList<HashMap<String,HashMap<String,String>>>();
 //		
 //		mav.addObject("aMap", map.get("aMap"));
 //		mav.addObject("engiIdList", map.get("engiIdList"));
