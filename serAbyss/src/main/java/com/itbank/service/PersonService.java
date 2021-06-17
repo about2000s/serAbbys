@@ -113,23 +113,6 @@ public class PersonService {
 		return dao.companyAdd(comp);
 	}
 
-	public void timePlus() {//월 일 시
-		int i = 1;
-		int j = 1;
-		int k = 1;
-		HashMap<String, Integer> map = new HashMap<String, Integer>();
-		for(i=6;i<=12;i++) {
-			if(i == 6 || i == 9 || i == 11) continue;
-			for(j=1;j<=31;j++) {
-				for(k=8;k<=22;k+=2) {
-					map.put("i", i);
-					map.put("j", j);
-					map.put("k", k);
-					int row = dao.timePlus(map);
-				}
-			}
-		}
-	}
 
 	public int emailCheck(String person_email) {
 		return dao.emailCheck(person_email);
