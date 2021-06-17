@@ -32,7 +32,6 @@
 			<c:if test="${login != null}">
 				<li><a href="${cpath }/common/logout">Logout</a></li>
 			</c:if>
-			<!-- 수정 -->
 			<c:if test="${login == null}">
 				<li><a href="${cpath }/common/login">Login</a></li>
 				<li><a href="${cpath }/common/join">회원가입</a></li>
