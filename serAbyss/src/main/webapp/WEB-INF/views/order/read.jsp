@@ -17,7 +17,7 @@
 
 <div class="order"> 
 	<div>
-		<a href="${cpath }/order/statusList/?type=${param.type}&search=${param.search}&status=${param.status}"><button>목록</button></a>
+		<a href="${cpath }/order/statusList/?page=${param.page }&type=${param.type}&search=${param.search}&status=${param.status}"><button>목록</button></a>
 	</div>
 <%-- 	<c:if test="${dto.service_id == (login.person_id or 'admin')}"> --%>
 		<div>
