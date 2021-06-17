@@ -8,7 +8,7 @@
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<title>엔지니어에게 경의를!</title>
+<title>기술로 세상을 밝히다</title>
 
 
 <link href="${cpath }/resources/css/css.css" rel="stylesheet" type="text/css">
