@@ -34,7 +34,7 @@ public class PersonService {
 		}
 		return hash;
 	}
-	
+	//
 	//랜덤비밀번호 받아오는 메서드
 	public String randomPw() {
 		return UUID.randomUUID().toString().split("-")[0];
