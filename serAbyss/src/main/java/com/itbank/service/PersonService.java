@@ -6,6 +6,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
+import java.util.Random;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +34,7 @@ public class PersonService {
 		}
 		return hash;
 	}
-	
+	//
 	//랜덤비밀번호 받아오는 메서드
 	public String randomPw() {
 		return UUID.randomUUID().toString().split("-")[0];
@@ -121,4 +123,50 @@ public class PersonService {
 	public List<HashMap<String, String>> compSearchList(String companyList_name) {
 		return dao.compSearchList(companyList_name);
 	}
+
+	public String getAuthNumber() {
+		Random ran = new Random();
+		String authNumber = "";
+		for(int i=0;i<6;i++) {
+			authNumber += ran.nextInt(9);
+		}
+		return authNumber;
+	}
+
+	public String sendMail(String person_email, String authNumber, String account) {
+
+		String host = "smtp.naver.com";
+		final String username = account.split("/")[0];
+		final String password = account.split("/")[1];
+		int port = 465;
+		
+		String subject = "[SIR-ABYSS] 인증번호입니다.";
+		String body = "인증번호는 [%s] 입니다\n\n";
+		body = String.format(body, authNumber);
+		
+		Properties props = System.getProperties();
+		
+		props.put("mail.smtp.host", host);
+		props.put("mail.smtp.port", port);
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.ssl.enable", "true");
+		props.put("mail.smtp.trust", host);
+		
+		return null;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
