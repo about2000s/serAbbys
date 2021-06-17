@@ -232,10 +232,6 @@ public class PersonController {
 		return ps.emailCheck(person_email);
 	}
 	
-	@GetMapping("timePlus")
-	public void timePlus() {
-		ps.timePlus();
-	}
 }
 
 
