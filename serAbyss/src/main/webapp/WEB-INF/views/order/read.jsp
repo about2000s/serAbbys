@@ -10,6 +10,7 @@
 </style>
 
 
+<<<<<<< HEAD
 
 	<table class="serviceRead">
 	<tr>
@@ -37,31 +38,16 @@
 		</tr>
 	<tr>
 		<td align="right" colspan="4">
-			<a href="${cpath }/order/statusList/?type=${param.type}&search=${param.search}&status=${param.status}"><button>목록</button></a>
+			<a href="${cpath }/order/statusList/?page=${param.page }&type=${param.type}&search=${param.search}&status=${param.status}"><button>목록</button></a>
 			<a href="${cpath }/order/select/${dto.service_idx}?value=modify"><button>수정</button></a>
 			<button id="deleteBtn">삭제</button>
 		</td></tr>
 		
-	</table>
-	
-	<table>
-		
-	<tr>
-		<td colspan="5">
-			
-			</td>
-	</tr>
-	</table>
-	<table>
-	<tr>
-		<td></td></tr>
+
 	<%-- 	<c:if test="${dto.service_id == (login.person_id or 'admin')}"> --%>
-	<tr>
-		<td>
-		</td></tr>
+
 	<%-- 	</c:if> --%>
-	</table>
-	
+
 <script>
 	const deleteUrl = '${cpath }/order/delete/${dto.service_idx}';
 	document.getElementById('deleteBtn').onclick = function(event) {
