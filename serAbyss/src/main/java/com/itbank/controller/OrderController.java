@@ -64,7 +64,9 @@ public class OrderController {
 	}
 	
 	@PostMapping("/order_new")
-	public ModelAndView order(OrderDTO dto) {
+	public ModelAndView order(OrderDTO dto, String address, String detailAddress) {
+		String fullAddress = address + " " + detailAddress;
+		dto.setService_address(fullAddress);
 		ModelAndView mav = new ModelAndView("/order/order_result");
 		String msg;
 		int row = os.order(dto);
