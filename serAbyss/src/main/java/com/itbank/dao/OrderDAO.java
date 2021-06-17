@@ -34,10 +34,7 @@ public interface OrderDAO {
 	@Delete("delete from service where service_idx=#{idx}")
 	int delete(int idx);
 
-	@Select("select * from reserve where "
-			+ "reserve_year=#{reserve_year} and reserve_month=#{reserve_month} and "
-			+ "reserve_day=#{reserve_day} and reserve_hour=#{reserve_hour} and "
-			+ "reserve_engiId=#{reserve_engiId}")
+	@Select("select * from reserve where reserve_fullDate=#{reserve_fullDate} and reserve_engiId=#{reserve_engiId}")
 	ReserveDTO selectReserveOne(ReserveDTO inputData);
 
 	@Select("select person_id from person where person_check='y'")
