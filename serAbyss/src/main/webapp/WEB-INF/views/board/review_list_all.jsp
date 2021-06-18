@@ -35,11 +35,10 @@ create table reviewboard (
 				<th width="10%">조회수</th>
 			</tr>
 
-
 			<tr>
 				<td>${dto.review_idx}</td>
 				<td>${star }</td>
-				<td><a href="">${dto.review_title}</a></td>
+				<td><a href="${cpath }/board/reviewRead?review_idx=${dto.review_idx}">${dto.review_title}</a></td>
 				<td>${dto.review_engineer}</td>
 				<td>${dto.review_reg }</td>
 				<td>${dto.review_viewCount }</td>

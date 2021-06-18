@@ -10,10 +10,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.dto.BoardDTO;
+import com.itbank.dto.ReviewBoardDTO;
 import com.itbank.dto.SerCenDTO;
 import com.itbank.dto.ServiceBoardDTO;
 import com.itbank.service.BoardService;
@@ -98,6 +100,36 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView("board/serCenRead");
 		SerCenDTO dto = bs.selectOneNotice(map);
 		mav.addObject("dto", dto);
+		return mav;
+	}
+	
+	@GetMapping("/reviewRead")
+	public ModelAndView reviewRead(int review_idx) {
+		ModelAndView mav = new ModelAndView("board/reviewRead");
+		ReviewBoardDTO dto = bs.selectOneReview(review_idx);
+		int row = bs.reviewViewCountPlus(dto);
+		System.out.println("조회수 1 증가");
+		mav.addObject("dto", dto);
+		return mav;
+	}
+	
+	@GetMapping("reviewUpdate")
+	public ModelAndView reviewUpdate(int review_idx) {
+		ModelAndView mav = new ModelAndView("board/reviewUpdate");
+		ReviewBoardDTO dto = bs.selectOneReview(review_idx);
+		mav.addObject("dto", dto);
+		return mav;
+	}
+	@PostMapping("reviewUpdate")
+	public ModelAndView reviewUpdate(ReviewBoardDTO inputData) {
+		ModelAndView mav = new ModelAndView("alert");
+		int row = bs.reviewUpdate(inputData);
+		String msg = null;
+		if(row == 1) {
+			msg = "글수정 성공";
+			mav.addObject("msg", msg);
+			mav.addObject("review_idx", inputData.getReview_idx());
+		}
 		return mav;
 	}
 	

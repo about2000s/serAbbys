@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <div class="leftmenu">
 	<ul>
-		<li><a href="${cpath }/order/order_new">서비스신청  </a></li>
+		<li><a href="${cpath }/order/order_new_for_engi">서비스신청  </a></li>
 		<li><a href="${cpath }/order/statusList?page=1&type=&search=&status=register">서비스준비중  <br></a></li>
 		<li><a href="${cpath }/order/statusList?page=1&type=&search=&status=fixing">서비스중  </a></li>
 		<li><a href="${cpath }/order/statusList?page=1&type=&search=&status=fixed">서비스완료  </a></li>

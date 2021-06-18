@@ -19,8 +19,8 @@ review_viewcount   default 0
 
  */
 public class ReviewBoardDTO {
-	private int review_idx, review_viewCount, review_starCount;
-	private String review_id, review_engineer, review_title, review_content, review_reg, review_uploadFile;
+	private int review_idx, review_viewCount, review_starScore;
+	private String review_custId, review_engiId, review_title, review_content, review_reg, review_uploadFile1, review_compBelong;
 	private MultipartFile file;
 	
 	public int getReview_idx() {
@@ -35,23 +35,17 @@ public class ReviewBoardDTO {
 	public void setReview_viewCount(int review_viewCount) {
 		this.review_viewCount = review_viewCount;
 	}
-	public int getReview_starCount() {
-		return review_starCount;
+	public String getReview_custId() {
+		return review_custId;
 	}
-	public void setReview_starCount(int review_starCount) {
-		this.review_starCount = review_starCount;
+	public void setReview_custId(String review_custId) {
+		this.review_custId = review_custId;
 	}
-	public String getReview_id() {
-		return review_id;
+	public String getReview_engiId() {
+		return review_engiId;
 	}
-	public void setReview_id(String review_id) {
-		this.review_id = review_id;
-	}
-	public String getReview_engineer() {
-		return review_engineer;
-	}
-	public void setReview_engineer(String review_engineer) {
-		this.review_engineer = review_engineer;
+	public void setReview_engiId(String review_engiId) {
+		this.review_engiId = review_engiId;
 	}
 	public String getReview_title() {
 		return review_title;
@@ -71,16 +65,29 @@ public class ReviewBoardDTO {
 	public void setReview_reg(String review_reg) {
 		this.review_reg = review_reg;
 	}
-	public String getReview_uploadFile() {
-		return review_uploadFile;
-	}
-	public void setReview_uploadFile(String review_uploadFile) {
-		this.review_uploadFile = review_uploadFile;
-	}
 	public MultipartFile getFile() {
 		return file;
 	}
 	public void setFile(MultipartFile file) {
 		this.file = file;
 	}
+	public int getReview_starScore() {
+		return review_starScore;
+	}
+	public void setReview_starScore(int review_starScore) {
+		this.review_starScore = review_starScore;
+	}
+	public String getReview_uploadFile1() {
+		return review_uploadFile1;
+	}
+	public void setReview_uploadFile1(String review_uploadFile1) {
+		this.review_uploadFile1 = review_uploadFile1;
+	}
+	public String getReview_compBelong() {
+		return review_compBelong;
+	}
+	public void setReview_compBelong(String review_compBelong) {
+		this.review_compBelong = review_compBelong;
+	}
+	
 }

@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.itbank.dto.BoardDTO;
+import com.itbank.dto.ReviewBoardDTO;
 import com.itbank.dto.SerCenDTO;
 import com.itbank.dto.ServiceBoardDTO;
 
@@ -35,6 +37,15 @@ public interface BoardDAO {
 	
 	@Select("select count(*) from serCen where serCen_belong='faq' and ${type} like '%${keyword}%'")
 	int selectBoardCountFaq(HashMap<String, String> map);
+
+	@Select("select * from review where review_idx=#{review_idx}")
+	ReviewBoardDTO selectOneReview(int review_idx);
+
+	@Update("update review set review_title=#{review_title}, review_content=#{review_content} where review_idx=#{review_idx}")
+	int reviewUpdate(ReviewBoardDTO inputData);
+
+	@Update("update review set review_viewCount=review_viewCount+1 where review_idx=#{review_idx}")
+	int reviewViewCountPlus(ReviewBoardDTO dto);
 
 	
 

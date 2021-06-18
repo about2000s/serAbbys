@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.itbank.dao.BoardDAO;
 import com.itbank.dto.BoardDTO;
+import com.itbank.dto.ReviewBoardDTO;
 import com.itbank.dto.SerCenDTO;
 import com.itbank.dto.ServiceBoardDTO;
 
@@ -42,6 +43,18 @@ public class BoardService {
 
 	public int selectBoardCountFaq(HashMap<String, String> map) {
 		return dao.selectBoardCountFaq(map);
+	}
+
+	public ReviewBoardDTO selectOneReview(int review_idx) {
+		return dao.selectOneReview(review_idx);
+	}
+
+	public int reviewUpdate(ReviewBoardDTO inputData) {
+		return dao.reviewUpdate(inputData);
+	}
+
+	public int reviewViewCountPlus(ReviewBoardDTO dto) {
+		return dao.reviewViewCountPlus(dto);
 	}
 
 	

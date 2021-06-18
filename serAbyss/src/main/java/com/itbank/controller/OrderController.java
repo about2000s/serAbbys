@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,19 +57,112 @@ public class OrderController {
 		return mav;
 	}
 	
-	@GetMapping("/order_new")
-	public String orderNew() {
-		return "/order/order_new";
+	@GetMapping("/order_new_for_engi")
+	public ModelAndView orderNew(HttpSession session) {
+		
+		ModelAndView mav = new ModelAndView("/order/order_new_for_engi");
+		Calendar today = Calendar.getInstance();
+		
+//		int yoil = today.get(Calendar.DAY_OF_WEEK);
+		int lastDayOfThisMonth = today.getActualMaximum(Calendar.DATE);
+		
+		int hourCount = 8;
+		int dayCount = 14;
+		
+		List<String> engiIdList = new ArrayList<String>();
+		engiIdList.add(((PersonDTO)session.getAttribute("login")).getPerson_id());
+		
+		int nowDay = today.get(Calendar.DATE);
+		int nowMonth = today.get(Calendar.MONTH) + 1;
+		List<String> dayList = new ArrayList<String>();
+		for(int i=0;i<dayCount;i++) {
+			if(nowDay == 30) {
+				if(nowMonth == 6 || nowMonth == 9 || nowMonth == 11) {
+					nowDay = 1;
+				}
+			}
+			else if(nowDay == 31) {
+				if(nowMonth == 7 || nowMonth == 8 || nowMonth == 10 || nowMonth == 12) {
+					nowDay = 1;
+				}
+			}
+			else {
+				nowDay++;
+			}
+			dayList.add(nowDay + "");
+		}
+		
+		List<HashMap<String, String>> list = new ArrayList<HashMap<String,String>>();
+		for(int i=0;i<engiIdList.size();i++) {
+			int year = today.get(Calendar.YEAR);
+			int month = today.get(Calendar.MONTH) + 1;
+			int day = today.get(Calendar.DATE) + 1;
+			int hour = 6; // for문으로 반복문을 돌려놓고 숫자계산 후 "" 더해서 HashMap에 넣자!
+			for(int j=0;j<hourCount*(dayCount + 1);j++) {
+				HashMap<String, String> map = new HashMap<String, String>();
+				if(hour == 22) {
+					if(day == 30) {
+						if(month == 6 || month == 9 || month == 11) {
+							month++;
+							day = 1;
+							hour = 8;
+						}
+					}
+					else if(day == 31) {
+						if(month == 7 || month == 8 || month == 10 || month == 12) {
+							month++;
+							day = 1;
+							hour = 8;
+						}
+					}
+					else {
+						day++;
+						hour = 8;
+					}
+				}else {
+					hour += 2;
+				}
+				ReserveDTO inputData = new ReserveDTO(year + "", month + "", day + "", hour + "", engiIdList.get(i));
+				ReserveDTO dto = os.selectReserveOne(inputData);
+				if(dto != null) continue;
+				map.put("engiId", engiIdList.get(i));
+				map.put("year", year + "");
+				map.put("month", month + "");
+				map.put("day", day + "");
+				map.put("hour", hour + "");
+				list.add(map);
+			}
+			
+		}
+		mav.addObject("engiIdList", engiIdList);
+		mav.addObject("dayList", dayList);
+		mav.addObject("list", list);
+		return mav;
+		
 	}
 	
-	@PostMapping("/order_new")
-	public ModelAndView order(OrderDTO dto, String address, String detailAddress) {
+	
+	//order에 저장되는 값: status, compBelong, engiId, custId, phone, name, title, content, file, address
+	//reserve에 저장되는 값: engiId, day, hour
+	@PostMapping("/order_new_for_engi")
+	public ModelAndView order(OrderDTO orderDTO, ReserveDTO reserveDTO, String address, String detailAddress) {
 		String fullAddress = address + " " + detailAddress;
-		dto.setService_address(fullAddress);
+		orderDTO.setService_address(fullAddress);
+		Calendar today = Calendar.getInstance();
+		reserveDTO.setReserve_year("2021");
+		if(Integer.parseInt(reserveDTO.getReserve_day()) >= 1 && Integer.parseInt(reserveDTO.getReserve_day()) <= 13) {
+			reserveDTO.setReserve_month((today.get(Calendar.MONTH) + 2) + "");
+		}
+		else {
+			reserveDTO.setReserve_month((today.get(Calendar.MONTH) + 1) + "");
+		}
+		reserveDTO.setReserve_custId(orderDTO.getService_custId());
+		
 		ModelAndView mav = new ModelAndView("/order/order_result");
 		String msg;
-		int row = os.order(dto);
-		if(row != 0) {
+		int row1 = os.order(orderDTO);
+		int row2 = os.insertReserve(reserveDTO);
+		if(row1 == 1 && row2 == 1) {
 			msg = "주문이 접수되었습니다";
 		}
 		else {
@@ -121,34 +215,7 @@ public class OrderController {
 		return mav;
 	}
 	
-//	@GetMapping("/order_new_for_cust")
-//	public ModelAndView order_new_for_cust() {
-//		ModelAndView mav = new ModelAndView("/order/order_new_for_cust");
-//		
-//		HashMap<String, List<String>> map = os.complicateJob();
-//		
-//		SimpleDateFormat dd = new SimpleDateFormat("dd");
-//		Date date = new Date();
-//		String day = dd.format(date);
-//		int dayToInt = Integer.parseInt(day);
-//		List<String> dayList = new ArrayList<String>();
-//		for(int i=0;i<7;i++) {
-//			dayToInt++;
-//			dayList.add(dayToInt + "");
-//		}
-//		
-//		mav.addObject("dayList", dayList);
-//		mav.addObject("map", map);
-//		//			engiId   
-//		List<HashMap<String, HashMap<String, String>>> newMap = new ArrayList<HashMap<String,HashMap<String,String>>>();
-//		
-//		mav.addObject("aMap", map.get("aMap"));
-//		mav.addObject("engiIdList", map.get("engiIdList"));
-//		mav.addObject("monthList", map.get("monthList"));
-//		mav.addObject("dayList", map.get("dayList"));
-		
-//		return mav;
-//	}
+
 	
 
 	@GetMapping("/order_new_for_cust")
@@ -270,7 +337,34 @@ public class OrderController {
 	}
 	
 	
-	
+//	@GetMapping("/order_new_for_cust")
+//	public ModelAndView order_new_for_cust() {
+//		ModelAndView mav = new ModelAndView("/order/order_new_for_cust");
+//		
+//		HashMap<String, List<String>> map = os.complicateJob();
+//		
+//		SimpleDateFormat dd = new SimpleDateFormat("dd");
+//		Date date = new Date();
+//		String day = dd.format(date);
+//		int dayToInt = Integer.parseInt(day);
+//		List<String> dayList = new ArrayList<String>();
+//		for(int i=0;i<7;i++) {
+//			dayToInt++;
+//			dayList.add(dayToInt + "");
+//		}
+//		
+//		mav.addObject("dayList", dayList);
+//		mav.addObject("map", map);
+//		//			engiId   
+//		List<HashMap<String, HashMap<String, String>>> newMap = new ArrayList<HashMap<String,HashMap<String,String>>>();
+//		
+//		mav.addObject("aMap", map.get("aMap"));
+//		mav.addObject("engiIdList", map.get("engiIdList"));
+//		mav.addObject("monthList", map.get("monthList"));
+//		mav.addObject("dayList", map.get("dayList"));
+		
+//		return mav;
+//	}
 	
 	
 	

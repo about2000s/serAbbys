@@ -135,32 +135,4 @@ document.querySelectorAll('input[name="reserve_day"]').forEach(input => input.on
 //   });
 </script>
 
-<script>
-// let className1
-// let className2
-// let className3
-// let classFullName
-
-// document.querySelectorAll('input[name="engiId"]').forEach(input => input.onclick = function(event){
-// 	className1 = event.target.value
-// 	classFullName = className1 + className2 + className3
-// 	document.querySelectorAll('div.' + 'main').forEach(div => div.classList.add('hiddenNone'))
-// 	document.querySelector('div.' + classFullName).classList.remove('hiddenNone')
-// })
-
-// document.querySelectorAll('input[name="month"]').forEach(input => input.onclick = function(event){
-// 	className2 = event.target.value
-// 	classFullName = className1 + className2 + className3
-// 	document.querySelectorAll('div.' + 'main').forEach(div => div.classList.add('hiddenNone'))
-// 	document.querySelector('div.' + classFullName).classList.remove('hiddenNone')
-// })
-
-// document.querySelectorAll('input[name="day"]').forEach(input => input.onclick = function(event){
-// 	className3 = event.target.value
-// 	classFullName = className1 + className2 + className3
-// 	document.querySelectorAll('div.' + 'main').forEach(div => div.classList.add('hiddenNone'))
-// 	document.querySelector('div.' + classFullName).classList.remove('hiddenNone')
-// })
-</script>
-	
 <%@ include file="../layout/footer.jsp" %>

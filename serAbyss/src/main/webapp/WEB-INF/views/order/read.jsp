@@ -6,12 +6,12 @@
 .serviceRead {width:890px; padding:5px; font-size:12px; }
 .serviceRead tr th{height:50px;background-color:#ececec;border:1px solid dcdcdc;}
 .serviceRead tr td {padding-left:50px; border:1px solid #dcdcdc; }
-
 </style>
 
 
-<<<<<<< HEAD
-
+	<c:if test="${login.person_id == dto.service_custId && dto.service_status == '모든 처리 완료' }">
+		<button onclick = "">리뷰 작성하러 가기!</button>
+	</c:if>
 	<table class="serviceRead">
 	<tr>
 		<th>서비스고유번호 | </th>
@@ -21,7 +21,7 @@
 		<td colspan="3"><b>${dto.service_title }</b></td></tr>
 	<tr>
 		<th width="150px">주문자이름</th>
-		<td colspan="3">${dto.service_custid }</td>
+		<td colspan="3">${dto.service_custId }</td>
 		</tr>
 	<tr>
 		<th>주문일시</th>

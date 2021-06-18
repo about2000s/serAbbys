@@ -15,12 +15,13 @@
 			<th>작성자</th>
 			<th>조회수</th>
 			<th>작성날짜</th>
+			<th>상태</th>
 		</tr>
 		<c:forEach var="dto" items="${list }">
 			<tr>
 				<td>${dto.service_idx }</td>
 				<td><a href="${cpath }/order/select/${dto.service_idx}?page=${param.page}&type=${param.type}&search=${param.search}&status=${param.status}&value=read">${dto.service_title }</a></td>
-				<td>${dto.service_custid }</td>
+				<td>${dto.service_custId }</td>
 				<td>${dto.service_viewCount }</td>
 				<td>${dto.service_reg }</td>
 			</tr>
