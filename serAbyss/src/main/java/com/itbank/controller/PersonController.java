@@ -38,6 +38,7 @@ public class PersonController {
 	//개인회원 로그인
 	@PostMapping("/personLogin")
 	public ModelAndView personLogin(PersonDTO inputData, HttpSession session) {
+		System.out.println("fds");
 		ModelAndView mav = new ModelAndView();
 		PersonDTO login = ps.personLogin(inputData);
 		if(login != null) {

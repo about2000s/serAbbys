@@ -9,19 +9,16 @@
 
 </style>
 
-
-<<<<<<< HEAD
-
 	<table class="serviceRead">
 	<tr>
-		<th>서비스고유번호 | </th>
+		<th>서비스고유번호 </th>
 		<td colspan="3">No. ${dto.service_idx }</td></tr>
 	<tr>
 		<th>서비스 요청 내역 </th>
 		<td colspan="3"><b>${dto.service_title }</b></td></tr>
 	<tr>
 		<th width="150px">주문자이름</th>
-		<td colspan="3">${dto.service_custid }</td>
+		<td colspan="3">${dto.service_custId }</td>
 		</tr>
 	<tr>
 		<th>주문일시</th>
@@ -38,12 +35,22 @@
 		</tr>
 	<tr>
 		<td align="right" colspan="4">
-			<a href="${cpath }/order/statusList/?page=${param.page }&type=${param.type}&search=${param.search}&status=${param.status}"><button>목록</button></a>
-			<a href="${cpath }/order/select/${dto.service_idx}?value=modify"><button>수정</button></a>
-			<button id="deleteBtn">삭제</button>
-<%-- 			<c:if test="${param.status eq 'register'} && ${login.person_check eq 'y'}"> --%>
-			<button id="registerChange">기사 배정</button>
-<%-- 			</c:if> --%>
+			<a href="${cpath }/order/statusList/?page=${param.page }&type=${param.type}
+				&search=${param.search}&status=${param.status}">
+				<button>목록</button>
+			</a>
+			<c:if test="${dto.service_status eq 'register' && login.person_check eq 'y'}">
+				<a href="${cpath }/order/select/${dto.service_idx}?value=modify&page=${param.page }
+					&type=${param.type}&search=${param.search}&status=${param.status}">
+					<button>수정</button>
+				</a>
+				<button id="deleteBtn">삭제</button>
+			</c:if>
+ 			<c:if test="${login.person_check eq 'y'}">
+				<form method="get" id="statusChange" action="${cpath}/order/statusChange">
+					<button>status 바꾸기</button>
+				</form>
+ 			</c:if>
 		</td></tr>
 		
 
@@ -56,17 +63,6 @@
 	document.getElementById('deleteBtn').onclick = function(event) {
 		if(confirm("정말 삭제하시겠습니까?") == true) {
 			location.href = deleteUrl + "?" + '${login.person_check}';
-		} else {
-			return;
-		}
-	}
-</script>
-
-<script>
-	const registerChangeUrl = '${cpath}/order/registerChange';
-	document.getElementById('registerChange').onclick = function(event) {
-		if(confirm("기사 배정하시겠습니까?") == true) {
-			location.href = registerChangeUrl + '?engiId=${login.person_id}&service_idx=${dto.service_idx}&page=${param.page }&type=${param.type}&search=${param.search}&status=${param.status}';
 		} else {
 			return;
 		}
