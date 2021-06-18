@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.itbank.dao.OrderDAO;
 import com.itbank.dto.OrderDTO;
+import com.itbank.dto.PersonDTO;
 import com.itbank.dto.ReserveDTO;
 
 @Service
@@ -141,9 +142,9 @@ public class OrderService {
 				}
 				String reserve_engiId = engiIdList.get(i);
 				String reserve_fullDate = FullDateToInt + "";
-				ReserveDTO inputData = new ReserveDTO(reserve_fullDate, reserve_engiId);
-				ReserveDTO dto = dao.selectReserveOne(inputData);
-				if(dto != null) continue;
+//				ReserveDTO inputData = new ReserveDTO(reserve_fullDate, reserve_engiId);
+//				ReserveDTO dto = dao.selectReserveOne(inputData);
+//				if(dto != null) continue;
 				
 				innerList.add(yearPart);
 				innerList.add(monthPart);
@@ -242,6 +243,14 @@ public class OrderService {
 	
 	public int selectBoardCountList(HashMap<String, String> param) {
 		return dao.selectBoardCountList(param);
+	}
+
+	public PersonDTO selectOneById(String service_custId) {
+		return dao.selectOneById(service_custId);
+	}
+
+	public int insertReserve(ReserveDTO reserveDTO) {
+		return dao.insertReserve(reserveDTO);
 	}
 	
 //	public int order(OrderDTO dto) {
