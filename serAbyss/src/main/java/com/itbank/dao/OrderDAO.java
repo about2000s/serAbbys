@@ -45,4 +45,7 @@ public interface OrderDAO {
 //	int setReserve(ReserveDTO reserveDTO);
 	int selectBoardCountList(HashMap<String, String> param);
 
+	@Update("update service set service_status='accept' where service_idx=#{service_idx}")
+	int change_status(HashMap<String, String> param);
+
 }

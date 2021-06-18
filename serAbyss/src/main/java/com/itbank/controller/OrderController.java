@@ -169,4 +169,21 @@ public class OrderController {
 //		return mav;
 //	}
 
+	@GetMapping("/registerChange")
+	public ModelAndView registerChange(@PathVariable HashMap<String, String> param) {
+		ModelAndView mav = new ModelAndView("/order/order_result");
+		String msg=null;
+		int row = os.change_status(param);
+		param.remove("engiId");
+		param.remove("service_idx");
+		if(row == 1) {
+			msg = "기사 배정 완료!";
+		} else {
+			msg = "기사 배정 실패! 다시 시도해주세요";
+		}
+		mav.addObject("param", param);
+		mav.addObject("msg", msg);
+		mav.addObject("value", "read");
+		return mav;
+	}
 }

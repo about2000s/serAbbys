@@ -243,6 +243,10 @@ public class OrderService {
 	public int selectBoardCountList(HashMap<String, String> param) {
 		return dao.selectBoardCountList(param);
 	}
+
+	public int change_status(HashMap<String, String> param) {
+		return dao.change_status(param);
+	}
 	
 //	public int order(OrderDTO dto) {
 //		if(dto.ready()) {
