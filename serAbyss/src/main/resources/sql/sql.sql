@@ -163,6 +163,8 @@ alter table customer add customer_service_idx varchar(50);
 --customer table 더미데이터 --
 insert into customer values( customer_seq.nextval, '전화연락 해달라고 하심' ,'2021-06-16 22:22:22' ,'1');
 
+--customer table 고객 응대 insert 
+insert into customer values (customer_seq.nextval, '전화연락 해달라고 하심' ,to_char(sysdate, 'yyyy-MM-dd hh24:mi') ,'1');
 
 
 create sequence customer_idx start with 1 maxvalue 999999 increment by 1 nocache;

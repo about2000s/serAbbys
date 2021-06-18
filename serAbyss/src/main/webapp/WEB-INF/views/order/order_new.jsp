@@ -8,11 +8,20 @@
 	<hr/>
 	<form method="post" enctype="multipart/form-data">
 		<input type="hidden" name="service_status" value="register">
+		<input type="hidden" name="service_compBelong" value="${login.person_belong }">
 		
 		<table>
 			<tr>
 				<th>고객아이디입력</th>
-				<td><input type="text" name="service_custid" placeholder="고객id입력" required></td>
+				<td><input type="text" name="service_custId" placeholder="고객id입력" required></td>
+			</tr>
+			<tr>
+				<th>고객전화번호입력</th>
+				<td><input type="text" name="service_phone" placeholder="고객phone" required></td>
+			</tr>
+			<tr>
+				<th>고객이름입력</th>
+				<td><input type="text" name="service_" placeholder="고객이름입력" required></td>
 			</tr>
 			<tr>
 				<th>제목입력</th>
