@@ -6,7 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
  service
 
 service_idx(PK)      sequence
-service_custid      session 유저 id값 받아와서 저장
+service_custId      session 유저 id값 받아와서 저장
 service_title      not null
 service_content      not null
 service_status      (R(접수)/A(배정)/P(지불)/C(완료))
@@ -17,9 +17,9 @@ service_viewcount   default 0
 
 */
 public class OrderDTO {
-	private int service_idx, service_viewCount;
-	private String service_custid, service_title, service_content, service_status, service_address, service_reg, service_engiId, asComment,
-			service_name, service_phone;
+	private int service_idx, service_viewCount, service_price;
+	private String service_custId, service_title, service_content, service_status, service_address, service_reg, service_engiId, 
+			service_compBelong , service_name, service_phone;
 	private String service_uploadFile1;
 	private MultipartFile file;
 	
@@ -54,23 +54,17 @@ public class OrderDTO {
 	public void setService_phone(String service_phone) {
 		this.service_phone = service_phone;
 	}
-	public String getAsComment() {
-		return asComment;
-	}
-	public void setAsComment(String asComment) {
-		this.asComment = asComment;
-	}
 	public int getService_viewCount() {
 		return service_viewCount;
 	}
 	public void setService_viewCount(int service_viewCount) {
 		this.service_viewCount = service_viewCount;
 	}
-	public String getService_custid() {
-		return service_custid;
+	public String getService_custId() {
+		return service_custId;
 	}
-	public void setService_custid(String service_custid) {
-		this.service_custid = service_custid;
+	public void setService_custId(String service_custId) {
+		this.service_custId = service_custId;
 	}
 	public String getService_title() {
 		return service_title;
@@ -120,5 +114,18 @@ public class OrderDTO {
 	public void setFile(MultipartFile file) {
 		this.file = file;
 	}
+	public int getService_price() {
+		return service_price;
+	}
+	public void setService_price(int service_price) {
+		this.service_price = service_price;
+	}
+	public String getService_compBelong() {
+		return service_compBelong;
+	}
+	public void setService_compBelong(String service_compBelong) {
+		this.service_compBelong = service_compBelong;
+	}
+	
 	
 }
