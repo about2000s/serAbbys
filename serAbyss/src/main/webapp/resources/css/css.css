@@ -35,9 +35,9 @@ body {background-color:#ffffff; margin:0;}
 
 
 
-.container { border:0px solid red;}
-.container table { width:1200px; border:1px solid #dcdcdc; border-collapse:collapse;}
-.container table th { background-color:#ececec; padding:8px; border-right:1px solid #dcdcdc; border-bottom:1px solid #dcdcdc; font-size:12px;}
+.container { border:opx solid red; float:left;}
+.container table { width:1000px; border:1px solid #dcdcdc; border-collapse:collapse;}
+.container table th { background-color:#ececec; padding:8px; border-right:1px solid #dcdcdc; border-bottom:1px solid #dcdcdc; font-size:12px; }
 .container table tr td { border-right:1px solid #dcdcdc; font-size:12px; align:center;padding:8px; }
 /* order_new */
 .container input { width:250px;height:30px; }
@@ -50,20 +50,22 @@ body {background-color:#ffffff; margin:0;}
 .hiddenNone { display:none; }
 
 /* leftmenu : 남형진*/
-.leftmenu { width:190px; background-color:#f7f7f7; border:1px solid #ececec; 
-			float:left; font-size:13px;text-align:center;border-radius:0px;margin-right:10px; } 
+.leftmenu { float:left;width:190px; background-color:#f7f7f7; border:1px solid #ececec; 
+			 font-size:13px;text-align:center;border-radius:0px;margin-right:10px; } 
 .leftmenu ul { padding:0; margin:0; list-style:none;}
 .leftmenu ul li { padding:10px; border:collapse; margin:0; border-bottom:1px solid white;} 
 .leftmenu ul li a { text-decoration: none; }
 .leftmenu ul li a:hover { color:black; text-decoration: underline; }
 
 /* 로그인 페이지 common/login : 남형진*/
-.logincontainer { display:block; margin-top:200px; margin:auto; width:600px; border:1px solid black;} 
-.logincontainer input[type="text"] {width:200px;height:50px;}
-.logincontainer input[type="password"] {width:200px;height:50px;}
+.logincontainer { display:block; margin-top:500px; margin:auto; width:600px; border:1px solid black;} 
+.logincontainer input[type="text"] { width:200px;height:50px; }
+.logincontainer input[type="password"] { width:200px;height:50px; }
 .logincontainer input[type="submit"] { width:100px;height:35px;background-color:#d4613e;font:12px; color:white;border:none; border-radius:5px;padding:5px; }
-.logincontainer .leftbox {float:left;border:0px solid black;}
-.logincontainer .rightbox {float:right;border:0px solid red;}
+.logincontainer .leftbox { float:left;border:0px solid black; }
+.logincontainer .rightbox { float:right;border:0px solid red; }
+
+
 
 
 

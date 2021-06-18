@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.itbank.dao.OrderDAO;
 import com.itbank.dto.OrderDTO;
+import com.itbank.dto.PersonDTO;
 import com.itbank.dto.ReserveDTO;
 
 @Service
@@ -82,7 +83,10 @@ public class OrderService {
 		return dao.selectEngiIdAll();
 	}
 	
-	public HashMap<String, Object> complicateJob(){
+	public HashMap<String, List<String>> complicateJob(){
+		int hourCount = 8;
+		int dayCount = 7;
+		
 		SimpleDateFormat yyyyMM = new SimpleDateFormat("yyyyMM");
 		SimpleDateFormat dd = new SimpleDateFormat("dd");
 		
@@ -94,17 +98,66 @@ public class OrderService {
 		int ddDateToInt = Integer.parseInt(ddDate);//현재 일(day)에 1을 더하기 위해 정수로 변환
 		ddDateToInt++;// 더하기 1
 		ddDate = ddDateToInt + ""; //1이 더해진 일(day)를 문자열로 변환
-		
-		String FullDate = yyyyMMDate + ddDate + "08"; // 그러니까 오늘이 20210616일 때, 2021061708부터 시작한다!
-		
-		int FullDateToInt = Integer.parseInt(FullDate);
-		
+		String FullDate = yyyyMMDate + ddDate + "06"; // 그러니까 오늘이 20210616일 때, 2021061706부터 시작한다!
 		List<String> engiIdList = selectEngiIdAll();
 		//			 기사		 예약시간대~~
-		List<HashMap<String, List<String>>> list = new ArrayList<HashMap<String,List<String>>>();
+		
+		//시작이 2021061706
+		//case1
+		
+		//case2
+//		HashMap<String, HashMap<String, String>> 
+		
+		List<HashMap<String, List<String>>> outerList = new ArrayList<HashMap<String,List<String>>>();
 		for(int i=0;i<engiIdList.size();i++) {// 오늘로부터 7일까지만 표기 ex)오늘이 16일이면 16, 17, ... , 22
-			
+			int FullDateToInt = Integer.parseInt(FullDate);
+			HashMap<String, List<String>> map = null;
+			for(int j=0;j<16;j++) {
+				map = new HashMap<String, List<String>>();
+				List<String> innerList = new ArrayList<String>();
+				
+				String yearPart = (FullDateToInt + "").substring(0, 4);
+				String monthPart = (FullDateToInt + "").substring(4, 6);
+				String dayPart = (FullDateToInt + "").substring(6, 8);
+				String hourPart = (FullDateToInt + "").substring(8, 10);
+				
+				if(hourPart.equals("22")) {
+					if(dayPart.equals("30")) {
+						if(monthPart.equals("06") || monthPart.equals("09") || monthPart.equals("11")) {
+							FullDateToInt += 7084;
+							continue;
+						}
+					}
+					else if(dayPart.equals("31")) {
+						if(monthPart.equals("07") || monthPart.equals("08") || monthPart.equals("10") || monthPart.equals("12")) {
+							FullDateToInt += 6984;
+							continue;
+						}
+					}
+					else {
+						FullDateToInt += 86;
+					}
+				}else {
+					FullDateToInt += 2;
+				}
+				String reserve_engiId = engiIdList.get(i);
+				String reserve_fullDate = FullDateToInt + "";
+//				ReserveDTO inputData = new ReserveDTO(reserve_fullDate, reserve_engiId);
+//				ReserveDTO dto = dao.selectReserveOne(inputData);
+//				if(dto != null) continue;
+				
+				innerList.add(yearPart);
+				innerList.add(monthPart);
+				innerList.add(dayPart);
+				innerList.add(hourPart);
+				map.put(engiIdList.get(i), innerList);
+			}
+			outerList.add(map);
 		}
+		
+		System.out.println(outerList);
+		
+		return null;
 		
 //		SimpleDateFormat yyyy = new SimpleDateFormat("yyyy");
 //		SimpleDateFormat MM = new SimpleDateFormat("MM");
@@ -181,7 +234,7 @@ public class OrderService {
 //		map.put("monthList", monthList);
 //		map.put("dayList", dayList);
 //		return map;
-		return null;
+		
 	}
 
 //	public int setReserve(ReserveDTO reserveDTO) {
@@ -190,6 +243,14 @@ public class OrderService {
 	
 	public int selectBoardCountList(HashMap<String, String> param) {
 		return dao.selectBoardCountList(param);
+	}
+
+	public PersonDTO selectOneById(String service_custId) {
+		return dao.selectOneById(service_custId);
+	}
+
+	public int insertReserve(ReserveDTO reserveDTO) {
+		return dao.insertReserve(reserveDTO);
 	}
 	
 //	public int order(OrderDTO dto) {

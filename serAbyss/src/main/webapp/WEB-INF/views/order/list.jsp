@@ -4,6 +4,7 @@
 <%@ include file="../layout/leftmenu.jsp" %>
 
 <div class="container">
+
 	<h1>서비스 신청</h1>
 
 	<table class="list">
@@ -18,8 +19,8 @@
 		<c:forEach var="dto" items="${list }">
 			<tr>
 				<td>${dto.service_idx }</td>
-				<td><a href="${cpath }/order/select/${dto.service_idx}?type=${param.type}&search=${param.search}&status=${param.status}&value=read">${dto.service_title }</a></td>
-				<td>${dto.service_custid }</td>
+				<td><a href="${cpath }/order/select/${dto.service_idx}?page=${param.page}&type=${param.type}&search=${param.search}&status=${param.status}&value=read">${dto.service_title }</a></td>
+				<td>${dto.service_custId }</td>
 				<td>${dto.service_viewCount }</td>
 				<td>${dto.service_reg }</td>
 			</tr>

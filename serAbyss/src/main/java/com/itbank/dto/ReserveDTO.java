@@ -1,22 +1,24 @@
 package com.itbank.dto;
 
 public class ReserveDTO {
-	private int reserve_idx;
-	private String reserve_year, reserve_month, reserve_day, reserve_hour, reserve_engiId, reserve_custId;
+	private String reserve_idx, reserve_year, reserve_month, reserve_day, reserve_hour;
+	private String reserve_engiId, reserve_custId;
 	
-	public ReserveDTO(String reserve_year, String reserve_month, String reserve_day, String reserve_hour,
-			String reserve_engiId) {
-		super();
+	public ReserveDTO() {
+		// TODO Auto-generated constructor stub
+	}
+	
+	public ReserveDTO(String reserve_year, String reserve_month, String reserve_day, String reserve_hour, String reserve_engiId) {
 		this.reserve_year = reserve_year;
 		this.reserve_month = reserve_month;
 		this.reserve_day = reserve_day;
 		this.reserve_hour = reserve_hour;
 		this.reserve_engiId = reserve_engiId;
 	}
-	public int getReserve_idx() {
+	public String getReserve_idx() {
 		return reserve_idx;
 	}
-	public void setReserve_idx(int reserve_idx) {
+	public void setReserve_idx(String reserve_idx) {
 		this.reserve_idx = reserve_idx;
 	}
 	public String getReserve_year() {
@@ -55,6 +57,8 @@ public class ReserveDTO {
 	public void setReserve_custId(String reserve_custId) {
 		this.reserve_custId = reserve_custId;
 	}
+	
+	
 	
 	
 }
