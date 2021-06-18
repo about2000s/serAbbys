@@ -43,7 +43,7 @@
 					</div>
 					
 					<div>
-						<h2>시간 선택</h2>
+						<h2>시간 선택(이미 예약이 되어있는 시간은 비어있습니다)</h2>
 						<c:forEach var = "i" items = "${engiIdList }">
 							<c:forEach var = "j" items = "${dayList }">
 								<c:forEach var = "k" items = "${list }">

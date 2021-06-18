@@ -12,7 +12,7 @@
 			<h2>이메일 변경을 위해서 인증이 필요합니다</h2>
 			<p>
 				<input type = "email" name = "newEmail" placeholder="새로운 이메일을 입력 후 인증이 필요합니다">
-				<button>인증번호 받기</button>
+				<button id = "">인증번호 받기</button>
 			</p>
 		</div>
 		
