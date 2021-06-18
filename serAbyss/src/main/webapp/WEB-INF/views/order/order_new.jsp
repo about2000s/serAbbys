@@ -8,6 +8,7 @@
 	<hr/>
 	<form method="post" enctype="multipart/form-data">
 		<input type="hidden" name="service_status" value="register">
+		
 		<table>
 			<tr>
 				<th>고객아이디입력</th>
@@ -35,7 +36,7 @@
 			</tr>
 			<tr>
 				<th>담당엔지니어</th>
-				<td><input type="text" name="service_engiId" value="없음" readonly></td>
+				<td><input type="text" name="service_engiId" value="${login.person_id }" readonly></td>
 			</tr>
 			<tr>
 				<td colspan='2'><input type="submit" value="신청하기"></td>
