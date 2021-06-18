@@ -26,7 +26,7 @@ public class OrderDTO {
 //	public boolean ready() {
 //		// uploadFile을 이용하여, originalFileName과 storedFileName 값을 만든다
 //		System.out.println("file is not null? : " + (file != null));
-//		if(file != null) {
+//		if(file != null) 
 //			file.getOriginalFilename();
 //			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
 //			String now = sdf.format(new Date());
