@@ -105,9 +105,10 @@
 		<div class = "hiddenNone" id = "authMailDiv">
 			<h2>인증번호 입력</h2>
 			<div>
-				<input type = "text" name = "auth" placeholder="인증번호를 입력하시오">
+				<input type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호를 입력하시오">
 				<button id = "injung">인증하기</button>
 			</div>
+			<div id = "injungSuccessDiv"></div>
 		</div>
 	<button type = "submit" id = "reg_submit">회원가입</button>
 </form>
@@ -118,7 +119,7 @@ const email_checkDiv = document.getElementById('email_checkDiv')
 const authMailDiv = document.getElementById('authMailDiv')
 
 const sendMailHandler = function(event){
-// 	event.preventDefault()
+	event.preventDefault()
 	const person_email = document.getElementById('person_email').value
 	console.log(person_email)
 	const url = '${cpath}/mailto/' + person_email + '/'
@@ -130,15 +131,48 @@ const sendMailHandler = function(event){
 		console.log(text)
 		if(text.length == 128){
 			email_checkDiv.innerText = '이메일 전송에 성공'
+			email_checkDiv.style.color = 'blue'
 			authMailDiv.classList.remove('hiddenNone')
 		}
 		else{
 			
 			email_checkDiv.innerText = '이메일 전송에 실패'
+			email_checkDiv.style.color = 'red'
 		}
+			email_checkDiv.style.fontWeight = 'bold'
 	})
 }
 document.getElementById('receiveAuthBtn').onclick = sendMailHandler
+</script>
+
+<script>
+const injungSuccessDiv = document.getElementById('injungSuccessDiv')
+// const pass
+const injungHandler = function(event){
+	event.preventDefault()
+	const authNumber = document.getElementById('authNumber').value
+	console.log(authNumber)
+	const url = '${cpath}/getAuthResult/' + authNumber
+	const opt = {
+			method: 'GET'
+	}
+	
+	fetch(url, opt).then(resp => resp.text())
+	.then(text => {
+		if(text == 'true'){
+			injungSuccessDiv.innerText = '인증 성공'
+			injungSuccessDiv.style.color = 'blue'
+		}
+		else{
+			injungSuccessDiv.innerText = '인증 실패'
+			injungSuccessDiv.style.color = 'red'
+		}
+			injungSuccessDiv.style.fontWeight = 'bold'
+	})
+}
+
+document.getElementById('injung').onclick = injungHandler
+
 </script>
 
 

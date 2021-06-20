@@ -10,6 +10,15 @@ import java.util.Properties;
 import java.util.Random;
 import java.util.UUID;
 
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,14 +55,17 @@ public class PersonService {
 	}
 
 	public PersonDTO personLogin(PersonDTO dto) {
+		dto.setPerson_pw(getHash(dto.getPerson_pw()));
 		return dao.personLogin(dto);
 	}
 
 	public PersonDTO companyLogin(PersonDTO dto) {
+		dto.setPerson_pw(getHash(dto.getPerson_pw()));
 		return dao.companyLogin(dto);
 	}
 
 	public int join(PersonDTO inputData) {
+		inputData.setPerson_pw(getHash(inputData.getPerson_pw()));
 		return dao.join(inputData);
 	}
 
@@ -80,12 +92,14 @@ public class PersonService {
 	}
 
 	public int selectOneCheckIdPw(PersonDTO inputData) {
+		inputData.setPerson_pw(getHash(inputData.getPerson_pw()));
 		return dao.selectOneCheckIdPw(inputData);
 	}
 
 	public int updatePw(PersonDTO inputData) {
 //		String hash = getHash(inputData.getPerson_pw());
 //		inputData.setPerson_pw(getHash(hash));
+		inputData.setPerson_pw(getHash(inputData.getPerson_pw()));
 		return dao.updatePw(inputData);
 	}
 
@@ -152,7 +166,31 @@ public class PersonService {
 		props.put("mail.smtp.ssl.enable", "true");
 		props.put("mail.smtp.trust", host);
 		
-		return null;
+		Session mailSession = Session.getDefaultInstance(props, new Authenticator() {
+			String un = username;
+			String pw = password;
+			
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {
+				return new PasswordAuthentication(un, pw);
+			}
+		});
+		mailSession.setDebug(true);
+		
+		Message mimeMessage = new MimeMessage(mailSession);
+		
+		try {
+			mimeMessage.setFrom(new InternetAddress(username + "@naver.com"));
+			mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(person_email));
+			mimeMessage.setSubject(subject);
+			mimeMessage.setText(body);
+			Transport.send(mimeMessage);
+			
+		} catch(MessagingException e) {
+			return "주소가 잘못되었습니다";
+		}
+		
+		return authNumber;
 	}
 }
 

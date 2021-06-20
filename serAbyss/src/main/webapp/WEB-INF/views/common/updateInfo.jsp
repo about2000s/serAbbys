@@ -10,10 +10,19 @@
 		</p>
 		<div class = "email main hiddenNone">
 			<h2>이메일 변경을 위해서 인증이 필요합니다</h2>
-			<p>
-				<input type = "email" name = "newEmail" placeholder="새로운 이메일을 입력 후 인증이 필요합니다">
-				<button>인증번호 받기</button>
-			</p>
+			<input type = "email" name = "newEmail" id = "newEmail" placeholder="새로운 이메일을 입력 후 인증이 필요합니다">
+			<button id = "receiveAuthBtn">인증번호 받기</button>
+			
+			<div class = "check_font" id = "email_checkDiv"></div>
+			
+			<div class = "hiddenNone" id = "authMailDiv">
+				<h2>인증번호 입력</h2>
+				<div>
+					<input type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호를 입력하시오">
+					<button id = "injung">인증하기</button>
+				</div>
+				<div id = "injungSuccessDiv"></div>
+			</div>
 		</div>
 		
 		<p>폰번호: <input type = "text" name = "person_phone" value = "${login.person_phone }"><a class = "phone">수정</a></p>
@@ -105,6 +114,67 @@
             }
         }).open();
     }
+</script>
+
+<script>
+	const email_checkDiv = document.getElementById('email_checkDiv')
+	const authMailDiv = document.getElementById('authMailDiv')
+	
+	const sendMailHandler = function(event){
+		event.preventDefault()
+		const newEmail = document.getElementById('newEmail').value
+		console.log(newEmail)
+		const url = '${cpath}/mailto/' + newEmail + '/'
+		const opt = {
+				method: 'GET'
+		}
+		fetch(url, opt).then(resp => resp.text())
+		.then(text => {
+			console.log(text)
+			if(text.length == 128){
+				email_checkDiv.innerText = '이메일 전송에 성공'
+				email_checkDiv.style.color = 'blue'
+				authMailDiv.classList.remove('hiddenNone')
+			}
+			else{
+				
+				email_checkDiv.innerText = '이메일 전송에 실패'
+				email_checkDiv.style.color = 'red'
+			}
+				email_checkDiv.style.fontWeight = 'bold'
+		})
+	}
+	document.getElementById('receiveAuthBtn').onclick = sendMailHandler
+</script>
+
+<script>
+const injungSuccessDiv = document.getElementById('injungSuccessDiv')
+// const pass
+const injungHandler = function(event){
+	event.preventDefault()
+	const authNumber = document.getElementById('authNumber').value
+	console.log(authNumber)
+	const url = '${cpath}/getAuthResult/' + authNumber
+	const opt = {
+			method: 'GET'
+	}
+	
+	fetch(url, opt).then(resp => resp.text())
+	.then(text => {
+		if(text == 'true'){
+			injungSuccessDiv.innerText = '인증 성공'
+			injungSuccessDiv.style.color = 'blue'
+		}
+		else{
+			injungSuccessDiv.innerText = '인증 실패'
+			injungSuccessDiv.style.color = 'red'
+		}
+			injungSuccessDiv.style.fontWeight = 'bold'
+	})
+}
+
+document.getElementById('injung').onclick = injungHandler
+
 </script>
 
 <script>

@@ -8,7 +8,7 @@
 	<div class="order">
 		<div>
 			<p>
-				<input type="text" name="service_custid" value="${dto.service_custid}" readonly>
+				<input type="text" name="service_custId" value="${dto.service_custId}" readonly>
 			</p>
 			<p>
 				<input type="text" name="service_title" value="${dto.service_title}" required>

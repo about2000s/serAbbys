@@ -11,7 +11,7 @@
 		<table>
 			<tr>
 				<th>고객아이디입력</th>
-				<td><input type="text" name="service_custid" placeholder="고객id입력" required></td>
+				<td><input type="text" name="service_custId" placeholder="고객id입력" required></td>
 			</tr>
 			<tr>
 				<th>제목입력</th>

@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.itbank.dto.CompDTO;
-import com.itbank.dto.CustomerDTO;
 import com.itbank.service.CustomerService;
 import com.itbank.service.Hash;
 import com.itbank.service.PersonService;
@@ -67,7 +65,20 @@ public class PersonRestController {
 		
 		String result = ps.sendMail(person_email, authNumber, account);
 		
-		System.out.println("ssd");
-		return "성공";
+		if(result.equals(authNumber)) {
+			return hashNumber;
+		}
+		else {
+			return result;
+		}
+		
+	}
+	
+	@GetMapping("/getAuthResult/{userNumber}")
+	public boolean getAuthResult(@PathVariable String userNumber, HttpSession session) {
+		String hashNumber = (String)session.getAttribute("hashNumber");
+		boolean flag = hashNumber.equals(Hash.getHash(userNumber));
+		System.out.println(flag);
+		return flag;
 	}
 }

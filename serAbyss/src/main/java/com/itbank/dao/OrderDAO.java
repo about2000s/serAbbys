@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.itbank.dto.OrderDTO;
+import com.itbank.dto.PersonDTO;
 import com.itbank.dto.ReserveDTO;
 
 public interface OrderDAO {
@@ -20,10 +21,11 @@ public interface OrderDAO {
 	@Select("select * from service where service_idx=#{idx}")
 	OrderDTO selectOne(int idx);
 
-	@Insert("insert into service (service_idx, service_custid, service_title, service_content, "
-			+ "service_address, service_engiId, service_uploadFile1, service_status)"
-			+ "values (service_seq.nextval, #{service_custid}, #{service_title}, #{service_content}, "
-			+ "#{service_address}, #{service_engiId}, '${service_uploadFile1}', #{service_status})")
+	@Insert("insert into service (service_idx, service_custId, service_title, service_content, "
+			+ "service_status, service_address, service_uploadFile1, service_engiId, service_compBelong, service_name, service_phone)"
+			+ "values (service_seq.nextval, #{service_custId}, #{service_title}, #{service_content}, "
+			+ "#{service_status}, #{service_address}, '${service_uploadFile1}', #{service_engiId}, "
+			+ "#{service_compBelong}, #{service_name}, #{service_phone})")
 	int order(OrderDTO dto);
 
 	@Update("update service set service_title=#{service_title}, service_content=#{service_content}, "
@@ -34,7 +36,7 @@ public interface OrderDAO {
 	@Delete("delete from service where service_idx=#{idx}")
 	int delete(int idx);
 
-	@Select("select * from reserve where reserve_fullDate=#{reserve_fullDate} and reserve_engiId=#{reserve_engiId}")
+	@Select("select * from reserve where reserve_year=#{reserve_year} and reserve_month=#{reserve_month} and reserve_day=#{reserve_day} and reserve_hour=#{reserve_hour} and reserve_engiId=#{reserve_engiId}")
 	ReserveDTO selectReserveOne(ReserveDTO inputData);
 
 	@Select("select person_id from person where person_check='y'")
@@ -44,5 +46,15 @@ public interface OrderDAO {
 //			"    values(reserve_seq.nextval, '2021', '06', '16', '14', 'kim123', 'lee123');")
 //	int setReserve(ReserveDTO reserveDTO);
 	int selectBoardCountList(HashMap<String, String> param);
+
+	@Update("update service set service_status=#{service_status} where service_idx=#{service_idx}")
+	int change_status(OrderDTO dto);
+
+	@Select("select * from person where person_id=#{service_custId}")
+	PersonDTO selectOneById(String service_custId);
+
+	@Insert("insert into reserve (reserve_idx, reserve_year, reserve_month, reserve_day, reserve_hour, reserve_engiId,  reserve_custId)" + 
+			"    values(reserve_seq.nextval, #{reserve_year}, #{reserve_month}, #{reserve_day}, #{reserve_hour}, #{reserve_engiId}, #{reserve_custId})")
+	int insertReserve(ReserveDTO reserveDTO);
 
 }
