@@ -1,8 +1,5 @@
 package com.itbank.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -14,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.itbank.dto.BoardDTO;
 import com.itbank.dto.ReviewBoardDTO;
 import com.itbank.dto.SerCenDTO;
 import com.itbank.dto.ServiceBoardDTO;
@@ -29,20 +25,42 @@ public class BoardController {
 	private BoardService bs;
 
 	@GetMapping("/review_list_all")
-	public ModelAndView boardListAll() {
-		ModelAndView mav = new ModelAndView();
-		BoardDTO dto = bs.boardListAll();
-		int starScore = dto.getReview_starScore();
+	public ModelAndView boardListAll(String type, String keyword, int page) {
+		ModelAndView mav = new ModelAndView("board/review_list_all");
 		
-		String star = "";
-		for (int i = 0; i < starScore; i++) {
-			star += "★";
+		if(keyword == null || keyword.equals("")) {
+			type = "review_title";
+			keyword = "";
 		}
-		for (int i = 0; i < 10 - starScore; i++) {
-			star += "☆";
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		
+		int reviewBoardCount = bs.reviewBoardCount(map);
+		Paging paging = new Paging(page, reviewBoardCount);
+		map.put("offset", paging.getOffset() + "");
+		map.put("nowD", paging.getNowD() + "");
+		
+		
+		
+		
+		List<ReviewBoardDTO> list = bs.reviewListAll(map);
+		for(int i=0;i<list.size();i++) {
+			int starScore = list.get(i).getReview_starScore();
+			String star = "";
+			for (int k = 0; k < starScore; k++) {
+				star += "★";
+			}
+			for (int j = 0; j < 10 - starScore; j++) {
+				star += "☆";
+			}
+			list.get(i).setStar(star);
 		}
-		mav.addObject("dto", dto);
-		mav.addObject("star", star);
+		mav.addObject("paging", paging);
+		mav.addObject("page", page);
+		mav.addObject("list", list);
+		mav.addObject("type", type);
+		mav.addObject("keyword", keyword);
 
 		return mav;
 	}
@@ -130,6 +148,28 @@ public class BoardController {
 			mav.addObject("msg", msg);
 			mav.addObject("review_idx", inputData.getReview_idx());
 		}
+		return mav;
+	}
+	
+	@GetMapping("reviewWrite")
+	public ModelAndView reviewWrite(int service_idx) {
+		ModelAndView mav = new ModelAndView("board/reviewWrite");
+		ServiceBoardDTO dto = bs.selectOneByIdx(service_idx);
+		mav.addObject("dto", dto);
+		return mav;
+	}
+	@PostMapping("reviewWrite")
+	public ModelAndView reviewWrite(ReviewBoardDTO dto) {
+		ModelAndView mav = new ModelAndView("alert");
+		int row = bs.reviewWrite(dto);
+		String msg = null;
+		if(row == 1) {
+			msg = "리뷰작성 성공";
+		}
+		else {
+			msg = "리뷰작성 실패";
+		}
+		mav.addObject("msg", msg);
 		return mav;
 	}
 	

@@ -13,8 +13,8 @@ import com.itbank.dto.ServiceBoardDTO;
 
 public interface BoardDAO {
 
-	@Select("select * from review where review_idx='1'")
-	BoardDTO boardListAll();
+	@Select("select * from review")
+	List<ReviewBoardDTO> boardListAll();
 
 	//회사 대표계정만이 자기 소속 회사 직원들이 올린 글들을 모두 볼 수 있다.
 	@Select("select * from service where service_compBelong=#{person_belong}")
@@ -46,6 +46,17 @@ public interface BoardDAO {
 
 	@Update("update review set review_viewCount=review_viewCount+1 where review_idx=#{review_idx}")
 	int reviewViewCountPlus(ReviewBoardDTO dto);
+
+	@Select("select * from service where service_idx=#{service_idx}")
+	ServiceBoardDTO selectOneByIdx(int service_idx);
+
+	// sqlmap-board.xml에 있습니다
+	int reviewWrite(ReviewBoardDTO dto);
+
+	@Select("select count(*) from review where ${type} like '%${keyword}%'")
+	int reviewBoardCount(HashMap<String, String> map);
+
+	List<ReviewBoardDTO> reviewListAll(HashMap<String, String> map);
 
 	
 

@@ -16,20 +16,20 @@ public interface OrderDAO {
 
 	List<OrderDTO> selectall(HashMap<String, String> param);
 
-	List<OrderDTO> selectStatus(HashMap<String, String> param);
+	List<OrderDTO> selectStatus(HashMap<String, Object> param);
 
 	@Select("select * from service where service_idx=#{idx}")
 	OrderDTO selectOne(int idx);
 
 	@Insert("insert into service (service_idx, service_custId, service_title, service_content, "
-			+ "service_status, service_address, service_uploadFile1, service_engiId, service_compBelong, service_name, service_phone)"
+			+ "service_status, service_address, service_engiId, service_compBelong, service_name, service_phone)"
 			+ "values (service_seq.nextval, #{service_custId}, #{service_title}, #{service_content}, "
-			+ "#{service_status}, #{service_address}, '${service_uploadFile1}', #{service_engiId}, "
+			+ "#{service_status}, #{service_address}, #{service_engiId}, "
 			+ "#{service_compBelong}, #{service_name}, #{service_phone})")
 	int order(OrderDTO dto);
 
 	@Update("update service set service_title=#{service_title}, service_content=#{service_content}, "
-			+ "service_uploadFile1='${service_uploadFile1}', service_address=#{service_address}, service_reg=to_char(sysdate, 'yyyy-MM-dd hh24:mi') "
+			+ "service_reg=to_char(sysdate, 'yyyy-MM-dd hh24:mi') "
 			+ "where service_idx=#{service_idx}")
 	int modify(OrderDTO dto);
 
@@ -53,5 +53,8 @@ public interface OrderDAO {
 	@Insert("insert into reserve (reserve_idx, reserve_year, reserve_month, reserve_day, reserve_hour, reserve_engiId,  reserve_custId)" + 
 			"    values(reserve_seq.nextval, #{reserve_year}, #{reserve_month}, #{reserve_day}, #{reserve_hour}, #{reserve_engiId}, #{reserve_custId})")
 	int insertReserve(ReserveDTO reserveDTO);
+
+	// order-order.xml에 있습니다
+	int statusListCount(HashMap<String, Object> map);
 
 }

@@ -59,9 +59,7 @@ public class PersonController {
 		PersonDTO login = ps.companyLogin(inputData);
 		
 		if(login != null) {
-			boolean iamCeo = ps.iamCeo(login);
 			session.setAttribute("login", login);
-			session.setAttribute("iamCeo", iamCeo);
 			mav.setViewName("home");
 		}
 		else {

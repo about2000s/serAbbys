@@ -44,6 +44,11 @@
 		select count(*) from person 
 		where person_id=#{person_id} and person_pw=#{person_pw} and person_check=#{person_check}
 	</select>
+	
+	<select id="companyLogin" parameterType="person" resultType="person">
+		select * from person where person_id=#{person_id} and person_pw=#{person_pw} 
+		and person_check in ('r', 'y', 'a')
+	</select>
 </mapper>
 
 

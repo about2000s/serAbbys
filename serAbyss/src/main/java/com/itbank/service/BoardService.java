@@ -17,7 +17,7 @@ public class BoardService {
 	
 	@Autowired private BoardDAO dao;
 
-	public BoardDTO boardListAll() {
+	public List<ReviewBoardDTO> boardListAll() {
 		return dao.boardListAll();
 	}
 
@@ -55,6 +55,22 @@ public class BoardService {
 
 	public int reviewViewCountPlus(ReviewBoardDTO dto) {
 		return dao.reviewViewCountPlus(dto);
+	}
+
+	public ServiceBoardDTO selectOneByIdx(int service_idx) {
+		return dao.selectOneByIdx(service_idx);
+	}
+
+	public int reviewWrite(ReviewBoardDTO dto) {
+		return dao.reviewWrite(dto);
+	}
+
+	public int reviewBoardCount(HashMap<String, String> map) {
+		return dao.reviewBoardCount(map);
+	}
+
+	public List<ReviewBoardDTO> reviewListAll(HashMap<String, String> map) {
+		return dao.reviewListAll(map);
 	}
 
 	
