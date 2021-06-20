@@ -82,11 +82,13 @@ public class OrderController {
 	//글 읽기/${dto.service_idx}?page=${map.page}&type=${map.type}&keyword=${map.keyword}&service_status=${map.service_status}
 	@GetMapping("/read/{service_idx}")
 	public ModelAndView read(@PathVariable int service_idx, @RequestParam HashMap<String, Object> map) {
-		System.out.println("read");
+		Boolean flag = os.alreadyReviewWrite(service_idx);//flag==true라면 리뷰글이 작성된 상태
+		System.out.println("flag: " + flag);
 		ModelAndView mav = new ModelAndView("/order/read");
 		OrderDTO dto = os.selectOne(service_idx);
 		mav.addObject("dto", dto);
 		mav.addObject("map", map);
+		mav.addObject("flag", flag);
 		return mav;
 	}
 

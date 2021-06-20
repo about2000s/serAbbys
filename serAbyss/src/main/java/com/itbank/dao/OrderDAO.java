@@ -11,6 +11,7 @@ import org.apache.ibatis.annotations.Update;
 import com.itbank.dto.OrderDTO;
 import com.itbank.dto.PersonDTO;
 import com.itbank.dto.ReserveDTO;
+import com.itbank.dto.ReviewBoardDTO;
 
 public interface OrderDAO {
 
@@ -56,5 +57,8 @@ public interface OrderDAO {
 
 	// order-order.xml에 있습니다
 	int statusListCount(HashMap<String, Object> map);
+
+	@Select("select * from review where review_idx=#{service_idx}")
+	ReviewBoardDTO alreadyReviewWrite(int service_idx);
 
 }

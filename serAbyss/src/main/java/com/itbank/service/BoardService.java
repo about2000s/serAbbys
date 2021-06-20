@@ -7,10 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itbank.dao.BoardDAO;
-import com.itbank.dto.BoardDTO;
+import com.itbank.dto.OrderDTO;
+import com.itbank.dto.ReplyDTO;
 import com.itbank.dto.ReviewBoardDTO;
 import com.itbank.dto.SerCenDTO;
-import com.itbank.dto.ServiceBoardDTO;
 
 @Service
 public class BoardService {
@@ -19,14 +19,6 @@ public class BoardService {
 
 	public List<ReviewBoardDTO> boardListAll() {
 		return dao.boardListAll();
-	}
-
-	public List<ServiceBoardDTO> myCompList(String person_belong) {
-		return dao.myCompList(person_belong);
-	}
-
-	public List<ServiceBoardDTO> myList(String person_id) {
-		return dao.myList(person_id);
 	}
 
 	public List<SerCenDTO> faqList(HashMap<String, String> map) {
@@ -57,7 +49,7 @@ public class BoardService {
 		return dao.reviewViewCountPlus(dto);
 	}
 
-	public ServiceBoardDTO selectOneByIdx(int service_idx) {
+	public OrderDTO selectOneByIdx(int service_idx) {
 		return dao.selectOneByIdx(service_idx);
 	}
 
@@ -65,13 +57,33 @@ public class BoardService {
 		return dao.reviewWrite(dto);
 	}
 
-	public int reviewBoardCount(HashMap<String, String> map) {
+	public int reviewBoardCount(HashMap<String, Object> map) {
 		return dao.reviewBoardCount(map);
 	}
 
-	public List<ReviewBoardDTO> reviewListAll(HashMap<String, String> map) {
+	public List<ReviewBoardDTO> reviewListAll(HashMap<String, Object> map) {
 		return dao.reviewListAll(map);
 	}
 
+	public int replyWrite(ReplyDTO dto) {
+		return dao.replyWrite(dto);
+	}
 	
+	public void setStarInList(List<ReviewBoardDTO> list) {
+		for(int i=0;i<list.size();i++) {
+			int starScore = list.get(i).getReview_starScore();
+			String star = "";
+			for (int k = 0; k < starScore; k++) {
+				star += "★";
+			}
+			for (int j = 0; j < 10 - starScore; j++) {
+				star += "☆";
+			}
+			list.get(i).setStar(star);
+		}
+	}
+
+	public List<ReplyDTO> replyList(int review_idx) {
+		return dao.replyList(review_idx);
+	}
 }

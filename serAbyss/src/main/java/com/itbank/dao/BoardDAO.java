@@ -3,25 +3,19 @@ package com.itbank.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.itbank.dto.BoardDTO;
+import com.itbank.dto.OrderDTO;
+import com.itbank.dto.ReplyDTO;
 import com.itbank.dto.ReviewBoardDTO;
 import com.itbank.dto.SerCenDTO;
-import com.itbank.dto.ServiceBoardDTO;
 
 public interface BoardDAO {
 
 	@Select("select * from review")
 	List<ReviewBoardDTO> boardListAll();
-
-	//회사 대표계정만이 자기 소속 회사 직원들이 올린 글들을 모두 볼 수 있다.
-	@Select("select * from service where service_compBelong=#{person_belong}")
-	List<ServiceBoardDTO> myCompList(String person_belong);
-
-	@Select("select * from service where service_engiId=#{person_id}")
-	List<ServiceBoardDTO> myList(String person_id);
 
 	// sqlmap-board.xml에 있습니다
 	List<SerCenDTO> faqList(HashMap<String, String> map);
@@ -32,9 +26,6 @@ public interface BoardDAO {
 	@Select("select * from serCen where serCen_belong=#{serCen_belong} and serCen_idx=#{serCen_idx}")
 	SerCenDTO selectOneNotice(HashMap<String, String> map);
 
-//	select count(*) from board2
-//	where ${type} like '%${keyword}%'
-	
 	@Select("select count(*) from serCen where serCen_belong='faq' and ${type} like '%${keyword}%'")
 	int selectBoardCountFaq(HashMap<String, String> map);
 
@@ -48,16 +39,21 @@ public interface BoardDAO {
 	int reviewViewCountPlus(ReviewBoardDTO dto);
 
 	@Select("select * from service where service_idx=#{service_idx}")
-	ServiceBoardDTO selectOneByIdx(int service_idx);
+	OrderDTO selectOneByIdx(int service_idx);
 
 	// sqlmap-board.xml에 있습니다
 	int reviewWrite(ReviewBoardDTO dto);
 
 	@Select("select count(*) from review where ${type} like '%${keyword}%'")
-	int reviewBoardCount(HashMap<String, String> map);
+	int reviewBoardCount(HashMap<String, Object> map);
 
-	List<ReviewBoardDTO> reviewListAll(HashMap<String, String> map);
+	// sqlmap-board.xml에 있습니다
+	List<ReviewBoardDTO> reviewListAll(HashMap<String, Object> map);
 
-	
+	@Insert("insert into reply (reply_idx, reply_bnum, reply_content, reply_id) "
+			+ "values (reply_seq.nextval, #{reply_bnum}, #{reply_content}, #{reply_id})")
+	int replyWrite(ReplyDTO dto);
 
+	@Select("select * from reply where reply_bnum=#{review_idx}")
+	List<ReplyDTO> replyList(int review_idx);
 }

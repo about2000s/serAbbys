@@ -47,7 +47,6 @@ public class PersonController {
 		else {
 			String msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
 			mav.addObject("msg", msg);
-//			mav.setViewName("alert");
 		}
 		return mav;
 	}
@@ -57,7 +56,6 @@ public class PersonController {
 	public ModelAndView companyLogin(PersonDTO inputData, HttpSession session) {
 		ModelAndView mav = new ModelAndView();
 		PersonDTO login = ps.companyLogin(inputData);
-		
 		if(login != null) {
 			session.setAttribute("login", login);
 			mav.setViewName("home");
@@ -65,7 +63,6 @@ public class PersonController {
 		else {
 			String msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
 			mav.addObject("msg", msg);
-//			mav.setViewName("alert");
 		}
 		return mav;
 	}

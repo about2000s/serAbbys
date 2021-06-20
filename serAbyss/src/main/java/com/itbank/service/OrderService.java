@@ -14,6 +14,7 @@ import com.itbank.dao.OrderDAO;
 import com.itbank.dto.OrderDTO;
 import com.itbank.dto.PersonDTO;
 import com.itbank.dto.ReserveDTO;
+import com.itbank.dto.ReviewBoardDTO;
 
 @Service
 public class OrderService {
@@ -179,5 +180,12 @@ public class OrderService {
 			reserveDTO.setReserve_month((today.get(Calendar.MONTH) + 1));
 		}
 		reserveDTO.setReserve_custId(orderDTO.getService_custId());
+	}
+
+	//서비스글에 해당하는 리뷰글이 작성되어 있느냐? 있다면 true, 없다면 false
+	public Boolean alreadyReviewWrite(int service_idx) {
+		ReviewBoardDTO dto = dao.alreadyReviewWrite(service_idx);
+		if(dto != null) return true;
+		return false;
 	}
 }

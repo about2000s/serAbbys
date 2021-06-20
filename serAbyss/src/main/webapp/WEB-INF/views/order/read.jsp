@@ -9,7 +9,12 @@
 </style>
 
 	<!-- 그 서비스글에 해당하는 고객만이 리뷰글을 작성하는 권한이 있다!! -->
-	<c:if test="${login.person_id == dto.service_custId && dto.service_status == '모든 처리 완료' }">
+	${flag }
+	<c:if test="${flag == true }">
+		<h2>이 글에 리뷰는 이미 작성되었습니다.</h2>
+<%-- 		<button onclick = "location.href='${cpath}/reviewRead'">작성된 리뷰글 보러가기!</button> --%>
+	</c:if>
+	<c:if test="${flag == false && login.person_id == dto.service_custId && dto.service_status == '모든 처리 완료' }">
 		<button onclick = "location.href='${cpath}/board/reviewWrite?service_idx=${dto.service_idx }'">리뷰 작성하러 가기!</button>
 	</c:if>
 	<table class="serviceRead">

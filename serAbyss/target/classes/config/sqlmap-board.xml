@@ -18,7 +18,7 @@
 	
 	<select id="reviewListAll" resultType="reviewBoard" parameterType="hashmap">
 		select * from review 
-		where ${type} like '%${keyword}%' order by review_idx desc 
+		where ${type} like '%${keyword}%' order by review_reg desc 
 	    offset ${offset} rows 
 	    fetch first ${nowD} rows only
 	</select>
