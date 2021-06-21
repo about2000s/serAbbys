@@ -48,6 +48,9 @@ public interface OrderDAO {
 //	int setReserve(ReserveDTO reserveDTO);
 	int selectBoardCountList(HashMap<String, String> param);
 
+	@Update("update service set service_status=#{service_status} where service_idx=#{service_idx}")
+	int change_status(OrderDTO dto);
+
 	@Select("select * from person where person_id=#{service_custId}")
 	PersonDTO selectOneById(String service_custId);
 

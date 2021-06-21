@@ -18,7 +18,7 @@
 	</c:if>
 	<table class="serviceRead">
 	<tr>
-		<th>서비스고유번호</th>
+		<th>서비스고유번호 </th>
 		<td colspan="3">No. ${dto.service_idx }</td></tr>
 	<tr>
 	<tr>
@@ -44,6 +44,11 @@
 		</tr>
 	<tr>
 		<td align="right" colspan="4">
+ 			<c:if test="${login.person_check eq 'y'}">
+				<form method="get" id="statusChange" action="${cpath}/order/statusChange">
+					<button>status 바꾸기</button>
+				</form>
+ 			</c:if>
 			<a href="${cpath }/order/statusList?page=${map.page }&type=${map.type }&keyword=${map.keyword}&service_status=${map.service_status}"><button>목록</button></a>
 			<a href="${cpath }/order/modify/${dto.service_idx}?page=${map.page }&type=${map.type }&keyword=${map.keyword}&service_status=${map.service_status}"><button>수정</button></a>
 			<button id="deleteBtn">삭제</button>

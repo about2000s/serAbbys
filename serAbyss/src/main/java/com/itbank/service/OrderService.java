@@ -57,6 +57,10 @@ public class OrderService {
 		return dao.selectBoardCountList(param);
 	}
 
+	public int change_status(OrderDTO dto) {
+		return dao.change_status(dto);
+	}
+	
 	public PersonDTO selectOneById(String service_custId) {
 		return dao.selectOneById(service_custId);
 	}
