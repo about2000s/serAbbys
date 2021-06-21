@@ -20,7 +20,11 @@
 		<c:forEach var="dto" items="${map.list }">
 			<tr>
 				<td>${dto.service_idx }</td>
+<<<<<<< HEAD
 				<td><a href="${cpath }/order/read/${dto.service_idx}?page=${map.page}&type=${map.type}&keyword=${map.keyword}&service_status=${map.service_status}">${dto.service_title }</a></td>
+=======
+				<td><a href="${cpath }/order/select/${dto.service_idx}?page=${param.page}&type=${param.type}&search=${param.search}&status=${param.status}&value=read">${dto.service_title }</a></td>
+>>>>>>> branch 'develop' of https://github.com/about2000s/serAbbys.git
 				<td>${dto.service_custId }</td>
 				<td>${dto.service_viewCount }</td>
 				<td>${dto.service_reg }</td>
