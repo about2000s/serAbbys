@@ -12,7 +12,7 @@
 	<div class="order">
 		<div>
 			<p>
-				고객: <input type="text" name="service_custId" value="${dto.service_custId}" readonly>
+				<input type="text" name="service_custId" value="${dto.service_custId}" readonly>
 			</p>
 			<p>
 				기사: <input type="text" name="service_custId" value="${dto.service_engiId}" readonly>

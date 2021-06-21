@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.PageContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -28,7 +29,8 @@ public class OrderController {
 	
 	@Autowired OrderService os;
 	
-	//상태값에 따른 목록 보기.
+	String[] status_list = {"등록완료", "접수완료", "fixing", "fixed", "payed", "cancleRegister", "cancleComplete", "success"};
+	
 	@GetMapping("/statusList")
 	public ModelAndView statusList(String service_status, String type, String keyword, int page, HttpSession session) {
 		ModelAndView mav = new ModelAndView("/order/list");
@@ -79,6 +81,7 @@ public class OrderController {
 		return mav;
 	}
 	
+	
 	//글 읽기/${dto.service_idx}?page=${map.page}&type=${map.type}&keyword=${map.keyword}&service_status=${map.service_status}
 	@GetMapping("/read/{service_idx}")
 	public ModelAndView read(@PathVariable int service_idx, @RequestParam HashMap<String, Object> map) {
@@ -102,6 +105,7 @@ public class OrderController {
 		mav.addObject("map", map);
 		return mav;
 	}
+	
 	//"redirect:/board/read/" + dto.getIdx() + "/?page=1";
 	@PostMapping("/modify/{service_idx}")
 	public String modify(@PathVariable int service_idx, OrderDTO inputData, @RequestParam HashMap<String, Object> map) {
@@ -109,9 +113,7 @@ public class OrderController {
 				"?page=" + map.get("page") + "&type=" + map.get("type")+ 
 				"&keyword=" + map.get("keyword") + "&service_status=" + map.get("service_status");
 		System.out.println(path);
-		ModelAndView mav = new ModelAndView("alert");
-		System.out.println("sex");
-		System.out.println("sex");
+		ModelAndView mav = new ModelAndView(path);
 //		int row = os.modify(inputData);
 		String msg = "글 수정 성공";
 		return path;
@@ -181,4 +183,42 @@ public class OrderController {
 		}
 		return mav;
 	}
+	
+//	@PostMapping("/order_new_for_cust")
+//	public ModelAndView order_new_for_cust(OrderDTO orderDTO, ReserveDTO reserveDTO) {
+//		ModelAndView mav = new ModelAndView("/order/order_result");
+//		int row = os.order(orderDTO);
+//		int row2 = os.setReserve(reserveDTO);
+//		String msg;
+//		if(row != 0) {
+//			msg = "주문이 접수되었습니다";
+//		}
+//		else {
+//			msg = "주문 접수에 실패했습니다. 다시 시도해주세요";
+//		}
+//		mav.addObject("msg", msg);
+//		
+//		return mav;
+//	}
+	
+//	@PostMapping("/statusChange")
+//	public ModelAndView statusChange(@PathVariable OrderDTO dto, HashMap<String, String> param) {
+//		ModelAndView mav = new ModelAndView("/order/order_result");
+//		String status = dto.getService_status();
+//		for(int i = 0; i < status_list.length; i++) {
+//			if(i != status_list.length-1 && status == status_list[i])
+//				dto.setService_status(status_list[i+1]);
+//		}
+//		String msg=null;
+//		int row = os.change_status(dto);
+//		if(row == 1) {
+//			msg = "상태 변경! 변경된 상태를 확인해주세요";
+//		} else {
+//			msg = "상태 변경 실패! 다시 시도해주세요";
+//		}
+//		mav.addObject("param", param);
+//		mav.addObject("value", "status_change");
+//		mav.addObject("msg", msg);
+//		return mav;
+//	}
 }
