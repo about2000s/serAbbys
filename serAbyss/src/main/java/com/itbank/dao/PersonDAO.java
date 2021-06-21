@@ -18,7 +18,7 @@ public interface PersonDAO {
 	@Select("select * from person where person_id=#{person_id} and person_pw=#{person_pw} and person_check='n'")
 	PersonDTO personLogin(PersonDTO dto);
 	
-	@Select("select * from person where person_id=#{person_id} and person_pw=#{person_pw} and person_check='y'")
+	//sqlmap-person.xml에 있습니다
 	PersonDTO companyLogin(PersonDTO dto);
 
 	//sqlmap-person.xml에 있습니다
@@ -46,8 +46,6 @@ public interface PersonDAO {
 	@Select("select nvl(count(*), 0) from person where person_id=#{person_id}")
 	int idCheck(String person_id);
 
-	@Select("select min(person_idx) from person where person_belong=#{person_belong}")
-	int getMinIdx(String person_belong);
 
 	@Insert("insert into companyList (companyList_idx, companyList_name, companyList_address) "
 			+ "values (companyList_seq.nextval, #{companyList_name}, #{companyList_address})")

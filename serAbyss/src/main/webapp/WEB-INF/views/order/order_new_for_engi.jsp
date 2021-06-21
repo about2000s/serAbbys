@@ -3,18 +3,23 @@
 <%@ include file="../layout/header.jsp" %>
 <%@ include file="../layout/leftmenu.jsp" %>
 
-<link rel = "stylesheet" href = "https://www.w3schools.com/w3css/4/w3.css">
-
 <div class="container">
-	<h2>고객이 서비스 신청하기</h2>
+	<h2>수리기사가 서비스 신청하기</h2>
 	<hr/>
 	<form method="post" enctype="multipart/form-data">
-		<input type = "hidden" name = "service_custId" value = "${login.person_id }">
-		<input type = "hidden" name = "service_name" value = "${login.person_name }">
-		<input type = "hidden" name = "service_phone" value = "${login.person_phone }">
-		
-		<input  type = "text" id = "realServiceAddress" name = "service_address" value = "${login.person_address }">
+		<input type = "hidden" name = "service_status" value = "등록완료">
+		<input type = "hidden" name = "service_compBelong" value = "${login.person_belong }">
+		<input type = "hidden" name = "service_engiId" value = "${login.person_id }">
 		<table>
+			<tr>
+				<td><input type="text" name="service_custId" placeholder="고객 아이디 입력" required></td>
+			</tr>
+			<tr>
+				<td><input type="text" name="service_phone" placeholder="고객 전화번호 입력" required></td>
+			</tr>
+			<tr>
+				<td><input type="text" name="service_name" placeholder="고객 이름 입력" required></td>
+			</tr>
 			<tr>
 				<td><input type="text" name="service_title" placeholder="제목 입력" required></td>
 			</tr>
@@ -23,10 +28,20 @@
 			</tr>
 			<tr>
 				<td>
+					<label>주소</label><br>
+					<input type="text" id="postcode" placeholder="우편번호">
+					<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+					<input type="text" id="address" name = "address" placeholder="주소"><br>
+					<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소">
+					<input type="text" id="extraAddress" placeholder="참고항목">
+				</td>
+			</tr>
+			<tr>
+				<td>
 					<div>
-						<h2>기사 선택</h2>
+						<h2>기사</h2>
 						<c:forEach var = "i" items = "${engiIdList }">
-							<label><input type = "radio" name = "reserve_engiId" value = "${i }">${i }</label>
+							<label><input type = "radio" name = "reserve_engiId" value = "${i }" checked>${i }</label>
 						</c:forEach>
 					</div>
 					
@@ -39,108 +54,40 @@
 					
 					<div>
 						<h2>시간 선택(이미 예약이 되어있는 시간은 비어있습니다)</h2>
-						<c:forEach var = "i" items = "${engiIdList }">
+<%-- 						<c:forEach var = "i" items = "${engiIdList }"> --%>
 							<c:forEach var = "j" items = "${dayList }">
 								<c:forEach var = "k" items = "${reserveList }">
-									<c:if test="${k.engiId == i && k.day == j }">
-										<div class = "${i }day${j } hiddenNone main">
+									<c:if test="${k.day == j }">
+										<div class = "day${j } hiddenNone main">
 											<label><input type = "radio" name = "reserve_hour" value = "${k.hour }">${k.hour }</label>
 										</div>
 									</c:if>
 								</c:forEach>
 							</c:forEach>
-						</c:forEach>
+<%-- 						</c:forEach> --%>
 					</div>
 				</td>
 			</tr>
-			
-			<tr>
-				<td>
-					<button id = "goToSelectAddress">
-						<h3>서비스 받을 주소지</h3>
-						<p id = "inputAddress">${login.person_address } ></p>
-					</button>
-					
-				</td>
-			</tr>
 		</table>
-		<div id = "id02" class = "w3-modal">
-			<div class = "w3-modal-content w3-card-4">
-				<header class = "w3-container w3-teal">
-					<span onclick = "document.getElementById('id02').style.display='none'"
-					class = "w3-button w3-display-topright">&times;</span>
-					<h2>Modal Header</h2>
-				</header>
-				<div class = "w3-container">
-					<button id = "originalAddressSelectBtn">
-						${login.person_address }
-					</button>
-					<button id = "newAddressSearchBtn">
-						<h2>+주소지 새로 입력</h2>
-					</button>
-				</div>
-			</div>
-		</div>
-		<div id = "id03" class = "w3-modal">
-			<label>주소</label><br>
-			<input type="text" id="postcode" placeholder="우편번호">
-			<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-			<input type="text" id="address" name = "address" placeholder="주소"><br>
-			<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소">
-			<input type="text" id="extraAddress" placeholder="참고항목">
-			<button id = "thisAddressSelectBtn">이 주소로 선택</button> <!-- 클릭하는 순간 위 버튼에 innerText하고 모든 모달창 닫기 -->
-		</div>
 		<input type = "submit" value = "제출">
 	</form>
 </div>
 
 <script>
-document.getElementById('newAddressSearchBtn').onclick = function(event){
-	event.preventDefault()
-	document.getElementById('id03').style.display='block'
-}
-
-document.getElementById('goToSelectAddress').onclick = function(event){
-	event.preventDefault()
-	document.getElementById('id02').style.display='block'
-}
-
-
-document.getElementById('originalAddressSelectBtn').onclick = function(event){
-	event.preventDefault()
-	document.getElementById('id02').style.display='none'
-	document.getElementById('realServiceAddress').value = fullAddress
-}
-
-
-document.getElementById('thisAddressSelectBtn').onclick = function(event){
-	event.preventDefault()
-	const address = document.querySelector('input[name="address"]').value
-	const detailAddress = document.querySelector('input[name="detailAddress"]').value
-	const fullAddress = address + ' ' + detailAddress
-	document.getElementById('id03').style.display='none'
-	document.getElementById('id02').style.display='none'
-	document.getElementById('inputAddress').innerText = fullAddress
-	document.getElementById('originalAddressSelectBtn').innerText = fullAddress
-	document.getElementById('realServiceAddress').value = fullAddress
-}
-</script>
-
-<script>
-let className1
+// let className1
 let className2
 let classFullName
 
-document.querySelectorAll('input[name="reserve_engiId"]').forEach(input => input.onclick = function(event){
-	className1 = event.target.value
-	classFullName = className1 + 'day' + className2
-	document.querySelectorAll('div.' + 'main').forEach(div => div.classList.add('hiddenNone'))
-	document.querySelectorAll('div.' + classFullName).forEach(div => div.classList.remove('hiddenNone'))
-});
+// document.querySelectorAll('input[name="reserve_engiId"]').forEach(input => input.onclick = function(event){
+// 	className1 = event.target.value
+// 	classFullName = className1 + 'day' + className2
+// 	document.querySelectorAll('div.' + 'main').forEach(div => div.classList.add('hiddenNone'))
+// 	document.querySelectorAll('div.' + classFullName).forEach(div => div.classList.remove('hiddenNone'))
+// });
 
 document.querySelectorAll('input[name="reserve_day"]').forEach(input => input.onclick = function(event){
 	className2 = event.target.value
-	classFullName = className1 + 'day' + className2
+	classFullName = 'day' + className2
 	document.querySelectorAll('div.' + 'main').forEach(div => div.classList.add('hiddenNone'))
 	document.querySelectorAll('div.' + classFullName).forEach(div => div.classList.remove('hiddenNone'))
 });
@@ -196,5 +143,4 @@ document.querySelectorAll('input[name="reserve_day"]').forEach(input => input.on
         }).open();
     }
 </script>
-
 <%@ include file="../layout/footer.jsp" %>

@@ -1,7 +1,5 @@
 package com.itbank.dto;
 
-import org.springframework.web.multipart.MultipartFile;
-
 /*
  service
 
@@ -20,6 +18,8 @@ public class OrderDTO {
 	private int service_idx, service_viewCount, service_price;
 	private String service_custId, service_title, service_content, service_status, service_address, service_reg, service_engiId, 
 			service_compBelong , service_name, service_phone;
+<<<<<<< HEAD
+=======
 	private String service_uploadFile1;
 	private MultipartFile file;
 	
@@ -35,6 +35,7 @@ public class OrderDTO {
 //		}
 //		return false;
 //	}
+>>>>>>> branch 'develop' of https://github.com/about2000s/serAbbys.git
 	
 	public int getService_idx() {
 		return service_idx;
@@ -101,18 +102,6 @@ public class OrderDTO {
 	}
 	public void setService_engiId(String service_engiId) {
 		this.service_engiId = service_engiId;
-	}
-	public String getService_uploadFile1() {
-		return service_uploadFile1;
-	}
-	public void setService_uploadFile1(String service_uploadFile) {
-		this.service_uploadFile1 = service_uploadFile;
-	}
-	public MultipartFile getFile() {
-		return file;
-	}
-	public void setFile(MultipartFile file) {
-		this.file = file;
 	}
 	public int getService_price() {
 		return service_price;

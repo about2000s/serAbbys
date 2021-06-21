@@ -147,7 +147,7 @@ document.getElementById('receiveAuthBtn').onclick = sendMailHandler
 
 <script>
 const injungSuccessDiv = document.getElementById('injungSuccessDiv')
-const pass = 
+// const pass = 
 const injungHandler = function(event){
 	event.preventDefault()
 	const authNumber = document.getElementById('authNumber').value
@@ -174,11 +174,6 @@ const injungHandler = function(event){
 document.getElementById('injung').onclick = injungHandler
 
 </script>
-
-
-
-
-
 
 <script>
 document.getElementById('compSearchBtn').onclick = function(event){

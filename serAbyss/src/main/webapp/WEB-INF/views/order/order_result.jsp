@@ -6,7 +6,7 @@
 <script>
 	alert("${msg}");
 	if('${value}' == 'modify') location.href="${cpath }/order/select/${idx}?value=read";
-	else location.href="${cpath }/order/statusList?page=1&type=&search=&status=";
+	else location.href="${cpath }/order/statusList?page=1&service_status=";
 </script>
 
 <%@ include file="../layout/footer.jsp" %>
