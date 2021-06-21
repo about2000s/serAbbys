@@ -46,6 +46,24 @@ public class BoardController {
 		
 		List<ReviewBoardDTO> list = bs.reviewListAll(map);
 		bs.setStarInList(list);
+		
+		List<HashMap<String, Object>> mapList = new ArrayList<HashMap<String,Object>>();
+		for(int i=0;i<list.size();i++) {
+			HashMap<String, Object> hashmap = new HashMap<String, Object>();
+			hashmap.put("review_idx", list.get(i).getReview_idx());
+			hashmap.put("review_star", list.get(i).getStar());
+			hashmap.put("review_title", list.get(i).getReview_title());
+			hashmap.put("review_custId", list.get(i).getReview_custId());
+			hashmap.put("review_reg", list.get(i).getReview_reg());
+			hashmap.put("review_viewCount", list.get(i).getReview_viewCount());
+			hashmap.put("review_replyCount", bs.replyCount(list.get(i).getReview_idx()));
+			mapList.add(hashmap);
+		}
+		
+		
+		
+		
+		mav.addObject("mapList", mapList);
 		mav.addObject("paging", paging);
 		mav.addObject("list", list);
 		mav.addObject("map", map);

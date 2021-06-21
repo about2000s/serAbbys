@@ -56,53 +56,33 @@
 
 
 
-<%-- <c:forEach var = "dto" items = "${replyList }" begin="0" end="9"> --%>
-<!-- 	<div> -->
-<%-- 		<h2><pre>${dto.reply_content }</pre></h2> --%>
-<!-- 	</div> -->
-<%-- </c:forEach> --%>
-<%-- <c:forEach var = "dto" items = "${replyList }" begin="10" end="19"> --%>
-<!-- 	<div> -->
-<%-- 		<h2><pre>${dto.reply_content }</pre></h2> --%>
-<!-- 	</div> -->
-<%-- </c:forEach> --%>
-<%-- <c:forEach var = "dto" items = "${replyList }" begin="20" end="29"> --%>
-<!-- 	<div> -->
-<%-- 		<h2><pre>${dto.reply_content }</pre></h2> --%>
-<!-- 	</div> -->
-<%-- </c:forEach> --%>
 
-<c:forEach var = "i" items = "${replyPageList }"><!-- 1, 2, 3,.. 1부터 시작 -->
-@@@@@@@@: ${nowD*(i-1) + (nowD - 1) }
+<c:forEach var = "i" items = "${replyPageList }">
 	<c:forEach var = "dto" items = "${replyList }" begin = "${nowD*(i-1) }" end = "${nowD*(i-1) + (nowD - 1) }">
-		<div class = "q${nowD*(i-1) }reply${nowD*(i-1) + (nowD - 1) }q hiddenNone main1">
+		<div class = "k${nowD*(i-1) }reply${nowD*(i-1) + (nowD - 1) } hiddenNone main1">
 		<h2><pre>${dto.reply_content }</pre></h2>
+		<h2>작성자: ${dto.reply_id }</h2>
+		<h2>작성일: ${dto.reply_reg }</h2>
 		</div>
 	</c:forEach>
 	<hr>
 </c:forEach>
 
 <c:forEach var = "i" items = "${replyPageList }">
-	<div>
-		<a href = "" class = "q${nowD*(i-1) }reply${nowD*(i-1) + (nowD - 1) }q">[${i }]</a>
-	</div>
+	<span><a href = "" class = "${nowD*(i-1) }reply${nowD*(i-1) + (nowD - 1) }">[${i }]</a></span>
 </c:forEach>
 
 <script>
 window.onload = function(){ // 페이지 실행시 바로 작동
-
+		document.querySelectorAll('div.' + 'k0reply9').forEach(div => div.classList.remove('hiddenNone'))
 }
 
-
-	document.querySelectorAll('div > a').forEach(a => a.onclick = function(event){
+	document.querySelectorAll('span > a').forEach(a => a.onclick = function(event){
 		event.preventDefault()
 		className = event.target.className
 		console.log(className)
 		document.querySelectorAll('div.' + 'main1').forEach(div => div.classList.add('hiddenNone'))
-		document.querySelectorAll('div.' + className).forEach(div => div.classList.remove('hiddenNone'))
+		document.querySelectorAll('div.k' + className).forEach(div => div.classList.remove('hiddenNone'))
 	})
 </script>
-
-<!-- <div class = "reply1To10"></div> -->
-<!-- <div class = "reply11To20"></div> -->
 <%@ include file="../layout/footer.jsp" %>

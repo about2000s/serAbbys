@@ -4,6 +4,10 @@
 <%@ include file="../layout/header.jsp"%>
 <%@ include file="../layout/reviewleftmenu.jsp"%>
 
+<style>
+:::
+</style>
+
 <h2>리뷰보기</h2>
 <div class="container">
 		<table>
@@ -15,11 +19,11 @@
 				<th width="10%">날짜</th>
 				<th width="10%">조회수</th>
 			</tr>
-			<c:forEach var = "dto" items = "${list }">
+			<c:forEach var = "dto" items = "${mapList }">
 				<tr>
 					<td>${dto.review_idx}</td>
 					<td>${dto.star }</td>
-					<td><a href="${cpath }/board/reviewRead/${dto.review_idx}?type=${map.type }&keyword=${map.keyword }&page=${map.page }">${dto.review_title}</a></td>
+					<td><a href="${cpath }/board/reviewRead/${dto.review_idx}?type=${map.type }&keyword=${map.keyword }&page=${map.page }">${dto.review_title}</a>&nbsp;[${dto.review_replyCount }]</td>
 					<td>${dto.review_custId}</td>
 					<td>${dto.review_reg }</td>
 					<td>${dto.review_viewCount }</td>

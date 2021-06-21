@@ -1,7 +1,5 @@
 package com.itbank.dto;
 
-import org.springframework.web.multipart.MultipartFile;
-
 //test
 
 /*
@@ -21,7 +19,6 @@ review_viewcount   default 0
 public class ReviewBoardDTO {
 	private int review_idx, review_viewCount, review_starScore;
 	private String review_custId, review_engiId, review_title, review_content, review_reg, review_uploadFile1, review_compBelong;
-	private MultipartFile file;
 	private String star;
 	
 	public String getStar() {
@@ -71,12 +68,6 @@ public class ReviewBoardDTO {
 	}
 	public void setReview_reg(String review_reg) {
 		this.review_reg = review_reg;
-	}
-	public MultipartFile getFile() {
-		return file;
-	}
-	public void setFile(MultipartFile file) {
-		this.file = file;
 	}
 	public int getReview_starScore() {
 		return review_starScore;
