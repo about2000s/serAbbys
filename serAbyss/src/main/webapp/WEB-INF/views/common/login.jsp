@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
-  
-<c:set var = "cpath" value = "${pageContext.request.contextPath }"/>
+<%@ include file="../layout/header.jsp" %>
 <link href = "${cpath }/resources/css/css.css" rel="stylesheet">
 
 <div class="logincontainer">
