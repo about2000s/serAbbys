@@ -55,14 +55,17 @@ public class PersonService {
 	}
 
 	public PersonDTO personLogin(PersonDTO dto) {
+		dto.setPerson_pw(getHash(dto.getPerson_pw()));
 		return dao.personLogin(dto);
 	}
 
 	public PersonDTO companyLogin(PersonDTO dto) {
+		dto.setPerson_pw(getHash(dto.getPerson_pw()));
 		return dao.companyLogin(dto);
 	}
 
 	public int join(PersonDTO inputData) {
+		inputData.setPerson_pw(getHash(inputData.getPerson_pw()));
 		return dao.join(inputData);
 	}
 
@@ -89,12 +92,14 @@ public class PersonService {
 	}
 
 	public int selectOneCheckIdPw(PersonDTO inputData) {
+		inputData.setPerson_pw(getHash(inputData.getPerson_pw()));
 		return dao.selectOneCheckIdPw(inputData);
 	}
 
 	public int updatePw(PersonDTO inputData) {
 //		String hash = getHash(inputData.getPerson_pw());
 //		inputData.setPerson_pw(getHash(hash));
+		inputData.setPerson_pw(getHash(inputData.getPerson_pw()));
 		return dao.updatePw(inputData);
 	}
 

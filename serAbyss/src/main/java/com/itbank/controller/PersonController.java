@@ -48,7 +48,7 @@ public class PersonController {
 		else {
 			String msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
 			mav.addObject("msg", msg);
-//			mav.setViewName("alert");
+			mav.setViewName("alert");
 		}
 		return mav;
 	}
@@ -68,7 +68,7 @@ public class PersonController {
 		else {
 			String msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
 			mav.addObject("msg", msg);
-//			mav.setViewName("alert");
+			mav.setViewName("alert");
 		}
 		return mav;
 	}
@@ -206,7 +206,7 @@ public class PersonController {
 		else {
 			String msg = "비밀번호가 일치하지 않습니다";
 			mav.addObject("msg", msg);
-//			mav.setViewName("alert");
+			mav.setViewName("alert");
 		}
 		return mav;
 	}
