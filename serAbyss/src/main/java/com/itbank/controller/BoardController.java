@@ -1,8 +1,5 @@
 package com.itbank.controller;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,12 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.itbank.dto.BoardDTO;
+import com.itbank.dto.OrderDTO;
+import com.itbank.dto.PersonDTO;
+import com.itbank.dto.ReplyDTO;
+import com.itbank.dto.ReviewBoardDTO;
 import com.itbank.dto.SerCenDTO;
-import com.itbank.dto.ServiceBoardDTO;
 import com.itbank.service.BoardService;
 import com.itbank.service.Paging;
 
@@ -26,43 +27,31 @@ public class BoardController {
 	@Autowired
 	private BoardService bs;
 
-	@GetMapping("/review_list_all")
-	public ModelAndView boardListAll() {
-		ModelAndView mav = new ModelAndView();
-		BoardDTO dto = bs.boardListAll();
-		int starScore = dto.getReview_starScore();
+	//리뷰글의 모든 리스트 보러 가기
+	@GetMapping("/review_list_all")//map에 page, type, keyword 담음
+	public ModelAndView boardListAll(@RequestParam HashMap<String, Object> map) {
+		ModelAndView mav = new ModelAndView("board/review_list_all");
 		
-		String star = "";
-		for (int i = 0; i < starScore; i++) {
-			star += "★";
+		if(map.get("keyword") == null || map.get("keyword").equals("")) {
+			map.put("type", "review_title");
+			map.put("keyword", "");
 		}
-		for (int i = 0; i < 10 - starScore; i++) {
-			star += "☆";
-		}
-		mav.addObject("dto", dto);
-		mav.addObject("star", star);
-
-		return mav;
-	}
-
-	//여기서 부터 재훈이가 건드렸습니다
-	@GetMapping("/myCompList/{person_belong}")
-	public ModelAndView myCompList(@PathVariable String person_belong) {
-		ModelAndView mav = new ModelAndView("board/myCompList");
-		List<ServiceBoardDTO> list = bs.myCompList(person_belong);
-		mav.addObject("list", list);
-		return mav;
-	}
-	
-	@GetMapping("/myList/{person_id}")
-	public ModelAndView myList(@PathVariable String person_id) {
-		ModelAndView mav = new ModelAndView("board/myList");
-		List<ServiceBoardDTO> list = bs.myList(person_id);
-		mav.addObject("list", list);
-		return mav;
 		
+		int page = Integer.parseInt(String.valueOf(map.get("page")));
+		int reviewBoardCount = bs.reviewBoardCount(map);
+		Paging paging = new Paging(page, reviewBoardCount);
+		map.put("offset", paging.getOffset());
+		map.put("nowD", paging.getNowD());
+		
+		List<ReviewBoardDTO> list = bs.reviewListAll(map);
+		bs.setStarInList(list);
+		mav.addObject("paging", paging);
+		mav.addObject("list", list);
+		mav.addObject("map", map);
+		return mav;
 	}
-	
+
+	//고객센터로 가기
 	@GetMapping("/serCen")
 	public ModelAndView serCen(String type, String keyword, int page) {
 		ModelAndView mav = new ModelAndView("board/faq");
@@ -89,7 +78,7 @@ public class BoardController {
 		return mav;
 	}
 	
-	
+	//고객센터의 글 읽기
 	@GetMapping("/serCenRead")
 	public ModelAndView noticeRead(int serCen_idx, String serCen_belong) {
 		HashMap<String, String> map = new HashMap<String, String>();
@@ -98,6 +87,81 @@ public class BoardController {
 		ModelAndView mav = new ModelAndView("board/serCenRead");
 		SerCenDTO dto = bs.selectOneNotice(map);
 		mav.addObject("dto", dto);
+		return mav;
+	}
+	
+	//리뷰글 읽기
+	@GetMapping("/reviewRead/{review_idx}")
+	public ModelAndView reviewRead(@PathVariable int review_idx, @RequestParam HashMap<String, Object> map) {
+		System.out.println("map" + map);
+		ModelAndView mav = new ModelAndView("board/reviewRead");
+		ReviewBoardDTO dto = bs.selectOneReview(review_idx);
+		int row = bs.reviewViewCountPlus(dto);
+		List<ReplyDTO> replyList = bs.replyList(review_idx);
+		System.out.println("조회수 1 증가");
+		mav.addObject("dto", dto);
+		mav.addObject("replyList", replyList);
+		mav.addObject("map", map);
+		return mav;
+	}
+	// 리뷰 게시판에 댓글 쓰기
+	@PostMapping("/reviewRead/{review_idx}")
+	public ModelAndView replyWrite(@PathVariable int review_idx, ReplyDTO dto, @RequestParam HashMap<String, Object> map) {
+		String path = "redirect:/board/reviewRead/" + review_idx
+				+ "?type=" + map.get("type")
+				+ "&keyword=" + map.get("keyword")
+				+ "&page=" + map.get("page");
+		ModelAndView mav = new ModelAndView(path);
+		int row = bs.replyWrite(dto);
+		if(row != 0) {
+			System.out.println("댓글 작성 성공");
+		}
+		return mav;
+	}
+	
+	//리뷰글 수정하는 폼으로 이동하기
+	@GetMapping("reviewModify/{review_idx}")
+	public ModelAndView reviewUpdate(@PathVariable int review_idx, @RequestParam HashMap<String, Object> map) {
+		ModelAndView mav = new ModelAndView("board/reviewModify");
+		ReviewBoardDTO dto = bs.selectOneReview(review_idx);
+		mav.addObject("dto", dto);
+		mav.addObject("map", map);
+		return mav;
+	}
+	//리뷰글 수정하기
+	@PostMapping("reviewModify/{review_idx}")
+	public ModelAndView reviewUpdate(@PathVariable int review_idx, ReviewBoardDTO inputData, @RequestParam HashMap<String, Object> map) {
+		String path = "redirect:/board/reviewRead/" + review_idx
+				+ "?type=" + map.get("type")
+				+ "&keyword=" + map.get("keyword")
+				+ "&page=" + map.get("page");
+		ModelAndView mav = new ModelAndView(path);
+		int row = bs.reviewUpdate(inputData);
+		String msg = null;
+		if(row == 1) {
+			msg = "글수정 성공";
+			mav.addObject("msg", msg);
+			mav.addObject("review_idx", inputData.getReview_idx());
+		}
+		System.out.println("글 수정 성공");
+		return mav;
+	}
+	
+	//리뷰글 작성하는 폼으로 이동하기
+	@GetMapping("reviewWrite")
+	public ModelAndView reviewWrite(int service_idx) {
+		ModelAndView mav = new ModelAndView("board/reviewWrite");
+		OrderDTO dto = bs.selectOneByIdx(service_idx);
+		mav.addObject("dto", dto);
+		return mav;
+	}
+	//리뷰글 작성하기
+	@PostMapping("reviewWrite")
+	public ModelAndView reviewWrite(ReviewBoardDTO dto) {
+		String path = "redirect:/board/reviewRead/" + dto.getReview_idx() + "?page=1";
+		ModelAndView mav = new ModelAndView(path);
+		int row = bs.reviewWrite(dto);
+		System.out.println("댓글 작성 성공");
 		return mav;
 	}
 	

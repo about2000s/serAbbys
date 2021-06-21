@@ -18,7 +18,7 @@ public interface PersonDAO {
 	@Select("select * from person where person_id=#{person_id} and person_pw=#{person_pw} and person_check='n'")
 	PersonDTO personLogin(PersonDTO dto);
 	
-	@Select("select * from person where person_id=#{person_id} and person_pw=#{person_pw} and person_check='y'")
+	//sqlmap-person.xml에 있습니다
 	PersonDTO companyLogin(PersonDTO dto);
 
 	//sqlmap-person.xml에 있습니다
@@ -46,8 +46,6 @@ public interface PersonDAO {
 	@Select("select nvl(count(*), 0) from person where person_id=#{person_id}")
 	int idCheck(String person_id);
 
-	@Select("select min(person_idx) from person where person_belong=#{person_belong}")
-	int getMinIdx(String person_belong);
 
 	@Insert("insert into companyList (companyList_idx, companyList_name, companyList_address) "
 			+ "values (companyList_seq.nextval, #{companyList_name}, #{companyList_address})")
@@ -61,5 +59,15 @@ public interface PersonDAO {
 
 	@Select("select * from companyList where companyList_name like '%${companyList_name}%'")
 	List<HashMap<String, String>> compSearchList(String companyList_name);
+
+	@Update("update person set person_email=#{replaceEmail} where person_id=#{login_id}")
+	int updateEmail(HashMap<String, String> map);
+
+	@Update("update person set person_address=#{realAddress} where person_id=#{login_id}")
+	int updateAddress(HashMap<String, String> map);
+
+	@Select("select * from person where person_id=#{login_id}")
+	PersonDTO selectOneById(String login_id);
+
 	
 }
