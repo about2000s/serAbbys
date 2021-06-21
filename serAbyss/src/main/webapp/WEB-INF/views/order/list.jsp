@@ -4,9 +4,18 @@
 <%@ include file="../layout/leftmenu.jsp" %>
 
 <div class="container">
-
-	<h1>서비스 신청</h1>
-
+	<h1>
+		<c:if test="${param.status eq ''}">전체 목록</c:if>
+		<c:if test="${param.status eq '접수완료'}">접수 목록</c:if>
+		<c:if test="${param.status eq '등록완료'}">기사 배정</c:if>
+		<c:if test="${param.status eq 'fixing'}">수리 진행 중</c:if>
+		<c:if test="${param.status eq 'fixed'}">수리 완료(미결제)</c:if>
+		<c:if test="${param.status eq 'payBefore'}">결제 진행 중</c:if>
+		<c:if test="${param.status eq 'payed'}">결제 완료 목록</c:if>
+		<c:if test="${param.status eq 'cancleRegister'}">환불 진행 중</c:if>
+		<c:if test="${param.status eq 'cancleComplete'}">환불 완료 목록</c:if>
+		<c:if test="${param.status eq 'success'}">처리 완료 목록</c:if>
+	</h1>
 	<table class="list">
 		
 		<tr>
@@ -20,11 +29,7 @@
 		<c:forEach var="dto" items="${map.list }">
 			<tr>
 				<td>${dto.service_idx }</td>
-<<<<<<< HEAD
 				<td><a href="${cpath }/order/read/${dto.service_idx}?page=${map.page}&type=${map.type}&keyword=${map.keyword}&service_status=${map.service_status}">${dto.service_title }</a></td>
-=======
-				<td><a href="${cpath }/order/select/${dto.service_idx}?page=${param.page}&type=${param.type}&search=${param.search}&status=${param.status}&value=read">${dto.service_title }</a></td>
->>>>>>> branch 'develop' of https://github.com/about2000s/serAbbys.git
 				<td>${dto.service_custId }</td>
 				<td>${dto.service_viewCount }</td>
 				<td>${dto.service_reg }</td>

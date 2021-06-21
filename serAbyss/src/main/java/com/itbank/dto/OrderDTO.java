@@ -19,7 +19,6 @@ public class OrderDTO {
 	private String service_custId, service_title, service_content, service_status, service_address, service_reg, service_engiId, 
 			service_compBelong , service_name, service_phone;
 	
-	
 	public int getService_idx() {
 		return service_idx;
 	}

@@ -67,10 +67,31 @@ button { width:80px;height:35px}
 			<form id="insertForm">
 				<input type = "hidden" name = "service_idx" value = "${dto.service_idx }">
 				<textarea class="textareastyle" name="custMemo"></textarea>
-				<input type = "submit" value = "다음">
+				<input id="comment-btn" type="submit" value = "다음">
 			</form>
 	</div>
 </div>
+
+<script>
+$(document).ready(function(){
+	$("#insertForm").submit(function(event){
+// 		event.preventDefault()
+		console.log("commentbtn클릭");
+			
+		$.ajax({
+			type : 'POST' ,
+			url : '${cpath}/customer',
+			dataType:'text',
+			success : function(result){
+				alert("등록성공");
+			},
+			error:function(){
+				alert("실패");
+			}
+	});
+	})
+});
+</script>
 
 
 <script>

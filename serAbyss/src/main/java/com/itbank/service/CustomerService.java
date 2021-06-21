@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itbank.dao.CustomerDAO;
+import com.itbank.dto.CustomerDTO;
 import com.itbank.dto.OrderDTO;
 
 @Service
@@ -21,6 +22,10 @@ public class CustomerService {
 
 	public List<HashMap<String, String>> selectList(int service_idx) {
 		return dao.selectList(service_idx);
+	}
+
+	public int insert(CustomerDTO dto) {
+		return dao.insert(dto);
 	}
 
 
