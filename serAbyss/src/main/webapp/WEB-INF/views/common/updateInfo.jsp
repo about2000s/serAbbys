@@ -22,6 +22,13 @@
 					<button id = "injung">인증하기</button>
 				</div>
 				<div id = "injungSuccessDiv"></div>
+				<div class = "hiddenNone" id = "injungform">
+					<form action = "${cpath}/common/replaceEmail/${login.person_idx}" method = "post">
+						<input type="hidden" name="login_idx" value="${login.person_idx }">
+						<input type="text" id="replaceEmail" name="replaceEmail">
+						<input type="submit" value="수정">
+					</form>
+				</div>
 			</div>
 		</div>
 		
@@ -117,6 +124,15 @@
 </script>
 
 <script>
+	$("#newEmail").keydown(function(){
+	    $('#replaceEmail').val($(this).val());
+	});
+	$("#newEmail").change(function(){
+	    $('#replaceEmail').val($(this).val());
+	});
+</script>
+
+<script>
 	const email_checkDiv = document.getElementById('email_checkDiv')
 	const authMailDiv = document.getElementById('authMailDiv')
 	
@@ -150,6 +166,7 @@
 <script>
 const injungSuccessDiv = document.getElementById('injungSuccessDiv')
 // const pass
+const replaceEmail = document.getElementById("newEmail").value
 const injungHandler = function(event){
 	event.preventDefault()
 	const authNumber = document.getElementById('authNumber').value
@@ -164,6 +181,8 @@ const injungHandler = function(event){
 		if(text == 'true'){
 			injungSuccessDiv.innerText = '인증 성공'
 			injungSuccessDiv.style.color = 'blue'
+			replaceEmail.innerText = replaceEmail
+			injungform.classList.remove('hiddenNone')
 		}
 		else{
 			injungSuccessDiv.innerText = '인증 실패'

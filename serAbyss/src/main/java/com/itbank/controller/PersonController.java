@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -229,5 +230,10 @@ public class PersonController {
 	public int emailCheck(@RequestParam("person_email") String person_email) {
 		return ps.emailCheck(person_email);
 	}
-
+	
+	@PostMapping("/replaceEmail/{login_idx}")
+	public ModelAndView emailUpdateResult(@PathVariable int login_idx, @RequestParam String replaceEmail) {
+		ModelAndView mav = new ModelAndView("common/updateInfo");
+		return mav;
+	}
 }
