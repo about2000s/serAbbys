@@ -64,10 +64,10 @@ button { width:80px;height:35px}
 	
 	<div>
 		<h2>기록 남기기</h2>
-			<form method="POST" id="insertForm">
-				<input type = "hidden" name="customer_service_idx" value="${dto.service_idx }">
-				<textarea class="textareastyle" name="customer_comments"></textarea>
-				<input name="insert-btn" type ="submit" value="다음">
+			<form id="insertForm">
+				<input type = "hidden" name = "service_idx" value = "${dto.service_idx }">
+				<textarea class="textareastyle" name="custMemo"></textarea>
+				<input id="comment-btn" type="submit" value = "다음">
 			</form>
 	</div>
 </div>
@@ -103,6 +103,27 @@ $(function() {
 
 </script>
 
+
+<script>
+$(document).ready(function(){
+	$("#insertForm").submit(function(event){
+// 		event.preventDefault()
+		console.log("commentbtn클릭");
+			
+		$.ajax({
+			type : 'POST' ,
+			url : '${cpath}/customer',
+			dataType:'text',
+			success : function(result){
+				alert("등록성공");
+			},
+			error:function(){
+				alert("실패");
+			}
+	});
+	})
+});
+</script>
 
 
 <script>

@@ -24,7 +24,8 @@ public class CustomerService {
 		return dao.selectList(service_idx);
 	}
 
-	public void crmInsert(CustomerDTO dto) {
+	public int insert(CustomerDTO dto) {
+		return dao.insert(dto);
 	}
 
 

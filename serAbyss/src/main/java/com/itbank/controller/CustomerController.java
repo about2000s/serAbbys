@@ -1,7 +1,6 @@
 package com.itbank.controller;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.itbank.dto.CustomerDTO;
 import com.itbank.dto.OrderDTO;
 import com.itbank.service.CustomerService;
 
@@ -23,6 +23,18 @@ public class CustomerController {
 	@Autowired
 	private CustomerService cs;
 	
+//	@PostMapping("/customer")
+//	public String customer(CustomerDTO dto) {
+//		System.out.println(dto);
+//		
+//		return "customer/crm";
+//	}
+	
+	
+	@GetMapping("/crm")
+	public String crm(@PathVariable CustomerDTO dto) {
+		return "customer/crm";
+	}
 		
 	@GetMapping("/crm")
 	public void crm() {}
@@ -37,11 +49,7 @@ public class CustomerController {
 	
 	@GetMapping("/crm?customer_service_idx=${customer_service_idx}")
 	public String selectRecord(@PathVariable Integer customer_service_idx) {
-		
 		System.out.println(customer_service_idx);
-		
-		
-		
 		return "customer/crm";
 	}
 

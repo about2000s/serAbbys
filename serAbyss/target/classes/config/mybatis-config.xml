@@ -15,6 +15,7 @@
 		<typeAlias type="com.itbank.dto.PersonDTO" alias="person"/>
 		<typeAlias type="com.itbank.dto.SerCenDTO" alias="serCen"/>
 		<typeAlias type="com.itbank.dto.OrderDTO" alias="order" />
+		<typeAlias type="com.itbank.dto.ReviewBoardDTO" alias="reviewBoard" />
 	</typeAliases>
 	
 </configuration>

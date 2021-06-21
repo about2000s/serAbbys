@@ -17,11 +17,9 @@ public interface CustomerDAO {
 	@Select("select * from customer where customer_service_idx=${service_idx}")
 	List<HashMap<String, String>> selectList(int service_idx);
 
-	@Insert("insert into customer values ( customer_seq.nextval , customer_comments=${customer_comments} , "
-			+ "customer_service_idx=${customer_service_idx}, customer_reg=to_char(sysdate, 'yyyy-MM-dd hh24:mi')")
-	void crmInsert(CustomerDTO dto);
-	
 
+	@Insert("insert into customer values (customer_seq.nextval , #{customer_comments}, to_char(sys_date,'yyyy-MM-dd hh24:mi'), #{customer_service_idx})")
+	int insert(CustomerDTO dto);
 	
 	
 	//@Insert("insert into customer values ( customer_seq.nextval , customer_comments=${custMemo} , "

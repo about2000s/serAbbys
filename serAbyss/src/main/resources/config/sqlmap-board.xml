@@ -10,4 +10,16 @@
 	    offset ${offset} rows 
 	    fetch first ${nowD} rows only
 	</select>
+	
+	<insert id = "reviewWrite" parameterType="reviewBoard">
+		insert into review (review_idx, review_custId, review_engiId, review_title, review_content, review_starScore, review_compBelong)
+		values (#{review_idx}, #{review_custId}, #{review_engiId}, #{review_title}, #{review_content}, #{review_starScore}, #{review_compBelong})
+	</insert>
+	
+	<select id="reviewListAll" resultType="reviewBoard" parameterType="hashmap">
+		select * from review 
+		where ${type} like '%${keyword}%' order by review_reg desc 
+	    offset ${offset} rows 
+	    fetch first ${nowD} rows only
+	</select>
 </mapper>

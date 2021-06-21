@@ -1,7 +1,5 @@
 package com.itbank.dto;
 
-import org.springframework.web.multipart.MultipartFile;
-
 /*
  service
 
@@ -20,21 +18,6 @@ public class OrderDTO {
 	private int service_idx, service_viewCount, service_price;
 	private String service_custId, service_title, service_content, service_status, service_address, service_reg, service_engiId, 
 			service_compBelong , service_name, service_phone;
-	private String service_uploadFile1;
-	private MultipartFile file;
-	
-//	public boolean ready() {
-//		// uploadFile을 이용하여, originalFileName과 storedFileName 값을 만든다
-//		System.out.println("file is not null? : " + (file != null));
-//		if(file != null) 
-//			file.getOriginalFilename();
-//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
-//			String now = sdf.format(new Date());
-//			service_uploadFile = now + file.getOriginalFilename();
-//			return true;
-//		}
-//		return false;
-//	}
 	
 	public int getService_idx() {
 		return service_idx;
@@ -101,18 +84,6 @@ public class OrderDTO {
 	}
 	public void setService_engiId(String service_engiId) {
 		this.service_engiId = service_engiId;
-	}
-	public String getService_uploadFile1() {
-		return service_uploadFile1;
-	}
-	public void setService_uploadFile1(String service_uploadFile) {
-		this.service_uploadFile1 = service_uploadFile;
-	}
-	public MultipartFile getFile() {
-		return file;
-	}
-	public void setFile(MultipartFile file) {
-		this.file = file;
 	}
 	public int getService_price() {
 		return service_price;

@@ -55,14 +55,17 @@ public class PersonService {
 	}
 
 	public PersonDTO personLogin(PersonDTO dto) {
+		dto.setPerson_pw(getHash(dto.getPerson_pw()));
 		return dao.personLogin(dto);
 	}
 
 	public PersonDTO companyLogin(PersonDTO dto) {
+		dto.setPerson_pw(getHash(dto.getPerson_pw()));
 		return dao.companyLogin(dto);
 	}
 
 	public int join(PersonDTO inputData) {
+		inputData.setPerson_pw(getHash(inputData.getPerson_pw()));
 		return dao.join(inputData);
 	}
 
@@ -89,12 +92,14 @@ public class PersonService {
 	}
 
 	public int selectOneCheckIdPw(PersonDTO inputData) {
+		inputData.setPerson_pw(getHash(inputData.getPerson_pw()));
 		return dao.selectOneCheckIdPw(inputData);
 	}
 
 	public int updatePw(PersonDTO inputData) {
 //		String hash = getHash(inputData.getPerson_pw());
 //		inputData.setPerson_pw(getHash(hash));
+		inputData.setPerson_pw(getHash(inputData.getPerson_pw()));
 		return dao.updatePw(inputData);
 	}
 
@@ -103,22 +108,7 @@ public class PersonService {
 	}
 	
 	//자기 회사의 최소 인덱스 구하는 메서드(이 인덱스번호와 일치하는 계정은, 대표계정임을 알 수 있음)
-	public int getMinIdx(String person_belong) {
-		return dao.getMinIdx(person_belong);
-	}
 
-	//내가 로그인한 계정이 회사의 대표계정이냐의 여부를 판별해주는 메서드
-	public boolean iamCeo(PersonDTO login) {
-		int minIdx = getMinIdx(login.getPerson_belong());
-		if(login.getPerson_idx() != minIdx) {
-			System.out.println("회사 대표계정이 아닌 직원이네요");
-			return false;
-		}
-		else {
-			System.out.println("회사 대표계정이네요!");
-			return true;
-		}
-	}
 
 	public int companyAdd(CompDTO comp) {
 		return dao.companyAdd(comp);

@@ -5,10 +5,17 @@
 
 <form method="post" enctype="multipart/form-data">
 	<input type="hidden" name="service_idx" value="${dto.service_idx }">
+	<input type="hidden" name="page" value="${map.page }">
+	<input type="hidden" name="type" value="${map.type }">
+	<input type="hidden" name="keyword" value="${map.keyword }">
+	<input type="hidden" name="service_status" value="${map.service_status }">
 	<div class="order">
 		<div>
 			<p>
-				<input type="text" name="service_custid" value="${dto.service_custid}" readonly>
+				<input type="text" name="service_custId" value="${dto.service_custId}" readonly>
+			</p>
+			<p>
+				기사: <input type="text" name="service_custId" value="${dto.service_engiId}" readonly>
 			</p>
 			<p>
 				<input type="text" name="service_title" value="${dto.service_title}" required>
@@ -18,23 +25,7 @@
 	<div class="content">
 		<textarea class="write-area" name="service_content" required>${dto.service_content}</textarea>
 	</div>
-	<div class="order">
-		<p>
-			<input type="file" name="file" >
-			<c:if test="${not empty dto.service_uploadFile1 }">
-				<div><img src="${cpath }/upload/${dto.service_uploadFile1 }" height="200px"></div>
-			</c:if>
-		</p>
-	</div>
-	<div class="order">
-		<p><input type="text" name="service_address" value="${dto.service_address}" required></p>
-	</div>
-	<div class="order">
-		<p><input type="text" name="service_engiId" value="${dto.service_engiId}" readonly></p>
-	</div>
-	<div class="order">
 		<input type="submit" value="수정하기">
-		<input type="button" value="취소하기" onclick="location.href='history(-1)'">
-	</div>
 </form>
+	<input type="button" value="취소하기" onclick="location.href='history(-1)'">
 <%@ include file="../layout/footer.jsp" %>
