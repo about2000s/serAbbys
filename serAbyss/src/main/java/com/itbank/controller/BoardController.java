@@ -1,5 +1,6 @@
 package com.itbank.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -98,7 +99,29 @@ public class BoardController {
 		ReviewBoardDTO dto = bs.selectOneReview(review_idx);
 		int row = bs.reviewViewCountPlus(dto);
 		List<ReplyDTO> replyList = bs.replyList(review_idx);
-		System.out.println("조회수 1 증가");
+		
+//		int replyCount = bs.replyCount(review_idx);
+		int replyCount = replyList.size();//댓글 개수
+		int nowD = 10;
+		int pageD = 10;
+		int replyPageCount = replyCount%nowD == 0 ? replyCount/nowD : replyCount/nowD + 1;//댓글 페이지 개수
+		
+		System.out.println("replyCount: " + replyCount);
+		System.out.println("replyPageCount: " + replyPageCount);
+		
+		List<Integer> replyPageList = new ArrayList<Integer>();
+		if(replyCount != 0) {
+			for(int i=1;i<=replyPageCount;i++) {
+				replyPageList.add(i);
+			}
+		}
+		
+		
+		mav.addObject("replyCount", replyCount);
+		mav.addObject("replyPageList", replyPageList);
+		mav.addObject("nowD", nowD);
+		
+		
 		mav.addObject("dto", dto);
 		mav.addObject("replyList", replyList);
 		mav.addObject("map", map);

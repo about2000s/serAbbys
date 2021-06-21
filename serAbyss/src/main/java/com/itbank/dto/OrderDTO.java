@@ -18,24 +18,7 @@ public class OrderDTO {
 	private int service_idx, service_viewCount, service_price;
 	private String service_custId, service_title, service_content, service_status, service_address, service_reg, service_engiId, 
 			service_compBelong , service_name, service_phone;
-<<<<<<< HEAD
-=======
-	private String service_uploadFile1;
-	private MultipartFile file;
 	
-//	public boolean ready() {
-//		// uploadFile을 이용하여, originalFileName과 storedFileName 값을 만든다
-//		System.out.println("file is not null? : " + (file != null));
-//		if(file != null) 
-//			file.getOriginalFilename();
-//			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
-//			String now = sdf.format(new Date());
-//			service_uploadFile = now + file.getOriginalFilename();
-//			return true;
-//		}
-//		return false;
-//	}
->>>>>>> branch 'develop' of https://github.com/about2000s/serAbbys.git
 	
 	public int getService_idx() {
 		return service_idx;
