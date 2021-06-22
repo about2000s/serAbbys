@@ -59,5 +59,15 @@ public interface PersonDAO {
 
 	@Select("select * from companyList where companyList_name like '%${companyList_name}%'")
 	List<HashMap<String, String>> compSearchList(String companyList_name);
+
+	@Update("update person set person_email=#{replaceEmail} where person_id=#{login_id}")
+	int updateEmail(HashMap<String, String> map);
+
+	@Update("update person set person_address=#{realAddress} where person_id=#{login_id}")
+	int updateAddress(HashMap<String, String> map);
+
+	@Select("select * from person where person_id=#{login_id}")
+	PersonDTO selectOneById(String login_id);
+
 	
 }

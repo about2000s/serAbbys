@@ -56,4 +56,7 @@ public interface BoardDAO {
 
 	@Select("select * from reply where reply_bnum=#{review_idx}")
 	List<ReplyDTO> replyList(int review_idx);
+
+	@Select("select count(*) from reply where reply_bnum=#{review_idx}")
+	int replyCount(int review_idx);
 }

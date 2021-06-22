@@ -1,10 +1,13 @@
 package com.itbank.controller;
 
+import java.util.HashMap;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -170,19 +173,16 @@ public class PersonController {
 	}
 
 	@GetMapping("/myPage")
-	public String myPage() {
-		return "common/myPage";
+	public ModelAndView myPage() {
+		ModelAndView mav = new ModelAndView("common/myPage");
+		String msg = "";
+		mav.addObject("msg", msg);
+		return mav;
 	}
 	
 	@GetMapping("/updateInfo")
 	public String updateInfo() {
 		return "common/updateInfo";
-	}
-	
-	@PostMapping("/updateInfo")
-	public ModelAndView updateInfo(PersonDTO inputData) {
-		ModelAndView mav = new ModelAndView();
-		return mav;
 	}
 	
 	@GetMapping("/updatePw")
@@ -229,5 +229,44 @@ public class PersonController {
 	public int emailCheck(@RequestParam("person_email") String person_email) {
 		return ps.emailCheck(person_email);
 	}
-
+	
+	@PostMapping("/replaceEmail")
+	public ModelAndView emailUpdateResult(@RequestParam String replaceEmail, String login_id, HttpSession session) {
+		ModelAndView mav = new ModelAndView("common/myPage");
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("login_id", login_id);
+		map.put("replaceEmail", replaceEmail);
+		int row = ps.updateEmail(map);
+		String msg = null;
+		if(row != 0) {
+			msg = "E-mail 변경이 완료되었습니다";
+		} else {
+			msg = "E-mail 변경에 실패했습니다. 재시도해주세요";
+		}
+		PersonDTO login = ps.selectOneById(login_id);
+		session.setAttribute("login", login);
+		mav.addObject("msg", msg);
+		return mav;
+	}
+	
+	
+	@PostMapping("replaceAddress")
+	public ModelAndView addressUpdateResult(String address, String detailAddress, String login_id, HttpSession session) {
+		ModelAndView mav = new ModelAndView("common/myPage");
+		String realAddress = address + " " + detailAddress;
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("login_id", login_id);
+		map.put("realAddress", realAddress);
+		int row = ps.updateAddress(map);
+		String msg = null;
+		if(row != 0) {
+			msg = "주소지 변경이 완료되었습니다";
+		} else {
+			msg = "주소지 변경에 실패했습니다. 재시도해주세요";
+		}
+		PersonDTO login = ps.selectOneById(login_id);
+		session.setAttribute("login", login);
+		mav.addObject("msg", msg);
+		return mav;
+	}
 }
