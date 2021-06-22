@@ -24,6 +24,6 @@
 	
 	<context:component-scan base-package="com.itbank.controller" />
 	
-	<view-controller path="/" view-name="home"/>
+	<view-controller path="/" view-name="index"/>
 	
 </beans:beans>
