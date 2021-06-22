@@ -3,6 +3,11 @@
 <%@ include file="../layout/header.jsp" %>
 <h2>마이페이지 입니다</h2>
 <div class="container">
+	<c:if test="${msg != ''}">
+		<script>
+			alert("${msg}")
+		</script>
+	</c:if>
 	<table>
 		<tr>
 			<th width="100px"><p>아이디: </p></th>
@@ -31,8 +36,9 @@
 		</tr>
 		<tr>
 			<c:if test="${login.person_fax != null }">
-			<th>팩스:</th>
-			<td>${login.person_fax }</td></tr></c:if>
+				<th>팩스:</th>
+				<td>${login.person_fax }</td></tr>
+			</c:if>
 		<tr>
 			<td colspan="2">
 			<button id="btn-summit" onclick = "location.href='${cpath }/common/updateInfo'">개인정보 수정</button> | 

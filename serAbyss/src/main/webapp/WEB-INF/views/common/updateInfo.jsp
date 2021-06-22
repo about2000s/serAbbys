@@ -5,7 +5,6 @@
 <h2>개인정보 수정하는 곳입니다.</h2>
 <div>
 	<!-- 수정 버튼 누르면 취소 버튼으로 탈바꿈한다. 그때 또 취소 버튼을 누르면 div가 hiddenNone된다. -->
-	
 		<p>이메일: ${login.person_email }<a class = "email">수정</a>
 		</p>
 		<div class = "email main hiddenNone">
@@ -22,6 +21,13 @@
 					<button id = "injung">인증하기</button>
 				</div>
 				<div id = "injungSuccessDiv"></div>
+				<div class = "hiddenNone" id = "injungform">
+					<form action = "${cpath}/common/replaceEmail" method = "post">
+						<input type="hidden" name="login_id" value="${login.person_id }">
+						<input type="hidden" id="replaceEmail" name="replaceEmail">
+						<input type="submit" value="수정">
+					</form>
+				</div>
 			</div>
 		</div>
 		
@@ -52,12 +58,16 @@
 		
 		<p>주소: <input type = "text" name = "person_address" value = "${login.person_address }"><a class = "address" >수정</a></p>
 		<div class = "address main hiddenNone">
-			<label>주소</label><br>
-			<input type="text" id="postcode" placeholder="우편번호">
-			<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-			<input type="text" id="address" name = "address" placeholder="주소"><br>
-			<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소">
-			<input type="text" id="extraAddress" placeholder="참고항목">
+			<form action = "${cpath}/common/replaceAddress" method = "post">
+				<label>주소</label><br>
+				<input type="hidden" name="login_id" value="${login.person_id }">
+				<input type="text" id="postcode" placeholder="우편번호">
+				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="text" id="address" name = "address" placeholder="주소"><br>
+				<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소">
+				<input type="text" id="extraAddress" placeholder="참고항목">
+				<input type="submit" value="수정">
+			</form>
 		</div>
 		
 		<button onclick = "history.go(-1);">뒤로 가기</button>
@@ -117,6 +127,15 @@
 </script>
 
 <script>
+	$("#newEmail").keydown(function(){
+	    $('#replaceEmail').val($(this).val());
+	});
+	$("#newEmail").change(function(){
+	    $('#replaceEmail').val($(this).val());
+	});
+</script>
+
+<script>
 	const email_checkDiv = document.getElementById('email_checkDiv')
 	const authMailDiv = document.getElementById('authMailDiv')
 	
@@ -150,6 +169,7 @@
 <script>
 const injungSuccessDiv = document.getElementById('injungSuccessDiv')
 // const pass
+const replaceEmail = document.getElementById("newEmail").value
 const injungHandler = function(event){
 	event.preventDefault()
 	const authNumber = document.getElementById('authNumber').value
@@ -164,6 +184,8 @@ const injungHandler = function(event){
 		if(text == 'true'){
 			injungSuccessDiv.innerText = '인증 성공'
 			injungSuccessDiv.style.color = 'blue'
+			replaceEmail.innerText = replaceEmail
+			injungform.classList.remove('hiddenNone')
 		}
 		else{
 			injungSuccessDiv.innerText = '인증 실패'
