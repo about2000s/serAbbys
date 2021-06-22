@@ -5,7 +5,6 @@
 <h2>개인정보 수정하는 곳입니다.</h2>
 <div>
 	<!-- 수정 버튼 누르면 취소 버튼으로 탈바꿈한다. 그때 또 취소 버튼을 누르면 div가 hiddenNone된다. -->
-	
 		<p>이메일: ${login.person_email }<a class = "email">수정</a>
 		</p>
 		<div class = "email main hiddenNone">
@@ -23,9 +22,9 @@
 				</div>
 				<div id = "injungSuccessDiv"></div>
 				<div class = "hiddenNone" id = "injungform">
-					<form action = "${cpath}/common/replaceEmail/${login.person_idx}" method = "post">
-						<input type="hidden" name="login_idx" value="${login.person_idx }">
-						<input type="text" id="replaceEmail" name="replaceEmail">
+					<form action = "${cpath}/common/replaceEmail" method = "post">
+						<input type="hidden" name="login_id" value="${login.person_id }">
+						<input type="hidden" id="replaceEmail" name="replaceEmail">
 						<input type="submit" value="수정">
 					</form>
 				</div>
@@ -59,12 +58,16 @@
 		
 		<p>주소: <input type = "text" name = "person_address" value = "${login.person_address }"><a class = "address" >수정</a></p>
 		<div class = "address main hiddenNone">
-			<label>주소</label><br>
-			<input type="text" id="postcode" placeholder="우편번호">
-			<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-			<input type="text" id="address" name = "address" placeholder="주소"><br>
-			<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소">
-			<input type="text" id="extraAddress" placeholder="참고항목">
+			<form action = "${cpath}/common/replaceAddress" method = "post">
+				<label>주소</label><br>
+				<input type="hidden" name="login_id" value="${login.person_id }">
+				<input type="text" id="postcode" placeholder="우편번호">
+				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+				<input type="text" id="address" name = "address" placeholder="주소"><br>
+				<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소">
+				<input type="text" id="extraAddress" placeholder="참고항목">
+				<input type="submit" value="수정">
+			</form>
 		</div>
 		
 		<button onclick = "history.go(-1);">뒤로 가기</button>
