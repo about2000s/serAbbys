@@ -63,8 +63,12 @@ public class OrderController {
 	public ModelAndView order(OrderDTO orderDTO, ReserveDTO reserveDTO, String address, String detailAddress) {
 		String fullAddress = address + " " + detailAddress;
 		orderDTO.setService_address(fullAddress);
-		
+		//[2021년 6월 23일 20시 홍길동 고객님께서 예약하셨습니다.]
 		os.monthAndCustIdSetForReserve(orderDTO, reserveDTO);
+		String title = String.format("[%d년 %d월 %d일 %d시 %s 고객님께서 예약하셨습니다.]",
+				2021, reserveDTO.getReserve_month(), reserveDTO.getReserve_day(),
+				reserveDTO.getReserve_hour(), orderDTO.getService_name());
+		orderDTO.setService_title(title);
 		
 		ModelAndView mav = new ModelAndView("/order/order_result");
 		String msg;
@@ -122,9 +126,10 @@ public class OrderController {
 	//글 삭제
 	@GetMapping("/delete/{idx}")
 	public ModelAndView delete(@PathVariable int idx) {
-		int row = os.delete(idx);
+		int row1 = os.deleteService(idx);
+		int row2 = os.cancelReserve(idx);//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@이거 해야 해
 		String msg;
-		if(row != 0) {
+		if(row1 != 0 && row2 != 0) {
 			msg = "삭제가 완료되었습니다";
 		}
 		else {

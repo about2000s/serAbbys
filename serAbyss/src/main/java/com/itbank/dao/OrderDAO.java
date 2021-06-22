@@ -22,11 +22,7 @@ public interface OrderDAO {
 	@Select("select * from service where service_idx=#{idx}")
 	OrderDTO selectOne(int idx);
 
-	@Insert("insert into service (service_idx, service_custId, service_title, service_content, "
-			+ "service_status, service_address, service_engiId, service_compBelong, service_name, service_phone)"
-			+ "values (service_seq.nextval, #{service_custId}, #{service_title}, #{service_content}, "
-			+ "#{service_status}, #{service_address}, #{service_engiId}, "
-			+ "#{service_compBelong}, #{service_name}, #{service_phone})")
+	// order-order.xml에 있습니다
 	int order(OrderDTO dto);
 
 	@Update("update service set service_title=#{service_title}, service_content=#{service_content}, "
@@ -35,7 +31,7 @@ public interface OrderDAO {
 	int modify(OrderDTO dto);
 
 	@Delete("delete from service where service_idx=#{idx}")
-	int delete(int idx);
+	int deleteService(int idx);
 
 	@Select("select * from reserve where reserve_year=#{reserve_year} and reserve_month=#{reserve_month} and reserve_day=#{reserve_day} and reserve_hour=#{reserve_hour} and reserve_engiId=#{reserve_engiId}")
 	ReserveDTO selectReserveOne(ReserveDTO inputData);
@@ -54,8 +50,7 @@ public interface OrderDAO {
 	@Select("select * from person where person_id=#{service_custId}")
 	PersonDTO selectOneById(String service_custId);
 
-	@Insert("insert into reserve (reserve_idx, reserve_year, reserve_month, reserve_day, reserve_hour, reserve_engiId,  reserve_custId)" + 
-			"    values(reserve_seq.nextval, #{reserve_year}, #{reserve_month}, #{reserve_day}, #{reserve_hour}, #{reserve_engiId}, #{reserve_custId})")
+	// order-order.xml에 있습니다
 	int insertReserve(ReserveDTO reserveDTO);
 
 	// order-order.xml에 있습니다
@@ -63,5 +58,8 @@ public interface OrderDAO {
 
 	@Select("select * from review where review_idx=#{service_idx}")
 	ReviewBoardDTO alreadyReviewWrite(int service_idx);
+
+	@Delete("delete reserve where ")
+	int cancelReserve(int idx);
 
 }

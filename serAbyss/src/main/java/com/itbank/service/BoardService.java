@@ -1,5 +1,6 @@
 package com.itbank.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class BoardService {
 		return dao.boardListAll();
 	}
 
-	public List<SerCenDTO> faqList(HashMap<String, String> map) {
+	public List<SerCenDTO> faqList(HashMap<String, Object> map) {
 		return dao.faqList(map);
 	}
 
@@ -33,7 +34,7 @@ public class BoardService {
 		return dao.selectOneNotice(map);
 	}
 
-	public int selectBoardCountFaq(HashMap<String, String> map) {
+	public int selectBoardCountFaq(HashMap<String, Object> map) {
 		return dao.selectBoardCountFaq(map);
 	}
 
@@ -89,5 +90,42 @@ public class BoardService {
 
 	public int replyCount(int review_idx) {
 		return dao.replyCount(review_idx);
+	}
+
+	public HashMap<String, Object> reviewJob(String type, String keyword, int page) {
+		
+		if(keyword == null || keyword.equals("")) {
+			type = "review_title";
+			keyword = "";
+		}
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("type", type);
+		map.put("keyword", keyword);
+		
+		int reviewBoardCount = reviewBoardCount(map);
+		
+		Paging paging = new Paging(page, reviewBoardCount);
+		map.put("offset", paging.getOffset());
+		map.put("nowD", paging.getNowD());
+		
+		List<ReviewBoardDTO> list = reviewListAll(map);
+		setStarInList(list);
+		
+		List<HashMap<String, Object>> mapList = new ArrayList<HashMap<String,Object>>();
+		for(int i=0;i<list.size();i++) {
+			HashMap<String, Object> hashmap = new HashMap<String, Object>();
+			hashmap.put("review_idx", list.get(i).getReview_idx());
+			hashmap.put("review_star", list.get(i).getStar());
+			hashmap.put("review_title", list.get(i).getReview_title());
+			hashmap.put("review_custId", list.get(i).getReview_custId());
+			hashmap.put("review_reg", list.get(i).getReview_reg());
+			hashmap.put("review_viewCount", list.get(i).getReview_viewCount());
+			hashmap.put("review_replyCount", replyCount(list.get(i).getReview_idx()));
+			mapList.add(hashmap);
+		}
+		map.put("page", page);
+		map.put("paging", paging);
+		map.put("mapList", mapList);
+		return map;
 	}
 }

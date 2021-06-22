@@ -11144,3 +11144,11 @@ html {
   border-radius: 5px;
   box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
 }
+
+.hiddenNone {
+	display: none;
+}
+
+.jjhSize {
+	width: 30%;
+}

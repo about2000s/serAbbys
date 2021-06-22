@@ -6,49 +6,43 @@
 <div class="container">
 	<h2>수리기사가 서비스 신청하기</h2>
 	<hr/>
-	<form method="post" enctype="multipart/form-data">
+	<form method="post">
 		<input type = "hidden" name = "service_status" value = "등록완료">
 		<input type = "hidden" name = "service_compBelong" value = "${login.person_belong }">
 		<input type = "hidden" name = "service_engiId" value = "${login.person_id }">
-		<table>
+		<table class = "table dataTable-table">
 			<tr>
-				<td><input type="text" name="service_custId" placeholder="고객 아이디 입력" required></td>
+				<td><input type="text" name="service_phone" placeholder="고객 전화번호 입력" required class = "form-control" style = "width: 20%; display:inline;">&nbsp;'-' 없이 입력해주세요!</td>
 			</tr>
 			<tr>
-				<td><input type="text" name="service_phone" placeholder="고객 전화번호 입력" required></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="service_name" placeholder="고객 이름 입력" required></td>
-			</tr>
-			<tr>
-				<td><input type="text" name="service_title" placeholder="제목 입력" required></td>
-			</tr>
-			<tr>
-				<td><textarea class="write-area" name="service_content" required>모델명: ...</textarea></td>
+				<td><input type="text" name="service_name" placeholder="고객 이름 입력" required required class = "form-control" style = "width: 20%;"></td>
 			</tr>
 			<tr>
 				<td>
 					<label>주소</label><br>
-					<input type="text" id="postcode" placeholder="우편번호">
+					<input type="text" id="postcode" placeholder="우편번호" readonly class = "form-control" style = "width: 15%; display:inline;">
 					<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-					<input type="text" id="address" name = "address" placeholder="주소"><br>
-					<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소">
-					<input type="text" id="extraAddress" placeholder="참고항목">
+					<input type="text" id="address" name = "address" placeholder="주소" readonly class = "form-control" style = "width: 30%;">
+					<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소" class = "form-control" style = "width: 15%; display:inline;">
+					<input type="text" id="extraAddress" placeholder="참고항목" readonly class = "form-control" style = "width: 15%; display:inline;">
 				</td>
+			</tr>
+			<tr>
+				<td><textarea class="form-control" name="service_content" required>모델명: ...</textarea></td>
 			</tr>
 			<tr>
 				<td>
 					<div>
 						<h2>기사</h2>
 						<c:forEach var = "i" items = "${engiIdList }">
-							<label><input type = "radio" name = "reserve_engiId" value = "${i }" checked>${i }</label>
+							<label><input type = "radio" name = "reserve_engiId" value = "${i }" checked class = "form-check-input">${i }</label>
 						</c:forEach>
 					</div>
 					
 					<div>
-						<h2>일 선택</h2>
+						<h2>날짜 선택</h2>
 						<c:forEach var = "j" items = "${dayList }">
-							<label><input type = "radio" name = "reserve_day" value = "${j }">${j }</label>
+							<label><input type = "radio" name = "reserve_day" value = "${j }" class = "form-check-input">${j }</label>
 						</c:forEach>
 					</div>
 					
@@ -59,7 +53,7 @@
 								<c:forEach var = "k" items = "${reserveList }">
 									<c:if test="${k.day == j }">
 										<div class = "day${j } hiddenNone main">
-											<label><input type = "radio" name = "reserve_hour" value = "${k.hour }">${k.hour }</label>
+											<label><input type = "radio" name = "reserve_hour" value = "${k.hour }" class = "form-check-input">${k.hour }:00</label>
 										</div>
 									</c:if>
 								</c:forEach>
@@ -69,7 +63,8 @@
 				</td>
 			</tr>
 		</table>
-		<input type = "submit" value = "제출">
+		<button class = "btn btn-primary btn-xl" type = "submit">다음</button>
+		<button class = "btn btn-primary btn-xl" type = "submit" onclick="location.href='history(-1)'">취소</button>
 	</form>
 </div>
 

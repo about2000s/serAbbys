@@ -10,7 +10,7 @@
 
 <div class="card mb-4 container">
 	<div class="card-body">
-		<table class = "table" id="datatablesSimple" class = "dataTable-table">
+		<table class = "table dataTable-table" id="datatablesSimple">
 			<thead>
 				<tr>
 					<th>글번호</th>
@@ -41,14 +41,14 @@
 	<div>
 		<form>
 			<input type="hidden" name="page" value="1">
-			<select name="type" class = "selectt">
+			<select name="type" class = "form-control" style = "width: 10%; display: inline;">
 				<option value="service_title" selected>제목</option>
 				<option value="service_content">내용</option>
 				<option value="both">제목+내용</option>
 			</select>
-			<input type="text" name="keyword" value="${map.keyword }" placeholder="검색어를 입력하세요" class = "selectt">
+			<input type="text" name="keyword" value="${map.keyword }" placeholder="검색어를 입력하세요" class = "form-control" style = "width: 30%; display: inline;">
 			<input type="hidden" name="service_status" value="${map.service_status}">
-			<a class = "btn btn-xl btn-outline-light">검색</a>
+			<button type = "submit" class = "btn btn-primary btn-xl">검색</button>
 		</form>
 	</div>
 </div>

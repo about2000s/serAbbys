@@ -8,32 +8,32 @@
 <div class="container">
 	<h2>고객이 서비스 신청하기</h2>
 	<hr/>
-	<form method="post" enctype="multipart/form-data">
+	<form method="post">
 		<input type = "hidden" name = "service_custId" value = "${login.person_id }">
 		<input type = "hidden" name = "service_name" value = "${login.person_name }">
 		<input type = "hidden" name = "service_phone" value = "${login.person_phone }">
 		
-		<input  type = "text" id = "realServiceAddress" name = "service_address" value = "${login.person_address }">
-		<table>
+		<input  type = "hidden" id = "realServiceAddress" name = "service_address" value = "${login.person_address }">
+		<table class = "table dataTable-table">
 			<tr>
-				<td><input type="text" name="service_title" placeholder="제목 입력" required></td>
+				<td><input type="text" name="service_title" placeholder="제목 입력" required class="form-control"></td>
 			</tr>
 			<tr>
-				<td><textarea name="service_content" required>모델명: ...</textarea></td>
+				<td><textarea class="form-control" name="service_content" required>모델명: ...</textarea></td>
 			</tr>
 			<tr>
 				<td>
 					<div>
 						<h2>기사 선택</h2>
 						<c:forEach var = "i" items = "${engiIdList }">
-							<label><input type = "radio" name = "reserve_engiId" value = "${i }">${i }</label>
+							<label><input type = "radio" name = "reserve_engiId" value = "${i }" class = "form-check-input">${i }</label>
 						</c:forEach>
 					</div>
 					
 					<div>
 						<h2>일 선택</h2>
 						<c:forEach var = "j" items = "${dayList }">
-							<label><input type = "radio" name = "reserve_day" value = "${j }">${j }</label>
+							<label><input type = "radio" name = "reserve_day" value = "${j }" class = "form-check-input">${j }</label>
 						</c:forEach>
 					</div>
 					
@@ -44,7 +44,7 @@
 								<c:forEach var = "k" items = "${reserveList }">
 									<c:if test="${k.engiId == i && k.day == j }">
 										<div class = "${i }day${j } hiddenNone main">
-											<label><input type = "radio" name = "reserve_hour" value = "${k.hour }">${k.hour }</label>
+											<label><input type = "radio" name = "reserve_hour" value = "${k.hour }" class = "form-check-input">${k.hour }:00</label>
 										</div>
 									</c:if>
 								</c:forEach>
@@ -56,7 +56,7 @@
 			
 			<tr>
 				<td>
-					<button id = "goToSelectAddress">
+					<button class = "btn btn-primary btn-xl" id = "goToSelectAddress">
 						<h3>서비스 받을 주소지</h3>
 						<p id = "inputAddress">${login.person_address } ></p>
 					</button>
@@ -72,10 +72,10 @@
 					<h2>Modal Header</h2>
 				</header>
 				<div class = "w3-container">
-					<button id = "originalAddressSelectBtn">
+					<button class = "btn btn-primary btn-xl" id = "originalAddressSelectBtn">
 						${login.person_address }
 					</button>
-					<button id = "newAddressSearchBtn">
+					<button class = "btn btn-primary btn-xl" id = "newAddressSearchBtn">
 						<h2>+주소지 새로 입력</h2>
 					</button>
 				</div>
@@ -88,9 +88,9 @@
 			<input type="text" id="address" name = "address" placeholder="주소"><br>
 			<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소">
 			<input type="text" id="extraAddress" placeholder="참고항목">
-			<button id = "thisAddressSelectBtn">이 주소로 선택</button> <!-- 클릭하는 순간 위 버튼에 innerText하고 모든 모달창 닫기 -->
+			<button class = "btn btn-primary btn-xl" id = "thisAddressSelectBtn">이 주소로 선택</button> <!-- 클릭하는 순간 위 버튼에 innerText하고 모든 모달창 닫기 -->
 		</div>
-		<input type = "submit" value = "제출">
+		<button class = "btn btn-primary btn-xl" type = "submit">다음</button>
 	</form>
 </div>
 

@@ -41,8 +41,8 @@ public class OrderService {
 		return dao.modify(dto);
 	}
 
-	public int delete(int idx) {
-		return dao.delete(idx);
+	public int deleteService(int idx) {
+		return dao.deleteService(idx);
 	}
 
 	public ReserveDTO selectReserveOne(ReserveDTO inputData) {
@@ -92,8 +92,8 @@ public class OrderService {
 		int statusListCount = statusListCount(map);
 		
 		Paging paging = new Paging(page, statusListCount);
-		map.put("offset", paging.getOffset() + "");
-		map.put("nowD", paging.getNowD() + "");
+		map.put("offset", paging.getOffset());
+		map.put("nowD", paging.getNowD());
 		
 		List<OrderDTO> list = selectStatus(map);
 		
@@ -183,7 +183,7 @@ public class OrderService {
 		else {
 			reserveDTO.setReserve_month((today.get(Calendar.MONTH) + 1));
 		}
-		reserveDTO.setReserve_custId(orderDTO.getService_custId());
+		if(orderDTO.getService_custId() != null) reserveDTO.setReserve_custId(orderDTO.getService_custId());
 	}
 
 	//서비스글에 해당하는 리뷰글이 작성되어 있느냐? 있다면 true, 없다면 false
@@ -191,5 +191,9 @@ public class OrderService {
 		ReviewBoardDTO dto = dao.alreadyReviewWrite(service_idx);
 		if(dto != null) return true;
 		return false;
+	}
+
+	public int cancelReserve(int idx) {
+		return dao.cancelReserve(idx);
 	}
 }
