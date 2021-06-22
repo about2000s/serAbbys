@@ -4,18 +4,6 @@
 <%@ include file="../layout/leftmenu.jsp" %>
 
 <div class="container">
-	<h1>
-		<c:if test="${param.status eq ''}">전체 목록</c:if>
-		<c:if test="${param.status eq '접수완료'}">접수 목록</c:if>
-		<c:if test="${param.status eq '등록완료'}">기사 배정</c:if>
-		<c:if test="${param.status eq 'fixing'}">수리 진행 중</c:if>
-		<c:if test="${param.status eq 'fixed'}">수리 완료(미결제)</c:if>
-		<c:if test="${param.status eq 'payBefore'}">결제 진행 중</c:if>
-		<c:if test="${param.status eq 'payed'}">결제 완료 목록</c:if>
-		<c:if test="${param.status eq 'cancleRegister'}">환불 진행 중</c:if>
-		<c:if test="${param.status eq 'cancleComplete'}">환불 완료 목록</c:if>
-		<c:if test="${param.status eq 'success'}">처리 완료 목록</c:if>
-	</h1>
 	<table class="list">
 		
 		<tr>
@@ -57,6 +45,56 @@
 		</div>
 	</div>
 </div>
+
+
+<div class="card2 mb-4">
+           <div class="card2-header">
+               <i class="fas fa-table me-1"></i>
+               DataTable Example
+           </div>
+           <div class="card2-body">
+               <table id="datatablesSimple" class = "">
+                   <thead>
+                       <tr>
+                           <th>글번호</th>
+                           <th>제목</th>
+                           <th>작성자</th>
+                           <th>조회수</th>
+                           <th>Start date</th>
+                           <th>Salary</th>
+                       </tr>
+                   </thead>
+                   <tfoot>
+                       <tr>
+                           <th>Name</th>
+                           <th>Position</th>
+                           <th>Office</th>
+                           <th>Age</th>
+                           <th>Start date</th>
+                           <th>Salary</th>
+                       </tr>
+                   </tfoot>
+                   <tbody>
+                       <tr>
+                           <td>Tiger Nixon</td>
+                           <td>System Architect</td>
+                           <td>Edinburgh</td>
+                           <td>61</td>
+                           <td>2011/04/25</td>
+                           <td>$320,800</td>
+                       </tr>
+                       <tr>
+                           <td>Garrett Winters</td>
+                           <td>Accountant</td>
+                           <td>Tokyo</td>
+                           <td>63</td>
+                           <td>2011/07/25</td>
+                           <td>$170,750</td>
+                       </tr>
+                   </tbody>
+               </table>
+           </div>
+       </div>
 
 <c:if test="${map.page > map.paging.pageD }">
 	<button onclick = "location.href='${cpath}/order/statusList?page=${paging.startNum - 1 }&type=${map.type}&keyword=${map.keyword }&service_status=${map.service_status }'">이전</button>

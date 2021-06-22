@@ -10,7 +10,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>기술로 세상을 밝히다</title>
 
-
 <link href="${cpath }/resources/css/styles.css" rel="stylesheet" type="text/css">
 <link rel="preconnect" href="https://fonts.gstatic.com">
 <link href="https://fonts.googleapis.com/css2?family=Alfa+Slab+One&family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
@@ -48,6 +47,11 @@
 		</ul>
 	</div>
 </div>
+
+<c:if test="${login.person_check == 'r'}"></c:if>
+<c:if test="${login.person_check == 'y'}"></c:if>
+<c:if test="${login.person_check == 'n'}"></c:if>
+<c:if test="${login.person_check == 'a'}"></c:if>
 </head>
 <body>
 

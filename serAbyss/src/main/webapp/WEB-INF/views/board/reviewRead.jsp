@@ -22,9 +22,6 @@
 		<th width="150px">내용</th>
 		<td colspan="3" height="500px">
 		<pre>${dto.review_content }</pre>
-		<c:if test="${not empty dto.review_uploadFile1 }">
-		<div><img src="${cpath }/upload/${dto.review_uploadFile1 }" height="300px"></div>
-		</c:if>
 		</td>
 	</tr>
 </table>
