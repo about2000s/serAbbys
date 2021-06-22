@@ -177,6 +177,15 @@ public class PersonService {
 		
 		return authNumber;
 	}
+	public int updateEmail(HashMap<String, String> map) {
+		return dao.updateEmail(map);
+	}
+	public int updateAddress(HashMap<String, String> map) {
+		return dao.updateAddress(map);
+	}
+	public PersonDTO selectOneById(String login_id) {
+		return dao.selectOneById(login_id);
+	}
 }
 
 
