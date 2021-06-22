@@ -86,4 +86,8 @@ public class BoardService {
 	public List<ReplyDTO> replyList(int review_idx) {
 		return dao.replyList(review_idx);
 	}
+
+	public int replyCount(int review_idx) {
+		return dao.replyCount(review_idx);
+	}
 }

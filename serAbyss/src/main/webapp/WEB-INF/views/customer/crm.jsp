@@ -71,49 +71,19 @@ button { width:80px;height:35px}
 			</form>
 	</div>
 </div>
-<script>
-$(function() {
-	//응대기록 이벤트
-	$("insert-btn").click(function() {
-		
-		const insertForm = $("#insertForm").val(); 
-		console.log("#insertForm" + insertForm);
-		
-		
-		$.ajax({
-			type: "POST";
-			url: "/customer/crm",
-			header : {
-				"Content-Type" : "application/json"
-			}, //
-			dataType: "text",
-			data: JSON.stringify(insertForm), 
-			success : function(result) {
-				console.log("통신성공")
-				alert("성공")
-			} ,
-			error: function() {
-				console.log("통신실패")
-			}
-		})
-		
-	})
-	
-}) 
-
-</script>
 
 
 <script>
 $(document).ready(function(){
-	$("#insertForm").submit(function(event){
-// 		event.preventDefault()
+	$("#insertForm").submit(function(e){
+ 		e.preventDefault()
 		console.log("commentbtn클릭");
 			
 		$.ajax({
 			type : 'POST' ,
-			url : '${cpath}/customer',
-			dataType:'text',
+			url : '${cpath}/customer/crm1',
+			data : JSON.stringify(insertForm),
+			dataType:'json',
 			success : function(result){
 				alert("등록성공");
 			},

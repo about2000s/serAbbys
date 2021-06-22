@@ -3,8 +3,8 @@ package com.itbank.dto;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-//@Component
-//@Scope("prototype")
+@Component
+@Scope("prototype")
 public class PersonDTO {
 	private int person_idx, person_busiNum;
 	private String person_id, person_pw, person_name, person_birth, person_email, person_address, person_phone, person_call, person_fax, person_check, person_belong;
