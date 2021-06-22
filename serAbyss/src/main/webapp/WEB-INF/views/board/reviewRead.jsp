@@ -47,17 +47,42 @@
 		<input type = "submit" value = "댓글 작성">
 	</form>
 </div>
+<%-- 		<h3>작성자: ${dto.reply_id }</h3> --%>
+<%-- 		<h3>작성일: ${dto.reply_reg }</h3> --%>
+<%-- 		<c:if test="${login.person_id == dto.reply_id }"> --%>
+<%-- 			<button onclick = "location.href='${cpath}/???'">수정</button> --%>
+<!-- 			<button id = "replyDeleteBtn">삭제</button> -->
+<%-- 		</c:if> --%>
 
-<c:forEach var = "dto" items = "${replyList }"><!-- 댓글 리스트 -->
-	<hr>
-	<div>
+
+
+
+<c:forEach var = "i" items = "${replyPageList }">
+	<c:forEach var = "dto" items = "${replyList }" begin = "${nowD*(i-1) }" end = "${nowD*(i-1) + (nowD - 1) }">
+		<div class = "k${nowD*(i-1) }reply${nowD*(i-1) + (nowD - 1) } hiddenNone main1">
 		<h2><pre>${dto.reply_content }</pre></h2>
-		<h3>작성자: ${dto.reply_id }</h3>
-		<h3>작성일: ${dto.reply_reg }</h3>
-		<c:if test="${login.person_id == dto.reply_id }">
-			<button>수정</button>
-			<button>삭제</button>
-		</c:if>
-	</div>
+		<h2>작성자: ${dto.reply_id }</h2>
+		<h2>작성일: ${dto.reply_reg }</h2>
+		</div>
+	</c:forEach>
+	<hr>
 </c:forEach>
+
+<c:forEach var = "i" items = "${replyPageList }">
+	<span><a href = "" class = "${nowD*(i-1) }reply${nowD*(i-1) + (nowD - 1) }">[${i }]</a></span>
+</c:forEach>
+
+<script>
+window.onload = function(){ // 페이지 실행시 바로 작동
+		document.querySelectorAll('div.' + 'k0reply9').forEach(div => div.classList.remove('hiddenNone'))
+}
+
+	document.querySelectorAll('span > a').forEach(a => a.onclick = function(event){
+		event.preventDefault()
+		className = event.target.className
+		console.log(className)
+		document.querySelectorAll('div.' + 'main1').forEach(div => div.classList.add('hiddenNone'))
+		document.querySelectorAll('div.k' + className).forEach(div => div.classList.remove('hiddenNone'))
+	})
+</script>
 <%@ include file="../layout/footer.jsp" %>

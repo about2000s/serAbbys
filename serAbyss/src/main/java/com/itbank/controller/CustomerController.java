@@ -31,10 +31,6 @@ public class CustomerController {
 //	}
 //	
 	
-//	@GetMapping("/crm")
-//	public String crm(@PathVariable CustomerDTO dto) {
-//		return "customer/crm";
-//	}
 		
 	@GetMapping("/crm")
 	public void crm() {}
