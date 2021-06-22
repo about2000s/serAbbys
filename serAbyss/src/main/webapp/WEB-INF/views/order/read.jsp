@@ -18,30 +18,19 @@
 	</c:if>
 	<table class="serviceRead">
 	<tr>
-		<th>서비스고유번호 </th>
-		<td colspan="3">No. ${dto.service_idx }</td></tr>
+		<td colspan="4">${dto.service_title }</td>
+	</tr>
 	<tr>
-	<tr>
-		<th>처리 상태</th>
-		<td colspan="3">${dto.service_status }</td></tr>
-	<tr>
-		<th>서비스 요청 내역 </th>
-		<td colspan="3"><b>${dto.service_title }</b></td></tr>
-	<tr>
-		<th width="150px">주문자이름</th>
-		<td colspan="3">${dto.service_custId }</td>
-		</tr>
-	<tr>
-		<th>주문일시</th>
-		<td>${dto.service_reg }</td></tr>
-		<th>조회</th>
+		<td>${dto.service_custId }</td>
+		<td>${dto.service_reg }</td>
 		<td>${dto.service_viewCount }</td>
+		<td>${dto.service_status }</td>
+	</tr>
 	<tr>
-		<th width="150px">내용</th>
-		<td colspan="3" height="500px">
+		<td colspan="4" height="500px">
 			<pre>${dto.service_content }</pre>
 		</td>
-		</tr>
+	</tr>
 	<tr>
 		<td align="right" colspan="4">
  			<c:if test="${login.person_check eq 'y'}">
@@ -52,7 +41,8 @@
 			<a href="${cpath }/order/statusList?page=${map.page }&type=${map.type }&keyword=${map.keyword}&service_status=${map.service_status}"><button>목록</button></a>
 			<a href="${cpath }/order/modify/${dto.service_idx}?page=${map.page }&type=${map.type }&keyword=${map.keyword}&service_status=${map.service_status}"><button>수정</button></a>
 			<button id="deleteBtn">삭제</button>
-		</td></tr>
+		</td>
+	</tr>
 	</table>
 
 <script>

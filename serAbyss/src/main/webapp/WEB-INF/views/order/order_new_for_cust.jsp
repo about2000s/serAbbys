@@ -19,7 +19,7 @@
 				<td><input type="text" name="service_title" placeholder="제목 입력" required></td>
 			</tr>
 			<tr>
-				<td><textarea class="write-area" name="service_content" required>모델명: ...</textarea></td>
+				<td><textarea name="service_content" required>모델명: ...</textarea></td>
 			</tr>
 			<tr>
 				<td>
@@ -134,6 +134,7 @@ let classFullName
 document.querySelectorAll('input[name="reserve_engiId"]').forEach(input => input.onclick = function(event){
 	className1 = event.target.value
 	classFullName = className1 + 'day' + className2
+	console.log(classFullName)
 	document.querySelectorAll('div.' + 'main').forEach(div => div.classList.add('hiddenNone'))
 	document.querySelectorAll('div.' + classFullName).forEach(div => div.classList.remove('hiddenNone'))
 });
@@ -141,6 +142,7 @@ document.querySelectorAll('input[name="reserve_engiId"]').forEach(input => input
 document.querySelectorAll('input[name="reserve_day"]').forEach(input => input.onclick = function(event){
 	className2 = event.target.value
 	classFullName = className1 + 'day' + className2
+	console.log(classFullName)
 	document.querySelectorAll('div.' + 'main').forEach(div => div.classList.add('hiddenNone'))
 	document.querySelectorAll('div.' + classFullName).forEach(div => div.classList.remove('hiddenNone'))
 });
