@@ -23,12 +23,12 @@ public class CustomerController {
 	@Autowired
 	private CustomerService cs;
 	
-//	@PostMapping("/crm")
-//	public String customer(CustomerDTO dto, String abc) {
-//		System.out.println(dto);
-//		
-//		return "customer/crm";
-//	}
+	@PostMapping("/crm1")
+	public String customer(CustomerDTO dto) {
+		System.out.println(dto);
+		
+		return "customer/crm";
+	}
 //	
 	
 //	@GetMapping("/crm")
