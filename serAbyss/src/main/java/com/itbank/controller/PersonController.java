@@ -45,13 +45,15 @@ public class PersonController {
 		ModelAndView mav = new ModelAndView();
 		PersonDTO login = ps.personLogin(inputData);
 		if(login != null) {
+			System.out.println("여기는 로그인 성공");
 			session.setAttribute("login", login);
 			mav.setViewName("home");
 		}
 		else {
+			System.out.println("여기는 로그인 실패");
 			String msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
 			mav.addObject("msg", msg);
-			mav.setViewName("alert");
+			mav.setViewName("common/alert");
 		}
 		return mav;
 	}
@@ -253,8 +255,6 @@ public class PersonController {
 	@PostMapping("replaceAddress")
 	public ModelAndView addressUpdateResult(String address, String detailAddress, String login_id, HttpSession session) {
 		ModelAndView mav = new ModelAndView("common/myPage");
-		System.out.println("address 값 : " + address);
-		System.out.println("detailAddress 값 : " + detailAddress);
 		String realAddress = address + " " + detailAddress;
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("login_id", login_id);

@@ -3,7 +3,5 @@
 <%@ include file="layout/header.jsp" %>
 
 <hr>
-<button onclick = "location.href='${cpath}/common/smsSendTest'">smsSendTest</button>
-
 
 <%@ include file = "layout/footer.jsp" %>

@@ -1,5 +1,6 @@
 package com.itbank.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,6 +46,24 @@ public class BoardController {
 		
 		List<ReviewBoardDTO> list = bs.reviewListAll(map);
 		bs.setStarInList(list);
+		
+		List<HashMap<String, Object>> mapList = new ArrayList<HashMap<String,Object>>();
+		for(int i=0;i<list.size();i++) {
+			HashMap<String, Object> hashmap = new HashMap<String, Object>();
+			hashmap.put("review_idx", list.get(i).getReview_idx());
+			hashmap.put("review_star", list.get(i).getStar());
+			hashmap.put("review_title", list.get(i).getReview_title());
+			hashmap.put("review_custId", list.get(i).getReview_custId());
+			hashmap.put("review_reg", list.get(i).getReview_reg());
+			hashmap.put("review_viewCount", list.get(i).getReview_viewCount());
+			hashmap.put("review_replyCount", bs.replyCount(list.get(i).getReview_idx()));
+			mapList.add(hashmap);
+		}
+		
+		
+		
+		
+		mav.addObject("mapList", mapList);
 		mav.addObject("paging", paging);
 		mav.addObject("list", list);
 		mav.addObject("map", map);
@@ -98,7 +117,29 @@ public class BoardController {
 		ReviewBoardDTO dto = bs.selectOneReview(review_idx);
 		int row = bs.reviewViewCountPlus(dto);
 		List<ReplyDTO> replyList = bs.replyList(review_idx);
-		System.out.println("조회수 1 증가");
+		
+//		int replyCount = bs.replyCount(review_idx);
+		int replyCount = replyList.size();//댓글 개수
+		int nowD = 10;
+		int pageD = 10;
+		int replyPageCount = replyCount%nowD == 0 ? replyCount/nowD : replyCount/nowD + 1;//댓글 페이지 개수
+		
+		System.out.println("replyCount: " + replyCount);
+		System.out.println("replyPageCount: " + replyPageCount);
+		
+		List<Integer> replyPageList = new ArrayList<Integer>();
+		if(replyCount != 0) {
+			for(int i=1;i<=replyPageCount;i++) {
+				replyPageList.add(i);
+			}
+		}
+		
+		
+		mav.addObject("replyCount", replyCount);
+		mav.addObject("replyPageList", replyPageList);
+		mav.addObject("nowD", nowD);
+		
+		
 		mav.addObject("dto", dto);
 		mav.addObject("replyList", replyList);
 		mav.addObject("map", map);
