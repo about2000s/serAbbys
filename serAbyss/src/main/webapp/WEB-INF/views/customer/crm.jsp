@@ -64,13 +64,66 @@ button { width:80px;height:35px}
 	
 	<div>
 		<h2>기록 남기기</h2>
-			<form id="insertForm">
-				<input type = "hidden" name = "service_idx" value = "${dto.service_idx }">
-				<textarea class="textareastyle" name="custMemo"></textarea>
-				<input type = "submit" value = "다음">
+			<form method="POST" id="insertForm">
+				<input type = "hidden" name="customer_service_idx" value="${dto.service_idx }">
+				<textarea class="textareastyle" name="customer_comments"></textarea>
+				<input name="insert-btn" type ="submit" value="다음">
 			</form>
 	</div>
 </div>
+<script>
+$(function() {
+	//응대기록 이벤트
+	$("insert-btn").click(function() {
+		
+		const insertForm = $("#insertForm").val(); 
+		console.log("#insertForm" + insertForm);
+		
+		
+		$.ajax({
+			type: "POST";
+			url: "/customer/crm",
+			header : {
+				"Content-Type" : "application/json"
+			}, //
+			dataType: "text",
+			data: JSON.stringify(insertForm), 
+			success : function(result) {
+				console.log("통신성공")
+				alert("성공")
+			} ,
+			error: function() {
+				console.log("통신실패")
+			}
+		})
+		
+	})
+	
+}) 
+
+</script>
+
+
+<script>
+$(document).ready(function(){
+	$("#insertForm").submit(function(event){
+// 		event.preventDefault()
+		console.log("commentbtn클릭");
+			
+		$.ajax({
+			type : 'POST' ,
+			url : '${cpath}/customer',
+			dataType:'text',
+			success : function(result){
+				alert("등록성공");
+			},
+			error:function(){
+				alert("실패");
+			}
+	});
+	})
+});
+</script>
 
 
 <script>
