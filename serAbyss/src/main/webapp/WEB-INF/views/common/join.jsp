@@ -44,8 +44,8 @@
     		<div class="container">
         		<div class="form_txtInput">
 					<p>
-						<label><input class = "indi" type = "radio" name = "person_check" value = "n" checked>개인회원</label>
-						<label><input class = "company" type = "radio" name = "person_check" value = "y">법인회원</label>
+						<label><input class = "form-check-input" type = "radio" name = "person_check" value = "n" checked>개인회원</label>
+						<label><input class = "form-check-input" type = "radio" name = "person_check" value = "y">법인회원</label>
 					</p>
 					
 					<div class = "company main hiddenNone">
