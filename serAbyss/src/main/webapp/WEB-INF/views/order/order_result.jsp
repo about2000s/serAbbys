@@ -5,8 +5,8 @@
 
 <script>
 	alert("${msg}");
-	if('${value}' == 'modify') location.href="${cpath }/order/select/${idx}?value=read";
-	else location.href="${cpath }/order/statusList?page=1&service_status=";
+	if('${value}' == 'modify') location.href="${cpath }/reserve/select/${idx}?value=read";
+	else location.href="${cpath }/reserve/statusList?page=1&reserve_status=";
 </script>
 
 <%@ include file="../layout/footer.jsp" %>

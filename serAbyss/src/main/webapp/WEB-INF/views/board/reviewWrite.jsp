@@ -5,10 +5,10 @@
 <div class="card mb-4 container">
 	<div class="card-body">
 		<form method = "post" enctype="multipart/form-data">
-			<input type = "hidden" name = "review_idx" value = "${dto.service_idx }">
-			<input type = "hidden" name = "review_engiId" value = "${dto.service_engiId }">
-			<input type = "hidden" name = "review_custId" value = "${dto.service_custId }">
-			<input type = "hidden" name = "review_compBelong" value = "${dto.service_compBelong }">
+			<input type = "hidden" name = "review_idx" value = "${dto.reserve_idx }">
+			<input type = "hidden" name = "review_engiId" value = "${dto.reserve_engiId }">
+			<input type = "hidden" name = "review_custId" value = "${dto.reserve_custId }">
+			<input type = "hidden" name = "review_compBelong" value = "${dto.reserve_compBelong }">
 			<table class = "table dataTable-table">
 
 			<tr>
