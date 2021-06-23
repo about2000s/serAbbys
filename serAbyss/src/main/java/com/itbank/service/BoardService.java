@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itbank.dao.BoardDAO;
-import com.itbank.dto.OrderDTO;
+import com.itbank.dto.ReserveDTO;
 import com.itbank.dto.ReplyDTO;
 import com.itbank.dto.ReviewBoardDTO;
 import com.itbank.dto.SerCenDTO;
@@ -49,7 +49,7 @@ public class BoardService {
 		return dao.reviewViewCountPlus(dto);
 	}
 
-	public OrderDTO selectOneByIdx(int reserve_idx) {
+	public ReserveDTO selectOneByIdx(int reserve_idx) {
 		return dao.selectOneByIdx(reserve_idx);
 	}
 

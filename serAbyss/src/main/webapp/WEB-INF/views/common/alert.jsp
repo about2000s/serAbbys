@@ -5,7 +5,7 @@
 
 <script>
 	alert("${msg}");
-	location.href = "${cpath}/common/login";
+	location.href = "history.go(-1)";
 </script>
 
 <%@ include file="../layout/footer.jsp" %>

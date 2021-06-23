@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.itbank.dto.OrderDTO;
+import com.itbank.dto.ReserveDTO;
 import com.itbank.dto.PersonDTO;
 import com.itbank.dto.ReplyDTO;
 import com.itbank.dto.ReviewBoardDTO;
@@ -192,7 +192,7 @@ public class BoardController {
 	@GetMapping("reviewWrite")
 	public ModelAndView reviewWrite(int service_idx) {
 		ModelAndView mav = new ModelAndView("board/reviewWrite");
-		OrderDTO dto = bs.selectOneByIdx(service_idx);
+		ReserveDTO dto = bs.selectOneByIdx(service_idx);
 		mav.addObject("dto", dto);
 		return mav;
 	}
