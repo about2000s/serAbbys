@@ -7,11 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itbank.dao.CustMemoDAO;
-import com.itbank.dto.CustMemoDTO;
 import com.itbank.dto.ReserveDTO;
 
 @Service
-public class CustomerService {
+public class CustMemoService {
 	
 	@Autowired
 	private CustMemoDAO dao;
@@ -20,11 +19,11 @@ public class CustomerService {
 		return dao.crmReserve(param);
 	}
 
-	public List<HashMap<String, String>> selectList(int service_idx) {
-		return dao.selectList(service_idx);
+	public List<HashMap<String, String>> selectList(int reserve_idx) {
+		return dao.selectList(reserve_idx);
 	}
 
-	public int insert(CustMemoDTO dto) {
+	public int insert(CustMemoDAO dto) {
 		return dao.insert(dto);
 	}
 

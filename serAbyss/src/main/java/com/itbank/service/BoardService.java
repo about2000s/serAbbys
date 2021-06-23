@@ -49,8 +49,8 @@ public class BoardService {
 		return dao.reviewViewCountPlus(dto);
 	}
 
-	public ReserveDTO selectOneByIdx(int service_idx) {
-		return dao.selectOneByIdx(service_idx);
+	public ReserveDTO selectOneByIdx(int reserve_idx) {
+		return dao.selectOneByIdx(reserve_idx);
 	}
 
 	public int reviewWrite(ReviewBoardDTO dto) {
