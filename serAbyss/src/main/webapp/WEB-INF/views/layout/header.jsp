@@ -57,7 +57,6 @@
 				        		<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-1 rounded" href="${cpath }/customer/crm">고객응대하기</a></li>
 				        		<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-1 rounded" href="${cpath }/board/review_list_all?page=1">리뷰보기</a></li>
 				        		<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-1 rounded" href="${cpath }/order/statusList?page=1&service_status=">내 서비스</a></li>
-                    		    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-1 rounded" href="${cpath }/board/review_list_all?page=1">리뷰보기</a></li>
                     	 	    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-1 rounded" href="${cpath }/board/serCen?page=1">고객센터</a></li>
                     	 	    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-1 rounded" href="${cpath }/order/order_new_for_cust">고객서비스신청</a></li>
 				        	</c:when>

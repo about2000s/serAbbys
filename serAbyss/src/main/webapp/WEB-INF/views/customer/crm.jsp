@@ -8,11 +8,10 @@
 button { width:80px;height:35px}
 .textareastyle {width:40%; height:300px;} 
 </style>
+
 <div class="container">
-	
 	<div>
 		<h2>응대 기록 검색하기<br/></h2>
-		
 		<form method="POST">
 		<select name="selectedWord" style="height:35px;">
 			<option value="service_name">고객명</option>
@@ -25,7 +24,6 @@ button { width:80px;height:35px}
 		<button>검색</button>
 		</form>
 	</div>
-	
 	<div>
 	<table border="">
 		<tr>
@@ -47,7 +45,6 @@ button { width:80px;height:35px}
 			<td>${dto.service_engiId }</td>
 			<td>${dto.service_address }</td>
 			<td>${dto.service_phone } + sms + copy </td>
-			
 			<td>
 				<p><input class = "gao${dto.service_idx }" type = "hidden" name = "service_idx" value = "${dto.service_idx }"></p>
 				<input class = "gao${dto.service_idx }" id = "gao${dto.service_idx }" type = "button" value = "응대기록가져오기 ">
@@ -56,12 +53,10 @@ button { width:80px;height:35px}
 		</c:forEach>
 	</table>
 	</div>
-	
 	<br/><br/>
 	<div class = "gender">
 		<h2>가져온 응대기록</h2>
 	</div>
-	
 	<div>
 		<h2>기록 남기기</h2>
 			<form method="POST" id="insertForm">
@@ -71,7 +66,6 @@ button { width:80px;height:35px}
 			</form>
 	</div>
 </div>
-
 
 <script>
 $(document).ready(function(){
@@ -94,7 +88,6 @@ $(document).ready(function(){
 	})
 });
 </script>
-
 
 <script>
 document.querySelectorAll('td > input').forEach(input => input.onclick = function(event){

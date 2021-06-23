@@ -19,7 +19,7 @@ public interface ReserveDAO {
 
 	List<OrderDTO> selectStatus(HashMap<String, Object> param);
 
-	@Select("select * from reserce where reserce_idx=#{idx}")
+	@Select("select * from reserve where reserve_idx=#{idx}")
 	OrderDTO selectOne(int idx);
 
 	@Insert("insert into reserve (reserve_idx, reserve_custId, reserve_title, reserve_content, "
