@@ -15,8 +15,6 @@ import com.itbank.dto.ReviewBoardDTO;
 
 public interface ReserveDAO {
 
-	List<ReserveDTO> selectall(HashMap<String, String> param);
-
 	List<ReserveDTO> selectStatus(HashMap<String, Object> param);
 
 	@Select("select * from reserve where reserve_idx=#{idx}")
@@ -37,16 +35,19 @@ public interface ReserveDAO {
 	@Delete("delete from reserve where reserve_idx=#{idx}")
 	int delete(int idx);
 
-	@Select("select * from reserveTime where reserveTime_year=#{reserveTime_year} and reserveTime_month=#{reserveTime_month} and reserveTime_day=#{reserveTime_day} and reserveTime_hour=#{reserveTime_hour} and reserveTime_engiId=#{reserveTime_engiId}")
+	@Select("select * from reserveTime where reserveTime_year=#{reserveTime_year} "
+			+ "and reserveTime_month=#{reserveTime_month} and reserveTime_day=#{reserveTime_day} "
+			+ " and reserveTime_hour=#{reserveTime_hour} and reserveTime_engiId=#{reserveTime_engiId}")
 	ReserveTimeDTO selectReserveOne(ReserveTimeDTO inputData);
 
 	@Select("select person_id from person where person_check='y'")
 	List<String> selectEngiIdAll();
 
-//	@Insert("insert into reserve (reserve_idx, reserve_year, reserve_month, reserve_day, reserve_hour, reserve_engiId,  reserve_custId) " + 
-//			"    values(reserve_seq.nextval, '2021', '06', '16', '14', 'kim123', 'lee123');")
-//	int setReserve(ReserveDTO reserveDTO);
-	int selectBoardCountList(HashMap<String, String> param);
+	@Insert("insert into reserveTime (reserveTime_idx, reserveTime_year, reserveTime_month, reserveTime_day, reserveTime_hour, reserveTime_engiId,  reserveTime_custId) " + 
+			"    values(reserveTime_seq.nextval, '2021', '06', '16', '14', 'kim123', 'lee123');")
+	int setReserve(ReserveDTO reserveTimeDTO);
+	
+//	int selectBoardCountList(HashMap<String, String> param);
 
 	@Update("update reserve set reserve_status=#{reserve_status} where reserve_idx=#{reserve_idx}")
 	int change_status(ReserveDTO dto);
@@ -58,14 +59,6 @@ public interface ReserveDAO {
 			"    values(reserveTime_seq.nextval, #{reserveTime_year}, #{reserveTime_month}, #{reserveTime_day}, #{reserveTime_hour}, #{reserveTime_engiId}, #{reserveTime_custId})")
 	int insertReserve(ReserveTimeDTO reserveTimeDTO);
 
-	// reserveTime-reserveTime.xml에 있습니다
-
-	@Select("select * from reserveTime where reserveTime_year=#{reserveTime_year} and reserveTime_month=#{reserveTime_month} and reserveTime_day=#{reserveTime_day} and reserveTime_hour=#{reserveTime_hour} and reserveTime_engiId=#{reserveTime_engiId}")
-	ReserveDTO selectReserveOne(ReserveDTO inputData);
-
-	@Insert("insert into reserveTime (reserveTime_idx, reserveTime_year, reserveTime_month, reserveTime_day, reserveTime_hour, reserveTime_engiId,  reserveTime_custId)" + 
-			"    values(reserveTime_seq.nextval, #{reserveTime_year}, #{reserveTime_month}, #{reserveTime_day}, #{reserveTime_hour}, #{reserveTime_engiId}, #{reserveTime_custId})")
-	int insertReserve(ReserveDTO reserveTimeDTO);
 
 	// order-order.xml에 있습니다
 	int statusListCount(HashMap<String, Object> map);

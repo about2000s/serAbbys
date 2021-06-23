@@ -81,7 +81,7 @@ $(document).ready(function(){
 			
 		$.ajax({
 			type : 'POST' ,
-			url : '${cpath}/customer/crm1',
+			url : '${cpath}/custMemo/crm1',
 			data : JSON.stringify(insertForm),
 			dataType:'json',
 			success : function(result){

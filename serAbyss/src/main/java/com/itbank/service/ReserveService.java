@@ -21,9 +21,6 @@ public class ReserveService {
 
 	@Autowired ReserveDAO dao;
 	
-	public List<ReserveDTO> selectall(HashMap<String, String> param) {
-		return dao.selectall(param);
-	}
 	
 	public List<ReserveDTO> selectStatus(HashMap<String, Object> param) {
 		return dao.selectStatus(param);
@@ -53,9 +50,9 @@ public class ReserveService {
 		return dao.selectEngiIdAll();
 	}
 	
-	public int selectBoardCountList(HashMap<String, String> param) {
-		return dao.selectBoardCountList(param);
-	}
+//	public int selectBoardCountList(HashMap<String, String> param) {
+//		return dao.selectBoardCountList(param);
+//	}
 
 	public int change_status(ReserveDTO dto) {
 		return dao.change_status(dto);
@@ -65,8 +62,8 @@ public class ReserveService {
 		return dao.selectOneById(reserve_custId);
 	}
 
-	public int insertReserve(ReserveTimeDTO reserveDTO) {
-		return dao.insertReserve(reserveDTO);
+	public int insertReserve(ReserveTimeDTO reserveTimeDTO) {
+		return dao.insertReserve(reserveTimeDTO);
 	}
 
 	public int statusListCount(HashMap<String, Object> map) {
@@ -176,14 +173,14 @@ public class ReserveService {
 	
 	public void monthAndCustIdSetForReserve(ReserveDTO reserveDTO, ReserveTimeDTO reserveTimeDTO) {
 		Calendar today = Calendar.getInstance();
-		reserveTimeDTO.setReserve_year(2021);
-		if(reserveTimeDTO.getReserve_day() >= 1 && reserveTimeDTO.getReserve_day() <= 13) {
-			reserveTimeDTO.setReserve_month((today.get(Calendar.MONTH) + 2));
+		reserveTimeDTO.setReserveTime_year(2021);
+		if(reserveTimeDTO.getReserveTime_day() >= 1 && reserveTimeDTO.getReserveTime_day() <= 13) {
+			reserveTimeDTO.setReserveTime_month((today.get(Calendar.MONTH) + 2));
 		}
 		else {
-			reserveTimeDTO.setReserve_month((today.get(Calendar.MONTH) + 1));
+			reserveTimeDTO.setReserveTime_month((today.get(Calendar.MONTH) + 1));
 		}
-		reserveDTO.setReserve_custId(reserveDTO.getReserve_custId());
+		reserveTimeDTO.setReserveTime_custId(reserveDTO.getReserve_custId());
 	}
 
 	//서비스글에 해당하는 리뷰글이 작성되어 있느냐? 있다면 true, 없다면 false

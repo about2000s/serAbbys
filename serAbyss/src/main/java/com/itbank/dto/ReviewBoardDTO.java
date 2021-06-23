@@ -18,7 +18,7 @@ review_viewcount   default 0
  */
 public class ReviewBoardDTO {
 	private int review_idx, review_viewCount, review_starScore;
-	private String review_custId, review_engiId, review_title, review_content, review_reg, review_uploadFile1, review_compBelong;
+	private String review_custId, review_engiId, review_title, review_content, review_reg, review_compBelong;
 	private String star;
 	
 	public String getStar() {
@@ -74,12 +74,6 @@ public class ReviewBoardDTO {
 	}
 	public void setReview_starScore(int review_starScore) {
 		this.review_starScore = review_starScore;
-	}
-	public String getReview_uploadFile1() {
-		return review_uploadFile1;
-	}
-	public void setReview_uploadFile1(String review_uploadFile1) {
-		this.review_uploadFile1 = review_uploadFile1;
 	}
 	public String getReview_compBelong() {
 		return review_compBelong;

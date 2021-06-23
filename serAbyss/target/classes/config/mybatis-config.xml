@@ -16,6 +16,7 @@
 		<typeAlias type="com.itbank.dto.SerCenDTO" alias="serCen"/>
 		<typeAlias type="com.itbank.dto.ReserveDTO" alias="reserve" />
 		<typeAlias type="com.itbank.dto.ReviewBoardDTO" alias="reviewBoard" />
+		<typeAlias type="com.itbank.dto.CustMemoDTO" alias="custMemo" />
 	</typeAliases>
 	
 </configuration>
