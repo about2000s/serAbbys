@@ -1,7 +1,7 @@
 package com.itbank.dto;
 
 public class CustMemoDTO {
-	
+
 	private int custMemo_idx , custMemo_service_idx;
 	private String custMemo_comments, custMemo_reg;
 	
