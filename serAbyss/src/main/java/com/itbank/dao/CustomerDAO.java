@@ -7,12 +7,12 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
 import com.itbank.dto.CustomerDTO;
-import com.itbank.dto.OrderDTO;
+import com.itbank.dto.ReserveDTO;
 
 public interface CustomerDAO {
 
 	@Select("select * from service where ${selectedWord} = #{word}" )
-	List<OrderDTO> crmOrder(HashMap<String, String> param);
+	List<ReserveDTO> crmOrder(HashMap<String, String> param);
 
 	@Select("select * from customer where customer_service_idx=${service_idx}")
 	List<HashMap<String, String>> selectList(int service_idx);

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.dto.CustomerDTO;
-import com.itbank.dto.OrderDTO;
+import com.itbank.dto.ReserveDTO;
 import com.itbank.service.CustomerService;
 
 @Controller
@@ -36,7 +36,7 @@ public class CustomerController {
 	@PostMapping("/crm")
 	public ModelAndView crm(@RequestParam HashMap<String,String> param ) {
 		ModelAndView mav = new ModelAndView();
-		List<OrderDTO> list = cs.crmOrder(param); 
+		List<ReserveDTO> list = cs.crmOrder(param); 
 		mav.addObject("list", list);
 		return mav;
 	}

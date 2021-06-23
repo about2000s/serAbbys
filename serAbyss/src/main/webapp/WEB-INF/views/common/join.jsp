@@ -21,10 +21,17 @@
 	.wrap.wd668{max-width:628px;}
 	.join_form{max-width:90vw;}
 	.wrap.wd668{width:90vw;}
+	.btn.btn-primary.btn-xl {
+		position: relative;
+        left: 170px;
+	}
 	#join_form span {
 		margin: 10px;
 		text-indent: 0;
 		font-size:13px;
+	}
+	.hiddenNone {
+		display: none;
 	}
 </style>
 
@@ -60,7 +67,7 @@
 							<h2>법인소속직원(기사) 폼</h2>compList에서 검색하는 폼
 							<input class = "form-control" type = "text" id = "person_belong" name = "person_belong" readonly>
 							<button onclick = "document.getElementById('id01').style.display='block'"
-							class = "w3-button w3-black">회사 검색</button>
+							class = "btn btn-primary btn-xl">회사 검색</button>
 						</div>
 						
 						<div id = "id01" class = "w3-modal">
@@ -73,7 +80,7 @@
 								<div class = "w3-container">
 									회사 검색 폼<br>
 									<input class = "form-control" type = "text" id = "keyword" name = "keyword">
-									<button id = "compSearchBtn">검색</button><br>
+									<button id = "compSearchBtn" class = "btn btn-primary btn-xl">검색</button><br>
 								</div>
 							</div>
 						</div>
@@ -124,14 +131,14 @@
 							<input class = "form-control" type="text" id="extraAddress" placeholder="참고항목">
 						</div>
 					</div>
-						<h2>이메일 입력</h2>
+						<span>이메일 입력</span>
 						<input class = "form-control" type = "text" id = "person_email" name = "person_email" required>
 						<button class = "btn btn-primary btn-xl" id = "receiveAuthBtn">인증번호 받기</button>
 						
 						<div class = "check_font" id = "email_checkDiv"></div>
 						
 						<div class = "hiddenNone" id = "authMailDiv">
-							<h2>인증번호 입력</h2>
+							<span>인증번호 입력</span>
 							<div>
 								<input class = "form-control" type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호를 입력하시오">
 								<button class = "btn btn-primary btn-xl" id = "injung">인증하기</button>

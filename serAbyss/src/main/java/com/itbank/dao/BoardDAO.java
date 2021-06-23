@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.itbank.dto.OrderDTO;
+import com.itbank.dto.ReserveDTO;
 import com.itbank.dto.ReplyDTO;
 import com.itbank.dto.ReviewBoardDTO;
 import com.itbank.dto.SerCenDTO;
@@ -39,7 +39,7 @@ public interface BoardDAO {
 	int reviewViewCountPlus(ReviewBoardDTO dto);
 
 	@Select("select * from service where service_idx=#{service_idx}")
-	OrderDTO selectOneByIdx(int service_idx);
+	ReserveDTO selectOneByIdx(int service_idx);
 
 	// sqlmap-board.xml에 있습니다
 	int reviewWrite(ReviewBoardDTO dto);

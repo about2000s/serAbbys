@@ -1,4 +1,4 @@
-package com.itbank.service;
+package com.itbank.reserve;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -10,34 +10,34 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.itbank.dao.OrderDAO;
-import com.itbank.dto.OrderDTO;
-import com.itbank.dto.PersonDTO;
+import com.itbank.dao.ReserveDAO;
 import com.itbank.dto.ReserveDTO;
+import com.itbank.dto.PersonDTO;
+import com.itbank.dto.ReserveTimeDTO;
 import com.itbank.dto.ReviewBoardDTO;
 
 @Service
-public class OrderService {
+public class ReserveService {
 
-	@Autowired OrderDAO dao;
+	@Autowired ReserveDAO dao;
 	
-	public List<OrderDTO> selectall(HashMap<String, String> param) {
+	public List<ReserveDTO> selectall(HashMap<String, String> param) {
 		return dao.selectall(param);
 	}
 	
-	public List<OrderDTO> selectStatus(HashMap<String, Object> param) {
+	public List<ReserveDTO> selectStatus(HashMap<String, Object> param) {
 		return dao.selectStatus(param);
 	}
 
-	public OrderDTO selectOne(int idx) {
+	public ReserveDTO selectOne(int idx) {
 		return dao.selectOne(idx);
 	}
 
-	public int order(OrderDTO dto) {
-		return dao.order(dto);
+	public int reserve(ReserveDTO dto) {
+		return dao.reserve(dto);
 	}
 
-	public int modify(OrderDTO dto) {
+	public int modify(ReserveDTO dto) {
 		return dao.modify(dto);
 	}
 
@@ -45,7 +45,7 @@ public class OrderService {
 		return dao.delete(idx);
 	}
 
-	public ReserveDTO selectReserveOne(ReserveDTO inputData) {
+	public ReserveTimeDTO selectReserveOne(ReserveTimeDTO inputData) {
 		return dao.selectReserveOne(inputData);
 	}
 
@@ -57,15 +57,15 @@ public class OrderService {
 		return dao.selectBoardCountList(param);
 	}
 
-	public int change_status(OrderDTO dto) {
+	public int change_status(ReserveDTO dto) {
 		return dao.change_status(dto);
 	}
 	
-	public PersonDTO selectOneById(String service_custId) {
-		return dao.selectOneById(service_custId);
+	public PersonDTO selectOneById(String reserve_custId) {
+		return dao.selectOneById(reserve_custId);
 	}
 
-	public int insertReserve(ReserveDTO reserveDTO) {
+	public int insertReserve(ReserveTimeDTO reserveDTO) {
 		return dao.insertReserve(reserveDTO);
 	}
 
@@ -73,17 +73,17 @@ public class OrderService {
 		return dao.statusListCount(map);
 	}
 	
-	public HashMap<String, Object> job(String service_status, String type, String keyword, int page, HttpSession session){
+	public HashMap<String, Object> job(String reserve_status, String type, String keyword, int page, HttpSession session){
 		PersonDTO login = (PersonDTO)session.getAttribute("login");
 		
 		if(keyword == null || keyword.equals("")) {
-			type = "service_title";
+			type = "reserve_title";
 			keyword = "";
 		}
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("type", type);
 		map.put("keyword", keyword);
-		map.put("service_status", service_status);
+		map.put("reserve_status", reserve_status);
 		
 		map.put("person_check", login.getPerson_check());
 		map.put("person_id", login.getPerson_id());
@@ -95,7 +95,7 @@ public class OrderService {
 		map.put("offset", paging.getOffset() + "");
 		map.put("nowD", paging.getNowD() + "");
 		
-		List<OrderDTO> list = selectStatus(map);
+		List<ReserveDTO> list = selectStatus(map);
 		
 		map.put("page", page);
 		map.put("paging", paging);
@@ -160,8 +160,8 @@ public class OrderService {
 				}else {
 					hour += 2;
 				}
-				ReserveDTO inputData = new ReserveDTO(year, month, day, hour, engiIdList.get(i));
-				ReserveDTO dto = selectReserveOne(inputData);
+				ReserveTimeDTO inputData = new ReserveTimeDTO(year, month, day, hour, engiIdList.get(i));
+				ReserveTimeDTO dto = selectReserveOne(inputData);
 				if(dto != null) continue;
 				map.put("engiId", engiIdList.get(i));
 				map.put("year", year);
@@ -174,21 +174,21 @@ public class OrderService {
 		return reverveList;
 	}
 	
-	public void monthAndCustIdSetForReserve(OrderDTO orderDTO, ReserveDTO reserveDTO) {
+	public void monthAndCustIdSetForReserve(ReserveDTO reserveDTO, ReserveTimeDTO reserveTimeDTO) {
 		Calendar today = Calendar.getInstance();
-		reserveDTO.setReserve_year(2021);
-		if(reserveDTO.getReserve_day() >= 1 && reserveDTO.getReserve_day() <= 13) {
-			reserveDTO.setReserve_month((today.get(Calendar.MONTH) + 2));
+		reserveTimeDTO.setReserve_year(2021);
+		if(reserveTimeDTO.getReserve_day() >= 1 && reserveTimeDTO.getReserve_day() <= 13) {
+			reserveTimeDTO.setReserve_month((today.get(Calendar.MONTH) + 2));
 		}
 		else {
-			reserveDTO.setReserve_month((today.get(Calendar.MONTH) + 1));
+			reserveTimeDTO.setReserve_month((today.get(Calendar.MONTH) + 1));
 		}
-		reserveDTO.setReserve_custId(orderDTO.getService_custId());
+		reserveDTO.setReserve_custId(reserveDTO.getReserve_custId());
 	}
 
 	//서비스글에 해당하는 리뷰글이 작성되어 있느냐? 있다면 true, 없다면 false
-	public Boolean alreadyReviewWrite(int service_idx) {
-		ReviewBoardDTO dto = dao.alreadyReviewWrite(service_idx);
+	public Boolean alreadyReviewWrite(int reserve_idx) {
+		ReviewBoardDTO dto = dao.alreadyReviewWrite(reserve_idx);
 		if(dto != null) return true;
 		return false;
 	}

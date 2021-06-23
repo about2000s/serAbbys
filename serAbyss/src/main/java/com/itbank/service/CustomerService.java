@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.itbank.dao.CustomerDAO;
 import com.itbank.dto.CustomerDTO;
-import com.itbank.dto.OrderDTO;
+import com.itbank.dto.ReserveDTO;
 
 @Service
 public class CustomerService {
@@ -16,7 +16,7 @@ public class CustomerService {
 	@Autowired
 	private CustomerDAO dao;
 
-	public List<OrderDTO> crmOrder(HashMap<String, String> param) {
+	public List<ReserveDTO> crmOrder(HashMap<String, String> param) {
 		return dao.crmOrder(param);
 	}
 
