@@ -86,8 +86,4 @@
 		</ul>
 	</div>
 </div>
-<c:if test="${login.person_check == 'r'}"></c:if>
-<c:if test="${login.person_check == 'y'}"></c:if>
-<c:if test="${login.person_check == 'n'}"></c:if>
-<c:if test="${login.person_check == 'a'}"></c:if>
 </head>

@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%@ include file="layout/header.jsp" %>
-
         <!-- Masthead-->
         <header class="masthead bg-primary text-white text-center">
             <div class="container d-flex align-items-center flex-column">
                 <!-- Masthead Avatar Image-->
-                <img class="masthead-avatar mb-5" src="${cpath }/resources/assets/img/avataaars.svg" alt="..." />
+                <img class="masthead-avatar mb-5" src="${cpath }/resources/assets/img/avataaars.svg" alt="" />
                 <!-- Masthead Heading-->
                 <h1 class="masthead-heading text-uppercase mb-0">Start Bootstrap</h1>
                 <!-- Icon Divider-->
@@ -103,8 +101,13 @@
                 </div>
                 <!-- About Section Content-->
                 <div class="row">
-                    <div class="col-lg-4 ms-auto"><p class="lead">Freelancer is a free bootstrap theme created by Start Bootstrap. The download includes the complete source files including HTML, CSS, and JavaScript as well as optional SASS stylesheets for easy customization.</p></div>
-                    <div class="col-lg-4 me-auto"><p class="lead">You can create your own custom avatar for the masthead, change the icon in the dividers, and add your email address to the contact form to make it fully functional!</p></div>
+                    <div class="col-lg-4 ms-auto">
+                    	<p class="lead">고객 또는 고객사는 서-어비스를 통해 엔지니어에게 직접 예약요청을 할 수 있습니다.또한 엔지니어의 기술적 해결능력을 
+                    	리뷰로 남겨 공유하고 데이터를 쌓아 더 좋은 서비스를 만들어가는데  </p></div>
+                    <div class="col-lg-4 me-auto">
+                    	<p class="lead">서-어비스는 출장이 잦은 엔지니어와 백업조직을  위한 플랫폼입니다. 
+            					  엔지니어들 Ser-abbys를 통해 통해 이동 중에 발생한 오더, 고객의 서비스 요청 등을 영구적으로 데이터베이스에 기록하고 
+            					  필요할 때 언제든지 불러와 고객에게 상세한 소통이 가능합니다.</p></div>
                 </div>
                 <!-- About Section Button-->
                 <div class="text-center mt-4">
