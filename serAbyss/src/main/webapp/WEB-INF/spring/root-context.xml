@@ -36,9 +36,10 @@
 		<property name="configLocation" value = "classpath:config/mybatis-config.xml"/>
 		<property name="mapperLocations">
 			<list>
+				<value>classpath:config/sqlmap-customer.xml</value>
 				<value>classpath:config/sqlmap-person.xml</value>
 				<value>classpath:config/sqlmap-board.xml</value>
-				<value>classpath:config/sqlmap-order.xml</value>
+				<value>classpath:config/sqlmap-reserve.xml</value>
 			</list>
 		</property>
 	</bean>
