@@ -15,11 +15,11 @@ button { width:80px;height:35px}
 		
 		<form method="POST">
 		<select name="selectedWord" style="height:35px;">
-			<option value="service_name">고객명</option>
-			<option value="service_phone">전화번호</option>
-			<option value="service_address">주소의 일부</option>
-			<option value="service_engiid">담당 엔지니어</option>
-			<option value="service_idx">서비스번호</option>
+			<option value="reserve_name">고객명</option>
+			<option value="reserve_phone">전화번호</option>
+			<option value="reserve_address">주소의 일부</option>
+			<option value="reserve_engiId">담당 엔지니어</option>
+			<option value="reserve_idx">서비스번호</option>
 		</select>
 		 <input type="text" name="word"/>
 		<button>검색</button>
@@ -40,17 +40,17 @@ button { width:80px;height:35px}
 		</tr>
 		<c:forEach var="dto" items="${list }">
 		<tr>
-			<td>${dto.service_reg}</td>
-			<td>${dto.service_idx }</td>
-			<td>${dto.service_status }</td>
-			<td>${dto.service_name }</td>
-			<td>${dto.service_engiId }</td>
-			<td>${dto.service_address }</td>
-			<td>${dto.service_phone } + sms + copy </td>
+			<td>${dto.reserve_reg}</td>
+			<td>${dto.reserve_idx }</td>
+			<td>${dto.reserve_status }</td>
+			<td>${dto.reserve_name }</td>
+			<td>${dto.reserve_engiId }</td>
+			<td>${dto.reserve_address }</td>
+			<td>${dto.reserve_phone } + sms + copy </td>
 			
 			<td>
-				<p><input class = "gao${dto.service_idx }" type = "hidden" name = "service_idx" value = "${dto.service_idx }"></p>
-				<input class = "gao${dto.service_idx }" id = "gao${dto.service_idx }" type = "button" value = "응대기록가져오기 ">
+				<p><input class = "gao${dto.reserve_idx }" type = "hidden" name = "reserve_idx" value = "${dto.reserve_idx }"></p>
+				<input class = "gao${dto.reserve_idx }" id = "gao${dto.reserve_idx }" type = "button" value = "응대기록가져오기 ">
 			</td>
 		</tr>
 		</c:forEach>
@@ -65,8 +65,8 @@ button { width:80px;height:35px}
 	<div>
 		<h2>기록 남기기</h2>
 			<form method="POST" id="insertForm">
-				<input type = "hidden" name="customer_service_idx" value="${dto.service_idx }">
-				<textarea class="textareastyle" name="customer_comments"></textarea>
+				<input type = "hidden" name="custMemo_service_idx" value="${dto.reserve_idx }">
+				<textarea class="textareastyle" name="custMemo_comments"></textarea>
 				<input name="insert-btn" type ="submit" value="다음">
 			</form>
 	</div>
@@ -99,9 +99,9 @@ $(document).ready(function(){
 <script>
 document.querySelectorAll('td > input').forEach(input => input.onclick = function(event){
 	const className = event.target.className
-	const service_idx = document.querySelector('input.' + className).value
+	const reserve_idx = document.querySelector('input.' + className).value
 	
-	const url = '${cpath}/crm/' + service_idx
+	const url = '${cpath}/crm/' + reserve_idx
 	const opt = { 
 			method : 'GET'
 			}
@@ -129,11 +129,11 @@ document.querySelectorAll('td > input').forEach(input => input.onclick = functio
 			var regTd = document.createElement('td')
 			var commentsTd = document.createElement('td')
 			
-			var customer_reg = json[i].CUSTOMER_REG
+			var custMemo_reg = json[i].CUSTMEMO_REG
 			regTd.innerText = customer_reg
 			
-			var customer_comments = json[i].CUSTOMER_COMMENTS
-			commentsTd.innerText = customer_comments
+			var custMemo_comments = json[i].CUSTMEMO_COMMENTS
+			commentsTd.innerText = custMemo_comments
 			
 			contentTr.appendChild(regTd)
 			contentTr.appendChild(commentsTd)

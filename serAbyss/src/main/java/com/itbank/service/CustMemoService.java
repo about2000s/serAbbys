@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.itbank.dao.CustMemoDAO;
+import com.itbank.dto.CustMemoDTO;
 import com.itbank.dto.ReserveDTO;
 
 @Service
@@ -23,7 +24,7 @@ public class CustMemoService {
 		return dao.selectList(reserve_idx);
 	}
 
-	public int insert(CustMemoDAO dto) {
+	public int insert(CustMemoDTO dto) {
 		return dao.insert(dto);
 	}
 

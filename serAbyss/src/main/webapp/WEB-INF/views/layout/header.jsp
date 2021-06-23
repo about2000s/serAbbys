@@ -34,6 +34,9 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="${cpath }/reserve/statusList?page=1&reserve_status=">내 서비스</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="${cpath }/board/review_list_all?page=1">리뷰보기</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="${cpath }/board/serCen?page=1">고객센터</a></li>
                         <!-- 엔지니어 로그인시 메뉴 출력 -->
                         <c:choose>
                         	<%--기사 로그인시 --%>
@@ -80,6 +83,25 @@
                 </div>
             </div>
         </nav>
+        
+        
+<div class="topmenubar">
+	<div class="toplogo"><a href="${cpath }"><img src="${cpath }/resources/img/logo.png"></a></div>
+	<div class="menubar">
+		<ul>
+			
+			<!-- 여기서부터 재훈이가 수정했습니다. -->
+			<li><a href="${cpath }/custMemo/crm">고객응대하기</a></li>
+			<li><a href="${cpath }/reserve/reserve_new_for_cust">고객이 서비스 신청하러 가기!</a></li>
+			<!-- 여기까지 -->
+		</ul>
+	</div>
+</div>
+
+<c:if test="${login.person_check == 'r'}"></c:if>
+<c:if test="${login.person_check == 'y'}"></c:if>
+<c:if test="${login.person_check == 'n'}"></c:if>
+<c:if test="${login.person_check == 'a'}"></c:if>
 </head>
 
   

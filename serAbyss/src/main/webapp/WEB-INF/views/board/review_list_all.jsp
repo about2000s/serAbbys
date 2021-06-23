@@ -9,54 +9,61 @@
 </style>
 
 <h2>리뷰보기</h2>
-<div class="container">
-		<table>
-			<tr>
-				<th width="5%">no</th>
-				<th width="10%">평점</th>
-				<th width="50%">제목</th>
-				<th width="10%">작성자(고객)</th>
-				<th width="10%">날짜</th>
-				<th width="10%">조회수</th>
-			</tr>
-			<c:forEach var = "dto" items = "${mapList }">
+<div class="card mb-4 container">
+	<div class="card-body">
+		<table class = "table dataTable-table" id="datatablesSimple">
+			<thead>
 				<tr>
-					<td>${dto.review_idx}</td>
-					<td>${dto.star }</td>
-					<td><a href="${cpath }/board/reviewRead/${dto.review_idx}?type=${map.type }&keyword=${map.keyword }&page=${map.page }">${dto.review_title}</a>&nbsp;[${dto.review_replyCount }]</td>
-					<td>${dto.review_custId}</td>
-					<td>${dto.review_reg }</td>
-					<td>${dto.review_viewCount }</td>
+					<th width="10%">평점</th>
+					<th width="50%">제목</th>
+					<th width="10%">작성자(고객)</th>
+					<th width="10%">날짜</th>
+					<th width="10%">조회수</th>
 				</tr>
-			</c:forEach>
+			</thead>
+			<tbody>
+				<c:forEach var = "dto" items = "${map.mapList }">
+					<tr>
+						<td>${dto.review_star }</td>
+						<td><a href="${cpath }/board/reviewRead/${dto.review_idx}?type=${map.type }&keyword=${map.keyword }&page=${map.page }">${dto.review_title}</a>&nbsp;[${dto.review_replyCount }]</td>
+						<td>${dto.review_custId}</td>
+						<td>${dto.review_reg }</td>
+						<td>${dto.review_viewCount }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
 		</table>
+	</div>
+	<div><!-- 검색 -->
+		<form>
+			<input type = "hidden" name = "page" value = "1">
+			<select name = "type" class = "form-control" style = "width: 10%; display: inline;">
+				<option value = "review_title" selected>제목</option>
+				<option value = "review_content">내용</option>
+				<option value = "review_custId">글쓴이</option>
+			</select>
+			<input type = "text" name = "keyword" value = "${keyword }" placeholder = "검색" class = "form-control" style = "width: 30%; display: inline;">
+			<button type = "submit" class = "btn btn-primary btn-xl">검색</button>
+		</form>
+	</div>
 </div>
 
-<div><!-- 검색 -->
-	<form>
-		<input type = "hidden" name = "page" value = "1">
-		<select name = "type">
-			<option value = "review_title" selected>제목</option>
-			<option value = "review_content">내용</option>
-			<option value = "review_custId">글쓴이</option>
-		</select>
-		<input type = "text" name = "keyword" value = "${keyword }" placeholder = "검색">
-		<input type = "submit" value = "검색">
-	</form>
+
+
+<div class="page_wrap">
+	<div class="page_nation">
+		<c:if test="${map.page > map.paging.pageD }">
+			<a class="arrow prev" href="${cpath}/board/review_list_all?page=${paging.startNum - 1 }&type=${map.type}&keyword=${map.keyword }"></a>
+		</c:if>
+		<c:forEach var = "i" begin="${map.paging.startNum }" end="${map.paging.endNum }">
+			<c:if test="${map.page == i }"> <b> </c:if>
+				<a href = "${cpath }/board/review_list_all?page=${i }&type=${map.type}&keyword=${map.keyword}">${i }</a>
+			<c:if test="${map.page == i }"> </b> </c:if>
+		</c:forEach>
+		<c:if test="${map.paging.endNum < map.paging.pageCount }">
+			<a class="arrow next" href="${cpath}/board/review_list_all?page=${map.paging.endNum + 1 }&type=${map.type}&keyword=${map.keyword}"></a>
+		</c:if>
+	</div>
 </div>
-
-<c:if test="${map.page > 10}">
-	<button onclick = "location.href='${cpath}/board/review_list_all?page=${paging.startNum - 1 }&type=${map.type}&keyword=${map.keyword }'">이전</button>
-</c:if>
-
-<c:forEach var = "i" begin="${paging.startNum }" end="${paging.endNum }">
-	<c:if test="${map.page == i }"> <b></c:if>
-	<a href = "${cpath }/board/review_list_all?page=${i}&type=${map.type}&keyword=${map.keyword }">[${i }]</a>
-	<c:if test="${map.page == i }"> </b></c:if>
-</c:forEach>
-
-<c:if test="${paging.endNum < paging.pageCount}">
-	<button onclick = "location.href='${cpath}/board/review_list_all?page=${paging.endNum + 1 }&type=${map.type}&keyword=${map.keyword }'">다음</button>
-</c:if>
 
 <%@ include file="../layout/footer.jsp"%>

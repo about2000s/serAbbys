@@ -23,38 +23,50 @@
 <%-- 		</c:forEach> --%>
 <!-- 	</table> -->
 <!-- </div> -->
-
-<div>
-	<span>글번호</span>
-	<span>제목</span><!-- 제목 옆에 숫자로 댓글 수 띄우기 -->
-	<span>작성자</span>
-	<span>조회수</span>
-	<span>등록일자</span>
+<h2>FAQ</h2>
+<div class="card mb-4 container">
+	<div class="card-body">
+		<table class = "table dataTable-table">
+			<thead>
+			<tr>
+				<th>글번호</th>
+				<th>제목</th><!-- 제목 옆에 숫자로 댓글 수 띄우기 -->
+				<th>작성자</th>
+				<th>조회수</th>
+				<th>등록일자</th>
+			</tr>
+			</thead>
+			<tbody>
+			<c:if test="${empty list}">
+				<tr>
+					<td>일치하는 검색결과가 없습니다.</td>
+				</tr>
+			</c:if>
+				<c:forEach var = "dto" items = "${list }">
+					<tr>
+						<td>${dto.serCen_idx }</td>
+						<td><a>${dto.serCen_title }</a></td>
+						<td>${dto.serCen_id }</td>
+						<td>${dto.serCen_viewCount }</td>
+						<td>${dto.serCen_reg }</td>
+					</tr>
+				</c:forEach>
+			</tbody>
+		</table>
+	</div>
+	<div>
+		<form>
+			<input type = "hidden" name = "page" value = "1">
+			<select name = "type" class = "form-control" style = "width: 10%; display: inline;">
+				<option value = "serCen_title" selected>제목</option>
+				<option value = "serCen_content">내용</option>
+			</select>
+			<input type = "text" name = "keyword" value = "${keyword }" placeholder = "검색" class = "form-control" style = "width: 30%; display: inline;">
+			<button type = "submit" class = "btn btn-primary btn-xl">검색</button>
+		</form>
+		<button onclick = "location.href='${cpath }/board/writeFaq?page=${page }'" class = "btn btn-primary btn-xl">새 글 작성</button>
+	</div>
 </div>
-<div>
-	<c:if test="${empty list}">
-		<h3>일치하는 검색결과가 없습니다.</h3>
-	</c:if>
-	<c:forEach var = "dto" items = "${list }">
-		<p><span>${dto.serCen_idx }</span>
-		<span><a>${dto.serCen_title }</a></span>
-		<span>${dto.serCen_id }</span>
-		<span>${dto.serCen_viewCount }</span>
-		<span>${dto.serCen_reg }</span></p>
-	</c:forEach>
-</div>
-<form>
-	<input type = "hidden" name = "page" value = "1">
-	<select name = "type">
-		<option value = "serCen_title" selected>제목</option>
-		<option value = "serCen_content">내용</option>
-		<option value = "serCen_id">글쓴이</option>
-	</select>
-	<input type = "text" name = "keyword" value = "${keyword }" placeholder = "검색">
-	<input type = "submit" value ="검색">
-</form>
-	 | <div><button onclick = "location.href='${cpath }/board/writeFaq?page=${page }'">새 글 작성</button></div>
-
 
 <c:if test="${page > paging.pageD }">
 	<button onclick = "location.href='${cpath}/board/serCen?page=${paging.startNum - 1 }&type=${type }&keyword=${keyword }'">이전</button>

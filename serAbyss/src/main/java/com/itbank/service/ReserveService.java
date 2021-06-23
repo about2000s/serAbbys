@@ -1,4 +1,4 @@
-package com.itbank.reserve;
+package com.itbank.service;
 
 import java.util.ArrayList;
 import java.util.Calendar;
