@@ -45,13 +45,15 @@ public class PersonController {
 		ModelAndView mav = new ModelAndView();
 		PersonDTO login = ps.personLogin(inputData);
 		if(login != null) {
+			System.out.println("여기는 로그인 성공");
 			session.setAttribute("login", login);
 			mav.setViewName("home");
 		}
 		else {
+			System.out.println("여기는 로그인 실패");
 			String msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
 			mav.addObject("msg", msg);
-			mav.setViewName("alert");
+			mav.setViewName("common/alert");
 		}
 		return mav;
 	}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC 
+			"-//mybatis.org//DTD Mapper 3.0//EN" 
+			"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+			
+<mapper namespace="com.itbank.dao.ReserveDAO">
+	<select id = "statusListCount" parameterType="hashmap" resultType="int">
+		select count(*) from reserve where 
+		<if test="type != 'both'">
+			${type} like '%${keyword}%' 
+			<if test="reserve_status != ''">
+				and reserve_status=#{reserve_status}
+			</if>
+		</if>
+		
+		<if test="type == 'both'">
+			reserve_title like '%${keyword}%' or reserve_content like '%${keyword}%' 
+		</if>
+		
+		<if test='person_check == "y"'>
+			and reserve_engiId='${person_id}'
+		</if>
+		<if test='person_check == "n"'>
+			and reserve_custId='${person_id}'
+		</if>
+		<if test='person_check == "r"'>
+			and reserve_compBelong='${person_belong}'
+		</if>
+		
+	</select>
+	
+	<select id="selectStatus" parameterType="hashmap" resultType="order">
+		select * from reserve 
+		where ${type} like '%${keyword}%' 
+		<if test="reserve_status != ''">
+			and reserve_status=#{reserve_status} 
+		</if> 
+		
+		<if test='person_check == "y"'>
+			and reserve_engiId='${person_id}'
+		</if>
+		<if test='person_check == "n"'>
+			and reserve_custId='${person_id}'
+		</if>
+		<if test='person_check == "r"'>
+			and reserve_compBelong='${person_belong}'
+		</if>
+		
+		order by reserve_idx desc 
+	    offset ${offset} rows 
+	    fetch first ${nowD} rows only
+	</select>
+</mapper>
+
+
+
+
