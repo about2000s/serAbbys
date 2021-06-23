@@ -2,6 +2,6 @@
     pageEncoding="UTF-8"%>
 <div class="leftmenu">
 	<ul>
-		<li><a href="${cpath }/customer/crm">OneStopCRM</a></li>
+		<li><a href="${cpath }/custMemo/crm">OneStopCRM</a></li>
 	</ul>
 </div>
