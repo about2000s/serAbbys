@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.itbank.dao.OrderDAO;
+import com.itbank.dao.ReserveDAO;
 import com.itbank.dto.OrderDTO;
 import com.itbank.dto.PersonDTO;
 import com.itbank.dto.ReserveDTO;
@@ -19,7 +19,7 @@ import com.itbank.dto.ReviewBoardDTO;
 @Service
 public class OrderService {
 
-	@Autowired OrderDAO dao;
+	@Autowired ReserveDAO dao;
 	
 	public List<OrderDTO> selectall(HashMap<String, String> param) {
 		return dao.selectall(param);

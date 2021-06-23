@@ -6,25 +6,24 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.itbank.dao.CustomerDAO;
-import com.itbank.dto.CustomerDTO;
+import com.itbank.dao.CustMemoDAO;
 import com.itbank.dto.OrderDTO;
 
 @Service
-public class CustomerService {
+public class CustMemoService {
 	
 	@Autowired
-	private CustomerDAO dao;
+	private CustMemoDAO dao;
 
 	public List<OrderDTO> crmOrder(HashMap<String, String> param) {
 		return dao.crmOrder(param);
 	}
 
-	public List<HashMap<String, String>> selectList(int service_idx) {
-		return dao.selectList(service_idx);
+	public List<HashMap<String, String>> selectList(int reserve_idx) {
+		return dao.selectList(reserve_idx);
 	}
 
-	public int insert(CustomerDTO dto) {
+	public int insert(CustMemoDAO dto) {
 		return dao.insert(dto);
 	}
 

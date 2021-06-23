@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.itbank.service.CustomerService;
+import com.itbank.service.CustMemoService;
 import com.itbank.service.Hash;
 import com.itbank.service.PersonService;
 
@@ -23,7 +23,7 @@ import com.itbank.service.PersonService;
 public class PersonRestController {
 	
 	@Autowired private PersonService ps;
-	@Autowired private CustomerService cs; 
+	@Autowired private CustMemoService cs; 
 	
 	private ObjectMapper mapper = new ObjectMapper();
 	

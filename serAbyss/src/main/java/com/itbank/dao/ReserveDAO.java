@@ -13,28 +13,28 @@ import com.itbank.dto.PersonDTO;
 import com.itbank.dto.ReserveDTO;
 import com.itbank.dto.ReviewBoardDTO;
 
-public interface OrderDAO {
+public interface ReserveDAO {
 
 	List<OrderDTO> selectall(HashMap<String, String> param);
 
 	List<OrderDTO> selectStatus(HashMap<String, Object> param);
 
-	@Select("select * from service where service_idx=#{idx}")
+	@Select("select * from reserce where reserce_idx=#{idx}")
 	OrderDTO selectOne(int idx);
 
-	@Insert("insert into service (service_idx, service_custId, service_title, service_content, "
-			+ "service_status, service_address, service_engiId, service_compBelong, service_name, service_phone)"
-			+ "values (service_seq.nextval, #{service_custId}, #{service_title}, #{service_content}, "
-			+ "#{service_status}, #{service_address}, #{service_engiId}, "
-			+ "#{service_compBelong}, #{service_name}, #{service_phone})")
+	@Insert("insert into reserve (reserve_idx, reserve_custId, reserve_title, reserve_content, "
+			+ "reserve_status, reserve_address, reserve_engiId, reserve_compBelong, reserve_name, reserve_phone)"
+			+ "values (reserve_seq.nextval, #{reserve_custId}, #{reserve_title}, #{reserve_content}, "
+			+ "#{reserve_status}, #{reserve_address}, #{reserve_engiId}, "
+			+ "#{reserve_compBelong}, #{reserve_name}, #{reserve_phone})")
 	int order(OrderDTO dto);
 
-	@Update("update service set service_title=#{service_title}, service_content=#{service_content}, "
-			+ "service_reg=to_char(sysdate, 'yyyy-MM-dd hh24:mi') "
-			+ "where service_idx=#{service_idx}")
+	@Update("update reserve set reserve_title=#{reserve_title}, reserve_content=#{reserve_content}, "
+			+ "reserve_reg=to_char(sysdate, 'yyyy-MM-dd hh24:mi') "
+			+ "where reserve_idx=#{reserve_idx}")
 	int modify(OrderDTO dto);
 
-	@Delete("delete from service where service_idx=#{idx}")
+	@Delete("delete from reserve where reserve_idx=#{idx}")
 	int delete(int idx);
 
 	@Select("select * from reserve where reserve_year=#{reserve_year} and reserve_month=#{reserve_month} and reserve_day=#{reserve_day} and reserve_hour=#{reserve_hour} and reserve_engiId=#{reserve_engiId}")
@@ -48,11 +48,11 @@ public interface OrderDAO {
 //	int setReserve(ReserveDTO reserveDTO);
 	int selectBoardCountList(HashMap<String, String> param);
 
-	@Update("update service set service_status=#{service_status} where service_idx=#{service_idx}")
+	@Update("update reserve set reserve_status=#{reserve_status} where reserve_idx=#{reserve_idx}")
 	int change_status(OrderDTO dto);
 
-	@Select("select * from person where person_id=#{service_custId}")
-	PersonDTO selectOneById(String service_custId);
+	@Select("select * from person where person_id=#{reserve_custId}")
+	PersonDTO selectOneById(String reserve_custId);
 
 	@Insert("insert into reserve (reserve_idx, reserve_year, reserve_month, reserve_day, reserve_hour, reserve_engiId,  reserve_custId)" + 
 			"    values(reserve_seq.nextval, #{reserve_year}, #{reserve_month}, #{reserve_day}, #{reserve_hour}, #{reserve_engiId}, #{reserve_custId})")
@@ -61,7 +61,7 @@ public interface OrderDAO {
 	// order-order.xml에 있습니다
 	int statusListCount(HashMap<String, Object> map);
 
-	@Select("select * from review where review_idx=#{service_idx}")
-	ReviewBoardDTO alreadyReviewWrite(int service_idx);
+	@Select("select * from review where review_idx=#{reserve_idx}")
+	ReviewBoardDTO alreadyReviewWrite(int reserve_idx);
 
 }
