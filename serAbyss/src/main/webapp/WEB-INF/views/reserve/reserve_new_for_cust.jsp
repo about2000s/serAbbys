@@ -41,7 +41,7 @@
 						<h2>시간 선택(이미 예약이 되어있는 시간은 비어있습니다)</h2>
 						<c:forEach var = "i" items = "${engiIdList }">
 							<c:forEach var = "j" items = "${dayList }">
-								<c:forEach var = "k" items = "${reserveList }">
+								<c:forEach var = "k" items = "${reserveTimeList }">
 									<c:if test="${k.engiId == i && k.day == j }">
 										<div class = "${i }day${j } hiddenNone main">
 											<label><input type = "radio" name = "reserveTime_hour" value = "${k.hour }" class = "form-check-input">${k.hour }:00</label>
