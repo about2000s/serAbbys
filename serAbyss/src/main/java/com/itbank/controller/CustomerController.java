@@ -13,21 +13,21 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.dto.CustMemoDTO;
-import com.itbank.dto.OrderDTO;
+import com.itbank.dto.ReserveDTO;
 import com.itbank.service.CustMemoService;
 
 @Controller
-@RequestMapping("customer")
+@RequestMapping("custMemo")
 public class CustomerController {
 	
 	@Autowired
 	private CustMemoService cs;
 	
 	@PostMapping("/crm1")
-	public String customer(CustMemoDTO dto) {
+	public String custMemo(CustMemoDTO dto) {
 		System.out.println(dto);
 		
-		return "customer/crm";
+		return "custMemo/crm";
 	}
 		
 	@GetMapping("/crm")
@@ -36,15 +36,15 @@ public class CustomerController {
 	@PostMapping("/crm")
 	public ModelAndView crm(@RequestParam HashMap<String,String> param ) {
 		ModelAndView mav = new ModelAndView();
-		List<OrderDTO> list = cs.crmOrder(param); 
+		List<ReserveDTO> list = cs.crmOrder(param); 
 		mav.addObject("list", list);
 		return mav;
 	}
 	
-	@GetMapping("/crm?customer_service_idx=${customer_service_idx}")
-	public String selectRecord(@PathVariable Integer customer_service_idx) {
-		System.out.println(customer_service_idx);
-		return "customer/crm";
+	@GetMapping("/crm?custMemo_service_idx=${custMemo_service_idx}")
+	public String selectRecord(@PathVariable Integer custMemo_service_idx) {
+		System.out.println(custMemo_service_idx);
+		return "custMemo/crm";
 	}
 
 	

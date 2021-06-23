@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.itbank.dto.OrderDTO;
+import com.itbank.dto.ReserveDTO;
 import com.itbank.dto.PersonDTO;
 import com.itbank.dto.ReplyDTO;
 import com.itbank.dto.ReviewBoardDTO;
@@ -30,69 +30,34 @@ public class BoardController {
 
 	//리뷰글의 모든 리스트 보러 가기
 	@GetMapping("/review_list_all")//map에 page, type, keyword 담음
-	public ModelAndView boardListAll(@RequestParam HashMap<String, Object> map) {
+	public ModelAndView boardListAll(String type, String keyword, int page) {
 		ModelAndView mav = new ModelAndView("board/review_list_all");
-		
-		if(map.get("keyword") == null || map.get("keyword").equals("")) {
-			map.put("type", "review_title");
-			map.put("keyword", "");
-		}
-		
-		int page = Integer.parseInt(String.valueOf(map.get("page")));
-		int reviewBoardCount = bs.reviewBoardCount(map);
-		Paging paging = new Paging(page, reviewBoardCount);
-		map.put("offset", paging.getOffset());
-		map.put("nowD", paging.getNowD());
-		
-		List<ReviewBoardDTO> list = bs.reviewListAll(map);
-		bs.setStarInList(list);
-		
-		List<HashMap<String, Object>> mapList = new ArrayList<HashMap<String,Object>>();
-		for(int i=0;i<list.size();i++) {
-			HashMap<String, Object> hashmap = new HashMap<String, Object>();
-			hashmap.put("review_idx", list.get(i).getReview_idx());
-			hashmap.put("review_star", list.get(i).getStar());
-			hashmap.put("review_title", list.get(i).getReview_title());
-			hashmap.put("review_custId", list.get(i).getReview_custId());
-			hashmap.put("review_reg", list.get(i).getReview_reg());
-			hashmap.put("review_viewCount", list.get(i).getReview_viewCount());
-			hashmap.put("review_replyCount", bs.replyCount(list.get(i).getReview_idx()));
-			mapList.add(hashmap);
-		}
-		
-		
-		
-		
-		mav.addObject("mapList", mapList);
-		mav.addObject("paging", paging);
-		mav.addObject("list", list);
+		HashMap<String, Object> map = bs.reviewJob(type, keyword, page);
 		mav.addObject("map", map);
 		return mav;
 	}
 
 	//고객센터로 가기
-	@GetMapping("/serCen")
-	public ModelAndView serCen(String type, String keyword, int page) {
+	@GetMapping("/serCen")//map에 page, type, keyword 담음
+	public ModelAndView serCen(@RequestParam HashMap<String, Object> map) {
 		ModelAndView mav = new ModelAndView("board/faq");
-		if(keyword == null || keyword.equals("")) {
-			type = "serCen_title";
-			keyword = "";
-		}//map에 type, keyword, page, offset, nowD를 담을 거임
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("type", type);
-		map.put("keyword", keyword);
-		int boardCountFaq = bs.selectBoardCountFaq(map);
-		Paging paging = new Paging(page, boardCountFaq);
-		map.put("offset", paging.getOffset() + "");
-		map.put("nowD", paging.getNowD() + "");
+		if(map.get("keyword") == null || map.get("keyword").equals("")) {
+			map.put("type", "serCen_title");
+			map.put("keyword", "");
+		}
+		
+		int page = Integer.parseInt(String.valueOf(map.get("page")));
+		int faqBoardCount = bs.selectBoardCountFaq(map);
+		Paging paging = new Paging(page, faqBoardCount);
+		map.put("offset", paging.getOffset());
+		map.put("nowD", paging.getNowD());
+		
+		map.put("paging", paging);
 		
 		List<SerCenDTO> list = bs.faqList(map);
-		mav.addObject("paging", paging);
-		mav.addObject("page", page);
+		map.put("list", list);
+		mav.addObject("map", map);
 		mav.addObject("list", list);
-		mav.addObject("type", type);
-		mav.addObject("keyword", keyword);
-		mav.setViewName("board/faq");
 		
 		return mav;
 	}
@@ -192,7 +157,7 @@ public class BoardController {
 	@GetMapping("reviewWrite")
 	public ModelAndView reviewWrite(int service_idx) {
 		ModelAndView mav = new ModelAndView("board/reviewWrite");
-		OrderDTO dto = bs.selectOneByIdx(service_idx);
+		ReserveDTO dto = bs.selectOneByIdx(service_idx);
 		mav.addObject("dto", dto);
 		return mav;
 	}

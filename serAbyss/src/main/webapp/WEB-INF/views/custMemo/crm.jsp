@@ -8,22 +8,24 @@
 button { width:80px;height:35px}
 .textareastyle {width:40%; height:300px;} 
 </style>
-
 <div class="container">
+	
 	<div>
 		<h2>응대 기록 검색하기<br/></h2>
+		
 		<form method="POST">
 		<select name="selectedWord" style="height:35px;">
 			<option value="reserve_name">고객명</option>
 			<option value="reserve_phone">전화번호</option>
 			<option value="reserve_address">주소의 일부</option>
-			<option value="reserve_engiid">담당 엔지니어</option>
+			<option value="reserve_engiId">담당 엔지니어</option>
 			<option value="reserve_idx">서비스번호</option>
 		</select>
 		 <input type="text" name="word"/>
 		<button>검색</button>
 		</form>
 	</div>
+	
 	<div>
 	<table border="">
 		<tr>
@@ -45,6 +47,7 @@ button { width:80px;height:35px}
 			<td>${dto.reserve_engiId }</td>
 			<td>${dto.reserve_address }</td>
 			<td>${dto.reserve_phone } + sms + copy </td>
+			
 			<td>
 				<p><input class = "gao${dto.reserve_idx }" type = "hidden" name = "reserve_idx" value = "${dto.reserve_idx }"></p>
 				<input class = "gao${dto.reserve_idx }" id = "gao${dto.reserve_idx }" type = "button" value = "응대기록가져오기 ">
@@ -53,19 +56,22 @@ button { width:80px;height:35px}
 		</c:forEach>
 	</table>
 	</div>
+	
 	<br/><br/>
 	<div class = "gender">
 		<h2>가져온 응대기록</h2>
 	</div>
+	
 	<div>
 		<h2>기록 남기기</h2>
 			<form method="POST" id="insertForm">
-				<input type = "hidden" name="custMemo_reserve_idx" value="${dto.reserve_idx }">
+				<input type = "hidden" name="custMemo_service_idx" value="${dto.reserve_idx }">
 				<textarea class="textareastyle" name="custMemo_comments"></textarea>
 				<input name="insert-btn" type ="submit" value="다음">
 			</form>
 	</div>
 </div>
+
 
 <script>
 $(document).ready(function(){
@@ -75,7 +81,7 @@ $(document).ready(function(){
 			
 		$.ajax({
 			type : 'POST' ,
-			url : '${cpath}/custMemo/crm1',
+			url : '${cpath}/customer/crm1',
 			data : JSON.stringify(insertForm),
 			dataType:'json',
 			success : function(result){
@@ -88,6 +94,7 @@ $(document).ready(function(){
 	})
 });
 </script>
+
 
 <script>
 document.querySelectorAll('td > input').forEach(input => input.onclick = function(event){
@@ -123,7 +130,7 @@ document.querySelectorAll('td > input').forEach(input => input.onclick = functio
 			var commentsTd = document.createElement('td')
 			
 			var custMemo_reg = json[i].CUSTMEMO_REG
-			regTd.innerText = custMemo_reg
+			regTd.innerText = customer_reg
 			
 			var custMemo_comments = json[i].CUSTMEMO_COMMENTS
 			commentsTd.innerText = custMemo_comments

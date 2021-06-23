@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.itbank.dto.OrderDTO;
+import com.itbank.dto.ReserveDTO;
 import com.itbank.dto.ReplyDTO;
 import com.itbank.dto.ReviewBoardDTO;
 import com.itbank.dto.SerCenDTO;
@@ -18,7 +18,7 @@ public interface BoardDAO {
 	List<ReviewBoardDTO> boardListAll();
 
 	// sqlmap-board.xml에 있습니다
-	List<SerCenDTO> faqList(HashMap<String, String> map);
+	List<SerCenDTO> faqList(HashMap<String, Object> map);
 
 	@Select("select * from serCen where serCen_belong='notice'")
 	List<SerCenDTO> noticeList();
@@ -27,7 +27,7 @@ public interface BoardDAO {
 	SerCenDTO selectOneNotice(HashMap<String, String> map);
 
 	@Select("select count(*) from serCen where serCen_belong='faq' and ${type} like '%${keyword}%'")
-	int selectBoardCountFaq(HashMap<String, String> map);
+	int selectBoardCountFaq(HashMap<String, Object> map);
 
 	@Select("select * from review where review_idx=#{review_idx}")
 	ReviewBoardDTO selectOneReview(int review_idx);
@@ -38,8 +38,8 @@ public interface BoardDAO {
 	@Update("update review set review_viewCount=review_viewCount+1 where review_idx=#{review_idx}")
 	int reviewViewCountPlus(ReviewBoardDTO dto);
 
-	@Select("select * from reserve where reserve_idx=#{reserve_idx}")
-	OrderDTO selectOneByIdx(int reserve_idx);
+	@Select("select * from service where service_idx=#{service_idx}")
+	ReserveDTO selectOneByIdx(int service_idx);
 
 	// sqlmap-board.xml에 있습니다
 	int reviewWrite(ReviewBoardDTO dto);
@@ -54,7 +54,7 @@ public interface BoardDAO {
 			+ "values (reply_seq.nextval, #{reply_bnum}, #{reply_content}, #{reply_id})")
 	int replyWrite(ReplyDTO dto);
 
-	@Select("select * from reply where reply_bnum=#{review_idx}")
+	@Select("select * from reply where reply_bnum=#{review_idx} order by reply_reg desc")
 	List<ReplyDTO> replyList(int review_idx);
 
 	@Select("select count(*) from reply where reply_bnum=#{review_idx}")

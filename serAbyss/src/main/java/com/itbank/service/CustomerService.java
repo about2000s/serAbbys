@@ -11,7 +11,7 @@ import com.itbank.dto.CustMemoDTO;
 import com.itbank.dto.ReserveDTO;
 
 @Service
-public class CustMemoService {
+public class CustomerService {
 	
 	@Autowired
 	private CustMemoDAO dao;
@@ -20,8 +20,8 @@ public class CustMemoService {
 		return dao.crmReserve(param);
 	}
 
-	public List<HashMap<String, String>> selectList(int reserve_idx) {
-		return dao.selectList(reserve_idx);
+	public List<HashMap<String, String>> selectList(int service_idx) {
+		return dao.selectList(service_idx);
 	}
 
 	public int insert(CustMemoDTO dto) {
