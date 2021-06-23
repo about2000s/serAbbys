@@ -126,17 +126,17 @@ public class OrderController {
 	//글 삭제
 	@GetMapping("/delete/{idx}")
 	public ModelAndView delete(@PathVariable int idx) {
-		int row1 = os.deleteService(idx);
-		int row2 = os.cancelReserve(idx);//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@이거 해야 해
+//		int row1 = os.deleteService(idx);
+//		int row2 = os.cancelReserve(idx);//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@이거 해야 해
 		String msg;
-		if(row1 != 0 && row2 != 0) {
-			msg = "삭제가 완료되었습니다";
-		}
-		else {
-			msg = "삭제에 실패했습니다. 다시 시도해주세요";
-		}
+//		if(row1 != 0 && row2 != 0) {
+//			msg = "삭제가 완료되었습니다";
+//		}
+//		else {
+//			msg = "삭제에 실패했습니다. 다시 시도해주세요";
+//		}
 		ModelAndView mav = new ModelAndView("/order/order_result");
-		mav.addObject("msg", msg);
+//		mav.addObject("msg", msg);
 		mav.addObject("value", "delete");
 		return mav;
 	}

@@ -38,8 +38,8 @@ public interface BoardDAO {
 	@Update("update review set review_viewCount=review_viewCount+1 where review_idx=#{review_idx}")
 	int reviewViewCountPlus(ReviewBoardDTO dto);
 
-	@Select("select * from service where service_idx=#{service_idx}")
-	OrderDTO selectOneByIdx(int service_idx);
+	@Select("select * from reserve where reserve_idx=#{reserve_idx}")
+	OrderDTO selectOneByIdx(int reserve_idx);
 
 	// sqlmap-board.xml에 있습니다
 	int reviewWrite(ReviewBoardDTO dto);

@@ -12,19 +12,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.itbank.dto.CustomerDTO;
+import com.itbank.dto.CustMemoDTO;
 import com.itbank.dto.OrderDTO;
-import com.itbank.service.CustomerService;
+import com.itbank.service.CustMemoService;
 
 @Controller
 @RequestMapping("customer")
 public class CustomerController {
 	
 	@Autowired
-	private CustomerService cs;
+	private CustMemoService cs;
 	
 	@PostMapping("/crm1")
-	public String customer(CustomerDTO dto) {
+	public String customer(CustMemoDTO dto) {
 		System.out.println(dto);
 		
 		return "customer/crm";
