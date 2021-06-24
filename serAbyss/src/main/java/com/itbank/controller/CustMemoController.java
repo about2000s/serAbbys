@@ -27,10 +27,12 @@ public class CustMemoController {
 	public void crm() {}
 	
 	@PostMapping("/crm")
-	public ModelAndView crm(@RequestParam HashMap<String,String> param ) {
+	public ModelAndView crm(@RequestParam HashMap<String, String> map) {
 		ModelAndView mav = new ModelAndView();
-		List<ReserveDTO> list = cs.crmOrder(param); 
+		System.out.println(map);
+		List<ReserveDTO> list = cs.crmOrder(map);
 		mav.addObject("list", list);
+		mav.addObject("map", map);
 		return mav;
 	}
 	

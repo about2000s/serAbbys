@@ -42,7 +42,7 @@
 		<form>
 			<input type="hidden" name="page" value="1">
 			<select name="type" class = "form-control" style = "width: 10%; display: inline;">
-				<option value="reserve_title" selected>제목</option>
+				<option value="reserve_title">제목</option>
 				<option value="reserve_content">내용</option>
 				<option value="both">제목+내용</option>
 			</select>
@@ -68,5 +68,10 @@
 		</c:if>
 	</div>
 </div>
+
+<script>
+const type = document.querySelector('option[value="${map.type}"]')
+type.setAttribute('selected', 'selected')
+</script>
 
 <%@ include file="../layout/footer.jsp" %>

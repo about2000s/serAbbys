@@ -1,12 +1,10 @@
 package com.itbank.controller;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-import javax.servlet.jsp.PageContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,7 +19,6 @@ import com.itbank.dto.ReserveDTO;
 import com.itbank.dto.PersonDTO;
 import com.itbank.dto.ReserveTimeDTO;
 import com.itbank.service.ReserveService;
-import com.itbank.service.Paging;
 
 @Controller
 @RequestMapping("/reserve")
@@ -32,6 +29,7 @@ public class ReserveController {
 	@GetMapping("/statusList")
 	public ModelAndView statusList(String reserve_status, String type, String keyword, int page, HttpSession session) {
 		ModelAndView mav = new ModelAndView("/reserve/list");
+		System.out.println("type: " + type);
 		HashMap<String, Object> map = rs.job(reserve_status, type, keyword, page, session);
 		mav.addObject("map", map);
 		return mav;
