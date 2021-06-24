@@ -11002,6 +11002,11 @@ html {
   width: 15rem;
 }
 
+.masthead .masthead-mainimg {
+  width: 100%;
+}
+
+
 @media (min-width: 992px) {
   .masthead {
     padding-top: calc(6rem + 104px);
