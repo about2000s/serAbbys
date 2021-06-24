@@ -11,10 +11,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.itbank.dto.CustMemoDTO;
 import com.itbank.service.CustMemoService;
 import com.itbank.service.Hash;
 import com.itbank.service.PersonService;
@@ -26,6 +29,15 @@ public class PersonRestController {
 	@Autowired private CustMemoService cs; 
 	
 	private ObjectMapper mapper = new ObjectMapper();
+	
+	
+//	CustMemo 고객 응대기록 비동기통신
+	@PostMapping("/crm1")
+	public String crm(@RequestBody CustMemoDTO dto) {
+		System.out.println(dto);
+		cs.insert(dto);
+		return "success";
+	}
 	
 	@GetMapping(value = "/compSearch/{keyword}", produces = "application/json; charset=utf-8")
 	public String compSearch(@PathVariable String keyword) throws JsonProcessingException {

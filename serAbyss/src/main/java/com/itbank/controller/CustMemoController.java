@@ -18,17 +18,11 @@ import com.itbank.service.CustMemoService;
 
 @Controller
 @RequestMapping("custMemo")
-public class CustomerController {
+public class CustMemoController {
 	
 	@Autowired
 	private CustMemoService cs;
 	
-	@PostMapping("/crm1")
-	public String custMemo(CustMemoDTO dto) {
-		System.out.println(dto);
-		
-		return "custMemo/crm";
-	}
 		
 	@GetMapping("/crm")
 	public void crm() {}
