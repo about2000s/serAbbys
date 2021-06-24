@@ -435,6 +435,16 @@ $('#person_name').blur(function(){
     }
 </script>
 
-
-
+<script>
+	document.querySelectorAll('tr > td > label > input').forEach(input => input.onclick = function(event){
+		const className = event.target.className
+		console.log(className)
+		if(className == 'company'){
+			document.querySelector('tr.' + className).classList.remove('hiddenNone')
+		}
+		if(className == 'indi'){
+			document.querySelector('tr.' + 'company').classList.add('hiddenNone')
+		}
+	})
+</script>
 <%@ include file="../layout/footer.jsp"%>

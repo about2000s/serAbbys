@@ -9,10 +9,8 @@ button { width:80px;height:35px}
 .textareastyle {width:40%; height:300px;} 
 </style>
 <div class="container">
-	
 	<div>
 		<h2>응대 기록 검색하기<br/></h2>
-		
 		<form method="POST">
 		<select name="selectedWord" style="height:35px;">
 			<option value="reserve_name">고객명</option>
@@ -25,7 +23,6 @@ button { width:80px;height:35px}
 		<button>검색</button>
 		</form>
 	</div>
-	
 	<div>
 	<table border="">
 		<tr>
@@ -48,10 +45,12 @@ button { width:80px;height:35px}
 			<td>${dto.reserve_address }</td>
 			<td>${dto.reserve_phone } + sms + copy </td>
 			
-			<td>
-				<p><input class = "gao${dto.reserve_idx }" type = "hidden" name = "reserve_idx" value = "${dto.reserve_idx }"></p>
-				<input class = "gao${dto.reserve_idx }" id = "gao${dto.reserve_idx }" type = "button" value = "응대기록가져오기 ">
-			</td>
+			<%--<td>
+				<p><input class = "gao${dto.reserve_idx }" type="hidden" name="reserve_idx" value="${dto.reserve_idx }"></p>
+				<input class = "gao${dto.reserve_idx }" id="gao${dto.reserve_idx }" type="button" value="응대기록가져오기 ">
+			</td> --%>
+			<td><input type="hidden" id="custMemoIdx" name="custMemoIdx" value="${dto.reserve_idx }">
+				<input type="button" id="custMemoBtn" value="응대기록가져오기" ></td>
 		</tr>
 		</c:forEach>
 	</table>
@@ -65,94 +64,65 @@ button { width:80px;height:35px}
 	<div>
 		<h2>기록 남기기</h2>
 			<form method="POST" id="insertForm">
-				<input type = "hidden" name="custMemo_service_idx" value="${dto.reserve_idx }">
-				<textarea class="textareastyle" name="custMemo_comments"></textarea>
-				<input name="insert-btn" type ="submit" value="다음">
+				<input id="custMemoServiceIdx" type="hidden" name="custMemo_service_idx" value="${dto.reserve_idx }">
+				<textarea id="content" class="textareastyle" name="custMemo_comments"></textarea>
+				<input id="insertBtn" type="submit" value="다음">
 			</form>
 	</div>
 </div>
 
 
 <script>
-$(document).ready(function(){
-	$("#insertForm").submit(function(e){
- 		e.preventDefault()
-		console.log("commentbtn클릭");
-			
-		$.ajax({
-			type : 'POST' ,
-			url : '${cpath}/custMemo/crm1',
-			data : JSON.stringify(insertForm),
-			dataType:'json',
-			success : function(result){
-				alert("등록성공");
-			},
-			error:function(){
-				alert("실패");
-			}
-	});
+document.getElementById('custMemoBtn').onclick=function(e){
+	console.log('custMemoBtn 클릭')
+	event.preventDefault(); 
+	const url='${cpath}/custMemo/crmRead/{custMemoIdx}'
+	const opt = {
+		method : 'GET'			
+	}
+	console.log(url) 
+	fetch (url, opt)
+	.then (resp => resp.text())
+	.then (text => {
+		
+		if(text == 1 ) {
+			alert("성공")
+		} else {
+			alert("실패")
+		}
+		
 	})
-});
-</script>
+}
 
 
-<script>
-document.querySelectorAll('td > input').forEach(input => input.onclick = function(event){
-	const className = event.target.className
-	const reserve_idx = document.querySelector('input.' + className).value
+document.getElementById('insertForm').onsubmit= function(event) { //form을 submit하면
+	console.log('insert !')
+	event.preventDefault(); 										//기본작동을 막고
+	const formData = new FormData(event.target)						//submit된 form을 기반으로 formData를 생성
+																	//화면에 출력
+	// 여기서부터 ajax 
+	const url = '${cpath}/custMemo/crmInsert'
+	const opt = {
+			body: formData,
+ 			//headers: {
+ 			//'Content-Type' : 'application/json; charset=utf-8'
+			//formData를 직접 전송할 때는 header에 Content-Type을 명시하지 말자 
+			// form 이용하여 multipart/form-data 형식으로 전송할 때도, 컨텐트 타입을 명시하지 않는다.
+	}
 	
-	const url = '${cpath}/crm/' + reserve_idx
-	const opt = { 
-			method : 'GET'
-			}
-	fetch(url, opt).then(resp => resp.json())
-	.then(json => {
-		if(document.querySelector('table.' + 'counterListTable') != null){
-			document.querySelector('table.' + 'counterListTable').remove()
+	fetch(url, opt)
+	.then(resp => resp.text())
+	.then(text => {
+	//	console.log(text)
+		if(text == 1) {
+			event.target.reset();
+			alert('등록성공');
+		} else {
+			alert('등록실패')
 		}
-		if(document.querySelector('div.' + 'noServComment') != null){
-			document.querySelector('div.' + 'noServComment').remove()
-		}
-	if(json != ''){
-		const table = document.createElement('table')
-		table.classList.add('counterListTable')
-		const headTr = document.createElement('tr')
-		const regTh = document.createElement('th')
-		const commentsTh = document.createElement('th')
-		regTh.innerText = '응대 날짜'
-		commentsTh.innerText = '내용'
-		headTr.appendChild(regTh)
-		headTr.appendChild(commentsTh)
-		table.appendChild(headTr)
-		for(let i=0;i<json.length;i++){
-			var contentTr = document.createElement('tr')
-			var regTd = document.createElement('td')
-			var commentsTd = document.createElement('td')
-			
-			var custMemo_reg = json[i].CUSTMEMO_REG
-			regTd.innerText = customer_reg
-			
-			var custMemo_comments = json[i].CUSTMEMO_COMMENTS
-			commentsTd.innerText = custMemo_comments
-			
-			contentTr.appendChild(regTd)
-			contentTr.appendChild(commentsTd)
-			
-			table.appendChild(contentTr)
-		}
-		document.querySelector('div.' + 'gender').appendChild(table)
-	}
-	else{
-		const div = document.createElement('div')
-		div.classList.add('noServComment')
-		div.innerText = '응대기록이 없습니다'
-		document.querySelector('div.' + 'gender').appendChild(div)
-	}
 	})
-})
-
+}
 </script>
-
 
 
 <%@ include file="../layout/footer.jsp" %>
