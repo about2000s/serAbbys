@@ -20,6 +20,9 @@ public interface CustMemoDAO {
 	@Insert("insert into custMemo values (custMemo_seq.nextval , #{custMemo_comments}, to_char(sys_date,'yyyy-MM-dd hh24:mi'), #{custMemo_reserve_idx})")
 	int insert(CustMemoDTO dto);
 	
+	@Select("select * from custMemo where custMemo_reserve_idx=${reserve_idx}") //고객 응대 기록 가져오기
+	List<CustMemoDTO> crmRead(int reserve_idx);
+	
 	
 	//@Insert("insert into customer values ( customer_seq.nextval , customer_comments=${custMemo} , "
 		//	+ "customer_reg=to_char(sysdate, 'yyyy-MM-dd hh24:mi') , customer_reserve_idx=${reserve_idx}" )

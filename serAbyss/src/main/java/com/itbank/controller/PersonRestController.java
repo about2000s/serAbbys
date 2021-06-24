@@ -11,10 +11,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.itbank.dto.CustMemoDTO;
 import com.itbank.service.CustMemoService;
 import com.itbank.service.Hash;
 import com.itbank.service.PersonService;
@@ -26,6 +29,19 @@ public class PersonRestController {
 	@Autowired private CustMemoService cs; 
 	
 	private ObjectMapper mapper = new ObjectMapper();
+	
+	@GetMapping(value = "/custMemo/crmRead/{reserve_idx}")
+	public String crmRead(@PathVariable int reserve_idx) throws JsonProcessingException {
+		List<CustMemoDTO> list = cs.crmRead(reserve_idx);
+		String json = mapper.writeValueAsString(list);
+		return json;
+	}
+	
+	@PostMapping("/custMemo/crmInsert")
+	public String crmInsert(@RequestBody CustMemoDTO dto) {
+		cs.insert(dto);
+		return "Success";
+	}
 	
 	@GetMapping(value = "/compSearch/{keyword}", produces = "application/json; charset=utf-8")
 	public String compSearch(@PathVariable String keyword) throws JsonProcessingException {
