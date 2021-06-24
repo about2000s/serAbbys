@@ -28,7 +28,7 @@ public class CustMemoService {
 		return dao.insert(dto);
 	}
 
-	public List<CustMemoDTO> crmRead(int reserve_idx) {
+	public List<HashMap<String, String>> crmRead(int reserve_idx) {
 		return dao.crmRead(reserve_idx);
 	}
 

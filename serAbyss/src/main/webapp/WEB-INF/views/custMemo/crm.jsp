@@ -49,7 +49,7 @@ button { width:80px;height:35px}
 				<p><input class = "gao${dto.reserve_idx }" type="hidden" name="reserve_idx" value="${dto.reserve_idx }"></p>
 				<input class = "gao${dto.reserve_idx }" id="gao${dto.reserve_idx }" type="button" value="응대기록가져오기 ">
 			</td> --%>
-			<td><input type="hidden" id="custMemoIdx" name="custMemoIdx" value="${dto.reserve_idx }">
+			<td><input type="hidden" id="reserve_idx" value="${dto.reserve_idx }">
 				<input type="button" id="custMemoBtn" value="응대기록가져오기" ></td>
 		</tr>
 		</c:forEach>
@@ -57,8 +57,8 @@ button { width:80px;height:35px}
 	</div>
 	
 	<br/><br/>
-	<div class = "gender">
 		<h2>가져온 응대기록</h2>
+	<div class = "gender" id = "apple">
 	</div>
 	
 	<div>
@@ -73,22 +73,22 @@ button { width:80px;height:35px}
 
 
 <script>
-document.getElementById('custMemoBtn').onclick=function(e){
-	console.log('custMemoBtn 클릭')
-	event.preventDefault(); 
-	const url='${cpath}/custMemo/crmRead/{custMemoIdx}'
+document.getElementById('custMemoBtn').onclick=function(event){
+// 	event.preventDefault();
+	const idx = document.getElementById('reserve_idx').value
+	const url='${cpath}/custMemo/crmList/' + idx
 	const opt = {
 		method : 'GET'			
 	}
-	console.log(url) 
+	console.log(url)
 	fetch (url, opt)
-	.then (resp => resp.text())
-	.then (text => {
-		
-		if(text == 1 ) {
-			alert("성공")
-		} else {
-			alert("실패")
+	.then (resp => resp.json)
+	.then (json => {
+		if(json == ''){
+			document.getElementById('apple').innerText = '결과 없음'
+		}
+		else{
+			
 		}
 		
 	})

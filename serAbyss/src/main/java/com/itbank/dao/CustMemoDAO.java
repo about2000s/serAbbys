@@ -21,7 +21,7 @@ public interface CustMemoDAO {
 	int insert(CustMemoDTO dto);
 	
 	@Select("select * from custMemo where custMemo_reserve_idx=${reserve_idx}") //고객 응대 기록 가져오기
-	List<CustMemoDTO> crmRead(int reserve_idx);
+	List<HashMap<String, String>> crmRead(int reserve_idx);
 	
 	
 	//@Insert("insert into customer values ( customer_seq.nextval , customer_comments=${custMemo} , "

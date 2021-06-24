@@ -30,9 +30,9 @@ public class PersonRestController {
 	
 	private ObjectMapper mapper = new ObjectMapper();
 	
-	@GetMapping(value = "/custMemo/crmRead/{reserve_idx}")
+	@GetMapping(value = "/custMemo/crmList/{reserve_idx}")
 	public String crmRead(@PathVariable int reserve_idx) throws JsonProcessingException {
-		List<CustMemoDTO> list = cs.crmRead(reserve_idx);
+		List<HashMap<String, String>> list = cs.crmRead(reserve_idx);
 		String json = mapper.writeValueAsString(list);
 		return json;
 	}
