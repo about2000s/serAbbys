@@ -3,12 +3,11 @@
 <%@ include file="../layout/header.jsp" %>
 <div>
 	<form id = "repwCheck" method = "post" action = "pwUpdateResult">
-		<p><input type = "hidden" name = "person_id" value = "${login.person_id }"></p>
-		<p>새 비밀번호 입력: <input type = "password" id = "person_pw" name = "person_pw"></p>
+		새 비밀번호 입력: <input type = "password" id = "person_pw" name = "person_pw" class= "form-control" style = "width: 15%;">
 		<div class = "check_font" id = "pw_check"></div>
-		<p>새 비밀번호 확인: <input type = "password" id = "person_pw2" name = "person_pw2"></p>
+		새 비밀번호 확인: <input type = "password" id = "person_pw2" name = "person_pw2" class= "form-control" style = "width: 15%;">
 		<div class = "check_font" id = "pw2_check"></div>
-		<input type = "submit" value = "다음">
+		<input type = "submit" value = "다음" class = "btn btn-primary btn-xl">
 	</form>
 </div>
 <script>

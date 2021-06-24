@@ -178,18 +178,23 @@ public class PersonService {
 		
 		return authNumber;
 	}
-	public int updateEmail(HashMap<String, String> map) {
-		return dao.updateEmail(map);
+	
+	public int updateEmail(PersonDTO dto) {
+		return dao.updateEmail(dto);
 	}
-	public int updateAddress(HashMap<String, String> map) {
-		return dao.updateAddress(map);
+	
+	public int updateAddress(PersonDTO dto) {
+		return dao.updateAddress(dto);
 	}
+	
 	public PersonDTO selectOneById(String login_id) {
 		return dao.selectOneById(login_id);
 	}
+	
 	public int updateFax(PersonDTO login) {
 		return dao.updateFax(login);
 	}
+	
 	public int updateCall(PersonDTO login) {
 		return dao.updateCall(login);
 	}

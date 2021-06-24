@@ -25,7 +25,6 @@
 	<button onclick = "location.href='${cpath}/common/selectIndiComp?say=pw'" class = "btn btn-primary btn-xl" type = "submit">비밀번호 재발급</button>
 	<br>
 	회원이 아니세요? <button onclick = "location.href='${cpath}/common/join'" class = "btn btn-primary btn-xl">로그인</button>
-
 </div>
 
 

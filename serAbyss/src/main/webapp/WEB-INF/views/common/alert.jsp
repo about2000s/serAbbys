@@ -7,7 +7,7 @@
 	alert('${msg}');
 	
 	if('${value}' == 'myPageUpdateSuccess') location.replace('${cpath}/common/myPage')
-	if('${value}' == 'myPageUpdateFail') location.replace('history.go(-1)')
+	if('${value}' == 'myPageUpdateFail') location.replace('javascript:history.go(-1)')
 </script>
 
 <%@ include file="../layout/footer.jsp" %>

@@ -8,26 +8,24 @@
 		이메일: ${login.person_email }<a class = "email btn btn-primary btn-xl">수정</a>
 		<div class = "email main hiddenNone">
 			<h2>이메일 변경을 위해서 인증이 필요합니다</h2>
-			<input type = "email" name = "newEmail" id = "newEmail" placeholder="새로운 이메일을 입력 후 인증이 필요합니다" class = "form-control" style = "width: 20%">
-			<button id = "receiveAuthBtn" class = "btn-primary btn-xl">인증번호 받기</button>
-			
-			<div class = "check_font" id = "email_checkDiv"></div>
-			
-			<div class = "hiddenNone" id = "authMailDiv">
-				<h2>인증번호 입력</h2>
-				<div>
-					<input type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호를 입력하시오" class = "form-control" style = "width: 20%">
-					<button id = "injung" class = "btn-primary btn-xl">인증하기</button>
+			<form action = "${cpath}/common/replaceEmail" method = "post">
+				<input type = "email" name = "newEmail" placeholder="새로운 이메일을 입력 후 인증이 필요합니다" class = "form-control" style = "width: 20%">
+				<button id = "receiveAuthBtn" class = "btn-primary btn-xl">인증번호 받기</button>
+				
+				<div class = "check_font" id = "email_checkDiv"></div>
+				
+				<div class = "hiddenNone" id = "authMailDiv">
+					<h2>인증번호 입력</h2>
+					<div>
+						<input type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호를 입력하시오" class = "form-control" style = "width: 20%">
+						<button id = "injung" class = "btn-primary btn-xl">인증하기</button>
+					</div>
+					<div id = "injungSuccessDiv"></div>
+					<div class = "hiddenNone" id = "injungform">
+						<button type = "submit" class = "btn btn-primary btn-xl">변경하기</button>
+					</div>
 				</div>
-				<div id = "injungSuccessDiv"></div>
-				<div class = "hiddenNone" id = "injungform">
-					<form action = "${cpath}/common/replaceEmail" method = "post">
-						<input type="hidden" name="login_id" value="${login.person_id }">
-						<input type="hidden" id="replaceEmail" name="replaceEmail">
-						<button type = "submit" class = "btn btn-primary btn-xl"></button>
-					</form>
-				</div>
-			</div>
+			</form>
 		</div>
 	<hr>
 	</div>
@@ -75,7 +73,6 @@
 		<div class = "address main hiddenNone">
 			<form action = "${cpath}/common/replaceAddress" method = "post">
 				<label>주소</label><br>
-				<input type="hidden" name="person_id" value="${login.person_id }">
 				<input type="text" id="postcode" placeholder="우편번호" class= "form-control" style = "width: 10%; display: inline;">
 				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-xl" style = "width: 10%;">
 				<input type="text" id="address" name = "address" placeholder="주소" class= "form-control" style = "width: 20%;"><br>

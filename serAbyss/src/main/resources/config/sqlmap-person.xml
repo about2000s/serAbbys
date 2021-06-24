@@ -42,7 +42,7 @@
 	
 	<select id="selectOneCheckIdPw" parameterType="person" resultType="int">
 		select count(*) from person 
-		where person_id=#{person_id} and person_pw=#{person_pw} and person_check=#{person_check}
+		where person_id=#{person_id} and person_pw=#{person_pw}
 	</select>
 	
 	<select id="companyLogin" parameterType="person" resultType="person">
