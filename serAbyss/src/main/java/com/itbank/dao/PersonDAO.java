@@ -27,7 +27,7 @@ public interface PersonDAO {
 	@Select("select person_id from person where person_name=#{person_name} and person_phone=#{person_phone}")
 	String findIdByPhone(PersonDTO inputData);
 	
-	@Select("select person_id from person where person_name=#{person_name} and person_phone=#{person_phone}")
+	@Select("select person_id from person where person_name=#{person_name} and person_email=#{person_email}")
 	String findIdByEmail(PersonDTO inputData);
 	
 	
@@ -69,5 +69,13 @@ public interface PersonDAO {
 	@Select("select * from person where person_id=#{login_id}")
 	PersonDTO selectOneById(String login_id);
 
+	@Select("select count(*) from person where person_name=#{person_name} and person_email=#{person_email}")
+	int emailNameCheck(PersonDTO inputData);
+	
+	@Select("select count(*) from person where person_id=#{person_id} and person_email=#{person_email}")
+	int emailIdCheck(PersonDTO inputData);
+
+	@Update("update person set person_pw=#{person_pw} where person_id=#{person_id}")
+	void replacePw(PersonDTO inputData);
 	
 }
