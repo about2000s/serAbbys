@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
-<h2>비밀번호 수정하는 페이지!</h2>
 <div>
 	<form id = "repwCheck" method = "post" action = "pwUpdateResult">
 		<p><input type = "hidden" name = "person_id" value = "${login.person_id }"></p>
