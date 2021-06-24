@@ -99,6 +99,7 @@ public class PersonService {
 	public int updatePw(PersonDTO inputData) {
 //		String hash = getHash(inputData.getPerson_pw());
 //		inputData.setPerson_pw(getHash(hash));
+		System.out.println("여긴 서비스");
 		inputData.setPerson_pw(getHash(inputData.getPerson_pw()));
 		return dao.updatePw(inputData);
 	}
@@ -185,6 +186,19 @@ public class PersonService {
 	}
 	public PersonDTO selectOneById(String login_id) {
 		return dao.selectOneById(login_id);
+	}
+	public int emailNameCheck(PersonDTO inputData) {
+		return dao.emailNameCheck(inputData);
+	}
+	public int emailIdCheck(PersonDTO inputData) {
+		return dao.emailIdCheck(inputData);
+	}
+	public String findPwByEmail(PersonDTO inputData) {
+		String authNumber = getAuthNumber();
+		String hashNumber = Hash.getHash(authNumber);
+		inputData.setPerson_pw(hashNumber);
+		dao.replacePw(inputData);
+		return authNumber;
 	}
 }
 

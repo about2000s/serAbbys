@@ -5,7 +5,7 @@
 
 <script>
 	alert("${msg}");
-	location.href = "history.go(-1)";
+	location.href = "${link}";
 </script>
 
 <%@ include file="../layout/footer.jsp" %>

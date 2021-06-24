@@ -32,6 +32,13 @@
 						<pre>${dto.reserve_content }</pre>
 					</td>
 				</tr>
+				<c:forEach var="memo" items="${list}">
+					<tr>
+						<td colspan="4" height="200px">
+							<pre>${memo.custMemo_comments }</pre>
+						</td>
+					</tr>
+				</c:forEach>
 				<tr>
 					<td align="right" colspan="4">
 			 			<c:if test="${login.person_check eq 'y'}">

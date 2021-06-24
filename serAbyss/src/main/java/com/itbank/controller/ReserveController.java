@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.dto.ReserveDTO;
+import com.itbank.dto.CustMemoDTO;
 import com.itbank.dto.PersonDTO;
 import com.itbank.dto.ReserveTimeDTO;
 import com.itbank.service.ReserveService;
@@ -86,9 +87,13 @@ public class ReserveController {
 	@GetMapping("/read/{reserve_idx}")
 	public ModelAndView read(@PathVariable int reserve_idx, @RequestParam HashMap<String, Object> map) {
 		Boolean flag = rs.alreadyReviewWrite(reserve_idx);//flag==true라면 리뷰글이 작성된 상태
+		List<CustMemoDTO> list = rs.custMemoList(reserve_idx);
+		System.out.println("리스트 출력확인");
+		System.out.println(list.toString());
 		System.out.println("flag: " + flag);
 		ModelAndView mav = new ModelAndView("/reserve/read");
 		ReserveDTO dto = rs.selectOne(reserve_idx);
+		mav.addObject("list", list);
 		mav.addObject("dto", dto);
 		mav.addObject("map", map);
 		mav.addObject("flag", flag);
