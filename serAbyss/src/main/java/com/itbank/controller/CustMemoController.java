@@ -22,8 +22,7 @@ public class CustMemoController {
 	
 	@Autowired
 	private CustMemoService cs;
-	
-		
+			
 	@GetMapping("/crm")
 	public void crm() {}
 	
@@ -35,27 +34,11 @@ public class CustMemoController {
 		return mav;
 	}
 	
-	@GetMapping("/crm?custMemo_service_idx=${custMemo_service_idx}")
-	public String selectRecord(@PathVariable Integer custMemo_service_idx) {
-		System.out.println(custMemo_service_idx);
+	@GetMapping("/crm?custMemo_reserve_idx=${custMemo_reserve_idx}")
+	public String selectRecord(@PathVariable Integer custMemo_reserve_idx) {
+		System.out.println(custMemo_reserve_idx);
 		return "custMemo/crm";
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

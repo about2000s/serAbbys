@@ -30,13 +30,17 @@ public class PersonRestController {
 	
 	private ObjectMapper mapper = new ObjectMapper();
 	
+	@GetMapping(value = "/custMemo/crmList/{reserve_idx}")
+	public String crmRead(@PathVariable int reserve_idx) throws JsonProcessingException {
+		List<HashMap<String, String>> list = cs.crmRead(reserve_idx);
+		String json = mapper.writeValueAsString(list);
+		return json;
+	}
 	
-//	CustMemo 고객 응대기록 비동기통신
-	@PostMapping("/crm1")
-	public String crm(@RequestBody CustMemoDTO dto) {
-		System.out.println(dto);
+	@PostMapping("/custMemo/crmInsert")
+	public String crmInsert(@RequestBody CustMemoDTO dto) {
 		cs.insert(dto);
-		return "success";
+		return "Success";
 	}
 	
 	@GetMapping(value = "/compSearch/{keyword}", produces = "application/json; charset=utf-8")

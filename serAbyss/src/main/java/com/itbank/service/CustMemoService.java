@@ -28,6 +28,10 @@ public class CustMemoService {
 		return dao.insert(dto);
 	}
 
+	public List<HashMap<String, String>> crmRead(int reserve_idx) {
+		return dao.crmRead(reserve_idx);
+	}
+
 
 
 //	public List<CustomerDTO> csCommentWrite(HashMap<String, String> param) {
