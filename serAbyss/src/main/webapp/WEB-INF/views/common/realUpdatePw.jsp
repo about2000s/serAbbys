@@ -6,7 +6,9 @@
 	<form id = "repwCheck" method = "post" action = "pwUpdateResult">
 		<p><input type = "hidden" name = "person_id" value = "${login.person_id }"></p>
 		<p>새 비밀번호 입력: <input type = "password" id = "person_pw" name = "person_pw"></p>
+		<div class = "check_font" id = "pw_check"></div>
 		<p>새 비밀번호 확인: <input type = "password" id = "person_pw2" name = "person_pw2"></p>
+		<div class = "check_font" id = "pw2_check"></div>
 		<input type = "submit" value = "다음">
 	</form>
 </div>
@@ -23,6 +25,7 @@
 		}
 	}
 </script>
+
 <script>
 	//비밀번호 체크
 	$('#person_pw').blur(function(){

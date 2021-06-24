@@ -3,40 +3,41 @@
 <%@ include file="../layout/header.jsp"%>
 
 <style>
-	* {margin:0;padding:0;}
-	html {height:100%;}
-	body {height:100%; font-family: 'Noto Sans KR';}
-	img {border:0; }
-	h1 { float:left; padding:0 0 0 0px;}
-	h2 {padding:0 0 0 0px;}
-	ul, li { list-style:none;}
-	ul{list-style:none; }
-	.form-control{
-		width:15vw;
-	}
-	.container{width:100%;}
-	.wrap{max-width:960px; margin: 0 auto;}
-	.wrap.wd668{max-width:768px;}
-	.join_form{max-width:90vw;}
-	.wrap.wd668{width:90vw;}
-	.btn.btn-primary.btn-xl {
-		width: 11vw;
-		height: 30px;
-		position: relative;
-        left: 170px;
-        font-size:15px;
-	}
-	span {
-		margin: 10px;
-		text-indent: 0;
-		font-size:15px;
-	}
-	th {
-		width: 20%;
-	}
-	.hiddenNone {
-		display: none;
-	}
+/* 	* {margin:0;padding:0;} */
+/* 	html {height:100%;} */
+/* 	body {height:100%; font-family: 'Noto Sans KR';} */
+/* 	img {border:0; } */
+/* 	h1 { float:left; padding:0 0 0 0px;} */
+/* 	h2 {padding:0 0 0 0px;} */
+/* 	ul, li { list-style:none;} */
+/* 	ul{list-style:none; } */
+/* 	.form-control{ */
+/* 		width:15vw; */
+/* 	} */
+/* 	.container{width:100%;} */
+/* 	.wrap{max-width:960px; margin: 0 auto;} */
+/* 	.wrap.wd668{max-width:864px;} */
+/* 	.join_form{max-width:90vw;} */
+/* 	.wrap.wd668{width:90vw;} */
+/* 	.btn.btn-primary.btn-xl { */
+/* 		width: 11vw; */
+/* 		height: 30px; */
+/* 		position: relative; */
+/*         left: 170px; */
+/*         font-size:15px; */
+/*         text-align:center; */
+/* 	} */
+/* 	span { */
+/* 		margin: 10px; */
+/* 		text-indent: 0; */
+/* 		font-size:15px; */
+/* 	} */
+/* 	th { */
+/* 		width: 15%; */
+/* 	} */
+/* 	.hiddenNone { */
+/* 		display: none; */
+/* 	} */
 </style>
 
 <link rel = "stylesheet" href = "https://www.w3schools.com/w3css/4/w3.css">
