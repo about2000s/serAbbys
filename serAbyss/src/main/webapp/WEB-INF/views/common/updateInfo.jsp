@@ -4,76 +4,116 @@
 <!-- style hiddenNone있던거 삭제하고 css로 옮겼습니다. 정재훈6월10일 9:42 -->
 <h2>개인정보 수정하는 곳입니다.</h2>
 <div>
-	<!-- 수정 버튼 누르면 취소 버튼으로 탈바꿈한다. 그때 또 취소 버튼을 누르면 div가 hiddenNone된다. -->
-		<p>이메일: ${login.person_email }<a class = "email">수정</a>
-		</p>
+	<div>
+		이메일: ${login.person_email }<a class = "email btn btn-primary btn-xl">수정</a>
 		<div class = "email main hiddenNone">
 			<h2>이메일 변경을 위해서 인증이 필요합니다</h2>
-			<input type = "email" name = "newEmail" id = "newEmail" placeholder="새로운 이메일을 입력 후 인증이 필요합니다">
-			<button id = "receiveAuthBtn">인증번호 받기</button>
+			<input type = "email" name = "newEmail" id = "newEmail" placeholder="새로운 이메일을 입력 후 인증이 필요합니다" class = "form-control" style = "width: 20%">
+			<button id = "receiveAuthBtn" class = "btn-primary btn-xl">인증번호 받기</button>
 			
 			<div class = "check_font" id = "email_checkDiv"></div>
 			
 			<div class = "hiddenNone" id = "authMailDiv">
 				<h2>인증번호 입력</h2>
 				<div>
-					<input type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호를 입력하시오">
-					<button id = "injung">인증하기</button>
+					<input type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호를 입력하시오" class = "form-control" style = "width: 20%">
+					<button id = "injung" class = "btn-primary btn-xl">인증하기</button>
 				</div>
 				<div id = "injungSuccessDiv"></div>
 				<div class = "hiddenNone" id = "injungform">
 					<form action = "${cpath}/common/replaceEmail" method = "post">
 						<input type="hidden" name="login_id" value="${login.person_id }">
 						<input type="hidden" id="replaceEmail" name="replaceEmail">
-						<input type="submit" value="수정">
+						<button type = "submit" class = "btn btn-primary btn-xl"></button>
 					</form>
 				</div>
 			</div>
 		</div>
-		
-		<p>폰번호: <input type = "text" name = "person_phone" value = "${login.person_phone }"><a class = "phone">수정</a></p>
+	<hr>
+	</div>
+	<div>
+		폰번호: ${login.person_phone }<a class = "phone btn btn-primary btn-xl">수정</a>
 		<div class = "phone main hiddenNone">
 			<h2>폰번호 변경을 위해서 인증이 필요합니다</h2>
-			<p>
-				<input type = "email" name = "newPhone" placeholder="새로운 폰번호를 입력 후 인증이 필요합니다">
-				<button>인증번호 받기</button>
-			</p>
+			<input type = "email" name = "newPhone" placeholder="새로운 폰번호를 입력 후 인증이 필요합니다" class = "form-control" style = "width: 20%">
+			<button class = "btn btn-primary btn-xl">인증번호 받기</button>
 		</div>
-		
+	<hr>
+	</div>
+	<div>
 		<c:if test="${login.person_call != null }">
-			<p>유선전화번호: <input type = "text" name = "person_call" value = "${login.person_call }"><a class = "call">수정</a></p>
-			<div class = "call main hiddenNone">
-				<p><input type = "text" name = "newCall" placeholder="새로운 유선전화 입력"></p>
-				<input type = "submit" value = "다음">
-			</div>
+			유선전화번호: ${login.person_call }<a class = "call btn btn-primary btn-xl">수정</a>
 		</c:if>
-		
+		<c:if test="${login.person_call == null }">
+			유선전화가 없습니다! <a class = "call btn btn-primary btn-xl">추가하기</a>
+		</c:if>
+		<div class = "call main hiddenNone">
+			<form action = "${cpath}/common/replaceCall" method = "post">
+				<input type = "text" name = "newCall" placeholder="새로운 유선전화 입력" class= "form-control" style = "width: 20%">
+				<button type = "submit" class = "btn btn-primary btn-xl">다음</button>
+			</form>
+		</div>
+	<hr>
+	</div>
+	<div>
 		<c:if test="${login.person_fax != null }">
-			<p>팩스: <input type = "text" name = "person_fax" value = "${login.person_fax }"><a class = "fax">수정</a></p>
-			<div class = "fax main hiddenNone">
-				<p><input type = "text" name = "newPax" placeholder="새로운 팩스 입력"></p>
-				<input type = "submit" value = "다음">
-			</div>
+			팩스: ${login.person_fax }<a class = "fax btn btn-primary btn-xl">수정</a>
 		</c:if>
-		
-		<p>주소: <input type = "text" name = "person_address" value = "${login.person_address }"><a class = "address" >수정</a></p>
+		<c:if test="${login.person_fax == null }">
+			팩스가 없습니다! <a class = "fax btn btn-primary btn-xl">추가하기</a>
+		</c:if>
+		<div class = "fax main hiddenNone">
+			<form action = "${cpath}/common/replaceFax" method = "post">
+				<input type = "text" name = "newFax" placeholder="새로운 팩스 입력" class= "form-control" style = "width: 20%">
+				<input type = "submit" value = "다음" class = "btn btn-primary btn-xl">
+			</form>
+		</div>
+		<hr>
+	</div>
+	<div>
+		주소: ${login.person_address }<a class = "address btn btn-primary btn-xl">수정</a>
 		<div class = "address main hiddenNone">
 			<form action = "${cpath}/common/replaceAddress" method = "post">
 				<label>주소</label><br>
-				<input type="hidden" name="login_id" value="${login.person_id }">
-				<input type="text" id="postcode" placeholder="우편번호">
-				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-				<input type="text" id="address" name = "address" placeholder="주소"><br>
-				<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소">
-				<input type="text" id="extraAddress" placeholder="참고항목">
-				<input type="submit" value="수정">
+				<input type="hidden" name="person_id" value="${login.person_id }">
+				<input type="text" id="postcode" placeholder="우편번호" class= "form-control" style = "width: 10%; display: inline;">
+				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-xl" style = "width: 10%;">
+				<input type="text" id="address" name = "address" placeholder="주소" class= "form-control" style = "width: 20%;"><br>
+				<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소" class= "form-control" style = "width: 9.8%; display: inline;">
+				<input type="text" id="extraAddress" placeholder="참고항목" class= "form-control" style = "width: 9.8%; display: inline;">
+				<button type = "submit" class = "btn btn-primary btn-xl">수정</button>
 			</form>
 		</div>
-		
-		<button onclick = "history.go(-1);">뒤로 가기</button>
-		
-	
+	</div>
+	<button onclick = "history.go(-1);" class = "btn btn-primary btn-xl">뒤로 가기</button>
 </div>
+
+<script>
+	document.querySelectorAll('a').forEach(a => a.onclick = function(event){
+		const className = event.target.classList.item(0)
+		console.log(className)
+		var status = document.querySelector('a.' + className).innerText
+		if(status == '수정'){
+			document.querySelector('a.' + className).innerText = '취소'
+			document.querySelector('div.' + className).classList.remove('hiddenNone')
+		}
+		if(status == '취소'){
+			document.querySelector('a.' + className).innerText = '수정'
+			document.querySelector('div.' + className).classList.add('hiddenNone')
+		}
+		
+		if(status == '추가하기'){
+			document.querySelector('a.' + className).innerText = '취소 '
+			document.querySelector('div.' + className).classList.remove('hiddenNone')
+		}
+		if(status == '취소 '){
+			document.querySelector('a.' + className).innerText = '수정'
+			document.querySelector('div.' + className).classList.add('hiddenNone')
+		}
+		
+	})
+	
+</script>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
@@ -199,23 +239,7 @@ document.getElementById('injung').onclick = injungHandler
 
 </script>
 
-<script>
-	document.querySelectorAll('div > p > a').forEach(a => a.onclick = function(event){
-		const className = event.target.className
-		var status = document.querySelector('a.' + className).innerText
-		if(status == '수정'){
-			document.querySelector('a.' + className).innerText = '취소'
-			document.querySelector('div.' + className).classList.remove('hiddenNone')
-		}
-		if(status == '취소'){
-			document.querySelector('a.' + className).innerText = '수정'
-			document.querySelector('div.' + className).classList.add('hiddenNone')
-		}
-		
-	})
-	
-	
-</script>
+
 
 
 <%@ include file="../layout/footer.jsp" %>

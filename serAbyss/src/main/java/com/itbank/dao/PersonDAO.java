@@ -69,5 +69,11 @@ public interface PersonDAO {
 	@Select("select * from person where person_id=#{login_id}")
 	PersonDTO selectOneById(String login_id);
 
+	@Update("update person set person_fax=#{person_fax} where person_idx=#{person_idx}")
+	int updateFax(PersonDTO login);
+
+	@Update("update person set person_call=#{person_call} where person_idx=#{person_idx}")
+	int updateCall(PersonDTO login);
+
 	
 }

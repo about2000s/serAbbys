@@ -186,6 +186,12 @@ public class PersonService {
 	public PersonDTO selectOneById(String login_id) {
 		return dao.selectOneById(login_id);
 	}
+	public int updateFax(PersonDTO login) {
+		return dao.updateFax(login);
+	}
+	public int updateCall(PersonDTO login) {
+		return dao.updateCall(login);
+	}
 }
 
 

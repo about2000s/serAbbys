@@ -50,6 +50,21 @@
 	    offset ${offset} rows 
 	    fetch first ${nowD} rows only
 	</select>
+	
+	<insert id="reserve" parameterType="reserve">
+		insert into reserve (reserve_idx, reserve_custId, reserve_title, reserve_content, 
+			 reserve_status, reserve_address, reserve_engiId, reserve_compBelong, reserve_name, reserve_phone)
+			 values (reserve_seq.nextval,
+			 <if test="reserve_custId != null"> 
+			 	#{reserve_custId}
+			 </if>
+			 <if test="reserve_custId == null"> 
+			 	null
+			 </if>
+			 , #{reserve_title}, #{reserve_content}, 
+			 #{reserve_status}, #{reserve_address}, #{reserve_engiId}, 
+			 #{reserve_compBelong}, #{reserve_name}, #{reserve_phone})
+	</insert>
 </mapper>
 
 

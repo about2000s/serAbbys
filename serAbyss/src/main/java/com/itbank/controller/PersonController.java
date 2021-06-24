@@ -7,7 +7,6 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -232,43 +231,110 @@ public class PersonController {
 		return ps.emailCheck(person_email);
 	}
 	
+	//이메일 변경
 	@PostMapping("/replaceEmail")
 	public ModelAndView emailUpdateResult(@RequestParam String replaceEmail, String login_id, HttpSession session) {
-		ModelAndView mav = new ModelAndView("common/myPage");
+		ModelAndView mav = new ModelAndView("common/alert");
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("login_id", login_id);
 		map.put("replaceEmail", replaceEmail);
 		int row = ps.updateEmail(map);
 		String msg = null;
+		String value = null;
 		if(row != 0) {
 			msg = "E-mail 변경이 완료되었습니다";
+			value = "myPageUpdateSuccess";
 		} else {
 			msg = "E-mail 변경에 실패했습니다. 재시도해주세요";
+			value = "myPageUpdateFail";
 		}
 		PersonDTO login = ps.selectOneById(login_id);
 		session.setAttribute("login", login);
+		mav.addObject("value", value);
 		mav.addObject("msg", msg);
 		return mav;
 	}
 	
-	
+	// 주소 변경
 	@PostMapping("replaceAddress")
 	public ModelAndView addressUpdateResult(String address, String detailAddress, String login_id, HttpSession session) {
-		ModelAndView mav = new ModelAndView("common/myPage");
+		ModelAndView mav = new ModelAndView("common/alert");
 		String realAddress = address + " " + detailAddress;
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("login_id", login_id);
 		map.put("realAddress", realAddress);
 		int row = ps.updateAddress(map);
 		String msg = null;
+		String value = null;
 		if(row != 0) {
 			msg = "주소지 변경이 완료되었습니다";
+			value = "myPageUpdateSuccess";
 		} else {
 			msg = "주소지 변경에 실패했습니다. 재시도해주세요";
+			value = "myPageUpdateFail";
 		}
 		PersonDTO login = ps.selectOneById(login_id);
 		session.setAttribute("login", login);
+		mav.addObject("value", value);
 		mav.addObject("msg", msg);
+		return mav;
+	}
+	
+	// 유선전화 변경 및 추가
+	@PostMapping("replaceCall")
+	public ModelAndView replaceCall(String newCall, HttpSession session) {
+		ModelAndView mav = new ModelAndView("common/alert");
+		PersonDTO login = (PersonDTO)session.getAttribute("login");
+		Boolean existsFax = null;
+		if(login.getPerson_fax() != null) existsFax = true;
+		if(login.getPerson_fax() == null) existsFax = false;
+		login.setPerson_call(newCall);
+		int row = ps.updateCall(login);
+		String msg = null;
+		String value = null;
+		if(row !=0) {
+			if(existsFax) {
+				msg = "유선전화가 변경되었습니다";
+			}
+			else {
+				msg = "유선전화가 추가되었습니다";
+			}
+			value = "myPageUpdateSuccess";
+		}else {
+			msg = "실패";
+			value = "myPageUpdateFail";
+		}
+		mav.addObject("msg", msg);
+		mav.addObject("value", value);
+		return mav;
+	}
+	
+	// 팩스번호 변경 및 추가
+	@PostMapping("replaceFax")
+	public ModelAndView replaceFax(String newFax, HttpSession session) {
+		ModelAndView mav = new ModelAndView("common/alert");
+		PersonDTO login = (PersonDTO)session.getAttribute("login");
+		Boolean existsFax = null;
+		if(login.getPerson_fax() != null) existsFax = true;
+		if(login.getPerson_fax() == null) existsFax = false;
+		login.setPerson_fax(newFax);
+		int row = ps.updateFax(login);
+		String msg = null;
+		String value = null;
+		if(row !=0) {
+			if(existsFax) {
+				msg = "팩스주소가 변경되었습니다";
+			}
+			else {
+				msg = "팩스주소가 추가되었습니다";
+			}
+			value = "myPageUpdateSuccess";
+		}else {
+			msg = "실패";
+			value = "myPageUpdateFail";
+		}
+		mav.addObject("msg", msg);
+		mav.addObject("value", value);
 		return mav;
 	}
 }
