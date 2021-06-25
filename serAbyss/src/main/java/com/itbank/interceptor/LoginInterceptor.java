@@ -17,11 +17,9 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		
-		String requestURL = request.getRequestURL().toString();
-		
 		HttpSession session = request.getSession();
 		if(session.getAttribute("login") == null) {
-			response.sendRedirect(request.getContextPath() + "/common/login?url=" + requestURL);
+			response.sendRedirect(request.getContextPath() + "/common/login");
 			return false;	// 컨트롤러의 메서드를 진행시키지 않는다
 		}
 		return true;		// 예정대로 컨트롤러의 메서드를 진행시킨다
