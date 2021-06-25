@@ -37,12 +37,6 @@ public class PersonRestController {
 		return json;
 	}
 	
-	@PostMapping("/custMemo/crmInsert")
-	public String crmInsert(@RequestBody CustMemoDTO dto) {
-		cs.insert(dto);
-		return "Success";
-	}
-	
 	@GetMapping(value = "/compSearch/{keyword}", produces = "application/json; charset=utf-8")
 	public String compSearch(@PathVariable String keyword) throws JsonProcessingException {
 		List<HashMap<String, String>> list = ps.compSearchList(keyword);
@@ -50,9 +44,9 @@ public class PersonRestController {
 		return json;
 	}
 	
-	@GetMapping(value = "/crm/{service_idx}", produces = "application/json; charset=utf-8")
-	public String crm(@PathVariable int service_idx) throws JsonProcessingException {
-		List<HashMap<String, String>> list = cs.selectList(service_idx);
+	@GetMapping(value = "/crm/{reserve_idx}", produces = "application/json; charset=utf-8")
+	public String crm(@PathVariable int reserve_idx) throws JsonProcessingException {
+		List<HashMap<String, String>> list = cs.selectList(reserve_idx);
 		String json = mapper.writeValueAsString(list);
 		return json;
 	}
@@ -96,6 +90,16 @@ public class PersonRestController {
 		boolean flag = hashNumber.equals(Hash.getHash(userNumber));
 		System.out.println(flag);
 		return flag;
+	}
+	
+	
+	@PostMapping(value = "/record")
+	public int jjh(@RequestBody CustMemoDTO dto) {
+		System.out.println("dto: " + dto);
+		System.out.println(dto.getCustMemo_comments());
+		System.out.println(dto.getCustMemo_reserve_idx());
+		int row = cs.insert(dto);
+		return 0;
 	}
 	
 
