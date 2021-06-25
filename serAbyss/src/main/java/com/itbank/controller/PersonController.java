@@ -60,6 +60,7 @@ public class PersonController {
 	//기업회원 로그인
 	@PostMapping("/companyLogin")
 	public ModelAndView companyLogin(PersonDTO inputData, HttpSession session) {
+		System.out.println("apple");
 		ModelAndView mav = new ModelAndView();
 		PersonDTO login = ps.companyLogin(inputData);
 		if(login != null) {

@@ -13,29 +13,29 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 public class LoginInterceptor extends HandlerInterceptorAdapter {
 
-	@Override
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
-			throws Exception {
-		
-		String requestURL = request.getRequestURL().toString();
-		
-		HttpSession session = request.getSession();
-		if(session.getAttribute("login") == null) {
-			response.sendRedirect(request.getContextPath() + "/common/login?url=" + requestURL);
-			return false;	// 컨트롤러의 메서드를 진행시키지 않는다
-		}
-		return true;		// 예정대로 컨트롤러의 메서드를 진행시킨다
-	}
-	
-	@Override
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
-			ModelAndView modelAndView) throws Exception {
-	}
-	
-	@Override
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
-			throws Exception {
-	}
+//	@Override
+//	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+//			throws Exception {
+//		
+//		String requestURL = request.getRequestURL().toString();
+//		
+//		HttpSession session = request.getSession();
+//		if(session.getAttribute("login") == null) {
+//			response.sendRedirect(request.getContextPath() + "/common/login?url=" + requestURL);
+//			return false;	// 컨트롤러의 메서드를 진행시키지 않는다
+//		}
+//		return true;		// 예정대로 컨트롤러의 메서드를 진행시킨다
+//	}
+//	
+//	@Override
+//	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
+//			ModelAndView modelAndView) throws Exception {
+//	}
+//	
+//	@Override
+//	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
+//			throws Exception {
+//	}
 	
 }
 
