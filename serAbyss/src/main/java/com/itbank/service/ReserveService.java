@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.itbank.dao.ReserveDAO;
 import com.itbank.dto.ReserveDTO;
+import com.itbank.dto.CustMemoDTO;
 import com.itbank.dto.PersonDTO;
 import com.itbank.dto.ReserveTimeDTO;
 import com.itbank.dto.ReviewBoardDTO;
@@ -197,6 +198,10 @@ public class ReserveService {
 		return false;
 	}
 
+	public List<CustMemoDTO> custMemoList(int reserve_idx) {
+		return dao.custMemoList(reserve_idx);
+	}
+	
 	public int selectMaxIdxInReserve(String reserve_engiId) {
 		return dao.selectMaxIdxInReserve(reserve_engiId);
 	}

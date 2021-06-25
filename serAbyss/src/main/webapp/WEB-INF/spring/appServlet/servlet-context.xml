@@ -26,4 +26,19 @@
 	
 	<view-controller path="/" view-name="index"/>
 	
+	<interceptors>
+		<interceptor>
+			
+			<mapping path="/**" />
+			<exclude-mapping path="/" />
+			<exclude-mapping path="/common/login" />
+			<exclude-mapping path="/common/join" />
+			
+			
+			<beans:bean id="loginInterceptor" 
+						class="com.itbank.interceptor.LoginInterceptor">
+			</beans:bean>
+		</interceptor>
+	</interceptors>
+	
 </beans:beans>
