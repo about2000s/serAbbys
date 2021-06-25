@@ -18,50 +18,29 @@ import com.itbank.service.CustMemoService;
 
 @Controller
 @RequestMapping("custMemo")
-public class CustomerController {
+public class CustMemoController {
 	
 	@Autowired
 	private CustMemoService cs;
-	
-	@PostMapping("/crm1")
-	public String custMemo(CustMemoDTO dto) {
-		System.out.println(dto);
-		
-		return "custMemo/crm";
-	}
-		
+			
 	@GetMapping("/crm")
 	public void crm() {}
 	
 	@PostMapping("/crm")
-	public ModelAndView crm(@RequestParam HashMap<String,String> param ) {
+	public ModelAndView crm(@RequestParam HashMap<String, String> map) {
 		ModelAndView mav = new ModelAndView();
-		List<ReserveDTO> list = cs.crmOrder(param); 
+		System.out.println(map);
+		List<ReserveDTO> list = cs.crmOrder(map);
 		mav.addObject("list", list);
+		mav.addObject("map", map);
 		return mav;
 	}
 	
-	@GetMapping("/crm?custMemo_service_idx=${custMemo_service_idx}")
-	public String selectRecord(@PathVariable Integer custMemo_service_idx) {
-		System.out.println(custMemo_service_idx);
+	@GetMapping("/crm?custMemo_reserve_idx=${custMemo_reserve_idx}")
+	public String selectRecord(@PathVariable Integer custMemo_reserve_idx) {
+		System.out.println(custMemo_reserve_idx);
 		return "custMemo/crm";
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }

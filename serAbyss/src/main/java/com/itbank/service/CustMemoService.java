@@ -16,8 +16,8 @@ public class CustMemoService {
 	@Autowired
 	private CustMemoDAO dao;
 
-	public List<ReserveDTO> crmOrder(HashMap<String, String> param) {
-		return dao.crmReserve(param);
+	public List<ReserveDTO> crmOrder(HashMap<String, String> map) {
+		return dao.crmReserve(map);
 	}
 
 	public List<HashMap<String, String>> selectList(int reserve_idx) {
@@ -26,6 +26,10 @@ public class CustMemoService {
 
 	public int insert(CustMemoDTO dto) {
 		return dao.insert(dto);
+	}
+
+	public List<HashMap<String, String>> crmRead(int reserve_idx) {
+		return dao.crmRead(reserve_idx);
 	}
 
 

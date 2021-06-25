@@ -1,33 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
-<link href = "${cpath }/resources/css/css.css" rel="stylesheet">
 
-<div class="logincontainer">
+<div class="container">
 	<h2>Log-in</h2>
-	<hr/>
-	<div class = "leftbox">
+	<hr>
+	<div class = "leftbox" style = "display: inline;">
 		<h3>개인회원 로그인</h3>
 		<form method = "post" action = "${cpath }/common/personLogin">
-			<p><input type = "text" name = "person_id" placeholder="아이디" required></p>
-			<p><input type = "password" name = "person_pw" placeholder="비밀번호" required></p>
-			<p><input type = "submit" value = "로그인"></p>
+			<input type = "text" name = "person_id" placeholder="아이디" required class = "form-control" style = "width: 20%;">
+			<input type = "password" name = "person_pw" placeholder="비밀번호" required class = "form-control" style = "width: 20%;">
+			<button class = "btn btn-primary btn-xl" type = "submit">로그인</button>
 		</form>
 	</div>
 	<div class = "rightbox">
 		<h3>기업회원 로그인</h3>
 		<form method = "post" action = "${cpath }/common/companyLogin">
-			<p><input type = "text" name = "person_id" placeholder="아이디" required></p>
-			<p><input type = "password" name = "person_pw" placeholder="비밀번호" required></p>
-			<p><input type = "submit" value = "로그인"></p>
+			<input type = "text" name = "person_id" placeholder="아이디" required class = "form-control" style = "width: 20%;">
+			<input type = "password" name = "person_pw" placeholder="비밀번호" required class = "form-control" style = "width: 20%;">
+			<button class = "btn btn-primary btn-xl" type = "submit">로그인</button>
 		</form>
 	</div>
-	<div class="">
-		<p><button onclick = "location.href='${cpath}/common/selectIndiComp?say=id'">ID 찾기</button> | 
-		<button onclick = "location.href='${cpath}/common/selectIndiComp?say=pw'">비밀번호 재발급</button></p>
-		<p>회원이 아니세요? <button onclick = "location.href='${cpath}/common/join'">회원가입</button></p>
-	</div>
-
+	<button onclick = "location.href='${cpath}/common/selectIndiComp?say=id'" class = "btn btn-primary btn-xl" type = "submit">ID 찾기</button>
+	<button onclick = "location.href='${cpath}/common/selectIndiComp?say=pw'" class = "btn btn-primary btn-xl" type = "submit">비밀번호 재발급</button>
+	<br>
+	회원이 아니세요? <button onclick = "location.href='${cpath}/common/join'" class = "btn btn-primary btn-xl">로그인</button>
 </div>
 
 

@@ -11,7 +11,7 @@
 <meta name="author" content="" />
 <title>기술로 세상을 밝히다</title>
 <!-- Favicon-->
-<link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+<link rel="icon" type="image/x-icon" href="${cpath }/resources/assets/favicon.ico" />
 <!-- Font Awesome icons (free version)-->
 <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
 <!-- Google fonts-->
@@ -86,8 +86,4 @@
 		</ul>
 	</div>
 </div>
-<c:if test="${login.person_check == 'r'}"></c:if>
-<c:if test="${login.person_check == 'y'}"></c:if>
-<c:if test="${login.person_check == 'n'}"></c:if>
-<c:if test="${login.person_check == 'a'}"></c:if>
 </head>
