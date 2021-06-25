@@ -29,9 +29,21 @@ public class ReserveController {
 	@GetMapping("/statusList")
 	public ModelAndView statusList(String reserve_status, String type, String keyword, int page, HttpSession session) {
 		ModelAndView mav = new ModelAndView("/reserve/list");
+		System.out.println("reserve_status: " + reserve_status);
 		System.out.println("type: " + type);
 		HashMap<String, Object> map = rs.job(reserve_status, type, keyword, page, session);
+		
+		List<String> statusList = new ArrayList<String>();
+		statusList.add("전체");
+		statusList.add("예약완료");
+		statusList.add("서비스중");
+		statusList.add("서비스완료");
+		statusList.add("결제완료");
+		statusList.add("환불접수");
+		statusList.add("처리완료");
+		
 		mav.addObject("map", map);
+		mav.addObject("statusList", statusList);
 		return mav;
 	}
 	

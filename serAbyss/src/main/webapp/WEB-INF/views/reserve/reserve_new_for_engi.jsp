@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
-<%@ include file="../layout/leftmenu.jsp" %>
 
 <div class="container">
 	<h2>수리기사가 서비스 신청하기</h2>
 	<hr/>
 	<form method="post">
-		<input type = "hidden" name = "reserve_status" value = "등록완료">
+		<input type = "hidden" name = "reserve_status" value = "예약완료">
 		<input type = "hidden" name = "reserve_compBelong" value = "${login.person_belong }">
 		<input type = "hidden" name = "reserve_engiId" value = "${login.person_id }">
 		<table class = "table dataTable-table">

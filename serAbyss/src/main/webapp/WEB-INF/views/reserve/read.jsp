@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
-<%@ include file="../layout/leftmenu.jsp" %>
 <style>
 .reserveRead {width:890px; padding:5px; font-size:12px; }
 .reserveRead tr th{height:50px;background-color:#ececec;border:1px solid dcdcdc;}

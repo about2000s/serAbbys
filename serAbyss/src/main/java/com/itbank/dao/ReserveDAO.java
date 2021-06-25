@@ -15,6 +15,7 @@ import com.itbank.dto.ReviewBoardDTO;
 
 public interface ReserveDAO {
 
+	// sqlmap-reserve.xml에 있습니다
 	List<ReserveDTO> selectStatus(HashMap<String, Object> param);
 
 	@Select("select * from reserve where reserve_idx=#{idx}")
@@ -56,7 +57,7 @@ public interface ReserveDAO {
 	int insertReserve(ReserveTimeDTO reserveTimeDTO);
 
 
-	// order-order.xml에 있습니다
+	// sqlmap-reserve.xml에 있습니다
 	int statusListCount(HashMap<String, Object> map);
 
 	@Select("select * from review where review_idx=#{reserve_idx}")
