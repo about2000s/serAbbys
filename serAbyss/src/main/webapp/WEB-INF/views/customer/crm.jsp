@@ -47,7 +47,9 @@ button { width:80px;height:35px}
 			<td>${dto.reserve_phone } + sms + copy </td>
 			<td>
 				<p><input class = "gao${dto.reserve_idx }" type = "hidden" name = "reserve_idx" value = "${dto.reserve_idx }"></p>
-				<input class = "gao${dto.reserve_idx }" id = "gao${dto.reserve_idx }" type = "button" value = "응대기록가져오기 ">
+				<input class="gao${dto.reserve_idx }" id="gao${dto.reserve_idx }" type="button" value="응대기록가져오기 ">
+				
+				
 			</td>
 		</tr>
 		</c:forEach>
@@ -60,34 +62,12 @@ button { width:80px;height:35px}
 	<div>
 		<h2>기록 남기기</h2>
 			<form method="POST" id="insertForm">
-				<input type = "hidden" name="custMemo_reserve_idx" value="${dto.reserve_idx }">
-				<textarea class="textareastyle" name="custMemo_comments"></textarea>
-				<input name="insert-btn" type ="submit" value="다음">
+				<input id="custMemo_reservie_idx" type = "hidden" name="custMemo_reserve_idx" value="${dto.reserve_idx }">
+				<textarea id="custMemo" class="textareastyle" name="custMemo_comments"></textarea>
+				<input id="custMemoBtn" name="insert-btn" type ="submit" value="다음">
 			</form>
 	</div>
 </div>
-
-<script>
-$(document).ready(function(){
-	$("#insertForm").submit(function(e){
- 		e.preventDefault()
-		console.log("commentbtn클릭");
-			
-		$.ajax({
-			type : 'POST' ,
-			url : '${cpath}/custMemo/crm1',
-			data : JSON.stringify(insertForm),
-			dataType:'json',
-			success : function(result){
-				alert("등록성공");
-			},
-			error:function(){
-				alert("실패");
-			}
-	});
-	})
-});
-</script>
 
 <script>
 document.querySelectorAll('td > input').forEach(input => input.onclick = function(event){
@@ -145,6 +125,7 @@ document.querySelectorAll('td > input').forEach(input => input.onclick = functio
 })
 
 </script>
+
 
 
 

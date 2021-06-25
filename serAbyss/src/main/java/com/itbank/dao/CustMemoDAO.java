@@ -14,7 +14,7 @@ public interface CustMemoDAO {
 	@Select("select * from reserve where ${selectedWord} = #{word}" )
 	List<ReserveDTO> crmReserve(HashMap<String, String> param);
 
-	@Select("select * from custMemo where custMemo_reserve_idx=${reserve_idx}")
+	@Select("select * from custmemo where custmemo_reserve_idx=${reserve_idx}")
 	List<HashMap<String, String>> selectList(int reserve_idx);
 
 	@Insert("insert into custMemo values (custMemo_seq.nextval , #{custMemo_comments}, to_char(sys_date,'yyyy-MM-dd hh24:mi'), #{custMemo_reserve_idx})")

@@ -58,7 +58,7 @@ button { width:80px;height:35px}
 	
 	<br/><br/>
 		<h2>가져온 응대기록</h2>
-	<div class = "gender" id = "apple">
+	<div class="gender" id="recordList">
 	</div>
 	
 	<div>
@@ -85,9 +85,13 @@ document.getElementById('custMemoBtn').onclick=function(event){
 	.then (resp => resp.json)
 	.then (json => {
 		if(json == ''){
-			document.getElementById('apple').innerText = '결과 없음'
+			document.getElementById('recordList').innerText = '결과 없음'
 		}
-		else{
+		else {
+			const custDiv = document.createElement('div')
+			console.log(json)
+			document.getElementById('recordList').innerText = json
+			
 			
 		}
 		
