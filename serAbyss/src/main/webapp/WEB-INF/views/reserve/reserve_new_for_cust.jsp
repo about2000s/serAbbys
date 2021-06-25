@@ -9,15 +9,13 @@
 	<h2>고객이 서비스 신청하기</h2>
 	<hr/>
 	<form method="post">
+		<input type = "hidden" name = "reserve_status" value = "등록완료">
 		<input type = "hidden" name = "reserve_custId" value = "${login.person_id }">
 		<input type = "hidden" name = "reserve_name" value = "${login.person_name }">
 		<input type = "hidden" name = "reserve_phone" value = "${login.person_phone }">
 		
 		<input  type = "hidden" id = "realReserveAddress" name = "reserve_address" value = "${login.person_address }">
 		<table class = "table dataTable-table">
-			<tr>
-				<td><input type="text" name="reserve_title" placeholder="제목 입력" required class="form-control"></td>
-			</tr>
 			<tr>
 				<td><textarea class="form-control" name="reserve_content" required>모델명: ...</textarea></td>
 			</tr>

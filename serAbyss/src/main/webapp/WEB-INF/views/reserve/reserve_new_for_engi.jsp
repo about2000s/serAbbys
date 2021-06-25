@@ -64,7 +64,7 @@
 			</tr>
 		</table>
 		<button class = "btn btn-primary btn-xl" type = "submit">다음</button>
-		<button class = "btn btn-primary btn-xl" type = "submit" onclick="location.href='history(-1)'">취소</button>
+		<button class = "btn btn-primary btn-xl" onclick="location.href='history(-1)'">취소</button>
 	</form>
 </div>
 

@@ -2,190 +2,151 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp"%>
 
-<style>
-/* 	* {margin:0;padding:0;} */
-/* 	html {height:100%;} */
-/* 	body {height:100%; font-family: 'Noto Sans KR';} */
-/* 	img {border:0; } */
-/* 	h1 { float:left; padding:0 0 0 0px;} */
-/* 	h2 {padding:0 0 0 0px;} */
-/* 	ul, li { list-style:none;} */
-/* 	ul{list-style:none; } */
-/* 	.form-control{ */
-/* 		width:15vw; */
-/* 	} */
-/* 	.container{width:100%;} */
-/* 	.wrap{max-width:960px; margin: 0 auto;} */
-/* 	.wrap.wd668{max-width:864px;} */
-/* 	.join_form{max-width:90vw;} */
-/* 	.wrap.wd668{width:90vw;} */
-/* 	.btn.btn-primary.btn-xl { */
-/* 		width: 11vw; */
-/* 		height: 30px; */
-/* 		position: relative; */
-/*         left: 170px; */
-/*         font-size:15px; */
-/*         text-align:center; */
-/* 	} */
-/* 	span { */
-/* 		margin: 10px; */
-/* 		text-indent: 0; */
-/* 		font-size:15px; */
-/* 	} */
-/* 	th { */
-/* 		width: 15%; */
-/* 	} */
-/* 	.hiddenNone { */
-/* 		display: none; */
-/* 	} */
-</style>
 
 <link rel = "stylesheet" href = "https://www.w3schools.com/w3css/4/w3.css">
-<div>
 <form id = "joinForm" method = "post">
-	<div class="join_form">
-		<div class="wrap wd668">
-    		<div class="container">
-        		<div class="form_txtInput">
-        			<table>
-						<tr>
-							<td>
-								<label><input class = "indi" type = "radio" name = "person_check" value = "n" checked>개인회원</label>
-							</td>
-							<td>
-								<label><input class = "company" type = "radio" name = "person_check" value = "y">법인회원</label>
-							</td>
-						</tr>
-							
-						<tr class = "company main hiddenNone">
-							<td><label><input type = "radio" name = "any" class = "radio1" >개인사업자</label></td>
-							<td><label><input type = "radio" name = "any" value = "comp" class = "radio2">법인사업자</label></td>
-							<td><label><input type = "radio" name = "any" value = "empl" class = "radio3">법인소속직원(기사)</label></td>
-						</tr>
-							
-						<tr class = "radio2 hiddenNone">
-							<td>
-								<h2>법인사업자 폼</h2>회사명 입력하는 폼
-							</td>
-							<td>
-								<input class = "form-control" type = "text" name = "person_belong" placeholder="회사명 입력">
-							</td>
-						</tr>
-							
-						<tr class = "radio12 hiddenNone">
-							<td>
-								<h2>사업자등록번호 입력</h2>
-							</td>
-							<td>
-								<input class = "form-control" type = "text" name = "person_busiNum">
-							</td>
-						</tr>
-							
-						<tr class = "radio3 hiddenNone">
-							<td>
-								<h2>법인소속직원(기사) 폼</h2>compList에서 검색하는 폼
-							</td>
-							<td>
-								<input class = "form-control" type = "text" id = "person_belong" name = "person_belong" readonly>
-								<button onclick = "document.getElementById('id01').style.display='block'"
-								class = "btn btn-primary btn-xl">회사 검색</button>
-							</td>
-						</tr>
-								
-						<tr id = "id01" class = "w3-modal">
-							<td class = "w3-modal-content w3-card-4">
-								<header class = "w3-container w3-teal">
-									<span onclick = "document.getElementById('id01').style.display='none'"
-									class = "w3-button w3-display-topright">&times;</span>
-									<h2>Modal Header</h2>
-								</header>
-							</td>
-							<td class = "w3-container">
-								회사 검색 폼<br>
-								<input class = "form-control" type = "text" id = "keyword" name = "keyword">
-								<button id = "compSearchBtn" class = "btn btn-primary btn-xl">검색</button><br>
-							</td>
-						</tr>
-
-						
-						<tr>
-							<th>아이디</th>
-							<td><input class = "form-control" type = "text" id = "person_id" name = "person_id" required></td>
-							<td class = "check_font" id = "id_check"></td>
-						</tr>
-						
-						<tr>
-							<th>비밀번호</th>
-							<td><input class = "form-control" type = "password" id = "person_pw" name = "person_pw" required></td>
-							<td class = "check_font" id = "pw_check"></td>
-						</tr>
-						<tr>
-							<th>비밀번호 확인</th>
-							<td><input class = "form-control" type = "password" id = "person_pw2" name = "person_pw2" required></td>
-							<td class = "check_font" id = "pw2_check"></td>
-						</tr>
-						<tr>
-							<th>이름</th>
-							<td><input class = "form-control" type = "text" id = "person_name" name = "person_name" required></td>
-							<td class = "check_font" id = "name_check"></td>
-						</tr>
-						<tr>
-							<th>생년월일 ex)980819</th>
-							<td><input class = "form-control" type = "text" id = "person_birth" name = "person_birth" required></td>
-							<td class = "check_font" id = "birth_check"></td>
-						</tr>
-						<tr>	
-							<th>일반전화</th>
-							<td><input class = "form-control" type = "text" name = "person_call"></td>
-							<td class = "check_font" id = "call_check"></div>
-						</tr>
-						<tr>
-							<th>팩스</th>
-							<td><input class = "form-control" type = "text" name = "person_fax"></td>
-							<td class = "check_font" id = "fax_check"></td>
-						</tr>
-						<tr>
-							<th>핸드폰번호</th>
-							<td>
-								<input class = "form-control" type = "text" name = "person_phone" placeholder="핸드폰번호 입력" required>
-							</td>
-							<td><button class = "btn btn-primary btn-xl">인증번호 받기</button></td>
-						</tr>
-						<tr>
-							<th>주소</th>
-							<td><input class = "form-control" type="text" id="postcode" placeholder="우편번호"></td>
-							<td><input class = "form-control" type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-xl"></td>
-						</tr>
-						<tr>
-							<th></th>
-							<td><input class = "form-control" type="text" id="address" name = "address" placeholder="주소"></td>
-							<td><input class = "form-control" type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소"></td>
-							<td><input class = "form-control" type="text" id="extraAddress" placeholder="참고항목"></td>
-						</tr>
-						<tr>
-							<th>이메일 입력</th>
-							<td><input class = "form-control" type = "text" id = "person_email" name = "person_email" required></td>
-							<td><button class = "btn btn-primary btn-xl" id = "receiveAuthBtn">인증번호 받기</button></td>
-							<td class = "check_font" id = "email_checkDiv"></td>
-						</tr>
-							
-						<tr class = "hiddenNone" id = "authMailDiv">
-							<th>인증번호 입력</th>
-								<td>
-									<input class = "form-control" type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호를 입력하시오">
-									<button class = "btn btn-primary btn-xl" id = "injung">인증하기</button>
-								</td>
-								<td><input type="text" id = "injungSuccessDiv" class = "injung hiddenNone"></td>
-						</tr>
-					</table>
-					<button class = "btn btn-primary btn-xl" type = "submit" id = "reg_submit">회원가입</button>
+  		<div class="container">
+		<h2>회원가입 폼</h2>
+  			<p>
+				<label><input class = "indi form-check-input" type = "radio" name = "person_check" value = "n" checked>개인회원</label>
+				<label><input class = "company form-check-input" type = "radio" name = "person_check" value = "y">법인회원</label>
+			</p>
+			<div class = "company main hiddenNone">
+				<label><input type = "radio" name = "any" class = "radio1 form-check-input" >개인사업자</label>
+				<label><input type = "radio" name = "any" value = "comp" class = "radio2 form-check-input">법인사업자</label>
+				<label><input type = "radio" name = "any" value = "empl" class = "radio3 form-check-input">법인소속직원(기사)</label>
+				
+				<div class = "radio2 hiddenNone">
+					<h2>법인사업자 폼</h2>회사명 입력하는 폼
+					<input class = "form-control" type = "text" name = "person_belong" placeholder="회사명 입력" style = "width: 20%;">
+				</div>
+				
+				<div class = "radio12 hiddenNone">
+					<h2>사업자등록번호 입력</h2>
+					<input class = "form-control" type = "text" name = "person_busiNum" style = "width: 20%;">
+				</div>
+				
+				<div class = "radio3 hiddenNone">
+					<h2>법인소속직원(기사) 폼</h2>compList에서 검색하는 폼
+					<input class = "form-control" type = "text" id = "person_belong" name = "person_belong" readonly style = "width: 20%;">
+					<button onclick = "document.getElementById('id01').style.display='block'"
+					class = "btn btn-primary btn-xl">회사 검색</button>
+				</div>
+				
+				<div id = "id01" class = "w3-modal">
+					<div class = "w3-modal-content w3-card-4">
+						<header class = "w3-container w3-teal">
+							<span onclick = "document.getElementById('id01').style.display='none'"
+							class = "w3-button w3-display-topright">&times;</span>
+							<h2>Modal Header</h2>
+						</header>
+						<div class = "w3-container">
+							회사 검색 폼<br>
+							<input class = "form-control" type = "text" id = "keyword" name = "keyword" style = "width: 20%;">
+							<button id = "compSearchBtn" class = "btn btn-primary btn-xl">검색</button><br>
+						</div>
+					</div>
 				</div>
 			</div>
-		</div>
+			
+			<div>
+			
+				<span>아이디</span>
+				<input class = "form-control" type = "text" id = "person_id" name = "person_id" required style = "width: 20%;">
+				<div class = "check_font" id = "id_check"></div>
+				<hr>
+				<span>비밀번호</span>
+				<input class = "form-control" type = "password" id = "person_pw" name = "person_pw" required style = "width: 20%;">
+				<div class = "check_font" id = "pw_check"></div>
+				<hr>
+				<span>비밀번호 확인</span>
+				<input class = "form-control" type = "password" id = "person_pw2" name = "person_pw2" required style = "width: 20%;">
+				<div class = "check_font" id = "pw2_check"></div>
+				<hr>
+				<span>이름</span>
+				<input class = "form-control" type = "text" id = "person_name" name = "person_name" required style = "width: 20%;">
+				<div class = "check_font" id = "name_check"></div>
+				
+				<hr>
+				<span>생년월일 ex)980819</span>
+				<input class = "form-control" type = "text" id = "person_birth" name = "person_birth" required style = "width: 20%;">
+				<div class = "check_font" id = "birth_check"></div>
+				<hr>
+				<span>일반전화</span>
+				<input class = "form-control" type = "text" name = "person_call" style = "width: 20%;">
+				<div class = "check_font" id = "call_check"></div>
+				<hr>
+				<span>팩스</span>
+				<input class = "form-control" type = "text" name = "person_fax" style = "width: 20%;">
+				<div class = "check_font" id = "fax_check"></div>
+				<hr>
+				<p>
+				<input class = "form-control" type = "text" name = "person_phone" placeholder="핸드폰번호 입력" required style = "width: 20%; display: inline;">
+				<button class = "btn btn-primary btn-xl">인증번호 받기</button>
+				</p>
+				<hr>
+				<div>
+					주소<br>
+					<input class = "form-control" type="text" id="postcode" placeholder="우편번호" style = "width: 10%; display: inline;">
+					<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-xl"><br>
+					<input class = "form-control" type="text" id="address" name = "address" placeholder="주소" style = "width: 20%;"><br>
+					<input class = "form-control" type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소" style = "width: 9.8%; display: inline;">
+					<input class = "form-control" type="text" id="extraAddress" placeholder="참고항목" style = "width: 9.8%; display: inline;">
+				</div>
+			</div>
+			<hr>
+				이메일 입력<br>
+				<input class = "form-control" type = "text" id = "person_email" name = "person_email" required style = "width: 20%; display: inline;">
+				<button class = "btn btn-primary btn-xl" id = "receiveAuthBtn">인증번호 받기</button>
+				
+				<div class = "check_font" id = "email_checkDiv"></div>
+				
+				<div class = "hiddenNone" id = "authMailDiv">
+					<span>인증번호 입력</span>
+					<div>
+						<input class = "form-control" type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호를 입력하시오">
+						<button class = "btn btn-primary btn-xl" id = "injung">인증하기</button>
+					</div>
+					<div id = "injungSuccessDiv"></div>
+				</div>
+			<button class = "btn btn-primary btn-xl" type = "submit" id = "reg_submit">회원가입</button>
 	</div>
 </form>
+<script>
+	document.querySelectorAll('p > label > input').forEach(input => input.onclick = function(event){
+		const className = event.target.classList.item(0)
+		console.log(className)
+		if(className == 'company'){
+			document.querySelector('div.' + className).classList.remove('hiddenNone')
+		}
+		if(className == 'indi'){
+			document.querySelector('div.' + 'company').classList.add('hiddenNone')
+		}
+	})
+	
+	document.querySelectorAll('div > label > input').forEach(input => input.onclick = function(event){
+		const className = event.target.classList.item(0)
+		console.log(className)
+		
+		if(className == 'radio1'){
+			document.querySelector('div.' + 'radio12').classList.remove('hiddenNone')
+			document.querySelector('div.' + 'radio2').classList.add('hiddenNone')
+			document.querySelector('div.' + 'radio3').classList.add('hiddenNone')
+		}
+		if(className == 'radio2'){
+			document.querySelector('div.' + 'radio12').classList.remove('hiddenNone')
+			document.querySelector('div.' + 'radio2').classList.remove('hiddenNone')
+			document.querySelector('div.' + 'radio3').classList.add('hiddenNone')
+		}
+		if(className == 'radio3'){
+			document.querySelector('div.' + 'radio12').classList.add('hiddenNone')
+			document.querySelector('div.' + 'radio3').classList.remove('hiddenNone')
+			document.querySelector('div.' + 'radio2').classList.add('hiddenNone')
+		}
+	})
+	
+</script>
     
-</div>
 
 <script>
 const email_checkDiv = document.getElementById('email_checkDiv')
@@ -485,27 +446,5 @@ $('#person_name').blur(function(){
 			document.querySelector('tr.' + 'company').classList.add('hiddenNone')
 		}
 	})
-	
-	document.querySelectorAll('tr > td > label > input').forEach(input => input.onclick = function(event){
-		const className = event.target.className
-		
-		if(className == 'radio1'){
-			document.querySelector('tr.' + 'radio12').classList.remove('hiddenNone')
-			document.querySelector('tr.' + 'radio2').classList.add('hiddenNone')
-			document.querySelector('tr.' + 'radio3').classList.add('hiddenNone')
-		}
-		if(className == 'radio2'){
-			document.querySelector('tr.' + 'radio12').classList.remove('hiddenNone')
-			document.querySelector('tr.' + 'radio2').classList.remove('hiddenNone')
-			document.querySelector('tr.' + 'radio3').classList.add('hiddenNone')
-		}
-		if(className == 'radio3'){
-			document.querySelector('tr.' + 'radio12').classList.add('hiddenNone')
-			document.querySelector('tr.' + 'radio3').classList.remove('hiddenNone')
-			document.querySelector('tr.' + 'radio2').classList.add('hiddenNone')
-		}
-	})
-	
 </script>
-
 <%@ include file="../layout/footer.jsp"%>

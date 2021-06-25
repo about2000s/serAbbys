@@ -3,40 +3,41 @@
 <%@ include file="../layout/header.jsp" %>
 <h2>비밀번호 재발급 페이지 입니다.</h2>
 
-<label><input type = "radio" name = "any" class = "phone" checked>회원정보에 등록한 휴대전화로 인증</label>
-<label><input type = "radio" name = "any" class = "email">본인확인 이메일로 인증</label>
+<label><input type = "radio" name = "any" class = "phone" checked class = "form-check-input">회원정보에 등록한 휴대전화로 인증</label>
+<label><input type = "radio" name = "any" class = "email" class = "form-check-input">본인확인 이메일로 인증</label>
 
 <hr>
 
 <div class = "main phone">
 	<h2>회원정보에 등록한 휴대전화 번호와 입력한 휴대전화 번호가 같아야, 인증번호를 받을 수 있습니다.</h2>
 	<form method = "post" action = "${cpath }/common/repwByPhone">
-		<p><input type = "hidden" name = "person_check" value = "${person_check }"></p>
-		<p><input type = "text" name = "person_id" placeholder="아이디"></p>
-		<p><input type = "text" name = "person_phone" placeholder="전화번호"><button>인증번호 받기</button></p>
-		<input type = "submit" value = "다음">
+		<input type = "hidden" name = "person_check" value = "${person_check }">
+		아이디: <input type = "text" name = "person_id" class="form-control" style = "width: 20%; display: inline;"><br>
+		전화번호: <input type = "text" name = "person_phone" class="form-control" style = "width: 20%; display: inline;">
+		<button class = "btn btn-primary btn-xl">인증번호 받기</button>
+		<input type = "submit" value = "다음" class = "btn btn-primary btn-xl">
 	</form>
 </div>
 
 
 <div class = "email main hiddenNone">
 	<h2>본인확인 이메일 주소와 입력한 이메일 주소가 같아야, 인증번호를 받을 수 있습니다.</h2>
-	<p>아이디 : <input type = "text" name = "input_id" id = "input_id"></p>
-	<p>이메일 : <input type = "email" name = "input_email" id = "input_email">
-	<button id = "receiveAuthBtn">인증번호 받기</button></p>
+	아이디 : <input type = "text" name = "input_id" id = "input_id" class="form-control" style = "width: 20%; display: inline;"><br>
+	이메일 : <input type = "email" name = "input_email" id = "input_email" class="form-control" style = "width: 20%; display: inline;">
+	<button id = "receiveAuthBtn" class = "btn btn-primary btn-xl">인증번호 받기</button>
 	
 	<div class = "check_font" id = "email_checkDiv"></div>
 		
 	<div class = "hiddenNone" id = "authMailDiv">
-		<input type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호 입력">
-		<button id = "injung">인증하기</button>
+		<input type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호 입력" class="form-control" style = "width: 20%; display: inline;">
+		<button id = "injung" class = "btn btn-primary btn-xl">인증하기</button>
 		<div id = "injungSuccessDiv"></div>
 		<div class = "hiddenNone" id = "injungform">
 			<form method = "post" action = "${cpath }/common/repwByEmail">
 				<input type = "hidden" name = "person_check" value = "${person_check }">
 				<input type = "hidden" id = "person_id" name = "person_id">
 				<input type = "hidden" id = "person_email" name = "person_email">
-				<input type = "submit" value = "다음">
+				<input type = "submit" value = "다음" class = "btn btn-primary btn-xl">
 			</form>
 		</div>
 	</div>

@@ -11,13 +11,13 @@ import com.itbank.dto.ReserveDTO;
 
 public interface CustMemoDAO {
 
-	@Select("select * from reserve where ${selectedWord} = #{word}" )
-	List<ReserveDTO> crmReserve(HashMap<String, String> param);
+	@Select("select * from reserve where ${type} like '%${keyword}%'" )
+	List<ReserveDTO> crmReserve(HashMap<String, String> map);
 
-	@Select("select * from custmemo where custmemo_reserve_idx=${reserve_idx}")
+	@Select("select * from custMemo where custMemo_reserve_idx=${reserve_idx} order by custMemo_reg desc")
 	List<HashMap<String, String>> selectList(int reserve_idx);
 
-	@Insert("insert into custMemo values (custMemo_seq.nextval , #{custMemo_comments}, to_char(sys_date,'yyyy-MM-dd hh24:mi'), #{custMemo_reserve_idx})")
+	@Insert("insert into custMemo values (custMemo_seq.nextval, #{custMemo_reserve_idx} , #{custMemo_comments}, to_char(sysdate,'yyyy-MM-dd hh24:mi'))")
 	int insert(CustMemoDTO dto);
 	
 	@Select("select * from custMemo where custMemo_reserve_idx=${reserve_idx}") //고객 응대 기록 가져오기

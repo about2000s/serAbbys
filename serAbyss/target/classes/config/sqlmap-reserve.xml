@@ -30,11 +30,17 @@
 	</select>
 	
 	<select id="selectStatus" parameterType="hashmap" resultType="reserve">
-		select * from reserve 
-		where ${type} like '%${keyword}%' 
-		<if test="reserve_status != ''">
-			and reserve_status=#{reserve_status} 
+		select * from reserve where 
+		<if test="type != 'both'">
+			${type} like '%${keyword}%'
+			<if test="reserve_status != ''">
+				and reserve_status=#{reserve_status} 
+			</if> 
 		</if> 
+		
+		<if test="type == 'both'">
+			reserve_title like '%${keyword}%' or reserve_content like '%${keyword}%' 
+		</if>
 		
 		<if test='person_check == "y"'>
 			and reserve_engiId='${person_id}'
@@ -50,6 +56,21 @@
 	    offset ${offset} rows 
 	    fetch first ${nowD} rows only
 	</select>
+	
+	<insert id="reserve" parameterType="reserve">
+		insert into reserve (reserve_idx, reserve_custId, reserve_title, reserve_content, 
+			 reserve_status, reserve_address, reserve_engiId, reserve_compBelong, reserve_name, reserve_phone)
+			 values (reserve_seq.nextval,
+			 <if test="reserve_custId != null"> 
+			 	#{reserve_custId}
+			 </if>
+			 <if test="reserve_custId == null"> 
+			 	null
+			 </if>
+			 , #{reserve_title}, #{reserve_content}, 
+			 #{reserve_status}, #{reserve_address}, #{reserve_engiId}, 
+			 #{reserve_compBelong}, #{reserve_name}, #{reserve_phone})
+	</insert>
 </mapper>
 
 

@@ -38,8 +38,8 @@ public class ReserveService {
 		return dao.modify(dto);
 	}
 
-	public int delete(int idx) {
-		return dao.delete(idx);
+	public int deleteReserve(int idx) {
+		return dao.deleteReserve(idx);
 	}
 
 	public ReserveTimeDTO selectReserveOne(ReserveTimeDTO inputData) {
@@ -62,7 +62,7 @@ public class ReserveService {
 		return dao.selectOneById(reserve_custId);
 	}
 
-	public int insertReserve(ReserveTimeDTO reserveTimeDTO) {
+	public int insertReserveTime(ReserveTimeDTO reserveTimeDTO) {
 		return dao.insertReserve(reserveTimeDTO);
 	}
 
@@ -124,10 +124,10 @@ public class ReserveService {
 		return dayList;
 	}
 	
-	public List<HashMap<String, Object>> reserveList(List<String> engiIdList, int hourCount, int dayCount){
+	public List<HashMap<String, Object>> reserveTimeList(List<String> engiIdList, int hourCount, int dayCount){
 		Calendar today = Calendar.getInstance();
 		
-		List<HashMap<String, Object>> reverveList = new ArrayList<HashMap<String,Object>>();
+		List<HashMap<String, Object>> reserveList = new ArrayList<HashMap<String,Object>>();
 		for(int i=0;i<engiIdList.size();i++) {
 			int year = today.get(Calendar.YEAR);
 			int month = today.get(Calendar.MONTH) + 1;
@@ -165,11 +165,13 @@ public class ReserveService {
 				map.put("month", month);
 				map.put("day", day);
 				map.put("hour", hour);
-				reverveList.add(map);
+				reserveList.add(map);
 			}
 		}
-		return reverveList;
+		return reserveList;
 	}
+	
+	
 	
 	public void monthAndCustIdSetForReserve(ReserveDTO reserveDTO, ReserveTimeDTO reserveTimeDTO) {
 		Calendar today = Calendar.getInstance();
@@ -180,7 +182,12 @@ public class ReserveService {
 		else {
 			reserveTimeDTO.setReserveTime_month((today.get(Calendar.MONTH) + 1));
 		}
-		reserveTimeDTO.setReserveTime_custId(reserveDTO.getReserve_custId());
+		if(reserveDTO.getReserve_custId() != null) {
+			reserveTimeDTO.setReserveTime_custId(reserveDTO.getReserve_custId());
+		}
+		else {
+			reserveTimeDTO.setReserveTime_custId(reserveDTO.getReserve_name());
+		}
 	}
 
 	//서비스글에 해당하는 리뷰글이 작성되어 있느냐? 있다면 true, 없다면 false
@@ -188,5 +195,29 @@ public class ReserveService {
 		ReviewBoardDTO dto = dao.alreadyReviewWrite(reserve_idx);
 		if(dto != null) return true;
 		return false;
+	}
+
+	public int selectMaxIdxInReserve(String reserve_engiId) {
+		return dao.selectMaxIdxInReserve(reserve_engiId);
+	}
+
+	public String selectEngiIdOneByIdx(int reserve_idx) {
+		return dao.selectEngiIdOneByIdx(reserve_idx);
+	}
+
+	public int changeReserveTime(ReserveTimeDTO reserveTimeDTO) {
+		return dao.changeReserveTime(reserveTimeDTO);
+	}
+
+	public int reserveTitleChange(ReserveDTO reserveDTO) {
+		return dao.reserveTitleChange(reserveDTO);
+	}
+
+	public int deleteReserveTime(int reserve_idx) {
+		return dao.deleteReserveTime(reserve_idx);
+	}
+
+	public int statusChange(ReserveDTO dto) {
+		return dao.statusChange(dto);
 	}
 }
