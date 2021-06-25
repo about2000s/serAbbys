@@ -41,15 +41,15 @@
 				<td>${dto.reserve_idx }</td>
 				<td>${dto.reserve_status }</td>
 				<td>
-				${dto.reserve_name }
-				<c:if test="${dto.reserve_custId != null }">(${dto.reserve_custId })</c:if>
+					${dto.reserve_name }
+					<c:if test="${dto.reserve_custId != null }">(${dto.reserve_custId })</c:if>
 				</td>
 				<td>${dto.reserve_engiId }</td>
 				<td>${dto.reserve_address }</td>
 				<td>${fn:substring(dto.reserve_phone, 0, 3)}-${fn:substring(dto.reserve_phone, 3, 7)}-${fn:substring(dto.reserve_phone, 7, 11)}</td>
 				
 				<td>
-					<p><input class = "gao${dto.reserve_idx }" type="hidden" name="reserve_idx" value="${dto.reserve_idx }"></p>
+					<input class = "gao${dto.reserve_idx } main" type="hidden" name="reserve_idx" value="${dto.reserve_idx }">
 					<input class = "gao${dto.reserve_idx }" id="gao${dto.reserve_idx }" type="button" value="응대기록가져오기 ">
 				</td>
 			</tr>
@@ -65,7 +65,7 @@
 	<div class = "hiddenNone record">
 		<h2>기록 남기기</h2>
 			<form id="insertForm">
-				<input type="hidden" id = "a" name="custMemo_reserve_idx" value="">
+				<input type="text" id = "a" name="custMemo_reserve_idx" value="${dto.reserve_idx }">
 				<textarea id = "b" class="form-control" name="custMemo_comments"></textarea>
 				<input id="insertBtn" type="submit" value="다음" class = "btn btn-primary btn-xl">
 			</form>
@@ -80,7 +80,7 @@ type.setAttribute('selected', 'selected')
 <script>
 document.getElementById('insertForm').onsubmit = function(event){
 	event.preventDefault()
-	const a = document.getElementById('a').value
+	const a = document.getElementById('a')
 	const b = document.getElementById('b')
 	const formData = new FormData(event.target)
 	const ent = formData.entries()
@@ -103,7 +103,7 @@ document.getElementById('insertForm').onsubmit = function(event){
 	fetch(url, opt).then(resp => resp.text())
 	.then(text => {
 		b.value = ''
-		document.querySelector('input#gao' + a).click()
+		document.querySelector('input#gao' + a.value).click()
 	})
 }
 </script>
@@ -113,7 +113,9 @@ document.querySelectorAll('td > input').forEach(input => input.onclick = functio
 	const className = event.target.className // gao ...
 	const reserve_idx = document.querySelector('input.' + className).value
 	console.log(className)
-	document.getElementById('a').value = document.querySelector('input[name="reserve_idx"]').value
+// 	document.getElementById('a').value = document.querySelector('input[name="reserve_idx"]').value
+// 	document.querySelectorAll('input[name="reserve_idx"]').forEach()
+	
 	const url = '${cpath}/crm/' + reserve_idx
 	const opt = {
 			method : 'GET'
