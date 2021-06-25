@@ -32,8 +32,19 @@
 			<mapping path="/**" />
 			<exclude-mapping path="/" />
 			<exclude-mapping path="/common/login" />
+			<exclude-mapping path="/common/personLogin" />
+			<exclude-mapping path="/common/companyLogin" />
 			<exclude-mapping path="/common/join" />
-			
+			<exclude-mapping path="/common/selectIndiComp" />
+			<exclude-mapping path="/common/findIdByPhone" />
+			<exclude-mapping path="/common/findIdByEmail" />
+			<exclude-mapping path="/common/repwByPhone" />						
+			<exclude-mapping path="/common/repwByEmail" />					
+			<exclude-mapping path="/compSearch/{keyword}" />					
+			<exclude-mapping path="/crm/**" />					
+			<exclude-mapping path="/mailto/**" />					
+			<exclude-mapping path="/getAuthResult/**" />
+			<exclude-mapping path="/record"/>					
 			
 			<beans:bean id="loginInterceptor" 
 						class="com.itbank.interceptor.LoginInterceptor">

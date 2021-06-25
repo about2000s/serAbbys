@@ -32,7 +32,7 @@ public class PersonController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "home";
+		return "index";
 	}
 	
 	//개인회원 로그인
@@ -44,7 +44,7 @@ public class PersonController {
 		if(login != null) {
 			System.out.println("여기는 로그인 성공");
 			session.setAttribute("login", login);
-			mav.setViewName("home");
+			mav.setViewName("index");
 		}
 		else {
 			System.out.println("여기는 로그인 실패");
@@ -65,7 +65,7 @@ public class PersonController {
 		PersonDTO login = ps.companyLogin(inputData);
 		if(login != null) {
 			session.setAttribute("login", login);
-			mav.setViewName("home");
+			mav.setViewName("index");
 		}
 		else {
 			String msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
@@ -144,7 +144,7 @@ public class PersonController {
 	//이메일 입력에 의한 아이디 찾기 데이터 받아와서 처리
 	@PostMapping("/findIdByEmail")
 	public ModelAndView findIdByEmail(PersonDTO inputData) {
-		ModelAndView mav = new ModelAndView("common/findIdResult");
+		ModelAndView mav = new ModelAndView("common/findResult");
 		int row = ps.emailNameCheck(inputData);
 		String msg;
 		if(row == 0) {
