@@ -52,7 +52,9 @@ public class PersonController {
 		else {
 			System.out.println("여기는 로그인 실패");
 			String msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
+			String value = "loginFail";
 			mav.addObject("msg", msg);
+			mav.addObject("value", value);
 			mav.setViewName("common/alert");
 		}
 		return mav;
