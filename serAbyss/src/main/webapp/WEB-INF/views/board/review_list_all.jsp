@@ -3,50 +3,47 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="../layout/header.jsp"%>
 
-<style>
-:::
-</style>
-
-<h2>리뷰보기</h2>
-<div class="card mb-4 container">
-	<div class="card-body">
-		<table class = "table dataTable-table" id="datatablesSimple">
-			<thead>
-				<tr>
-					<th width="10%">평점</th>
-					<th width="50%">제목</th>
-					<th width="10%">작성자(고객)</th>
-					<th width="10%">날짜</th>
-					<th width="10%">조회수</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var = "dto" items = "${map.mapList }">
+<section class="page-section">
+	<h2>리뷰보기</h2>
+	<div class="card mb-4 container">
+		<div class="card-body">
+			<table class = "table dataTable-table" id="datatablesSimple">
+				<thead>
 					<tr>
-						<td>${dto.review_star }</td>
-						<td><a href="${cpath }/board/reviewRead/${dto.review_idx}?type=${map.type }&keyword=${map.keyword }&page=${map.page }">${dto.review_title}</a>&nbsp;[${dto.review_replyCount }]</td>
-						<td>${dto.review_custId}</td>
-						<td>${dto.review_reg }</td>
-						<td>${dto.review_viewCount }</td>
+						<th width="10%">평점</th>
+						<th width="50%">제목</th>
+						<th width="10%">작성자(고객)</th>
+						<th width="10%">날짜</th>
+						<th width="10%">조회수</th>
 					</tr>
-				</c:forEach>
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					<c:forEach var = "dto" items = "${map.mapList }">
+						<tr>
+							<td>${dto.review_star }</td>
+							<td><a href="${cpath }/board/reviewRead/${dto.review_idx}?type=${map.type }&keyword=${map.keyword }&page=${map.page }">${dto.review_title}</a>&nbsp;[${dto.review_replyCount }]</td>
+							<td>${dto.review_custId}</td>
+							<td>${dto.review_reg }</td>
+							<td>${dto.review_viewCount }</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		<div><!-- 검색 -->
+			<form>
+				<input type = "hidden" name = "page" value = "1">
+				<select name = "type" class = "form-control" style = "width: 10%; display: inline;">
+					<option value = "review_title" selected>제목</option>
+					<option value = "review_content">내용</option>
+					<option value = "review_custId">글쓴이</option>
+				</select>
+				<input type = "text" name = "keyword" value = "${keyword }" placeholder = "검색" class = "form-control" style = "width: 30%; display: inline;">
+				<button type = "submit" class = "btn btn-primary btn-xl">검색</button>
+			</form>
+		</div>
 	</div>
-	<div><!-- 검색 -->
-		<form>
-			<input type = "hidden" name = "page" value = "1">
-			<select name = "type" class = "form-control" style = "width: 10%; display: inline;">
-				<option value = "review_title" selected>제목</option>
-				<option value = "review_content">내용</option>
-				<option value = "review_custId">글쓴이</option>
-			</select>
-			<input type = "text" name = "keyword" value = "${keyword }" placeholder = "검색" class = "form-control" style = "width: 30%; display: inline;">
-			<button type = "submit" class = "btn btn-primary btn-xl">검색</button>
-		</form>
-	</div>
-</div>
-
+</section>
 
 
 <div class="page_wrap">

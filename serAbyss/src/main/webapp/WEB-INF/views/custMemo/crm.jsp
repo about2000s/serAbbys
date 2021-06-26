@@ -4,74 +4,74 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ include file="../layout/header.jsp" %>
 <%@ include file="../layout/customerLeftMenu.jsp" %>
-
-<div class="container">
-	<div>
-		<h2>응대 기록 검색하기</h2>
-		<form method="POST">
-			<select name="type" class = "form-control" style = "width: 10%; display: inline;">
-				<option value="reserve_name">고객명</option>
-				<option value="reserve_phone">전화번호</option>
-				<option value="reserve_address">주소의 일부</option>
-				<option value="reserve_engiId">담당 엔지니어</option>
-				<option value="reserve_idx">서비스번호</option>
-			</select>
-			 <input type="text" name="keyword" value = "${map.keyword }" class = "form-control" style = "width: 30%; display: inline;">
-			<button class = "btn btn-primary btn-xl">검색</button>
-		</form>
-	</div>
-	<div>
-		<table class = "table dataTable-table">
-			<thead>
-				<tr>
-					<th>서비스 신청일</th>
-					<th>서비스번호</th>
-					<th>처리 상태</th>
-					<th>고객명</th>
-					<th>담당엔지니어</th>
-					<th>주소</th>
-					<th>phone</th>
-					<th>응대기록</th>
-				</tr>
-			</thead>
-			<tbody>
-				<c:forEach var="dto" items="${list }">
-				<tr>
-					<td>${dto.reserve_reg}</td>
-					<td>${dto.reserve_idx }</td>
-					<td>${dto.reserve_status }</td>
-					<td>
-						${dto.reserve_name }
-						<c:if test="${dto.reserve_custId != null }">(${dto.reserve_custId })</c:if>
-					</td>
-					<td>${dto.reserve_engiId }</td>
-					<td>${dto.reserve_address }</td>
-					<td>${fn:substring(dto.reserve_phone, 0, 3)}-${fn:substring(dto.reserve_phone, 3, 7)}-${fn:substring(dto.reserve_phone, 7, 11)}</td>
-					
-					<td>
-						<input class = "gao${dto.reserve_idx } main" type="hidden" name="reserve_idx" value="${dto.reserve_idx }">
-						<input class = "gao${dto.reserve_idx }" id="gao${dto.reserve_idx }" type="button" value="응대기록가져오기 ">
-					</td>
-				</tr>
-				</c:forEach>
-			</tbody>
-		</table>
-	</div>
-	
-	<h2>가져온 응대기록</h2>
-	<div class="gender" id="recordList">
-	</div>
-	
-	<div class = "hiddenNone record">
-		<h2>기록 남기기</h2>
-			<form id="insertForm">
-				<input type="hidden" id = "a" name="custMemo_reserve_idx" value="">
-				<textarea id = "b" class="form-control" name="custMemo_comments"></textarea>
-				<input id="insertBtn" type="submit" value="다음" class = "btn btn-primary btn-xl">
+<section class="page-section">
+	<div class="container">
+		<div>
+			<h2>응대 기록 검색하기</h2>
+			<form method="POST">
+				<select name="type" class = "form-control" style = "width: 10%; display: inline;">
+					<option value="reserve_name">고객명</option>
+					<option value="reserve_phone">전화번호</option>
+					<option value="reserve_address">주소의 일부</option>
+					<option value="reserve_engiId">담당 엔지니어</option>
+					<option value="reserve_idx">서비스번호</option>
+				</select>
+				 <input type="text" name="keyword" value = "${map.keyword }" class = "form-control" style = "width: 30%; display: inline;">
+				<button class = "btn btn-primary btn-xl">검색</button>
 			</form>
+		</div>
+		<div>
+			<table class = "table dataTable-table">
+				<thead>
+					<tr>
+						<th>서비스 신청일</th>
+						<th>서비스번호</th>
+						<th>처리 상태</th>
+						<th>고객명</th>
+						<th>담당엔지니어</th>
+						<th>주소</th>
+						<th>phone</th>
+						<th>응대기록</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="dto" items="${list }">
+					<tr>
+						<td>${dto.reserve_reg}</td>
+						<td>${dto.reserve_idx }</td>
+						<td>${dto.reserve_status }</td>
+						<td>
+							${dto.reserve_name }
+							<c:if test="${dto.reserve_custId != null }">(${dto.reserve_custId })</c:if>
+						</td>
+						<td>${dto.reserve_engiId }</td>
+						<td>${dto.reserve_address }</td>
+						<td>${fn:substring(dto.reserve_phone, 0, 3)}-${fn:substring(dto.reserve_phone, 3, 7)}-${fn:substring(dto.reserve_phone, 7, 11)}</td>
+						
+						<td>
+							<input class = "gao${dto.reserve_idx } main" type="hidden" name="reserve_idx" value="${dto.reserve_idx }">
+							<input class = "gao${dto.reserve_idx }" id="gao${dto.reserve_idx }" type="button" value="응대기록가져오기 ">
+						</td>
+					</tr>
+					</c:forEach>
+				</tbody>
+			</table>
+		</div>
+		
+		<h2>가져온 응대기록</h2>
+		<div class="gender" id="recordList">
+		</div>
+		
+		<div class = "hiddenNone record">
+			<h2>기록 남기기</h2>
+				<form id="insertForm">
+					<input type="hidden" id = "a" name="custMemo_reserve_idx" value="">
+					<textarea id = "b" class="form-control" name="custMemo_comments"></textarea>
+					<input id="insertBtn" type="submit" value="다음" class = "btn btn-primary btn-xl">
+				</form>
+		</div>
 	</div>
-</div>
-
+</section>
 <script>
 	const type = document.querySelector('option[value="${map.type}"]') // map에는 type(검색 유형)이 담겨있다. 예를들어 폰번호로 검색했다면 reserve_phone이 있는 것이다
 	//그러한 value를 가진 option을 쿼리셀렉터 해서 type에 저장하는 거다. 그럼 그 type은 <option value="reserve_phone">전화번호</option> 이 되겠다.

@@ -82,4 +82,7 @@ public interface ReserveDAO {
 	@Update("update reserve set reserve_status=#{reserve_status} where reserve_idx=#{reserve_idx}")
 	int statusChange(ReserveDTO dto);
 
+	@Update("update reserve set reserve_viewCount = reserve_viewCount + 1 where reserve_idx=#{reserve_idx}")
+	int reserveViewCountPlus(int reserve_idx);
+
 }

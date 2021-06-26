@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
 
+<section class="page-section">
 <div class="card mb-4 container">
 	<div class="card-body">
 		<h2>마이페이지 입니다</h2>
@@ -36,5 +37,5 @@
 		</table>
 	</div>
 </div>
-
+</section>
 <%@ include file="../layout/footer.jsp" %>

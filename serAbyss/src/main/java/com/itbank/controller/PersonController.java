@@ -32,19 +32,18 @@ public class PersonController {
 	@GetMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		return "home";
+		return "index";
 	}
 	
 	//개인회원 로그인
 	@PostMapping("/personLogin")
 	public ModelAndView personLogin(PersonDTO inputData, HttpSession session) {
 		System.out.println("fds");
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView("index");
 		PersonDTO login = ps.personLogin(inputData);
 		if(login != null) {
 			System.out.println("여기는 로그인 성공");
 			session.setAttribute("login", login);
-			mav.setViewName("home");
 		}
 		else {
 			System.out.println("여기는 로그인 실패");
@@ -58,16 +57,15 @@ public class PersonController {
 	//기업회원 로그인
 	@PostMapping("/companyLogin")
 	public ModelAndView companyLogin(PersonDTO inputData, HttpSession session) {
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView("index");
 		PersonDTO login = ps.companyLogin(inputData);
 		if(login != null) {
 			session.setAttribute("login", login);
-			mav.setViewName("home");
 		}
 		else {
 			String msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
 			mav.addObject("msg", msg);
-			mav.addObject("link", "history.go(-1)");
+			mav.addObject("value", "loginFail");
 			mav.setViewName("common/alert");
 		}
 		return mav;
@@ -96,17 +94,19 @@ public class PersonController {
 			}
 		}
 		String msg = null;
+		String value = null;
 		int row = ps.join(inputData);
 		
 		if(row != 0) {
 			msg = "회원가입 성공";
-			mav.addObject("link", "login");
+			value = "joinSuccess";
 		}
 		else {
 			msg = "회원가입 실패";
-			mav.addObject("link", "history.go(-1)");
+			value = "joinFail";
 		}
 		mav.addObject("msg", msg);
+		mav.addObject("value", value);
 		return mav;
 	}
 	

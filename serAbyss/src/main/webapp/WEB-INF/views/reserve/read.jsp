@@ -6,6 +6,7 @@
 .reserveRead tr th{height:50px;background-color:#ececec;border:1px solid dcdcdc;}
 .reserveRead tr td {padding-left:50px; border:1px solid #dcdcdc; }
 </style>
+<section class="page-section">
 	<div class = "container">
 		<div class="card-body">
 			<!-- 그 서비스글에 해당하는 고객만이 리뷰글을 작성하는 권한이 있다!! -->
@@ -60,7 +61,7 @@
 			</table>
 		</div>
 	</div>
-
+</section>
 <script>
 document.getElementById('statusChange').onclick = function(event){
 	console.log('sex')

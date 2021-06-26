@@ -176,4 +176,12 @@ public class BoardService {
 	private int selectBoardCountNotice(HashMap<String, Object> map) {
 		return dao.selectBoardCountNotice(map);
 	}
+
+	public int serCenWrite(SerCenDTO dto) {
+		return dao.serCenWrite(dto);
+	}
+
+	public int serCenViewCountPlus(int serCen_idx) {
+		return dao.serCenViewCountPlus(serCen_idx);
+	}
 }

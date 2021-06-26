@@ -2,9 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
 <!-- style hiddenNone있던거 삭제하고 css로 옮겼습니다. 정재훈6월10일 9:42 -->
-<h2>개인정보 수정하는 곳입니다.</h2>
-<div>
-	<div>
+<section class="page-section">
+	<div class = "container">
+	<h2>개인정보 수정하는 곳입니다.</h2>
 		이메일: ${login.person_email }<a class = "email btn btn-primary btn-xl">수정</a>
 		<div class = "email main hiddenNone">
 			<h2>이메일 변경을 위해서 인증이 필요합니다</h2>
@@ -83,7 +83,7 @@
 		</div>
 	</div>
 	<button onclick = "history.go(-1);" class = "btn btn-primary btn-xl">뒤로 가기</button>
-</div>
+</section>
 
 <script>
 	document.querySelectorAll('a').forEach(a => a.onclick = function(event){

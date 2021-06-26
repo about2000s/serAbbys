@@ -65,4 +65,11 @@ public interface BoardDAO {
 
 	@Select("select count(*) from serCen where serCen_belong='notice' and ${type} like '%${keyword}%'")
 	int selectBoardCountNotice(HashMap<String, Object> map);
+
+	@Insert("insert into serCen (serCen_idx, serCen_id, serCen_title, serCen_content, serCen_belong) "
+			+ "values (serCen_seq.nextval, #{serCen_id}, #{serCen_title}, #{serCen_content}, #{serCen_belong})")
+	int serCenWrite(SerCenDTO dto);
+
+	@Update("update serCen set serCen_viewCount = serCen_viewCount + 1 where serCen_idx=#{serCen_idx}")
+	int serCenViewCountPlus(int serCen_idx);
 }

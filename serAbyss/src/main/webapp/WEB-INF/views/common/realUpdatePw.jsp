@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
+<section class="page-section">
 <div>
 	<form id = "repwCheck" method = "post" action = "pwUpdateResult">
 		새 비밀번호 입력: <input type = "password" id = "person_pw" name = "person_pw" class= "form-control" style = "width: 15%;">
@@ -10,6 +11,7 @@
 		<input type = "submit" value = "다음" class = "btn btn-primary btn-xl">
 	</form>
 </div>
+</section>
 <script>
 	document.getElementById('repwCheck').onsubmit = function(event){
 		event.preventDefault()
