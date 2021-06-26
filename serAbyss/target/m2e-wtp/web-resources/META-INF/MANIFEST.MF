@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: bae-7
+=======
+Built-By: kgitbank10
+>>>>>>> branch 'develop' of https://github.com/about2000s/serAbbys.git
 Build-Jdk: 1.8.0_291
 Created-By: Maven Integration for Eclipse
 
