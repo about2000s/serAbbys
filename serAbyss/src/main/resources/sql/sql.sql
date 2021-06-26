@@ -158,13 +158,17 @@ update service set service_phone = '01099999999' where service_idx=2;
 update service set service_phone = '01022222222' where service_idx=3; 
 
 --검색을 위한 customer 테이블 칼럼 추가(서비스테이블의 idx값과 동일한 값이지만 중복 가능) --
-alter table customer add customer_service_idx varchar(50);
+alter table custmemo add customer_service_idx varchar(50);
 
 --customer table 더미데이터 --
-insert into customer values( customer_seq.nextval, '전화연락 해달라고 하심' ,'2021-06-16 22:22:22' ,'1');
+insert into custmemo values (custmemo_seq.nextval, '1' , '프로펠러 안돈다고 하심 ', to_char(sysdate, 'yyyy-MM-dd hh24:mi'));
+insert into custmemo values (custmemo_seq.nextval, '1' , '냉각수 유출로 문의주심, 증상이 심하지 않아 냉각수 채우고 다음번 방문 때 패킹 교환 해드리기로 함  ', to_char(sysdate, 'yyyy-MM-dd hh24:mi'));
+insert into custmemo values (custmemo_seq.nextval, '1' , '패킹 교환 해드림 ', to_char(sysdate, 'yyyy-MM-dd hh24:mi'));
+insert into custmemo values (custmemo_seq.nextval, '1' , '결제 완료 했다고 전화연락 주심 ', to_char(sysdate, 'yyyy-MM-dd hh24:mi'));
+
 
 --customer table 고객 응대 insert 
-insert into customer values (customer_seq.nextval, '전화연락 해달라고 하심' ,to_char(sysdate, 'yyyy-MM-dd hh24:mi') ,'1');
+insert into custmemo values (custmemo_seq.nextval, '전화연락 해달라고 하심' ,to_char(sysdate, 'yyyy-MM-dd hh24:mi') ,'1');
 
 
 create sequence customer_idx start with 1 maxvalue 999999 increment by 1 nocache;

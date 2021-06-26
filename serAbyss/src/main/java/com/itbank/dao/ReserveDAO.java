@@ -22,20 +22,16 @@ public interface ReserveDAO {
 	@Select("select * from reserve where reserve_idx=#{idx}")
 	ReserveDTO selectOne(int idx);
 
-	@Insert("insert into reserve (reserve_idx, reserve_custId, reserve_title, reserve_content, "
-			+ "reserve_status, reserve_address, reserve_engiId, reserve_compBelong, reserve_name, reserve_phone)"
-			+ "values (reserve_seq.nextval, #{reserve_custId}, #{reserve_title}, #{reserve_content}, "
-			+ "#{reserve_status}, #{reserve_address}, #{reserve_engiId}, "
-			+ "#{reserve_compBelong}, #{reserve_name}, #{reserve_phone})")
+	// sqlmap-reserve.xml에 있습니다
 	int reserve(ReserveDTO dto);
 
-	@Update("update reserve set reserve_title=#{reserve_title}, reserve_content=#{reserve_content}, "
+	@Update("update reserve set reserve_content=#{reserve_content}, "
 			+ "reserve_reg=to_char(sysdate, 'yyyy-MM-dd hh24:mi') "
 			+ "where reserve_idx=#{reserve_idx}")
 	int modify(ReserveDTO dto);
 
 	@Delete("delete from reserve where reserve_idx=#{idx}")
-	int delete(int idx);
+	int deleteReserve(int idx);
 
 	@Select("select * from reserveTime where reserveTime_year=#{reserveTime_year} "
 			+ "and reserveTime_month=#{reserveTime_month} and reserveTime_day=#{reserveTime_day} "
@@ -58,7 +54,7 @@ public interface ReserveDAO {
 	PersonDTO selectOneById(String reserve_custId);
 
 	@Insert("insert into reserveTime (reserveTime_idx, reserveTime_year, reserveTime_month, reserveTime_day, reserveTime_hour, reserveTime_engiId,  reserveTime_custId)" + 
-			"    values(reserveTime_seq.nextval, #{reserveTime_year}, #{reserveTime_month}, #{reserveTime_day}, #{reserveTime_hour}, #{reserveTime_engiId}, #{reserveTime_custId})")
+			"    values(#{reserveTime_idx}, #{reserveTime_year}, #{reserveTime_month}, #{reserveTime_day}, #{reserveTime_hour}, #{reserveTime_engiId}, #{reserveTime_custId})")
 	int insertReserve(ReserveTimeDTO reserveTimeDTO);
 
 
@@ -70,5 +66,24 @@ public interface ReserveDAO {
 
 	@Select("select * from custMemo where custMemo_reserve_idx=#{reserve_idx}")
 	ArrayList<CustMemoDTO> custMemoList(int reserve_idx);
+	
+	@Select("select max(reserve_idx) from (select * from reserve where reserve_engiId=#{reserve_engiId})")
+	int selectMaxIdxInReserve(String reserve_engiId);
+
+	@Select("select reserve_engiId from reserve where reserve_idx=#{reserve_idx}")
+	String selectEngiIdOneByIdx(int reserve_idx);
+
+	@Update("update reserveTime set reserveTime_day=#{reserveTime_day}, reserveTime_hour=#{reserveTime_hour} where reserveTime_idx=#{reserveTime_idx}")
+	int changeReserveTime(ReserveTimeDTO reserveTimeDTO);
+
+	@Update("update reserve set reserve_title=#{reserve_title}, "
+			+ "reserve_reg=to_char(sysdate, 'yyyy-MM-dd hh24:mi') where reserve_idx=#{reserve_idx}")
+	int reserveTitleChange(ReserveDTO reserveDTO);
+
+	@Delete("delete from reserveTime where reserveTime_idx=#{reserveTime_idx}")
+	int deleteReserveTime(int reserveTime_idx);
+
+	@Update("update reserve set reserve_status=#{reserve_status} where reserve_idx=#{reserve_idx}")
+	int statusChange(ReserveDTO dto);
 
 }

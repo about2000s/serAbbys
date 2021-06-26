@@ -11,10 +11,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.itbank.dto.CustMemoDTO;
 import com.itbank.service.CustMemoService;
 import com.itbank.service.Hash;
 import com.itbank.service.PersonService;
@@ -27,6 +30,13 @@ public class PersonRestController {
 	
 	private ObjectMapper mapper = new ObjectMapper();
 	
+	@GetMapping(value = "/custMemo/crmList/{reserve_idx}",  produces = "application/json; charset=utf-8")
+	public String crmRead(@PathVariable int reserve_idx) throws JsonProcessingException {
+		List<HashMap<String, String>> list = cs.crmRead(reserve_idx);
+		String json = mapper.writeValueAsString(list);
+		return json;
+	}
+	
 	@GetMapping(value = "/compSearch/{keyword}", produces = "application/json; charset=utf-8")
 	public String compSearch(@PathVariable String keyword) throws JsonProcessingException {
 		List<HashMap<String, String>> list = ps.compSearchList(keyword);
@@ -34,9 +44,9 @@ public class PersonRestController {
 		return json;
 	}
 	
-	@GetMapping(value = "/crm/{service_idx}", produces = "application/json; charset=utf-8")
-	public String crm(@PathVariable int service_idx) throws JsonProcessingException {
-		List<HashMap<String, String>> list = cs.selectList(service_idx);
+	@GetMapping(value = "/crm/{reserve_idx}", produces = "application/json; charset=utf-8")
+	public String crm(@PathVariable int reserve_idx) throws JsonProcessingException {
+		List<HashMap<String, String>> list = cs.selectList(reserve_idx);
 		String json = mapper.writeValueAsString(list);
 		return json;
 	}
@@ -80,6 +90,16 @@ public class PersonRestController {
 		boolean flag = hashNumber.equals(Hash.getHash(userNumber));
 		System.out.println(flag);
 		return flag;
+	}
+	
+	
+	@PostMapping(value = "/record")
+	public int jjh(@RequestBody CustMemoDTO dto) {
+		System.out.println("dto: " + dto);
+		System.out.println(dto.getCustMemo_comments());
+		System.out.println(dto.getCustMemo_reserve_idx());
+		int row = cs.insert(dto);
+		return 0;
 	}
 	
 
