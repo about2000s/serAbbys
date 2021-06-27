@@ -22,25 +22,25 @@
 					<td>
 						<div>
 							<h2>기사 선택</h2>
-							<c:forEach var = "i" items = "${engiIdList }">
-								<label><input type = "radio" name = "reserveTime_engiId" value = "${i }" class = "form-check-input">${i }</label>
+							<c:forEach var = "dto" items = "${engiList }">
+								<label><input type = "radio" name = "reserveTime_engiId" value = "${dto.person_id }" class = "form-check-input">${dto.person_name }(${dto.person_id })</label>
 							</c:forEach>
 						</div>
 						
 						<div>
 							<h2>일 선택</h2>
 							<c:forEach var = "j" items = "${dayList }">
-								<label><input type = "radio" name = "reserveTime_day" value = "${j }" class = "form-check-input">${j }</label>
+								<label><input type = "radio" name = "reserveTime_day" value = "${j }" class = "form-check-input">${j }일</label>
 							</c:forEach>
 						</div>
 						
 						<div>
 							<h2>시간 선택(이미 예약이 되어있는 시간은 비어있습니다)</h2>
-							<c:forEach var = "i" items = "${engiIdList }">
+							<c:forEach var = "i" items = "${engiList }">
 								<c:forEach var = "j" items = "${dayList }">
 									<c:forEach var = "k" items = "${reserveTimeList }">
-										<c:if test="${k.engiId == i && k.day == j }">
-											<div class = "${i }day${j } hiddenNone main">
+										<c:if test="${k.engiId == i.person_id && k.day == j }">
+											<div class = "${i.person_id }day${j } hiddenNone main">
 												<label><input type = "radio" name = "reserveTime_hour" value = "${k.hour }" class = "form-check-input">${k.hour }:00</label>
 											</div>
 										</c:if>
@@ -62,17 +62,17 @@
 				</tr>
 			</table>
 			<div id = "id02" class = "w3-modal">
-				<div class = "w3-modal-content w3-card-4">
+				<div class = "w3-modal-content w3-card-4" style = "width: 30%;">
 					<header class = "w3-container w3-teal">
 						<span onclick = "document.getElementById('id02').style.display='none'"
 						class = "w3-button w3-display-topright">&times;</span>
-						<h2>Modal Header</h2>
+						<h2>&nbsp;&nbsp;&nbsp;</h2>
 					</header>
 					<div class = "w3-container">
-						<button class = "btn btn-primary btn-xl" id = "originalAddressSelectBtn">
+						<button class = "btn btn-primary btn-sm" id = "originalAddressSelectBtn">
 							${login.person_address }
 						</button>
-						<button class = "btn btn-primary btn-xl" id = "newAddressSearchBtn">+주소지 새로 입력</button>
+						<button class = "btn btn-primary btn-sm" id = "newAddressSearchBtn">+주소지 새로 입력</button>
 					</div>
 				</div>
 			</div>
@@ -83,16 +83,16 @@
 						class = "w3-button w3-display-topright">&times;</span>
 						<h2>Modal Header</h2>
 					</header>
-				<label>주소</label><br>
-				<input type="text" id="postcode" placeholder="우편번호" readonly class="form-control" style = "width: 10%; display: inline;">
-				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-sm" style = "width: 10%;"><br>
-				<input type="text" id="address" name = "address" placeholder="주소" readonly class="form-control" style = "width: 20%;"><br>
-				<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소" class="form-control" style = "width: 9.8%; display: inline;">
-				<input type="text" id="extraAddress" placeholder="참고항목" readonly class="form-control" style = "width: 9.8%; display: inline;">
-				<button class = "btn btn-primary btn-sm" id = "thisAddressSelectBtn">이 주소로 선택</button> <!-- 클릭하는 순간 위 버튼에 innerText하고 모든 모달창 닫기 -->
+					<label>주소</label><br>
+					<input type="text" id="postcode" placeholder="우편번호" readonly class="form-control" style = "width: 10%; display: inline;">
+					<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-sm" style = "width: 10%;"><br>
+					<input type="text" id="address" name = "address" placeholder="주소" readonly class="form-control" style = "width: 20%;"><br>
+					<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소" class="form-control" style = "width: 9.8%; display: inline;">
+					<input type="text" id="extraAddress" placeholder="참고항목" readonly class="form-control" style = "width: 9.8%; display: inline;">
+					<button class = "btn btn-primary btn-sm" id = "thisAddressSelectBtn">이 주소로 선택</button> <!-- 클릭하는 순간 위 버튼에 innerText하고 모든 모달창 닫기 -->
+				</div>
 			</div>
-			</div>
-			<button class = "btn btn-primary btn-xl" type = "submit">다음</button>
+			<button class = "btn btn-primary btn-lg" type = "submit">다음</button>
 		</form>
 	</div>
 </section>

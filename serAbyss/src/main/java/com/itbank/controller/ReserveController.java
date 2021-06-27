@@ -46,14 +46,17 @@ public class ReserveController {
 		int hourCount = 8;
 		int dayCount = 14;
 		
-		List<String> engiIdList = new ArrayList<String>();//기사의 아이디를 담는 리스트 선언 및 초기화
-		engiIdList.add(((PersonDTO)session.getAttribute("login")).getPerson_id());//기사 리스트에 세션에 저장된 아이디를 담는다.
+		List<PersonDTO> engiList = new ArrayList<PersonDTO>();//기사의 아이디를 담는 리스트 선언 및 초기화
+		
+		PersonDTO login = (PersonDTO)session.getAttribute("login");
+		
+		engiList.add(login);//기사 리스트에 세션에 저장된 아이디를 담는다.
 		
 		List<Integer> dayList = rs.dayList(dayCount);//날짜 리스트를 담는 메서드
-		List<HashMap<String, Object>> reserveTimeList = rs.reserveTimeList(engiIdList, hourCount, dayCount);
+		List<HashMap<String, Object>> reserveTimeList = rs.reserveTimeList(engiList, hourCount, dayCount);
 		//기사에 따른 예약가능한 예약시간을 담아두는 메서드
 		
-		mav.addObject("engiIdList", engiIdList);
+		mav.addObject("engiList", engiList);
 		mav.addObject("dayList", dayList);
 		mav.addObject("reserveTimeList", reserveTimeList);
 		return mav;
@@ -63,12 +66,6 @@ public class ReserveController {
 	@PostMapping("/reserve_new_for_engi")
 	public ModelAndView reserve(ReserveDTO reserveDTO, ReserveTimeDTO reserveTimeDTO, String address, String detailAddress) {
 		ModelAndView mav = new ModelAndView("/reserve/alert");
-		
-		
-		
-		
-		
-		
 		
 		rs.addressAndTitleSetting(reserveDTO, reserveTimeDTO, address, detailAddress);
 		
@@ -104,14 +101,14 @@ public class ReserveController {
 		int row = rs.reserveViewCountPlus(reserve_idx);//예약글의 조회수 증가시키는 메서드
 		ReserveDTO dto = rs.selectOne(reserve_idx);//idx값을 통해 예약글 하나를 받아오는 메서드
 		
-		String b1 = "";
-		String b2 = "";
 		String ment = "(으)로 처리 상태 변경하기";
 		
-		rs.statusChangeBtn(dto, b1, b2);//현재 상태에 따라 바꿀 상태값의 버튼 이름 정하는 메서드
 		
-		mav.addObject("b1", b1);
-		mav.addObject("b2", b2);
+		HashMap<String, String> btnList = rs.statusChangeBtn(dto);//현재 상태에 따라 바꿀 상태값의 버튼 이름 정하는 메서드
+		System.out.println(dto.getReserve_status());
+		System.out.println("btnList: " + btnList);
+		
+		mav.addObject("btnList", btnList);
 		mav.addObject("ment", ment);
 		mav.addObject("dto", dto);
 		mav.addObject("map", map);
@@ -120,49 +117,53 @@ public class ReserveController {
 	}
 	//미완성. 아직 더 봐야 해
 	@GetMapping("statusChange/{reserve_idx}")
-	public ModelAndView statusChange(@PathVariable int reserve_idx, String b1, String b2) {
+	public ModelAndView statusChange(@PathVariable int reserve_idx, String nextStatus) {
 		ModelAndView mav = new ModelAndView("redirect:/reserve/read/" + reserve_idx);
+		
+		System.out.println("nextStatus: " + nextStatus);
 		ReserveDTO dto = rs.selectOne(reserve_idx);
-		if(b1.equals("서비스중")) {
+		String b1 = "";
+		if(nextStatus.equals("서비스중")) {
 			b1 = "서비스중";
 		}
-		else if(b1.equals("서비스완료")) {
+		else if(nextStatus.equals("서비스완료")) {
 			b1 = "서비스완료";
 		}
-		else if(b1.equals("결제완료")) {
+		else if(nextStatus.equals("결제완료")) {
 			b1 = "결제완료";
 		}
-		else if(b1.equals("환불신청")){
+		else if(nextStatus.equals("환불신청")){
 				b1 = "환불접수";
 			}
-		else if(b1.equals("처리완료")) {
+		else if(nextStatus.equals("처리완료")) {
 			b1 = "처리완료";
 		}
 		dto.setReserve_status(b1);
+		System.out.println("status: " + dto.getReserve_status());
 		int row = rs.statusChange(dto);
-		mav.addObject("b1", b1);
-		mav.addObject("b2", b2);
 		return mav;
 	}
 	
+	//예약시간 변경하는 폼으로 이동
 	@GetMapping("/changeReserveTime/{reserve_idx}")
 	public ModelAndView changeReserveTime(@PathVariable int reserve_idx) {
 		ModelAndView mav = new ModelAndView("reserve/changeReserveTime");
 		int hourCount = 8;
 		int dayCount = 14;
-		String engiId = rs.selectEngiIdOneByIdx(reserve_idx);
-		List<String> engiIdList = new ArrayList<String>();
-		engiIdList.add(engiId);
+		PersonDTO engi = rs.selectEngiOneByIdx(reserve_idx);
+		List<PersonDTO> engiList = new ArrayList<PersonDTO>();
+		engiList.add(engi);
 		
 		List<Integer> dayList = rs.dayList(dayCount);
 		
-		List<HashMap<String, Object>> reserveTimeList = rs.reserveTimeList(engiIdList, hourCount, dayCount);
+		List<HashMap<String, Object>> reserveTimeList = rs.reserveTimeList(engiList, hourCount, dayCount);
 		
-		mav.addObject("engiIdList", engiIdList);
+		mav.addObject("engiList", engiList);
 		mav.addObject("dayList", dayList);
 		mav.addObject("reserveTimeList", reserveTimeList);
 		return mav;
 	}
+	//예약시간 변경
 	@PostMapping("/changeReserveTime/{reserve_idx}")
 	public ModelAndView changeReserveTime(@PathVariable int reserve_idx, ReserveTimeDTO reserveTimeDTO) {
 		ModelAndView mav = new ModelAndView("reserve/alert");
@@ -189,14 +190,18 @@ public class ReserveController {
 		reserveTimeDTO.setReserveTime_idx(reserve_idx);
 		int row2 = rs.changeReserveTime(reserveTimeDTO);
 		String msg = null;
+		String value = null;
 		if(row1 != 0 && row2 != 0) {
 			msg = "예약시간 변경 성공";
 			mav.addObject("reserve_idx", reserve_idx);
+			value = "reserveTimeChangeSuccess";
 		}
 		else {
 			msg = "예약시간 변경 실패";
+			value = "reserveTimeChangeFail";
 		}
 		mav.addObject("msg", msg);
+		mav.addObject("value", value);
 		
 		return mav;
 	}
@@ -204,7 +209,6 @@ public class ReserveController {
 	//게시글 수정
 	@GetMapping("/modify/{reserve_idx}")
 	public ModelAndView modify(@PathVariable int reserve_idx, @RequestParam HashMap<String, Object> map) {
-		
 		
 		ModelAndView mav = new ModelAndView("reserve/modify");
 		ReserveDTO dto = rs.selectOne(reserve_idx);
@@ -232,13 +236,17 @@ public class ReserveController {
 		int row2 = rs.deleteReserveTime(reserve_idx);
 		int row1 = rs.deleteReserve(reserve_idx);
 		String msg;
+		String value = null;
 		if(row1 != 0 && row2 != 0) {
 			msg = "예약이 취소됨";
+			value = "reserveCancel";
 		}
 		else {
 			msg = "예약취소 실패";
+			value = "reserveCancelFail";
 		}
 		mav.addObject("msg", msg);
+		mav.addObject("value", value);
 		return mav;
 	}
 
@@ -250,12 +258,12 @@ public class ReserveController {
 		int hourCount = 8;
 		int dayCount = 14;
 		
-		List<String> engiIdList = rs.selectEngiIdAll();
+		List<PersonDTO> engiList = rs.selectEngiAll();
 		List<Integer> dayList = rs.dayList(dayCount);
 		
-		List<HashMap<String, Object>> reserveTimeList = rs.reserveTimeList(engiIdList, hourCount, dayCount);
+		List<HashMap<String, Object>> reserveTimeList = rs.reserveTimeList(engiList, hourCount, dayCount);
 		
-		mav.addObject("engiIdList", engiIdList);
+		mav.addObject("engiList", engiList);
 		mav.addObject("dayList", dayList);
 		mav.addObject("reserveTimeList", reserveTimeList);
 		return mav;
@@ -267,6 +275,9 @@ public class ReserveController {
 		ModelAndView mav = new ModelAndView("reserve/alert");
 		PersonDTO cust = rs.selectOneById(reserveDTO.getReserve_custId());
 		PersonDTO engi = rs.selectOneById(reserveTimeDTO.getReserveTime_engiId());
+		
+		System.out.println("engi.comp: " + engi.getPerson_belong());
+		
 		
 		reserveDTO.setReserve_engiId(reserveTimeDTO.getReserveTime_engiId());
 		reserveDTO.setReserve_compBelong(engi.getPerson_belong());
@@ -284,52 +295,20 @@ public class ReserveController {
 		int row2 = rs.insertReserveTime(reserveTimeDTO);
 		
 		String msg = null;
+		String value = null;
 		if(row1 == 1 && row2 == 1) {
 			msg = "예약 성공";
+			value = "reserveSuccess";
 			mav.addObject("reserve_idx", reserve_idx);
+			
 		}
 		else {
 			msg = "예약 실패";
+			value = "reserveFail";
 		}
 		mav.addObject("msg", msg);
+		mav.addObject("value", value);
 		return mav;
 	}
 	
-//	@PostMapping("/reserve_new_for_cust")
-//	public ModelAndView reserve_new_for_cust(reserveDTO reserveDTO, ReserveDTO reserveDTO) {
-//		ModelAndView mav = new ModelAndView("/reserve/reserve_result");
-//		int row = os.reserve(reserveDTO);
-//		int row2 = rs.setReserve(reserveDTO);
-//		String msg;
-//		if(row != 0) {
-//			msg = "주문이 접수되었습니다";
-//		}
-//		else {
-//			msg = "주문 접수에 실패했습니다. 다시 시도해주세요";
-//		}
-//		mav.addObject("msg", msg);
-//		
-//		return mav;
-//	}
-	
-//	@PostMapping("/statusChange")
-//	public ModelAndView statusChange(@PathVariable reserveDTO dto, HashMap<String, String> param) {
-//		ModelAndView mav = new ModelAndView("/reserve/reserve_result");
-//		String status = dto.getreserve_status();
-//		for(int i = 0; i < status_list.length; i++) {
-//			if(i != status_list.length-1 && status == status_list[i])
-//				dto.setReserve_status(status_list[i+1]);
-//		}
-//		String msg=null;
-//		int row = rs.change_status(dto);
-//		if(row == 1) {
-//			msg = "상태 변경! 변경된 상태를 확인해주세요";
-//		} else {
-//			msg = "상태 변경 실패! 다시 시도해주세요";
-//		}
-//		mav.addObject("param", param);
-//		mav.addObject("value", "status_change");
-//		mav.addObject("msg", msg);
-//		return mav;
-//	}
 }

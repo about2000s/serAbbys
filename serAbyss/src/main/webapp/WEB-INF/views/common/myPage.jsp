@@ -30,8 +30,8 @@
 			</c:if>
 		<tr>
 			<td colspan="2">
-				<button onclick = "location.href='${cpath }/common/updateInfo'" class = "btn btn-primary btn-xl">개인정보 수정</button>
-				<button onclick = "location.href='${cpath }/common/updatePw'" class = "btn btn-primary btn-xl">비밀번호 변경</button>
+				<button onclick = "location.href='${cpath }/common/updateInfo'" class = "btn btn-primary btn-sm">개인정보 수정</button>
+				<button onclick = "location.href='${cpath }/common/updatePw'" class = "btn btn-primary btn-sm">비밀번호 변경</button>
 			</td>
 		</tr>
 		</table>

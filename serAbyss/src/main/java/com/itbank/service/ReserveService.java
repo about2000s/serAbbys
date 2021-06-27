@@ -46,8 +46,8 @@ public class ReserveService {
 		return dao.selectReserveOne(inputData);
 	}
 
-	public List<String> selectEngiIdAll() {
-		return dao.selectEngiIdAll();
+	public List<PersonDTO> selectEngiAll() {
+		return dao.selectEngiAll();
 	}
 	
 //	public int selectBoardCountList(HashMap<String, String> param) {
@@ -124,11 +124,11 @@ public class ReserveService {
 		return dayList;
 	}
 	
-	public List<HashMap<String, Object>> reserveTimeList(List<String> engiIdList, int hourCount, int dayCount){
+	public List<HashMap<String, Object>> reserveTimeList(List<PersonDTO> engiList, int hourCount, int dayCount){
 		Calendar today = Calendar.getInstance();
 		
 		List<HashMap<String, Object>> reserveList = new ArrayList<HashMap<String,Object>>();
-		for(int i=0;i<engiIdList.size();i++) {
+		for(int i=0;i<engiList.size();i++) {
 			int year = today.get(Calendar.YEAR);
 			int month = today.get(Calendar.MONTH) + 1;
 			int day = today.get(Calendar.DATE) + 1;
@@ -157,10 +157,10 @@ public class ReserveService {
 				}else {
 					hour += 2;
 				}
-				ReserveTimeDTO inputData = new ReserveTimeDTO(year, month, day, hour, engiIdList.get(i));
+				ReserveTimeDTO inputData = new ReserveTimeDTO(year, month, day, hour, engiList.get(i).getPerson_id());
 				ReserveTimeDTO dto = selectReserveOne(inputData);
 				if(dto != null) continue;
-				map.put("engiId", engiIdList.get(i));
+				map.put("engiId", engiList.get(i).getPerson_id());
 				map.put("year", year);
 				map.put("month", month);
 				map.put("day", day);
@@ -201,8 +201,10 @@ public class ReserveService {
 		return dao.selectMaxIdxInReserve(reserve_engiId);
 	}
 
-	public String selectEngiIdOneByIdx(int reserve_idx) {
-		return dao.selectEngiIdOneByIdx(reserve_idx);
+	public PersonDTO selectEngiOneByIdx(int reserve_idx) {
+		String engiId = dao.selectEngiIdOneByIdx(reserve_idx);
+		PersonDTO engi = dao.selectEngiById(engiId);
+		return engi;
 	}
 
 	public int changeReserveTime(ReserveTimeDTO reserveTimeDTO) {
@@ -256,7 +258,10 @@ public class ReserveService {
 		}
 	}
 	
-	public void statusChangeBtn(ReserveDTO dto, String b1, String b2) {
+	public HashMap<String, String> statusChangeBtn(ReserveDTO dto) {
+		HashMap<String, String> btnList = new HashMap<String, String>();
+		String b1 = "";
+		String b2 = "";
 		switch(dto.getReserve_status()) {
 		case "예약완료":
 			b1 = "서비스중";
@@ -268,12 +273,18 @@ public class ReserveService {
 			b1 = "결제완료";
 			break;
 		case "결제완료":
-			b1 = "환불신청";//하루 내에 환불신청 가능
-			b2 = "처리완료";//하루 지나면 가능한걸로
+			b1 = "처리완료";//하루 내에 환불신청 가능
+			b2 = "환불신청";//하루 지나면 가능한걸로
 			break;
 		case "환불접수":
 			b1 = "처리완료";
 			break;
+		case "처리완료":
+			b1 = "";
+			break;
 		}
+		btnList.put("b1", b1);
+		btnList.put("b2", b2);
+		return btnList;
 	}
 }

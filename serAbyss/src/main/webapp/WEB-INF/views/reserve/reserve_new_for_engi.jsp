@@ -32,9 +32,9 @@
 				<tr>
 					<td>
 						<div>
-							<h2>기사</h2>
-							<c:forEach var = "i" items = "${engiIdList }">
-								<label><input type = "radio" name = "reserveTime_engiId" value = "${i }" checked class = "form-check-input">${i }</label>
+							<h2>기사 선택</h2>
+							<c:forEach var = "dto" items = "${engiList }">
+								<label><input type = "radio" name = "reserveTime_engiId" value = "${dto.person_id }" class = "form-check-input">${dto.person_name }(${dto.person_id })</label>
 							</c:forEach>
 						</div>
 						

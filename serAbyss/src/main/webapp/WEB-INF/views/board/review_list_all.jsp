@@ -4,15 +4,15 @@
 <%@ include file="../layout/header.jsp"%>
 
 <section class="page-section">
-	<h2>리뷰보기</h2>
 	<div class="card mb-4 container">
+		<h2>리뷰보기</h2>
 		<div class="card-body">
 			<table class = "table dataTable-table" id="datatablesSimple">
 				<thead>
 					<tr>
 						<th width="10%">평점</th>
 						<th width="50%">제목</th>
-						<th width="10%">작성자(고객)</th>
+						<th width="10%">작성자</th>
 						<th width="10%">날짜</th>
 						<th width="10%">조회수</th>
 					</tr>
@@ -39,7 +39,7 @@
 					<option value = "review_custId">글쓴이</option>
 				</select>
 				<input type = "text" name = "keyword" value = "${keyword }" placeholder = "검색" class = "form-control" style = "width: 30%; display: inline;">
-				<button type = "submit" class = "btn btn-primary btn-xl">검색</button>
+				<button type = "submit" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">검색</button>
 			</form>
 		</div>
 	</div>

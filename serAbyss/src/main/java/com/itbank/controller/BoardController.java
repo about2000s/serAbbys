@@ -192,9 +192,9 @@ public class BoardController {
 	
 	//리뷰글 작성하는 폼으로 이동하기
 	@GetMapping("/reviewWrite")
-	public ModelAndView reviewWrite(int service_idx) {
+	public ModelAndView reviewWrite(int reserve_idx) {
 		ModelAndView mav = new ModelAndView("board/reviewWrite");
-		ReserveDTO dto = bs.selectOneByIdx(service_idx);//idx값을 통해 리뷰글 하나를 받아오는 메서드
+		ReserveDTO dto = bs.selectOneByIdx(reserve_idx);//idx값을 통해 리뷰글 하나를 받아오는 메서드
 		mav.addObject("dto", dto);
 		return mav;
 	}

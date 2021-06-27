@@ -3,8 +3,8 @@
 <%@ include file="../layout/header.jsp" %>
 <section class = "page-section">
 	<div class = "container">
-		<a href = "${cpath }/board/faq?page=1" class = "btn btn-primary btn-xl">자주 묻는 질문</a>
-		<a href = "${cpath }/board/notice?page=1" class = "btn btn-primary btn-xl">공지사항</a>
+		<a href = "${cpath }/board/faq?page=1" class = "btn btn-primary btn-lg">자주 묻는 질문</a>
+		<a href = "${cpath }/board/notice?page=1" class = "btn btn-primary btn-lg">공지사항</a>
 	</div>
 	<div class="card mb-4 container">
 		<h2>공지사항</h2>
@@ -45,7 +45,7 @@
 					<option value = "serCen_content">내용</option>
 				</select>
 				<input type = "text" name = "keyword" value = "${keyword }" placeholder = "검색" class = "form-control" style = "width: 30%; display: inline;">
-				<button type = "submit" class = "btn btn-primary btn-xl">검색</button>
+				<button type = "submit" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">검색</button>
 			</form>
 			<c:if test="${login.person_check == 'a' }">
 				<button onclick = "location.href='${cpath }/board/serCenWrite?serCen_belong=notice'" class = "btn btn-primary btn-xl">새 글 작성</button>

@@ -2,6 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
 <section class="page-section">
+	<c:if test="${login.person_check == 'n' }"><c:set var = "k" value = "cust"/></c:if>
+	<c:if test="${login.person_check != 'n' }"><c:set var = "k" value = "engi"/></c:if>
+	<button onclick = "location.href='${cpath}/reserve/reserve_new_for_${k }'">예약하기</button>
 	<div class="card mb-4 container">
 		<div class="card-body">
 			<table class = "table dataTable-table" id="datatablesSimple">
@@ -18,7 +21,7 @@
 					<c:forEach var="dto" items="${map.list }">
 						<tr>
 							<td>${dto.reserve_idx }</td>
-							<td><a href="${cpath }/reserve/read/${dto.reserve_idx}?page=${map.page}&type=${map.type}&keyword=${map.keyword}&reserve_status=${map.reserve_status}">${dto.reserve_title }</a></td>
+							<td><a href="${cpath }/reserve/read/${dto.reserve_idx}?page=${map.page}&type=${map.type}&keyword=${map.keyword}&reserve_status=${map.reserve_status}">${dto.reserve_title }</a>[${dto.reserve_status }]</td>
 							
 							<td>
 								<c:if test="${dto.reserve_custId != null }">${dto.reserve_custId }</c:if>
@@ -49,7 +52,7 @@
 					<option value="both">제목+내용</option>
 				</select>
 				<input type="text" name="keyword" value="${map.keyword }" placeholder="검색어를 입력하세요" class = "form-control" style = "width: 30%; display: inline;">
-				<button type = "submit" class = "btn btn-primary btn-xl">검색</button>
+				<button type = "submit" class = "btn btn-primary btn-sm" style = "height: 38px; margin-bottom: 3px;">검색</button>
 			</form>
 		</div>
 	</div>

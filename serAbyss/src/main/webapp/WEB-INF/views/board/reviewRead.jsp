@@ -14,22 +14,22 @@
 					<td>조회수: ${dto.review_viewCount }</td>
 				</tr>
 				<tr>
-					<td colspan="3" height="500px">
+					<td colspan="3">
 						<pre>${dto.review_content }</pre>
 					</td>
 				</tr>
 				<tr>
 					<td align="right" colspan="3">
-			 			<button onclick = "location.href='${cpath }/board/review_list_all?page=${map.page }&type=${map.type }&keyword=${map.keyword}'" class = "btn btn-primary btn-xl">목록</button>
+			 			<button onclick = "location.href='${cpath }/board/review_list_all?page=${map.page }&type=${map.type }&keyword=${map.keyword}'" class = "btn btn-primary btn-lg">목록</button>
 			 			<c:if test="${login.person_id == dto.review_custId }">
-				 			<button onclick = "location.href='${cpath }/board/reviewModify/${dto.review_idx}?page=${map.page }&type=${map.type }&keyword=${map.keyword}'" class = "btn btn-primary btn-xl">수정</button>
-							<button id = "deleteBtn" class = "btn btn-primary btn-xl">삭제</button>
+				 			<button onclick = "location.href='${cpath }/board/reviewModify/${dto.review_idx}?page=${map.page }&type=${map.type }&keyword=${map.keyword}'" class = "btn btn-primary btn-lg">수정</button>
+							<button id = "deleteBtn" class = "btn btn-primary btn-lg">삭제</button>
 						</c:if>
 					</td>
 				</tr>
 			</table>
 		</div>
-		<div><!-- 댓글 기능을 구현해 봅시다. -->
+		<div style = "text-align: center;"><!-- 댓글 기능을 구현해 봅시다. -->
 			<form method = "post">
 				<input type = "hidden" name = "page" value = "${map.page }">
 				<input type = "hidden" name = "type" value = "${map.type }">
@@ -37,31 +37,32 @@
 				<input type = "hidden" name = "reply_bnum" value = "${dto.review_idx }">
 				<input type = "hidden" name = "reply_id" value = "${login.person_id }">
 				<textarea name = "reply_content" placeholder="바른말 고운말" class = "form-control" style="width: 40%; height: 100px; display: inline;"></textarea>
-				<button type = "submit" class = "btn btn-primary btn-xl">댓글 작성</button>
+				<button type = "submit" class = "btn btn-primary btn-lg" style = "margin-bottom: 4%;">댓글 작성</button>
 			</form>
-		
-		<c:forEach var = "i" items = "${replyPageList }">
-			<c:forEach var = "dto" items = "${replyList }" begin = "${nowD*(i-1) }" end = "${nowD*(i-1) + (nowD - 1) }">
-				<div class = "k${nowD*(i-1) }reply${nowD*(i-1) + (nowD - 1) } hiddenNone main1">
-					<table class = "table dataTable-table" style = "width: 30%;">
-						<tr>
-							<td>${dto.reply_id }</td>
-							<td>${dto.reply_reg }</td>
-						</tr>
-						<tr>
-							<td colspan="2"><pre>${dto.reply_content }</pre></td>
-						</tr>
-					</table>
-				</div>
-			</c:forEach>
-			<hr>
-		</c:forEach>
-		
-		<c:forEach var = "i" items = "${replyPageList }">
-			<span><a href = "" class = "${nowD*(i-1) }reply${nowD*(i-1) + (nowD - 1) }">[${i }]</a></span>
-		</c:forEach>
 		</div>
-	</div>
+		<div style = "margin-left: 26%;">
+			<c:forEach var = "i" items = "${replyPageList }">
+				<c:forEach var = "dto" items = "${replyList }" begin = "${nowD*(i-1) }" end = "${nowD*(i-1) + (nowD - 1) }">
+					<div class = "k${nowD*(i-1) }reply${nowD*(i-1) + (nowD - 1) } hiddenNone main1">
+						<table class = "table dataTable-table" style = "width: 50%;">
+							<tr>
+								<td>${dto.reply_id }</td>
+								<td style = "text-align: right;">${dto.reply_reg }</td>
+							</tr>
+							<tr>
+								<td colspan="2"><pre>${dto.reply_content }</pre></td>
+							</tr>
+						</table>
+					</div>
+				</c:forEach>
+			</c:forEach>
+		</div>
+		<div style = "margin-left: 44%;">
+			<c:forEach var = "i" items = "${replyPageList }">
+				<span><a href = "" class = "${nowD*(i-1) }reply${nowD*(i-1) + (nowD - 1) }">[${i }]</a></span>
+			</c:forEach>
+			</div>
+		</div>
 </section>
 
 <script>

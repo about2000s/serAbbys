@@ -4,7 +4,7 @@
 <c:set var = "cpath" value = "${pageContext.request.contextPath }"/>
 <script>
 alert('${msg}')
-if('${value}' == 'reserveSuccess') location.replace('${cpath}/reserve/read/${reserve_idx}?page=1&status=')
-if('${msg}' == 'reserveFail') location.replace('history.go(-1)')
-if('${msg}' == '예약이 취소됨') location.replace('${cpath}')
+if('${value}' == 'reserveSuccess' || '${value}' == 'reserveTimeChangeSuccess') location.replace('${cpath}/reserve/read/${reserve_idx}?page=1&reserve_status=')
+if('${value}' == 'reserveFail' || '${value}' == 'reserveCancelFail') location.replace('history.go(-1)')
+if('${value}' == 'reserveCancel') location.replace('${cpath}')
 </script>

@@ -16,8 +16,14 @@
 					<option value="reserve_engiId">담당 엔지니어</option>
 					<option value="reserve_idx">서비스번호</option>
 				</select>
-				 <input type="text" name="keyword" value = "${map.keyword }" class = "form-control" style = "width: 30%; display: inline;">
-				<button class = "btn btn-primary btn-xl">검색</button>
+				<c:if test="${login.person_check == 'y' }">
+					<input type = "hidden" name = "person_id" value = "${login.person_id }">
+				</c:if>
+				<c:if test="${login.person_check == 'r' }">
+					<input type = "hidden" name = "person_belong" value = "${login.person_belong }">
+				</c:if>
+				<input type="text" name="keyword" value = "${map.keyword }" class = "form-control" style = "width: 30%; display: inline;">
+				<button class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">검색</button>
 			</form>
 		</div>
 		<div>
@@ -31,7 +37,7 @@
 						<th>담당엔지니어</th>
 						<th>주소</th>
 						<th>phone</th>
-						<th>응대기록</th>
+						<th></th>
 					</tr>
 				</thead>
 				<tbody>
@@ -50,7 +56,7 @@
 						
 						<td>
 							<input class = "gao${dto.reserve_idx } main" type="hidden" name="reserve_idx" value="${dto.reserve_idx }">
-							<input class = "gao${dto.reserve_idx }" id="gao${dto.reserve_idx }" type="button" value="응대기록가져오기 ">
+							<input class = "gao${dto.reserve_idx } btn btn-primary btn-sm" id="gao${dto.reserve_idx }" type="button" value="응대기록가져오기 ">
 						</td>
 					</tr>
 					</c:forEach>
@@ -67,7 +73,7 @@
 				<form id="insertForm">
 					<input type="hidden" id = "a" name="custMemo_reserve_idx" value="">
 					<textarea id = "b" class="form-control" name="custMemo_comments"></textarea>
-					<input id="insertBtn" type="submit" value="다음" class = "btn btn-primary btn-xl">
+					<input id="insertBtn" type="submit" value="다음" class = "btn btn-primary btn-sm">
 				</form>
 		</div>
 	</div>
@@ -111,7 +117,7 @@
 
 <script>
 	document.querySelectorAll('td > input').forEach(input => input.onclick = function(event){
-		const className = event.target.className // gao ...
+		const className = event.target.classList.item(0) // gao ...
 		const reserve_idx = document.querySelector('input.' + className).value
 		console.log(className)
 		// 여기서 event.target은 button이다 그러한 버튼의 이전 자식에 대한 value 즉, 1이나 3 , 5 가 될 수 있겠다.
