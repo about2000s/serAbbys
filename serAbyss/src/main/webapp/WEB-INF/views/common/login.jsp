@@ -4,7 +4,7 @@
 <section class = "page-section">
 	<div class="container">
 	<div class = "row" style = "margin-left: 10%;">
-		<h2>Log-in</h2>
+		<h2>Login</h2>
 		<hr>
 		<div class = "col-md-6">
 			<h3>개인회원 로그인</h3>
