@@ -3,7 +3,6 @@
     <head>
         <title>SMS 프로젝트</title>
     </head>
-    <body onload="loadJSON()">
     <form method="post" name="smsForm" action="smssend.jsp">
         <input type="hidden" name="action" value="go">
         <textarea name="msg" cols="30" rows="10" style="width:455px;" placeholder="내용 입력"></textarea>
