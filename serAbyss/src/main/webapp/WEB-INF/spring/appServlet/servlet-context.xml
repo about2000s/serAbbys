@@ -50,6 +50,8 @@
 			<exclude-mapping path="/board/reviewRead/{review_idx}"/>
 			<exclude-mapping path="/board/serCen"/>
 			<exclude-mapping path="/board/serCenRead"/>
+			<exclude-mapping path="/phoneInjung/{person_phone}"/>
+			<exclude-mapping path="/injungPhone1111/{authNumberPhone}"/>
 			<beans:bean id="loginInterceptor" 
 						class="com.itbank.interceptor.LoginInterceptor">
 			</beans:bean>

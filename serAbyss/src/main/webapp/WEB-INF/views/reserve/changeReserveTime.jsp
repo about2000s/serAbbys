@@ -8,7 +8,7 @@
 				<tr>
 					<td>
 						<div>
-							<h2>기사</h2>
+<!-- 							<h2>기사</h2> -->
 							<c:forEach var = "i" items = "${engiIdList }">
 								<label><input type = "radio" name = "reserveTime_engiId" value = "${i }" checked class = "form-check-input">${i }</label>
 							</c:forEach>

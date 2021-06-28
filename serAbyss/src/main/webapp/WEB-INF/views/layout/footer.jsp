@@ -15,30 +15,16 @@
                     <!-- Footer Location-->
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <h4 class="text-uppercase mb-4">JaeHoon Jeong : 정재훈</h4>
-	                        <p class="lead mb-0">
-	                           "코딩으로 우리가 상상하는 무엇이든 구현이 가능하다. 다만 시간이 걸릴 뿐이다" <br/>
-		                        "Whatever I want, I can make whatever. but it takes time"<br/>
 	                        <a href="mailto:wjdwogns2860@naver.com">wjdwogns2860@naver.com</a><br />
-	                        </p>
-                    	
                     </div>
                     <!-- Footer Social Icons-->
                     <div class="col-lg-4 mb-5 mb-lg-0">
                         <h4 class="text-uppercase mb-4">GiChan Bae : 배기찬</h4>
-                       
-                        <p class="lead mb-0">
-                            "코딩으로 우리가 상상하는 무엇이든 구현이 가능하다. 다만 시간이 걸릴 뿐이다" <br/>
-	                        "Whatever I want, I can make whatever. but it takes time"
-                        </p>
-                        <p  class="lead mb-0"><a href="mailto:wjdwogns2860@naver.com">wjdwogns2860@naver.com</a><br /></p>
+                        <p  class="lead mb-0"><a href="mailto:wjdwogns2860@naver.com">bae-729@hanmail.net</a><br /></p>
                     </div>
                     <!-- Footer About Text-->
                     <div class="col-lg-4">
                         <h4 class="text-uppercase mb-4">HyeongJin Nam : 남형진</h4>
-                        <p class="lead mb-0">
-                            "우리팀 한달 동안 너무 고생 많았고 앞으로의 더 큰 발전이 있길" <br/>
-	                        "We have Only a way. But It's 429.491768yd=(90000里)"
-                        </p>
                         <p  class="lead mb-0"><a href="mailto:about2000s@naver.com">about2000s@naver.com</a><br /></p>
                     </div>
                 </div>
