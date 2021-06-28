@@ -372,5 +372,8 @@ public class PersonService {
        String result = new String(strByte);
        return result ;
    }
+public List<HashMap<String, String>> regionSearchList(String keyword) {
+	return dao.regionSearchList(keyword);
+}
 }
 

@@ -132,6 +132,12 @@ public class PersonRestController  {
 		else {
 			return "0";
 		}
-		
+	}
+	
+	@GetMapping(value = "/regionSearch/{keyword}", produces = "application/json; charset=utf-8")
+	public String regionSearch(@PathVariable String keyword) throws JsonProcessingException {
+		List<HashMap<String, String>> list = ps.regionSearchList(keyword);
+		String json = mapper.writeValueAsString(list);
+		return json;
 	}
 }

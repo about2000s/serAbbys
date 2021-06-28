@@ -34,7 +34,7 @@
 						<div>
 							<h2>기사 선택</h2>
 							<c:forEach var = "dto" items = "${engiList }">
-								<label><input type = "radio" name = "reserveTime_engiId" value = "${dto.person_id }" class = "form-check-input">${dto.person_name }(${dto.person_id })</label>
+								<label><input type = "radio" name = "reserveTime_engiId" value = "${dto.person_id }" class = "form-check-input" checked="checked">${dto.person_name }(${dto.person_id })</label>
 							</c:forEach>
 						</div>
 						

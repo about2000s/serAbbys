@@ -20,6 +20,13 @@
 				</tr>
 				<tr>
 					<td>
+					
+					
+					
+					
+					
+					
+					
 						<div style="margin-bottom:3rem;">
 							<h2>기사 선택</h2>
 							<c:forEach var = "dto" items = "${engiList }">
@@ -95,7 +102,99 @@
 			<button class = "btn btn-primary btn-lg" type = "submit">다음</button>
 		</form>
 	</div>
+	
+	<div>
+		<input type = "text" name = "reserveTime_engiId" readonly>
+		<button id = "engiSearchBtn">기사 검색하기</button>
+	
+	</div>
+	
+	<div id = "id01" class = "w3-modal">
+		<div class = "w3-modal-content w3-card-4">
+			<header class = "w3-container w3-teal">
+				<span onclick = "document.getElementById('id01').style.display='none'"
+				class = "w3-button w3-display-topright">&times;</span>
+				<h2>모달 기사 검색하기</h2>
+			</header>
+			<div class = "w3-container"><!-- 기사 검색폼 -->
+				<input class = "form-control" type = "text" id = "keyword" name = "keyword" style = "width: 20%; display: inline;">
+				<button id = "regionSearchBtn" class = "btn btn-primary btn-sm" style = "height: 37px;">지역 검색</button><br>
+			</div>
+		</div>
+	</div>
+	
 </section>
+
+<script>
+	document.getElementById('engiSearchBtn').onclick = function(event){
+		event.preventDefault()
+		
+		document.getElementById('id01').style.display='block'
+	}
+	
+	document.getElementById('regionSearchBtn').onclick = function(event){
+		event.preventDefault()
+		const keyword = document.querySelector('input[name="keyword"]').value
+		console.log('keyword: ' + keyword)
+		const url = '${cpath}/regionSearch/' + keyword
+		const opt = {
+				method: 'GET'
+		}
+		fetch(url, opt).then(resp => resp.json())
+		.then(json => {
+				if(document.querySelector('table.' + 'engiListTable') != null){
+					document.querySelector('table.' + 'engiListTable').remove()
+				}
+				if(document.querySelector('div.' + 'noEngiComment') != null){
+					document.querySelector('div.' + 'noEngiComment').remove()
+				}
+			if(json != ''){
+				
+				const table = document.createElement('table')
+				table.classList.add('engiListTable')
+				const headTr = document.createElement('tr')
+				const nameTh = document.createElement('th')
+				const addressTh = document.createElement('th')
+				nameTh.innerText = '회사 이름'
+				addressTh.innerText = '회사 주소'
+				headTr.appendChild(nameTh)
+				headTr.appendChild(addressTh)
+				table.appendChild(headTr)
+				for(let i=0;i<json.length;i++){
+					var contentTr = document.createElement('tr')
+					var nameTd = document.createElement('td')
+					var addressTd = document.createElement('td')
+					
+					var companyList_name = json[i].COMPANYLIST_NAME
+					var nameLink = document.createElement('a')
+					nameLink.innerText = companyList_name
+					nameLink.href = "javascript:inputBelong('" + companyList_name + "')"
+					nameTd.appendChild(nameLink)
+					
+					var companyList_address = json[i].COMPANYLIST_ADDRESS
+					var addressLink = document.createElement('a')
+					addressLink.innerText = companyList_address
+					addressLink.href = "javascript:inputBelong('" + companyList_name + "')"
+					addressTd.appendChild(addressLink)
+					
+					contentTr.appendChild(nameTd)
+					contentTr.appendChild(addressTd)
+					
+					table.appendChild(contentTr)
+				}
+				document.querySelector('div.' + 'w3-container').appendChild(table)
+			}
+			else{
+				const div = document.createElement('div')
+				div.classList.add('noCompComment')
+				div.innerText = '검색결과가 없습니다'
+				document.querySelector('div.' + 'w3-container').appendChild(div)
+			}
+			
+		})
+	}
+</script>
+
 
 <script>
 document.getElementById('newAddressSearchBtn').onclick = function(event){
