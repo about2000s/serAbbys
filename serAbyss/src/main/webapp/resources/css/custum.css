@@ -5,5 +5,5 @@
 
 /* index. mainbanner */
 
-.mainbanner {width:100vw; }
+.mainbanner {width:100%; overflow:hidden; }
 .mainbanner .mainText {posision:relative; font-size:1.0em;}

@@ -36,8 +36,8 @@
 			<exclude-mapping path="/common/personLogin" />
 			<exclude-mapping path="/common/companyLogin" />
 			<exclude-mapping path="/common/join" />
-			<exclude-mapping path="/common/selectIndiComp/" />
-			<exclude-mapping path="/common/findIdByPhone" />
+			<exclude-mapping path="/common/selectIndiComp" />
+			<exclude-mapping path="/common/findIdByPhone" /> 
 			<exclude-mapping path="/common/findIdByEmail" />
 			<exclude-mapping path="/common/repwByPhone" />						
 			<exclude-mapping path="/common/repwByEmail" />					
