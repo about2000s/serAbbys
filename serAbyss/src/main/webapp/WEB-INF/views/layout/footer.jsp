@@ -58,17 +58,16 @@
                         <div class="container">
                             <div class="row justify-content-center">
                                 <div class="col-lg-8">
-                                    Portfolio Modal - Title
-                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">Log Cabin</h2>
-                                    Icon Divider
+                                  	추천 엔지니어
+                                    <h2 class="portfolio-modal-title text-secondary text-uppercase mb-0">곽재선</h2>
+                                    	주요 분야 : M & A
                                     <div class="divider-custom">
                                         <div class="divider-custom-line"></div>
                                         <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                                         <div class="divider-custom-line"></div>
                                     </div>
-                                    Portfolio Modal - Image
                                     <img class="img-fluid rounded mb-5" src="${cpath }/resources/assets/img/portfolio/cabin.png" alt="..." />
-                                    Portfolio Modal - Text
+									소속 : KG그룹 회장
                                     <p class="mb-4">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia neque assumenda ipsam nihil, molestias magnam, recusandae quos quis inventore quisquam velit asperiores, vitae? Reprehenderit soluta, eos quod consequuntur itaque. Nam.</p>
                                     <button class="btn btn-primary" href="#!" data-bs-dismiss="modal">
                                         <i class="fas fa-times fa-fw"></i>
