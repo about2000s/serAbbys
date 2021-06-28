@@ -3,15 +3,15 @@
 <%@ include file="../layout/header.jsp" %>
 <section class = "page-section">
 	<div class="container">
-	<div class = "row" style = "margin-left: 10%;">
+	<div class="row" style="margin-left:10%;">
 		<h2>Login</h2>
 		<hr>
-		<div class = "col-md-6">
+		<div class="col-md-6">
 			<h3>개인회원 로그인</h3>
-			<form method = "post" action = "${cpath }/common/personLogin">
-				<div style = "float: left;">
-					<input type = "text" name = "person_id" placeholder="아이디" required class = "form-control">
-					<input type = "password" name = "person_pw" placeholder="비밀번호" required class = "form-control">
+			<form method="post" action="${cpath }/common/personLogin">
+				<div style="float: left;">
+					<input type = "text" name="person_id" placeholder="아이디" required class="form-control">
+					<input type="password" name = "person_pw" placeholder="비밀번호" required class = "form-control">
 				</div>
 				<button class = "btn btn-primary btn-xl" type = "submit" style = "height: 80px;">로그인</button>
 			</form>
