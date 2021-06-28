@@ -1,40 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="layout/header.jsp" %>
-        <!-- Masthead-->
-        <div>
-        	<img width="100%"  src="${cpath }/resources/img/main.jpg">
-        	<div>예약하기</div>
-        </div> 
-        <header class="masthead bg-primary text-white text-center">
-        	<div>
-        		<h1 class="masthead-heading text-uppercase mb-0">Ser-Abbys</h1>
-                <!-- Icon Divider--> 
-                <div class="divider-custom divider-light">
-                    <div class="divider-custom-line"></div>
-                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
-                    <div class="divider-custom-line"></div>
-                </div>
-                <!-- Masthead Subheading-->
-                
-                <p class="masthead-subheading font-weight-light mb-0">기술적인 문제가 있다면 Ser-Abbys!</p>
-            </div>
-<!--             <div class="container"> -->s
-<!--                 Masthead Avatar Image -->
-<%--                 <img class="masthead-avatar mb-5" src="${cpath }/resources/assets/img/avataaars.svg" alt="" />  --%>
-<%-- 				 <img class="masthead-mainimg"  src="${cpath }/resources/img/main.jpg"> --%>
-<!--                 Masthead Heading -->
-<!--                 <h1 class="masthead-heading text-uppercase mb-0">Ser-Abbys</h1> -->
-<!--                 Icon Divider  -->
-<!--                 <div class="divider-custom divider-light"> -->
-<!--                     <div class="divider-custom-line"></div> -->
-<!--                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div> -->
-<!--                     <div class="divider-custom-line"></div> -->
-<!--                 </div> -->
-<!--                 Masthead Subheading -->
-<!--                 <p class="masthead-subheading font-weight-light mb-0">기술적인 문제가 있다면 Ser-Abbys!</p> -->
-<!--             </div> -->
-        </header>
+<!-- custom.css에 있습니다. -->
+		<div class="mainbanner">
+			<img width="100%" src="${cpath }/resources/img/main.jpg">
+	    	<h2 class="mainText">기술로 세상을 밝히다</h2>
+ 	    </div> 
         <!-- Engineer Section -->
         <section class="page-section">
         	<div class="container">

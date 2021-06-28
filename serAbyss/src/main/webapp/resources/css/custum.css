@@ -3,4 +3,7 @@
 /* header 마스터 로그인 시 css 조정   */
 .masterfontsize {font-size:0.9em;}
 
-/* ge*/
+/* index. mainbanner */
+
+.mainbanner {width:100vw; }
+.mainbanner .mainText {posision:relative; font-size:1.0em;}
