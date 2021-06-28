@@ -116,7 +116,6 @@ public class PersonRestController  {
 	public String phoneInjung(@PathVariable String person_phone, HttpSession session) throws Exception {
 		String authNumber = ps.getAuthNumber();
 		session.setAttribute("authNumber", authNumber);
-		System.out.println("sex");
 		System.out.println(person_phone);
 		String msg = ps.any(person_phone, authNumber);
 
