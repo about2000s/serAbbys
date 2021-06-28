@@ -75,15 +75,4 @@
                 </div>
             </div>
         </nav>
-<div class="topmenubar">
-	<div class="toplogo"><a href="${cpath }"><img src="${cpath }/resources/img/logo.png"></a></div>
-	<div class="menubar">
-		<ul>
-			<!-- 여기서부터 재훈이가 수정했습니다. -->
-			<li><a href="${cpath }/custMemo/crm">고객응대하기</a></li>
-			<li><a href="${cpath }/reserve/reserve_new_for_cust">고객이 서비스 신청하러 가기!</a></li>
-			<!-- 여기까지 -->
-		</ul>
-	</div>
-</div>
 </head>
