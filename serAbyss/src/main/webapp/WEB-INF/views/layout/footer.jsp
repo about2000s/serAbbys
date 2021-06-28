@@ -48,8 +48,6 @@
         <div class="copyright py-4 text-center text-white">
             <div class="container"><small>Copyright &copy; All right reserved 2021</small></div>
         </div>
-        Portfolio Modals
-        Portfolio Modal 1
         <div class="portfolio-modal modal fade" id="portfolioModal1" tabindex="-1" aria-labelledby="portfolioModal1" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
@@ -80,7 +78,6 @@
                 </div>
             </div>
         </div>
-        Portfolio Modal 2
         <div class="portfolio-modal modal fade" id="portfolioModal2" tabindex="-1" aria-labelledby="portfolioModal2" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
@@ -111,7 +108,6 @@
                 </div>
             </div>
         </div>
-        Portfolio Modal 3
         <div class="portfolio-modal modal fade" id="portfolioModal3" tabindex="-1" aria-labelledby="portfolioModal3" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
@@ -142,7 +138,6 @@
                 </div>
             </div>
         </div>
-        Portfolio Modal 4
         <div class="portfolio-modal modal fade" id="portfolioModal4" tabindex="-1" aria-labelledby="portfolioModal4" aria-hidden="true">
             <div class="modal-dialog modal-xl">
                 <div class="modal-content">
@@ -173,15 +168,8 @@
                 </div>
             </div>
         </div>
-       
-        Bootstrap core JS
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
-        Core theme JS
         <script src="${cpath }/resources/js/scripts.js"></script>
-        * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-        * *                               SB Forms JS                               * *
-        * * Activate your form at https://startbootstrap.com/solution/contact-forms * *
-        * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
         <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 
 </body>

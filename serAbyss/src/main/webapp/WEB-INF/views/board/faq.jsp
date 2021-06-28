@@ -6,8 +6,11 @@
 		<a href = "${cpath }/board/faq?page=1" class = "btn btn-primary btn-lg">자주 묻는 질문</a>
 		<a href = "${cpath }/board/notice?page=1" class = "btn btn-primary btn-lg">공지사항</a>
 	</div>
+	
 	<div class="card mb-4 container">
-		<h2>FAQ</h2>
+	<h2>FAQ</h2>
+	<hr/>
+		
 		<div class="card-body">
 			<table class = "table dataTable-table">
 				<thead>

@@ -3,7 +3,9 @@
 <%@ include file="../layout/header.jsp" %>
 <section class="page-section">
 	<div class = "container">
-	<h2>비밀번호를 수정하려고 왔다. 기존의 비밀번호를 입력하세요.</h2>
+	<h3>비밀번호 변경</h3>
+	<hr>
+	<h5>기존 비밀번호를 입력하세요</h5>
 		<form method = "post">
 			<input type = "hidden" name = "person_id" value = "${login.person_id }">
 			<input type = "password" name = "person_pw" class= "form-control" style = "width: 15%; display: inline;">
