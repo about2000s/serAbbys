@@ -61,7 +61,7 @@
                         </c:choose>
                         <%--공통 사항 --%>
                  		<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="${cpath }/board/review_list_all?page=1">리뷰보기</a></li>
-                   	 	<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="${cpath }/board/serCen?page=1">고객센터</a></li>
+                   	 	<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="${cpath }/board/faq?page=1">고객센터</a></li>
                         
                         <c:if test="${login == null }">
                   	        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="${cpath }/common/login">LogIn</a></li>
@@ -75,4 +75,7 @@
                 </div>
             </div>
         </nav>
+<div class="topmenubar">
+	<div class="toplogo"><a href="${cpath }"><img src="${cpath }/resources/img/logo.png"></a></div>
+</div>
 </head>

@@ -17,6 +17,7 @@ import com.itbank.dto.ReviewBoardDTO;
 
 public interface ReserveDAO {
 
+	// sqlmap-reserve.xml에 있습니다
 	List<ReserveDTO> selectStatus(HashMap<String, Object> param);
 
 	@Select("select * from reserve where reserve_idx=#{idx}")
@@ -38,8 +39,8 @@ public interface ReserveDAO {
 			+ " and reserveTime_hour=#{reserveTime_hour} and reserveTime_engiId=#{reserveTime_engiId}")
 	ReserveTimeDTO selectReserveOne(ReserveTimeDTO inputData);
 
-	@Select("select person_id from person where person_check='y'")
-	List<String> selectEngiIdAll();
+	@Select("select * from person where person_check='y'")
+	List<PersonDTO> selectEngiAll();
 
 	@Insert("insert into reserveTime (reserveTime_idx, reserveTime_year, reserveTime_month, reserveTime_day, reserveTime_hour, reserveTime_engiId,  reserveTime_custId) " + 
 			"    values(reserveTime_seq.nextval, '2021', '06', '16', '14', 'kim123', 'lee123');")
@@ -58,7 +59,7 @@ public interface ReserveDAO {
 	int insertReserve(ReserveTimeDTO reserveTimeDTO);
 
 
-	// order-order.xml에 있습니다
+	// sqlmap-reserve.xml에 있습니다
 	int statusListCount(HashMap<String, Object> map);
 
 	@Select("select * from review where review_idx=#{reserve_idx}")
@@ -85,5 +86,11 @@ public interface ReserveDAO {
 
 	@Update("update reserve set reserve_status=#{reserve_status} where reserve_idx=#{reserve_idx}")
 	int statusChange(ReserveDTO dto);
+
+	@Update("update reserve set reserve_viewCount = reserve_viewCount + 1 where reserve_idx=#{reserve_idx}")
+	int reserveViewCountPlus(int reserve_idx);
+
+	@Select("select * from person where person_id=#{engi_id}")
+	PersonDTO selectEngiById(String engiId);
 
 }

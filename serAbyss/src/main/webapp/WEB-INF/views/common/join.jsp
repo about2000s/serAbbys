@@ -4,114 +4,166 @@
 
 
 <link rel = "stylesheet" href = "https://www.w3schools.com/w3css/4/w3.css">
-<form id = "joinForm" method = "post">
-  		<div class="container">
+<section class="page-section">
+	<div class="container">
 		<h2>회원가입 폼</h2>
-  			<p>
-				<label><input class = "indi form-check-input" type = "radio" name = "person_check" value = "n" checked>개인회원</label>
-				<label><input class = "company form-check-input" type = "radio" name = "person_check" value = "y">법인회원</label>
-			</p>
-			<div class = "company main hiddenNone">
-				<label><input type = "radio" name = "any" class = "radio1 form-check-input" >개인사업자</label>
-				<label><input type = "radio" name = "any" value = "comp" class = "radio2 form-check-input">법인사업자</label>
-				<label><input type = "radio" name = "any" value = "empl" class = "radio3 form-check-input">법인소속직원(기사)</label>
+		<form id = "joinForm" method = "post">
+	  			
+					<label><input class = "indi form-check-input" type = "radio" name = "person_check" value = "n" checked>개인회원</label>
+					<label><input class = "company form-check-input" type = "radio" name = "person_check" value = "y">법인회원</label>
 				
-				<div class = "radio2 hiddenNone">
-					<h2>법인사업자 폼</h2>회사명 입력하는 폼
-					<input class = "form-control" type = "text" name = "person_belong" placeholder="회사명 입력" style = "width: 20%;">
-				</div>
-				
-				<div class = "radio12 hiddenNone">
-					<h2>사업자등록번호 입력</h2>
-					<input class = "form-control" type = "text" name = "person_busiNum" style = "width: 20%;">
-				</div>
-				
-				<div class = "radio3 hiddenNone">
-					<h2>법인소속직원(기사) 폼</h2>compList에서 검색하는 폼
-					<input class = "form-control" type = "text" id = "person_belong" name = "person_belong" readonly style = "width: 20%;">
-					<button onclick = "document.getElementById('id01').style.display='block'"
-					class = "btn btn-primary btn-xl">회사 검색</button>
-				</div>
-				
-				<div id = "id01" class = "w3-modal">
-					<div class = "w3-modal-content w3-card-4">
-						<header class = "w3-container w3-teal">
-							<span onclick = "document.getElementById('id01').style.display='none'"
-							class = "w3-button w3-display-topright">&times;</span>
-							<h2>Modal Header</h2>
-						</header>
-						<div class = "w3-container">
-							회사 검색 폼<br>
-							<input class = "form-control" type = "text" id = "keyword" name = "keyword" style = "width: 20%;">
-							<button id = "compSearchBtn" class = "btn btn-primary btn-xl">검색</button><br>
+				<div class = "company main hiddenNone">
+					<label><input type = "radio" name = "any" class = "radio1 form-check-input" >개인사업자</label>
+					<label><input type = "radio" name = "any" value = "comp" class = "radio2 form-check-input">법인사업자</label>
+					<label><input type = "radio" name = "any" value = "empl" class = "radio3 form-check-input">법인소속직원(기사)</label>
+					
+					<div class = "radio2 hiddenNone">
+						<h2>법인사업자 폼</h2>회사명 입력하는 폼
+						<input class = "form-control" type = "text" name = "person_belong" placeholder="회사명 입력" style = "width: 20%;">
+					</div>
+					
+					<div class = "radio12 hiddenNone">
+						<h2>사업자등록번호 입력</h2>
+						<input class = "form-control" type = "text" name = "person_busiNum" style = "width: 20%;">
+					</div>
+					
+					<div class = "radio3 hiddenNone">
+						<h2>법인소속직원(기사) 폼</h2>compList에서 검색하는 폼
+						<input class = "form-control" type = "text" id = "person_belong" name = "person_belong" readonly style = "width: 20%;">
+						<button onclick = "document.getElementById('id01').style.display='block'"
+						class = "btn btn-primary btn-xl">회사 검색</button>
+					</div>
+					
+					<div id = "id01" class = "w3-modal">
+						<div class = "w3-modal-content w3-card-4">
+							<header class = "w3-container w3-teal">
+								<span onclick = "document.getElementById('id01').style.display='none'"
+								class = "w3-button w3-display-topright">&times;</span>
+								<h2>Modal Header</h2>
+							</header>
+							<div class = "w3-container">
+								회사 검색 폼<br>
+								<input class = "form-control" type = "text" id = "keyword" name = "keyword" style = "width: 20%;">
+								<button id = "compSearchBtn" class = "btn btn-primary btn-xl">검색</button><br>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			
-			<div>
-			
-				<span>아이디</span>
-				<input class = "form-control" type = "text" id = "person_id" name = "person_id" required style = "width: 20%;">
-				<div class = "check_font" id = "id_check"></div>
-				<hr>
-				<span>비밀번호</span>
-				<input class = "form-control" type = "password" id = "person_pw" name = "person_pw" required style = "width: 20%;">
-				<div class = "check_font" id = "pw_check"></div>
-				<hr>
-				<span>비밀번호 확인</span>
-				<input class = "form-control" type = "password" id = "person_pw2" name = "person_pw2" required style = "width: 20%;">
-				<div class = "check_font" id = "pw2_check"></div>
-				<hr>
-				<span>이름</span>
-				<input class = "form-control" type = "text" id = "person_name" name = "person_name" required style = "width: 20%;">
-				<div class = "check_font" id = "name_check"></div>
 				
-				<hr>
-				<span>생년월일 ex)980819</span>
-				<input class = "form-control" type = "text" id = "person_birth" name = "person_birth" required style = "width: 20%;">
-				<div class = "check_font" id = "birth_check"></div>
-				<hr>
-				<span>일반전화</span>
-				<input class = "form-control" type = "text" name = "person_call" style = "width: 20%;">
-				<div class = "check_font" id = "call_check"></div>
-				<hr>
-				<span>팩스</span>
-				<input class = "form-control" type = "text" name = "person_fax" style = "width: 20%;">
-				<div class = "check_font" id = "fax_check"></div>
-				<hr>
-				<p>
-				<input class = "form-control" type = "text" name = "person_phone" placeholder="핸드폰번호 입력" required style = "width: 20%; display: inline;">
-				<button class = "btn btn-primary btn-xl">인증번호 받기</button>
-				</p>
-				<hr>
 				<div>
-					주소<br>
-					<input class = "form-control" type="text" id="postcode" placeholder="우편번호" style = "width: 10%; display: inline;">
-					<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-xl"><br>
-					<input class = "form-control" type="text" id="address" name = "address" placeholder="주소" style = "width: 20%;"><br>
-					<input class = "form-control" type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소" style = "width: 9.8%; display: inline;">
-					<input class = "form-control" type="text" id="extraAddress" placeholder="참고항목" style = "width: 9.8%; display: inline;">
-				</div>
-			</div>
-			<hr>
-				이메일 입력<br>
-				<input class = "form-control" type = "text" id = "person_email" name = "person_email" required style = "width: 20%; display: inline;">
-				<button class = "btn btn-primary btn-xl" id = "receiveAuthBtn">인증번호 받기</button>
 				
-				<div class = "check_font" id = "email_checkDiv"></div>
-				
-				<div class = "hiddenNone" id = "authMailDiv">
-					<span>인증번호 입력</span>
+					<span>아이디</span>
+					<input class = "form-control" type = "text" id = "person_id" name = "person_id" required style = "width: 20%;">
+					<div class = "check_font" id = "id_check"></div>
+					<hr>
+					<span>비밀번호</span>
+					<input class = "form-control" type = "password" id = "person_pw" name = "person_pw" required style = "width: 20%;">
+					<div class = "check_font" id = "pw_check"></div>
+					<hr>
+					<span>비밀번호 확인</span>
+					<input class = "form-control" type = "password" id = "person_pw2" name = "person_pw2" required style = "width: 20%;">
+					<div class = "check_font" id = "pw2_check"></div>
+					<hr>
+					<span>이름</span>
+					<input class = "form-control" type = "text" id = "person_name" name = "person_name" required style = "width: 20%;">
+					<div class = "check_font" id = "name_check"></div>
+					
+					<hr>
+					<span>생년월일 ex)980819</span>
+					<input class = "form-control" type = "text" id = "person_birth" name = "person_birth" required style = "width: 20%;">
+					<div class = "check_font" id = "birth_check"></div>
+					<hr>
+					<span>일반전화</span>
+					<input class = "form-control" type = "text" name = "person_call" style = "width: 20%;">
+					<div class = "check_font" id = "call_check"></div>
+					<hr>
+					<span>팩스</span>
+					<input class = "form-control" type = "text" name = "person_fax" style = "width: 20%;">
+					<div class = "check_font" id = "fax_check"></div>
+					<hr>
 					<div>
-						<input class = "form-control" type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호를 입력하시오">
-						<button class = "btn btn-primary btn-xl" id = "injung">인증하기</button>
+						주소<br>
+						<input class = "form-control" type="text" id="postcode" placeholder="우편번호" style = "width: 10%; display: inline;">
+						<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-xl"><br>
+						<input class = "form-control" type="text" id="address" name = "address" placeholder="주소" style = "width: 20%;"><br>
+						<input class = "form-control" type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소" style = "width: 9.8%; display: inline;">
+						<input class = "form-control" type="text" id="extraAddress" placeholder="참고항목" style = "width: 9.8%; display: inline;">
 					</div>
-					<div id = "injungSuccessDiv"></div>
 				</div>
-			<button class = "btn btn-primary btn-xl" type = "submit" id = "reg_submit">회원가입</button>
+				<hr>
+					이메일 입력<br>
+					<input class = "form-control" type = "text" id = "person_email" name = "person_email" required style = "width: 20%; display: inline;">
+					<button class = "btn btn-primary btn-xl" id = "receiveAuthBtn">인증번호 받기</button>
+					
+					<div class = "check_font" id = "email_checkDiv"></div>
+					
+					<div class = "hiddenNone" id = "authMailDiv">
+						<span>인증번호 입력</span>
+						<div>
+							<input class = "form-control" type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호를 입력하시오">
+							<button class = "btn btn-primary btn-xl" id = "injung">인증하기</button>
+						</div>
+						<div id = "injungSuccessDiv"></div>
+					</div>
+				<button class = "btn btn-primary btn-xl" type = "submit" id = "reg_submit">회원가입</button>
+				
+				<input type="text" name="person_phone"><!-- 나중에 문자열 스플릿 해서 내보내면 된다! -->
+		        <button id = "phoneInjungBtn">인증번호 받기</button>
+		        
+		        <div class = "hiddenNone" id = "authMailDivPhone">
+		        	<span>휴대폰 인증번호 입력</span>
+					<input class = "form-control" type = "text" id = "authNumberPhone" name = "authNumberPhone" placeholder="인증번호를 입력하시오">
+					<button class = "btn btn-primary btn-xl" id = "injungPhone1111">인증하기</button>
+					<div id = "injungSuccessDivPhone"></div>
+		        </div>
+		</form>
 	</div>
-</form>
+</section>
+<script>
+	//입력한 전화번호에 인증번호 보내기
+	document.getElementById('phoneInjungBtn').onclick = function(event){
+		event.preventDefault()
+		const person_phone = document.querySelector('input[name="person_phone"]').value
+		
+		const url = '${cpath}/phoneInjung/' + person_phone
+		const opt = {
+				method: 'GET'
+		}
+		fetch(url, opt).then(resp => resp.text())
+		.then(text => {
+			if(text != null){
+				document.getElementById('authMailDivPhone').classList.remove('hiddenNone')
+				
+			}
+		})
+	}
+	
+	document.getElementById('injungPhone1111').onclick = function(event){
+		event.preventDefault()
+		const authNumberPhone = document.getElementById('authNumberPhone').value
+		
+		const url = '${cpath}/injungPhone1111/' + authNumberPhone
+		const opt = {
+				method: 'GET'
+		}
+		fetch(url, opt).then(resp => resp.text())
+		.then(text => {
+			console.log('text: ' + text)
+			if(text == '1'){
+				document.getElementById('injungSuccessDivPhone').innerText = '인증 성공'
+				document.getElementById('injungSuccessDivPhone').style.color = 'blue'
+			}
+			else{
+				document.getElementById('injungSuccessDivPhone').innerText = '인증 실패'
+				document.getElementById('injungSuccessDivPhone').style.color = 'red'
+			}
+			document.getElementById('injungSuccessDivPhone').style.fontWeight = 'bold'
+		})
+	}
+</script>
+
+
+
 <script>
 	document.querySelectorAll('p > label > input').forEach(input => input.onclick = function(event){
 		const className = event.target.classList.item(0)

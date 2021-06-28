@@ -5,4 +5,13 @@
 
 <mapper namespace="com.itbank.dao.CustMemoDAO">
 
+	<select id="crmReserve" parameterType="hashmap" resultType="reserve">
+		select * from reserve where ${type} like '%${keyword}%' and 
+		<if test="person_id != null">
+			reserve_engiId=#{person_id}
+		</if>
+		<if test="person_belong != null">
+			reserve_compBelong=#{person_belong}
+		</if>
+	</select>
 </mapper>

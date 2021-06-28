@@ -21,7 +21,7 @@ import com.itbank.dto.ReviewBoardDTO;
 public class ReserveService {
 
 	@Autowired ReserveDAO dao;
-	
+	@Autowired PersonService ps;
 	
 	public List<ReserveDTO> selectStatus(HashMap<String, Object> param) {
 		return dao.selectStatus(param);
@@ -47,8 +47,8 @@ public class ReserveService {
 		return dao.selectReserveOne(inputData);
 	}
 
-	public List<String> selectEngiIdAll() {
-		return dao.selectEngiIdAll();
+	public List<PersonDTO> selectEngiAll() {
+		return dao.selectEngiAll();
 	}
 	
 //	public int selectBoardCountList(HashMap<String, String> param) {
@@ -125,11 +125,11 @@ public class ReserveService {
 		return dayList;
 	}
 	
-	public List<HashMap<String, Object>> reserveTimeList(List<String> engiIdList, int hourCount, int dayCount){
+	public List<HashMap<String, Object>> reserveTimeList(List<PersonDTO> engiList, int hourCount, int dayCount){
 		Calendar today = Calendar.getInstance();
 		
 		List<HashMap<String, Object>> reserveList = new ArrayList<HashMap<String,Object>>();
-		for(int i=0;i<engiIdList.size();i++) {
+		for(int i=0;i<engiList.size();i++) {
 			int year = today.get(Calendar.YEAR);
 			int month = today.get(Calendar.MONTH) + 1;
 			int day = today.get(Calendar.DATE) + 1;
@@ -158,10 +158,10 @@ public class ReserveService {
 				}else {
 					hour += 2;
 				}
-				ReserveTimeDTO inputData = new ReserveTimeDTO(year, month, day, hour, engiIdList.get(i));
+				ReserveTimeDTO inputData = new ReserveTimeDTO(year, month, day, hour, engiList.get(i).getPerson_id());
 				ReserveTimeDTO dto = selectReserveOne(inputData);
 				if(dto != null) continue;
-				map.put("engiId", engiIdList.get(i));
+				map.put("engiId", engiList.get(i).getPerson_id());
 				map.put("year", year);
 				map.put("month", month);
 				map.put("day", day);
@@ -206,8 +206,10 @@ public class ReserveService {
 		return dao.selectMaxIdxInReserve(reserve_engiId);
 	}
 
-	public String selectEngiIdOneByIdx(int reserve_idx) {
-		return dao.selectEngiIdOneByIdx(reserve_idx);
+	public PersonDTO selectEngiOneByIdx(int reserve_idx) {
+		String engiId = dao.selectEngiIdOneByIdx(reserve_idx);
+		PersonDTO engi = dao.selectEngiById(engiId);
+		return engi;
 	}
 
 	public int changeReserveTime(ReserveTimeDTO reserveTimeDTO) {
@@ -224,5 +226,70 @@ public class ReserveService {
 
 	public int statusChange(ReserveDTO dto) {
 		return dao.statusChange(dto);
+	}
+
+	public int reserveViewCountPlus(int reserve_idx) {
+		return dao.reserveViewCountPlus(reserve_idx);
+	}
+	
+	public List<String> statusList(){
+		List<String> statusList = new ArrayList<String>();
+		statusList.add("전체");
+		statusList.add("예약완료");
+		statusList.add("서비스중");
+		statusList.add("서비스완료");
+		statusList.add("결제완료");
+		statusList.add("환불접수");
+		statusList.add("처리완료");
+		return statusList;
+	}
+	
+	public void addressAndTitleSetting(ReserveDTO reserveDTO, ReserveTimeDTO reserveTimeDTO, String address, String detailAddress) {
+		String fullAddress = address + " " + detailAddress;
+		reserveDTO.setReserve_address(fullAddress);
+		
+		monthAndCustIdSetForReserve(reserveDTO, reserveTimeDTO);
+		
+		String title = String.format("[2021년 %d월 %d일 %d시 %s 고객님이 예약하셨습니다.]", 
+				reserveTimeDTO.getReserveTime_month(), reserveTimeDTO.getReserveTime_day(), 
+				reserveTimeDTO.getReserveTime_hour(), reserveDTO.getReserve_name());
+		reserveDTO.setReserve_title(title);
+		
+		try {
+			String msg = ps.any(reserveDTO.getReserve_phone(), title);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public HashMap<String, String> statusChangeBtn(ReserveDTO dto) {
+		HashMap<String, String> btnList = new HashMap<String, String>();
+		String b1 = "";
+		String b2 = "";
+		switch(dto.getReserve_status()) {
+		case "예약완료":
+			b1 = "서비스중";
+			break;
+		case "서비스중":
+			b1 = "서비스완료";
+			break;
+		case "서비스완료":
+			b1 = "결제완료";
+			break;
+		case "결제완료":
+			b1 = "처리완료";//하루 내에 환불신청 가능
+			b2 = "환불신청";//하루 지나면 가능한걸로
+			break;
+		case "환불접수":
+			b1 = "처리완료";
+			break;
+		case "처리완료":
+			b1 = "";
+			break;
+		}
+		btnList.put("b1", b1);
+		btnList.put("b2", b2);
+		return btnList;
 	}
 }
