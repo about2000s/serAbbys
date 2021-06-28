@@ -37,7 +37,7 @@
 				<input type = "hidden" name = "reply_bnum" value = "${dto.review_idx }">
 				<input type = "hidden" name = "reply_id" value = "${login.person_id }">
 				<textarea name = "reply_content" placeholder="바른말 고운말" class = "form-control" style="width: 40%; height: 100px; display: inline;"></textarea>
-				<button type = "submit" class = "btn btn-primary btn-lg" style = "margin-bottom: 4%;">댓글 작성</button>
+				<button type = "submit" id = "replySubmitBtn" class = "btn btn-primary btn-lg" style = "margin-bottom: 4%;" disabled="disabled">댓글 작성</button>
 			</form>
 		</div>
 		<div style = "margin-left: 26%;">
@@ -64,6 +64,25 @@
 			</div>
 		</div>
 </section>
+
+<script>
+	const replySubmitBtn = document.getElementById('replySubmitBtn')
+	const reply = document.querySelector('textarea[name="reply_content"]')
+	let replyFlag = false
+	reply.onkeyup = function(event){
+		if(reply.value){
+			replyFlag = true
+		}
+		else{
+			replyFlag = false
+		}
+		check()
+	}
+	function check(){
+		if(replyFlag) replySubmitBtn.disabled = false
+		else replySubmitBtn.disabled = true
+	}
+</script>
 
 <script>
 window.onload = function(){ // 페이지 실행시 바로 작동

@@ -109,6 +109,10 @@ public class PersonController {
 				inputData.setPerson_belong(inputData.getPerson_belong().split(",")[1]);
 				// 가입 조건에서 선택한 회사이름을 가져와서 belong으로 세팅
 			}
+			if(any.equals("mu")) {//회사직원 가입시 진행됨
+				inputData.setPerson_belong("무소속");
+				// 가입 조건에서 선택한 회사이름을 가져와서 belong으로 세팅
+			}
 		}
 		String msg = null;
 		String value = null;

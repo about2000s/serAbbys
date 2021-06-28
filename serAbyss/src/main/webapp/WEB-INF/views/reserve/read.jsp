@@ -28,14 +28,14 @@
 					<td>조회수: ${dto.reserve_viewCount }</td>
 					<td>
 						처리 상태: ${dto.reserve_status }
-						<c:if test="${dto.reserve_status != '결제완료' && btnList.b1 != '' && person_check == 'y'}">
+						<c:if test="${dto.reserve_status != '결제완료' && btnList.b1 != '' && login.person_check == 'y'}">
 							<button class = "btn btn-primary btn-sm statusChange" value = "${btnList.b1 }">${btnList.b1 }${ment }</button>
 						</c:if>
 						<c:if test="${dto.reserve_status == '결제완료' }">
-						<c:if test="${person_check == 'y' }">
+						<c:if test="${login.person_check == 'y' }">
 							<button class = "btn btn-primary btn-sm statusChange" value = "${btnList.b1 }">${btnList.b1 }${ment }</button>
 						</c:if>
-						<c:if test="${person_check == 'n' }">
+						<c:if test="${login.person_check == 'n' }">
 							<button class = "btn btn-primary btn-sm statusChange" value = "${btnList.b2 }">${btnList.b2 }${ment }</button>
 						</c:if>
 						</c:if>

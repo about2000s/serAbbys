@@ -84,7 +84,7 @@ public interface PersonDAO {
 	@Update("update person set person_pw=#{person_pw} where person_id=#{person_id}")
 	void replacePw(PersonDTO inputData);	// 입력받은 id와 일치하는 계정의 pw값을 입력받은 pw값으로 갱신
 
-	@Select("select * from person where person_address like '%${keyword}%'")
+	@Select("select * from person where person_address like '%${keyword}%' and person_check='y'")
 	List<HashMap<String, String>> regionSearchList(String keyword);
 	
 }

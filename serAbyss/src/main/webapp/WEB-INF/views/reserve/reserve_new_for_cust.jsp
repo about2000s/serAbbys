@@ -20,28 +20,33 @@
 				</tr>
 				<tr>
 					<td>
-					
-					
-					
-					
-					
-					
-					
-						<div style="margin-bottom:3rem;">
-							<h2>기사 선택</h2>
-							<c:forEach var = "dto" items = "${engiList }">
-								<label><input type="radio" name="reserveTime_engiId" value="${dto.person_id }" class="form-check-input">${dto.person_name }(${dto.person_id })</label>
-							</c:forEach>
+						<div>
+							<input type = "text" id = "sss" name = "reserveTime_engiId" readonly class="form-control" style = "width: 20%; display: inline;">
+							<button id = "engiSearchBtn" class = "btn btn-primary btn-lg">기사 검색하기</button>
 						</div>
 						
-						<div style="margin-bottom:3rem;">
+						<div id = "id01" class = "w3-modal">
+							<div class = "w3-modal-content w3-card-4">
+								<header class = "w3-container w3-teal">
+									<span onclick = "document.getElementById('id01').style.display='none'"
+									class = "w3-button w3-display-topright">&times;</span>
+									<h2>기사 검색창(우리 지역의 가까운 수리기사를 찾아보세요!)</h2>
+								</header>
+								<div class = "w2-container w3-container"><!-- 기사 검색폼 -->
+									<input class = "form-control" type = "text" id = "keyword" name = "keyword" style = "width: 20%; display: inline;">
+									<button id = "regionSearchBtn" class = "btn btn-primary btn-sm" style = "height: 37px;">지역 검색</button><br>
+								</div>
+							</div>
+						</div>
+						
+						<div id = "daySelect" class = "hiddenNone" style="margin-bottom:3rem;">
 							<h2>일 선택</h2>
 							<c:forEach var = "j" items = "${dayList }">
 								<label><input type="radio" name="reserveTime_day" value="${j }" class="form-check-input">${j }일</label>
 							</c:forEach>
 						</div>
 						
-						<div>
+						<div id = "hourSelect" class = "hiddenNone">
 							<h2>시간 선택(이미 예약이 되어있는 시간은 비어있습니다)</h2>
 							<c:forEach var="i" items="${engiList }">
 								<c:forEach var="j" items="${dayList }">
@@ -99,32 +104,34 @@
 					<button class = "btn btn-primary btn-sm" id = "thisAddressSelectBtn">이 주소로 선택</button> <!-- 클릭하는 순간 위 버튼에 innerText하고 모든 모달창 닫기 -->
 				</div>
 			</div>
-			<button class = "btn btn-primary btn-lg" type = "submit">다음</button>
+			<button class = "btn btn-primary btn-lg" type = "submit" disabled="disabled">다음</button>
 		</form>
-	</div>
-	
-	<div>
-		<input type = "text" name = "reserveTime_engiId" readonly>
-		<button id = "engiSearchBtn">기사 검색하기</button>
-	
-	</div>
-	
-	<div id = "id01" class = "w3-modal">
-		<div class = "w3-modal-content w3-card-4">
-			<header class = "w3-container w3-teal">
-				<span onclick = "document.getElementById('id01').style.display='none'"
-				class = "w3-button w3-display-topright">&times;</span>
-				<h2>모달 기사 검색하기</h2>
-			</header>
-			<div class = "w3-container"><!-- 기사 검색폼 -->
-				<input class = "form-control" type = "text" id = "keyword" name = "keyword" style = "width: 20%; display: inline;">
-				<button id = "regionSearchBtn" class = "btn btn-primary btn-sm" style = "height: 37px;">지역 검색</button><br>
-			</div>
-		</div>
 	</div>
 	
 </section>
 
+<script>
+let engiIdFlag = false
+const engiId = document.getElementById('sss')
+engiId.change = function(event){
+	if(engiId.value) engiIdFlag = true
+	else engiIdFlag = false
+	console.log('engiIdFlag: ' + engiIdFlag)
+}
+
+</script>
+
+<script>
+	document.querySelectorAll('input[name="reserveTime_day"]').forEach(input => input.onclick = function(event){
+		const reserveTime_engiId = document.querySelector('input[name="reserveTime_engiId"]').value
+		const reserveTime_day = event.target.value
+		if(reserveTime_day) document.getElementById('hourSelect').classList.remove('hiddenNone')
+		classFullName = reserveTime_engiId + 'day' + reserveTime_day
+		console.log(classFullName)
+		document.querySelectorAll('div.' + 'main').forEach(div => div.classList.add('hiddenNone'))
+		document.querySelectorAll('div.' + classFullName).forEach(div => div.classList.remove('hiddenNone'))
+	});
+</script>
 <script>
 	document.getElementById('engiSearchBtn').onclick = function(event){
 		event.preventDefault()
@@ -149,53 +156,78 @@
 					document.querySelector('div.' + 'noEngiComment').remove()
 				}
 			if(json != ''){
-				
+				//회사명, 이름, 아이디, 활동지역(주소)
 				const table = document.createElement('table')
 				table.classList.add('engiListTable')
 				const headTr = document.createElement('tr')
 				const nameTh = document.createElement('th')
+				const idTh = document.createElement('th')
 				const addressTh = document.createElement('th')
-				nameTh.innerText = '회사 이름'
-				addressTh.innerText = '회사 주소'
+				const compTh = document.createElement('th')
+				nameTh.innerText = '이름'
+				idTh.innerText = '아이디'
+				addressTh.innerText = '활동지역'
+				compTh.innerText = '소속회사'
 				headTr.appendChild(nameTh)
+				headTr.appendChild(idTh)
 				headTr.appendChild(addressTh)
+				headTr.appendChild(compTh)
 				table.appendChild(headTr)
 				for(let i=0;i<json.length;i++){
 					var contentTr = document.createElement('tr')
 					var nameTd = document.createElement('td')
+					var idTd = document.createElement('td')
 					var addressTd = document.createElement('td')
+					var compTd = document.createElement('td')
 					
-					var companyList_name = json[i].COMPANYLIST_NAME
-					var nameLink = document.createElement('a')
-					nameLink.innerText = companyList_name
-					nameLink.href = "javascript:inputBelong('" + companyList_name + "')"
-					nameTd.appendChild(nameLink)
+					var person_name = json[i].PERSON_NAME
+					nameTd.innerText = person_name
 					
-					var companyList_address = json[i].COMPANYLIST_ADDRESS
-					var addressLink = document.createElement('a')
-					addressLink.innerText = companyList_address
-					addressLink.href = "javascript:inputBelong('" + companyList_name + "')"
-					addressTd.appendChild(addressLink)
+					var person_id = json[i].PERSON_ID
+					idTd.innerText = person_id
+					
+					var person_address = json[i].PERSON_ADDRESS
+					addressTd.innerText = person_address
+					
+					var person_belong = json[i].PERSON_BELONG
+					compTd.innerText = person_belong
+					
 					
 					contentTr.appendChild(nameTd)
+					contentTr.appendChild(idTd)
 					contentTr.appendChild(addressTd)
+					contentTr.appendChild(compTd)
+					
+					contentTr.id = person_id + i
+					console.log('contentTr.id: ' + contentTr.id)
+					
+					contentTr.addEventListener('click', function(event){
+						event.preventDefault()
+						const aa = json[i].PERSON_ID
+						console.log('sexss: ' + json[i].PERSON_ID)
+						select(aa)
+					})
 					
 					table.appendChild(contentTr)
 				}
-				document.querySelector('div.' + 'w3-container').appendChild(table)
+				document.querySelector('div.' + 'w2-container').appendChild(table)
 			}
 			else{
 				const div = document.createElement('div')
-				div.classList.add('noCompComment')
+				div.classList.add('noEngiComment')
 				div.innerText = '검색결과가 없습니다'
-				document.querySelector('div.' + 'w3-container').appendChild(div)
+				document.querySelector('div.' + 'w2-container').appendChild(div)
 			}
 			
 		})
 	}
+	
+function select(aa){
+	document.getElementById('sss').value = aa
+	document.getElementById('id01').style.display='none'
+	document.getElementById('daySelect').classList.remove('hiddenNone')
+}
 </script>
-
-
 <script>
 document.getElementById('newAddressSearchBtn').onclick = function(event){
 	event.preventDefault()
@@ -207,13 +239,11 @@ document.getElementById('goToSelectAddress').onclick = function(event){
 	document.getElementById('id02').style.display='block'
 }
 
-
 document.getElementById('originalAddressSelectBtn').onclick = function(event){
 	event.preventDefault()
 	document.getElementById('id02').style.display='none'
 	document.getElementById('realReserveAddress').value = fullAddress
 }
-
 
 document.getElementById('thisAddressSelectBtn').onclick = function(event){
 	event.preventDefault()
@@ -226,28 +256,6 @@ document.getElementById('thisAddressSelectBtn').onclick = function(event){
 	document.getElementById('originalAddressSelectBtn').innerText = fullAddress
 	document.getElementById('realReserveAddress').value = fullAddress
 }
-</script>
-
-<script>
-let className1
-let className2
-let classFullName
-
-document.querySelectorAll('input[name="reserveTime_engiId"]').forEach(input => input.onclick = function(event){
-	className1 = event.target.value
-	classFullName = className1 + 'day' + className2
-	console.log(classFullName)
-	document.querySelectorAll('div.' + 'main').forEach(div => div.classList.add('hiddenNone'))
-	document.querySelectorAll('div.' + classFullName).forEach(div => div.classList.remove('hiddenNone'))
-});
-
-document.querySelectorAll('input[name="reserveTime_day"]').forEach(input => input.onclick = function(event){
-	className2 = event.target.value
-	classFullName = className1 + 'day' + className2
-	console.log(classFullName)
-	document.querySelectorAll('div.' + 'main').forEach(div => div.classList.add('hiddenNone'))
-	document.querySelectorAll('div.' + classFullName).forEach(div => div.classList.remove('hiddenNone'))
-});
 </script>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>

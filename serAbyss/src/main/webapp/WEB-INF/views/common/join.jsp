@@ -13,7 +13,7 @@
 				<label><input class = "company form-check-input" type = "radio" name = "person_check" value = "y">법인회원</label>
 			</p>
 			<div class = "company main hiddenNone">
-				<label><input type = "radio" name = "any" class = "radio1 form-check-input" >개인사업자</label>
+				<label><input type = "radio" name = "any" value = "mu" class = "radio1 form-check-input" >개인사업자</label>
 				<label><input type = "radio" name = "any" value = "comp" class = "radio2 form-check-input">법인사업자</label>
 				<label><input type = "radio" name = "any" value = "empl" class = "radio3 form-check-input">법인소속직원(기사)</label>
 				
