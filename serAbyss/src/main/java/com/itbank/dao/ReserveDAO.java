@@ -1,5 +1,6 @@
 package com.itbank.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,6 +10,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.itbank.dto.ReserveDTO;
+import com.itbank.dto.CustMemoDTO;
 import com.itbank.dto.PersonDTO;
 import com.itbank.dto.ReserveTimeDTO;
 import com.itbank.dto.ReviewBoardDTO;
@@ -63,6 +65,9 @@ public interface ReserveDAO {
 	@Select("select * from review where review_idx=#{reserve_idx}")
 	ReviewBoardDTO alreadyReviewWrite(int reserve_idx);
 
+	@Select("select * from custMemo where custMemo_reserve_idx=#{reserve_idx}")
+	ArrayList<CustMemoDTO> custMemoList(int reserve_idx);
+	
 	@Select("select max(reserve_idx) from (select * from reserve where reserve_engiId=#{reserve_engiId})")
 	int selectMaxIdxInReserve(String reserve_engiId);
 

@@ -42,6 +42,13 @@
 						<pre>${dto.reserve_content }</pre>
 					</td>
 				</tr>
+				<c:forEach var="memo" items="${list}">
+					<tr>
+						<td colspan="4" height="200px">
+							<pre>${memo.custMemo_comments }</pre>
+						</td>
+					</tr>
+				</c:forEach>
 				<tr>
 					<td align="right" colspan="4">
 			 			<button onclick = "location.href='${cpath }/reserve/statusList?page=${map.page }&type=${map.type }&keyword=${map.keyword}&reserve_status=${map.reserve_status}'" class = "btn btn-primary btn-sm">목록</button>

@@ -107,8 +107,7 @@ public class PersonService {
 	public int updatePw(PersonDTO inputData) {
 //		String hash = getHash(inputData.getPerson_pw());
 //		inputData.setPerson_pw(getHash(hash));
-		System.out.println("여긴 서비스");
-		inputData.setPerson_pw(getHash(inputData.getPerson_pw()));
+		inputData.setPerson_pw(getHash(inputData.getPerson_pw()));	// 입력받은 inputData의 pw값을 해쉬처리하여 다시 갱신시킴
 		return dao.updatePw(inputData);
 	}
 
@@ -131,17 +130,17 @@ public class PersonService {
 	public String getAuthNumber() {
 		Random ran = new Random();
 		String authNumber = "";
-		for(int i=0;i<6;i++) {
-			authNumber += ran.nextInt(9);
+		for(int i=0;i<6;i++) {	
+			authNumber += ran.nextInt(9); // 랜덤한 0~9 사이의 숫자를 총 6자리를 만들어 저장
 		}
 		return authNumber;
 	}
 
 	public String sendMail(String person_email, String authNumber, String account) {
 
-		String host = "smtp.naver.com";
-		final String username = account.split("/")[0];
-		final String password = account.split("/")[1];
+		String host = "smtp.naver.com";	// host 주소를 설정
+		final String username = account.split("/")[0];	// account의 / 앞 정보값을 username으로 저장
+		final String password = account.split("/")[1];	// account의 / 뒤 정보값을 password로 저장
 		int port = 465;
 		
 		String subject = "[SIR-ABYSS] 인증번호입니다.";

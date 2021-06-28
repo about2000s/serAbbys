@@ -26,6 +26,7 @@
 	</div>
 </section>
 <script>
+	//id값이 input_id인 곳에 입력하는 값의 정보를 그대로 id값이 person_id인 곳에도 입력시킴
 	$("#input_id").keydown(function(){
 	    $('#person_id').val($(this).val());
 	});
@@ -35,6 +36,7 @@
 </script>
 
 <script>
+	//id값이 input_email인 곳에 입력하는 값의 정보를 그대로 id값이 person_email인 곳에도 입력시킴
 	$("#input_email").keydown(function(){
 	    $('#person_email').val($(this).val());
 	});

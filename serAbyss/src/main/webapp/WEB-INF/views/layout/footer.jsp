@@ -4,39 +4,49 @@
         <!-- Footer-->
         <footer class="footer text-center">
             <div class="container">
+            <h2 class="page-section-heading text-center text-uppercase text-white">developer</h2>
+                <!-- Icon Divider-->
+                <div class="divider-custom divider-light">
+                    <div class="divider-custom-line"></div>
+                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                    <div class="divider-custom-line"></div>
+                </div>
                 <div class="row">
                     <!-- Footer Location-->
                     <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Location</h4>
-                        <p class="lead mb-0">
-                            2215 John Daniel Drive
-                            <br />
-                            Clark, MO 65243
-                        </p>
+                        <h4 class="text-uppercase mb-4">JaeHoon Jeong : 정재훈</h4>
+	                        <p class="lead mb-0">
+	                           "코딩으로 우리가 상상하는 무엇이든 구현이 가능하다. 다만 시간이 걸릴 뿐이다" <br/>
+		                        "Whatever I want, I can make whatever. but it takes time"<br/>
+	                        <a href="mailto:wjdwogns2860@naver.com">wjdwogns2860@naver.com</a><br />
+	                        </p>
+                    	
                     </div>
                     <!-- Footer Social Icons-->
                     <div class="col-lg-4 mb-5 mb-lg-0">
-                        <h4 class="text-uppercase mb-4">Around the Web</h4>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-facebook-f"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-twitter"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-linkedin-in"></i></a>
-                        <a class="btn btn-outline-light btn-social mx-1" href="#!"><i class="fab fa-fw fa-dribbble"></i></a>
+                        <h4 class="text-uppercase mb-4">GiChan Bae : 배기찬</h4>
+                       
+                        <p class="lead mb-0">
+                            "코딩으로 우리가 상상하는 무엇이든 구현이 가능하다. 다만 시간이 걸릴 뿐이다" <br/>
+	                        "Whatever I want, I can make whatever. but it takes time"
+                        </p>
+                        <p  class="lead mb-0"><a href="mailto:wjdwogns2860@naver.com">wjdwogns2860@naver.com</a><br /></p>
                     </div>
                     <!-- Footer About Text-->
                     <div class="col-lg-4">
-                        <h4 class="text-uppercase mb-4">About Freelancer</h4>
+                        <h4 class="text-uppercase mb-4">HyeongJin Nam : 남형진</h4>
                         <p class="lead mb-0">
-                            Freelance is a free to use, MIT licensed Bootstrap theme created by
-                            <a href="http://startbootstrap.com">Start Bootstrap</a>
-                            .
+                            "우리팀 한달 동안 너무 고생 많았고 앞으로의 더 큰 발전이 있길" <br/>
+	                        "We have Only a way. But It's 429.491768yd=(90000里)"
                         </p>
+                        <p  class="lead mb-0"><a href="mailto:about2000s@naver.com">about2000s@naver.com</a><br /></p>
                     </div>
                 </div>
             </div>
         </footer>
         <!-- Copyright Section-->
         <div class="copyright py-4 text-center text-white">
-            <div class="container"><small>Copyright &copy; Your Website 2021</small></div>
+            <div class="container"><small>Copyright &copy; All right reserved 2021</small></div>
         </div>
         Portfolio Modals
         Portfolio Modal 1
