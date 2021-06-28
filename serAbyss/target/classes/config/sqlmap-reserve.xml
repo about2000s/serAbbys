@@ -8,7 +8,7 @@
 		select count(*) from reserve where 
 		<if test="type != 'both'">
 			${type} like '%${keyword}%' 
-			<if test="reserve_status != ''">
+			<if test="reserve_status != '' and reserve_status != '전체'">
 				and reserve_status=#{reserve_status}
 			</if>
 		</if>
@@ -33,9 +33,9 @@
 		select * from reserve where 
 		<if test="type != 'both'">
 			${type} like '%${keyword}%'
-			<if test="reserve_status != ''">
-				and reserve_status=#{reserve_status} 
-			</if> 
+			<if test="reserve_status != '' and reserve_status != '전체'">
+				and reserve_status=#{reserve_status}
+			</if>
 		</if> 
 		
 		<if test="type == 'both'">

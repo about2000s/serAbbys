@@ -26,12 +26,8 @@ public class BoardService {
 		return dao.faqList(map);
 	}
 
-	public List<SerCenDTO> noticeList() {
-		return dao.noticeList();
-	}
-
-	public SerCenDTO selectOneNotice(HashMap<String, String> map) {
-		return dao.selectOneNotice(map);
+	public SerCenDTO selectOneSerCen(int serCen_idx) {
+		return dao.selectOneSerCen(serCen_idx);
 	}
 
 	public int selectBoardCountFaq(HashMap<String, Object> map) {
@@ -127,5 +123,65 @@ public class BoardService {
 		map.put("paging", paging);
 		map.put("mapList", mapList);
 		return map;
+	}
+
+	public HashMap<String, Object> faqJob(String type, String keyword, int page) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		if(keyword == null || keyword.equals("")) {
+			map.put("type", "serCen_title");
+			map.put("keyword", "");
+		}
+		
+		int faqBoardCount = selectBoardCountFaq(map);
+		Paging paging = new Paging(page, faqBoardCount);
+		map.put("offset", paging.getOffset());
+		map.put("nowD", paging.getNowD());
+		map.put("paging", paging);
+		map.put("page", page);
+		
+		List<SerCenDTO> list = faqList(map);
+		map.put("list", list);
+		return map;
+	}
+
+	public int serCenModify(SerCenDTO inputData) {
+		return dao.serCenModify(inputData);
+	}
+
+	public HashMap<String, Object> noticeJob(String type, String keyword, int page) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		if(keyword == null || keyword.equals("")) {
+			map.put("type", "serCen_title");
+			map.put("keyword", "");
+		}
+		
+		int faqBoardCount = selectBoardCountNotice(map);
+		Paging paging = new Paging(page, faqBoardCount);
+		map.put("offset", paging.getOffset());
+		map.put("nowD", paging.getNowD());
+		map.put("paging", paging);
+		map.put("page", page);
+		
+		List<SerCenDTO> list = noticeList(map);
+		map.put("list", list);
+		return map;
+	}
+
+	private List<SerCenDTO> noticeList(HashMap<String, Object> map) {
+		return dao.noticeList(map);
+	}
+
+	private int selectBoardCountNotice(HashMap<String, Object> map) {
+		return dao.selectBoardCountNotice(map);
+	}
+
+	public int serCenWrite(SerCenDTO dto) {
+		return dao.serCenWrite(dto);
+	}
+
+	public int serCenViewCountPlus(int serCen_idx) {
+		return dao.serCenViewCountPlus(serCen_idx);
 	}
 }

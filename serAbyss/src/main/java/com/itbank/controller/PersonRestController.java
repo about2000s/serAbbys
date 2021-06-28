@@ -1,10 +1,20 @@
 package com.itbank.controller;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,10 +33,13 @@ import com.itbank.service.Hash;
 import com.itbank.service.PersonService;
 
 @RestController
-public class PersonRestController {
+public class PersonRestController  {
+	
+	
 	
 	@Autowired private PersonService ps;
 	@Autowired private CustMemoService cs; 
+	
 	
 	private ObjectMapper mapper = new ObjectMapper();
 	
@@ -95,12 +108,30 @@ public class PersonRestController {
 	
 	@PostMapping(value = "/record")
 	public int jjh(@RequestBody CustMemoDTO dto) {
-		System.out.println("dto: " + dto);
-		System.out.println(dto.getCustMemo_comments());
-		System.out.println(dto.getCustMemo_reserve_idx());
 		int row = cs.insert(dto);
 		return 0;
 	}
 	
+	@GetMapping(value = "/phoneInjung/{person_phone}")
+	public String phoneInjung(@PathVariable String person_phone, HttpSession session) throws Exception {
+		String authNumber = ps.getAuthNumber();
+		session.setAttribute("authNumber", authNumber);
+		
+		String msg = ps.any(person_phone, authNumber);
 
+		return msg;
+	}
+	
+	@GetMapping(value = "/injungPhone1111/{authNumberPhone}")
+	public String authNumberPhone(@PathVariable String authNumberPhone, HttpSession session) {
+		String authNumber = (String)session.getAttribute("authNumber");
+		System.out.println("authNumber: " + authNumber);
+		if(authNumberPhone.equals(authNumber)) {
+			return "1";
+		}
+		else {
+			return "0";
+		}
+		
+	}
 }

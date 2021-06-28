@@ -11,6 +11,13 @@
 	    fetch first ${nowD} rows only
 	</select>
 	
+	<select id="noticeList" parameterType="hashmap" resultType="serCen">
+		select * from serCen 
+		where serCen_belong='notice' and ${type} like '%${keyword}%' order by serCen_idx desc 
+	    offset ${offset} rows 
+	    fetch first ${nowD} rows only
+	</select>
+	
 	<insert id = "reviewWrite" parameterType="reviewBoard">
 		insert into review (review_idx, review_custId, review_engiId, review_title, review_content, review_starScore, review_compBelong)
 		values (#{review_idx}, #{review_custId}, #{review_engiId}, #{review_title}, #{review_content}, #{review_starScore}, #{review_compBelong})

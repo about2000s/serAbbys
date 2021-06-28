@@ -20,11 +20,8 @@ public interface BoardDAO {
 	// sqlmap-board.xml에 있습니다
 	List<SerCenDTO> faqList(HashMap<String, Object> map);
 
-	@Select("select * from serCen where serCen_belong='notice'")
-	List<SerCenDTO> noticeList();
-
-	@Select("select * from serCen where serCen_belong=#{serCen_belong} and serCen_idx=#{serCen_idx}")
-	SerCenDTO selectOneNotice(HashMap<String, String> map);
+	@Select("select * from serCen where serCen_idx=#{serCen_idx}")
+	SerCenDTO selectOneSerCen(int serCen_idx);
 
 	@Select("select count(*) from serCen where serCen_belong='faq' and ${type} like '%${keyword}%'")
 	int selectBoardCountFaq(HashMap<String, Object> map);
@@ -59,4 +56,20 @@ public interface BoardDAO {
 
 	@Select("select count(*) from reply where reply_bnum=#{review_idx}")
 	int replyCount(int review_idx);
+
+	@Update("update serCen set serCen_title=#{serCen_title}, serCen_content=#{serCen_content} where serCen_idx=#{serCen_idx}")
+	int serCenModify(SerCenDTO inputData);
+
+	// sqlmap-board.xml에 있습니다
+	List<SerCenDTO> noticeList(HashMap<String, Object> map);
+
+	@Select("select count(*) from serCen where serCen_belong='notice' and ${type} like '%${keyword}%'")
+	int selectBoardCountNotice(HashMap<String, Object> map);
+
+	@Insert("insert into serCen (serCen_idx, serCen_id, serCen_title, serCen_content, serCen_belong) "
+			+ "values (serCen_seq.nextval, #{serCen_id}, #{serCen_title}, #{serCen_content}, #{serCen_belong})")
+	int serCenWrite(SerCenDTO dto);
+
+	@Update("update serCen set serCen_viewCount = serCen_viewCount + 1 where serCen_idx=#{serCen_idx}")
+	int serCenViewCountPlus(int serCen_idx);
 }
