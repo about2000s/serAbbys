@@ -30,6 +30,7 @@
 		<interceptor>
 			<mapping path="/**" />
 			<exclude-mapping path="/" />
+			<exclude-mapping path="/resources/**" />
 			<exclude-mapping path="/common/login" />
 			<exclude-mapping path="/common/personLogin" />
 			<exclude-mapping path="/common/companyLogin" />
