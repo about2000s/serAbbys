@@ -2,22 +2,38 @@
     pageEncoding="UTF-8"%>
 <%@ include file="layout/header.jsp" %>
         <!-- Masthead-->
+        <div>
+        	<img width="100%"  src="${cpath }/resources/img/main.jpg">
+        	<div>예약하기</div>
+        </div> 
         <header class="masthead bg-primary text-white text-center">
-            <div class="container d-flex align-items-center flex-column">
-                <!-- Masthead Avatar Image-->
-<%--                 <img class="masthead-avatar mb-5" src="${cpath }/resources/assets/img/avataaars.svg" alt="" /> --%>
-				<img class="masthead-mainimg"  src="${cpath }/resources/img/main.jpg">
-                <!-- Masthead Heading-->
-                <h1 class="masthead-heading text-uppercase mb-0">Start Bootstrap</h1>
-                <!-- Icon Divider-->
+        	<div>
+        		<h1 class="masthead-heading text-uppercase mb-0">Ser-Abbys</h1>
+                <!-- Icon Divider--> 
                 <div class="divider-custom divider-light">
                     <div class="divider-custom-line"></div>
-                    <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
                     <div class="divider-custom-line"></div>
                 </div>
                 <!-- Masthead Subheading-->
-                <p class="masthead-subheading font-weight-light mb-0">Graphic Artist - Web Designer - Illustrator</p>
+                
+                <p class="masthead-subheading font-weight-light mb-0">기술적인 문제가 있다면 Ser-Abbys!</p>
             </div>
+<!--             <div class="container"> -->s
+<!--                 Masthead Avatar Image -->
+<%--                 <img class="masthead-avatar mb-5" src="${cpath }/resources/assets/img/avataaars.svg" alt="" />  --%>
+<%-- 				 <img class="masthead-mainimg"  src="${cpath }/resources/img/main.jpg"> --%>
+<!--                 Masthead Heading -->
+<!--                 <h1 class="masthead-heading text-uppercase mb-0">Ser-Abbys</h1> -->
+<!--                 Icon Divider  -->
+<!--                 <div class="divider-custom divider-light"> -->
+<!--                     <div class="divider-custom-line"></div> -->
+<!--                     <div class="divider-custom-icon"><i class="fas fa-star"></i></div> -->
+<!--                     <div class="divider-custom-line"></div> -->
+<!--                 </div> -->
+<!--                 Masthead Subheading -->
+<!--                 <p class="masthead-subheading font-weight-light mb-0">기술적인 문제가 있다면 Ser-Abbys!</p> -->
+<!--             </div> -->
         </header>
         <!-- Engineer Section -->
         <section class="page-section">
@@ -59,60 +75,11 @@
                             <img class="img-fluid" src="${cpath }/resources/img/larry.jpg">
                         </div>
                     </div>
-                    <!-- Portfolio Item 4-->
-                    <div class="col-md-6 col-lg-4 mb-5 mb-lg-0">
-                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal4">
-                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                            </div>
-                            <img class="img-fluid" src="${cpath }/resources/img/kwon.jpg">
-                        </div>
-                    </div>
-                    <!-- Portfolio Item 5-->
-                    <div class="col-md-6 col-lg-4 mb-5 mb-md-0">
-                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal5">
-                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                            </div>
-                            <img class="img-fluid" src="${cpath }/resources/assets/img/portfolio/safe.png" alt="..." />
-                        </div>
-                    </div>
-                    <!-- Portfolio Item 6-->
-                    <div class="col-md-6 col-lg-4">
-                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal6">
-                            <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
-                                <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
-                            </div>
-                            <img class="img-fluid" src="${cpath }/resources/assets/img/portfolio/submarine.png" alt="..." />
-                        </div>
-                    </div>
                 </div>
-               	
-               	
-               	
-               	
-               	
-               	
-               	
-               	
-               	
-               	
-               	
-               	
-               	
-               	
-               	
-               	
-               	
-               	
-               	
-               	
- 				
-        	
         	</div>
         </section>
         
-        <!-- Portfolio Section-->
+       <%-- <!-- Portfolio Section-->
         <section class="page-section portfolio" id="portfolio">
             <div class="container">
                 <!-- Portfolio Section Heading-->
@@ -127,7 +94,7 @@
                 <div class="row justify-content-center">
                     <!-- Portfolio Item 1-->
                     <div class="col-md-6 col-lg-4 mb-5">
-                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="#portfolioModal1">
+                        <div class="portfolio-item mx-auto" data-bs-toggle="modal" data-bs-target="portfolioModal4">
                             <div class="portfolio-item-caption d-flex align-items-center justify-content-center h-100 w-100">
                                 <div class="portfolio-item-caption-content text-center text-white"><i class="fas fa-plus fa-3x"></i></div>
                             </div>
@@ -182,6 +149,7 @@
                 </div>
             </div>
         </section>
+         --%>
         <!-- About Section-->
         <section class="page-section bg-primary text-white mb-0" id="about">
             <div class="container">
