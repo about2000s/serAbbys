@@ -43,7 +43,11 @@
 			<exclude-mapping path="/crm/**" />					
 			<exclude-mapping path="/mailto/**" />					
 			<exclude-mapping path="/getAuthResult/**" />
-			<exclude-mapping path="/record"/>					
+			<exclude-mapping path="/record"/>
+			<exclude-mapping path="/board/review_list_all"/>
+			<exclude-mapping path="/board/reviewRead/{review_idx}"/>
+			<exclude-mapping path="/board/serCen"/>
+			<exclude-mapping path="/board/serCenRead"/>
 			<beans:bean id="loginInterceptor" 
 						class="com.itbank.interceptor.LoginInterceptor">
 			</beans:bean>
