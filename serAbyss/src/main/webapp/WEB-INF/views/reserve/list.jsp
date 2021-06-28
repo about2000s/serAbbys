@@ -2,17 +2,18 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
 <section class="page-section">
-	<c:if test="${login.person_check == 'n' }"><c:set var = "k" value = "cust"/></c:if>
-	<c:if test="${login.person_check != 'n' }"><c:set var = "k" value = "engi"/></c:if>
-	<button onclick = "location.href='${cpath}/reserve/reserve_new_for_${k }'">예약하기</button>
+<%-- 	<c:if test="${login.person_check == 'n' }"><c:set var = "k" value = "cust"/></c:if> --%>
+<%-- 	<c:if test="${login.person_check != 'n' }"><c:set var = "k" value = "engi"/></c:if> --%>
 	<div class="card mb-4 container">
+<%-- 	<button onclick = "location.href='${cpath}/reserve/reserve_new_for_${k }'" class = "btn btn-primary btn-sm">예약하기</button> --%>
 		<div class="card-body">
 			<table class = "table dataTable-table" id="datatablesSimple">
 				<thead>
 					<tr>
-						<th>글번호</th>
+						<th>예약번호</th>
 	                    <th>제목</th>
 	                    <th>작성자</th>
+	                    <th>담당기사</th>
 	                    <th>조회수</th>
 	                    <th>작성날짜</th>
 					</tr>
@@ -27,6 +28,7 @@
 								<c:if test="${dto.reserve_custId != null }">${dto.reserve_custId }</c:if>
 								<c:if test="${dto.reserve_custId == null }">${dto.reserve_engiId }</c:if>
 							</td>
+							<td>${dto.reserve_engiId }</td>
 							<td>${dto.reserve_viewCount }</td>
 							<td>${dto.reserve_reg }</td>
 						</tr>
