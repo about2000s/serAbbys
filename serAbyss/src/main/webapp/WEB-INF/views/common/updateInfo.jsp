@@ -2,15 +2,15 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
 <!-- style hiddenNone있던거 삭제하고 css로 옮겼습니다. 정재훈6월10일 9:42 -->
-<h2>개인정보 수정하는 곳입니다.</h2>
-<div>
-	<div>
-		이메일: ${login.person_email }<a class = "email btn btn-primary btn-xl">수정</a>
+<section class="page-section">
+	<div class = "container">
+	<h2>개인정보 수정하는 곳입니다.</h2>
+		이메일: ${login.person_email }<a class = "email btn btn-primary btn-sm">수정</a>
 		<div class = "email main hiddenNone">
 			<h2>이메일 변경을 위해서 인증이 필요합니다</h2>
 			<form action = "${cpath}/common/replaceEmail" method = "post">
 				<input type = "email" name = "newEmail" placeholder="새로운 이메일을 입력 후 인증이 필요합니다" class = "form-control" style = "width: 20%">
-				<button id = "receiveAuthBtn" class = "btn-primary btn-xl">인증번호 받기</button>
+				<button id = "receiveAuthBtn" class = "btn btn-primary btn-sm">인증번호 받기</button>
 				
 				<div class = "check_font" id = "email_checkDiv"></div>
 				
@@ -18,72 +18,73 @@
 					<h2>인증번호 입력</h2>
 					<div>
 						<input type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호를 입력하시오" class = "form-control" style = "width: 20%">
-						<button id = "injung" class = "btn-primary btn-xl">인증하기</button>
+						<button id = "injung" class = "btn btn-primary btn-sm">인증하기</button>
 					</div>
 					<div id = "injungSuccessDiv"></div>
 					<div class = "hiddenNone" id = "injungform">
-						<button type = "submit" class = "btn btn-primary btn-xl">변경하기</button>
+						<button type = "submit" class = "btn btn-primary btn-sm">변경하기</button>
 					</div>
 				</div>
 			</form>
 		</div>
 	<hr>
-	</div>
+	
 	<div>
-		폰번호: ${login.person_phone }<a class = "phone btn btn-primary btn-xl">수정</a>
+		폰번호: ${login.person_phone }<a class = "phone btn btn-primary btn-sm">수정</a>
 		<div class = "phone main hiddenNone">
-			<h2>폰번호 변경을 위해서 인증이 필요합니다</h2>
-			<input type = "email" name = "newPhone" placeholder="새로운 폰번호를 입력 후 인증이 필요합니다" class = "form-control" style = "width: 20%">
-			<button class = "btn btn-primary btn-xl">인증번호 받기</button>
+			<h2>폰번호 변경을 위해서 새로운 폰번호를 입력 후 인증이 필요합니다</h2>
+			<input type = "email" name = "newPhone" class = "form-control" style = "width: 20%; display: inline;">
+			<button class = "btn btn-primary btn-sm">인증번호 받기</button>
 		</div>
 	<hr>
 	</div>
 	<div>
 		<c:if test="${login.person_call != null }">
-			유선전화번호: ${login.person_call }<a class = "call btn btn-primary btn-xl">수정</a>
+			유선전화번호: ${login.person_call }<a class = "call btn btn-primary btn-sm">수정</a>
 		</c:if>
 		<c:if test="${login.person_call == null }">
-			유선전화가 없습니다! <a class = "call btn btn-primary btn-xl">추가하기</a>
+			유선전화가 없습니다! <a class = "call btn btn-primary btn-sm">추가하기</a>
 		</c:if>
 		<div class = "call main hiddenNone">
 			<form action = "${cpath}/common/replaceCall" method = "post">
 				<input type = "text" name = "newCall" placeholder="새로운 유선전화 입력" class= "form-control" style = "width: 20%">
-				<button type = "submit" class = "btn btn-primary btn-xl">다음</button>
+				<button type = "submit" class = "btn btn-primary btn-sm">다음</button>
 			</form>
 		</div>
 	<hr>
 	</div>
 	<div>
 		<c:if test="${login.person_fax != null }">
-			팩스: ${login.person_fax }<a class = "fax btn btn-primary btn-xl">수정</a>
+			팩스: ${login.person_fax }<a class = "fax btn btn-primary btn-sm">수정</a>
 		</c:if>
 		<c:if test="${login.person_fax == null }">
-			팩스가 없습니다! <a class = "fax btn btn-primary btn-xl">추가하기</a>
+			팩스가 없습니다! <a class = "fax btn btn-primary btn-sm">추가하기</a>
 		</c:if>
 		<div class = "fax main hiddenNone">
 			<form action = "${cpath}/common/replaceFax" method = "post">
 				<input type = "text" name = "newFax" placeholder="새로운 팩스 입력" class= "form-control" style = "width: 20%">
-				<input type = "submit" value = "다음" class = "btn btn-primary btn-xl">
+				<input type = "submit" value = "다음" class = "btn btn-primary btn-sm">
 			</form>
 		</div>
 		<hr>
 	</div>
 	<div>
-		주소: ${login.person_address }<a class = "address btn btn-primary btn-xl">수정</a>
+		주소: ${login.person_address }<a class = "address btn btn-primary btn-sm">수정</a>
 		<div class = "address main hiddenNone">
 			<form action = "${cpath}/common/replaceAddress" method = "post">
 				<label>주소</label><br>
 				<input type="text" id="postcode" placeholder="우편번호" class= "form-control" style = "width: 10%; display: inline;">
-				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-xl" style = "width: 10%;">
+				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-sm" style = "width: 10%;">
 				<input type="text" id="address" name = "address" placeholder="주소" class= "form-control" style = "width: 20%;"><br>
 				<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소" class= "form-control" style = "width: 9.8%; display: inline;">
 				<input type="text" id="extraAddress" placeholder="참고항목" class= "form-control" style = "width: 9.8%; display: inline;">
-				<button type = "submit" class = "btn btn-primary btn-xl">수정</button>
+				<button type = "submit" class = "btn btn-primary btn-sm">수정</button>
 			</form>
 		</div>
 	</div>
-	<button onclick = "history.go(-1);" class = "btn btn-primary btn-xl">뒤로 가기</button>
-</div>
+	<button onclick = "history.go(-1);" class = "btn btn-primary btn-sm">뒤로 가기</button>
+	</div>
+</section>
 
 <script>
 	document.querySelectorAll('a').forEach(a => a.onclick = function(event){

@@ -1,15 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
-<div>
-	<form id = "repwCheck" method = "post" action = "pwUpdateResult">
-		새 비밀번호 입력: <input type = "password" id = "person_pw" name = "person_pw" class= "form-control" style = "width: 15%;">
-		<div class = "check_font" id = "pw_check"></div>
-		새 비밀번호 확인: <input type = "password" id = "person_pw2" name = "person_pw2" class= "form-control" style = "width: 15%;">
-		<div class = "check_font" id = "pw2_check"></div>
-		<input type = "submit" value = "다음" class = "btn btn-primary btn-xl">
-	</form>
-</div>
+<section class="page-section">
+	<div class = "container">
+		<form id = "repwCheck" method = "post" action = "pwUpdateResult">
+			새 비밀번호 입력: <input type = "password" id = "person_pw" name = "person_pw" class= "form-control" style = "width: 15%;">
+			<div class = "check_font" id = "pw_check"></div>
+			새 비밀번호 확인: <input type = "password" id = "person_pw2" name = "person_pw2" class= "form-control" style = "width: 15%;">
+			<div class = "check_font" id = "pw2_check"></div>
+			<input type = "submit" value = "다음" class = "btn btn-primary btn-lg">
+		</form>
+	</div>
+</section>
 <script>
 	document.getElementById('repwCheck').onsubmit = function(event){
 		event.preventDefault()

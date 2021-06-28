@@ -11,7 +11,7 @@ import com.itbank.dto.ReserveDTO;
 
 public interface CustMemoDAO {
 
-	@Select("select * from reserve where ${type} like '%${keyword}%'" )
+	
 	List<ReserveDTO> crmReserve(HashMap<String, String> map);
 
 	@Select("select * from custMemo where custMemo_reserve_idx=${reserve_idx} order by custMemo_reg desc")

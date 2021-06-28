@@ -39,7 +39,7 @@ public class PersonController {
 	@PostMapping("/personLogin")
 	public ModelAndView personLogin(PersonDTO inputData, HttpSession session) {
 		System.out.println("fds");
-		ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView("index");
 		PersonDTO login = ps.personLogin(inputData);
 		// PersonService의 personLogin으로 inputData를 넘겨 일치여부 확인.
 		// 일치하는 값이 있다면 login에 해당 정보가 들어가게 되고, 없다면 null이 들어가게 됨
@@ -75,6 +75,7 @@ public class PersonController {
 		else {
 			String msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
 			mav.addObject("msg", msg);
+			mav.addObject("value", "loginFail");
 			// 등록한 메시지 msg를 저장하여 alert.jsp로 전달
 			mav.setViewName("common/alert");
 		}
@@ -110,17 +111,19 @@ public class PersonController {
 			}
 		}
 		String msg = null;
+		String value = null;
 		int row = ps.join(inputData);
 		
 		if(row != 0) {
 			msg = "회원가입 성공";
-			mav.addObject("link", "login");
+			value = "joinSuccess";
 		}
 		else {
 			msg = "회원가입 실패";
-			mav.addObject("link", "history.go(-1)");
+			value = "joinFail";
 		}
 		mav.addObject("msg", msg);
+		mav.addObject("value", value);
 		return mav;
 	}
 	
