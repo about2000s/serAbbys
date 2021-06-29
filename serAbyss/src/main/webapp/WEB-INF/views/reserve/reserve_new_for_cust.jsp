@@ -5,8 +5,6 @@
 <link rel="stylesheet" href = "https://www.w3schools.com/w3css/4/w3.css">
 <section class="page-section">
 	<div class="container">
-		<h2>고객이 서비스 신청하기</h2>
-		<hr/>
 		<form method="post">
 			<input type = "hidden" name = "reserve_status" value = "예약완료">
 			<input type = "hidden" name = "reserve_custId" value = "${login.person_id }">
@@ -16,13 +14,13 @@
 			<input  type = "hidden" id = "realReserveAddress" name = "reserve_address" value = "${login.person_address }">
 			<table class = "table dataTable-table">
 				<tr>
-					<td><textarea class="form-control" name="reserve_content" required>모델명: ...</textarea></td>
+					<td><textarea class="form-control" name="reserve_content" required>모델명: </textarea></td>
 				</tr>
 				<tr>
 					<td>
 						<div>
 							<input type = "text" id = "sss" name = "reserveTime_engiId" readonly class="form-control" style = "width: 20%; display: inline;">
-							<button id = "engiSearchBtn" class = "btn btn-primary btn-lg">기사 검색하기</button>
+							<button id = "engiSearchBtn" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">기사 검색하기</button>
 						</div>
 						
 						<div id = "id01" class = "w3-modal">
@@ -30,17 +28,17 @@
 								<header class = "w3-container w3-teal">
 									<span onclick = "document.getElementById('id01').style.display='none'"
 									class = "w3-button w3-display-topright">&times;</span>
-									<h2>기사 검색창(우리 지역의 가까운 수리기사를 찾아보세요!)</h2>
+									<h2>우리 지역의 가까운 수리기사를 찾아보세요!</h2>
 								</header>
-								<div class = "w2-container w3-container"><!-- 기사 검색폼 -->
+								<div class = "w2-container w3-container" style = "padding-top: 10px; padding-bottom: 10px;"><!-- 기사 검색폼 -->
 									<input class = "form-control" type = "text" id = "keyword" name = "keyword" style = "width: 20%; display: inline;">
-									<button id = "regionSearchBtn" class = "btn btn-primary btn-sm" style = "height: 37px;">지역 검색</button><br>
+									<button id = "regionSearchBtn" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">지역 검색</button><br>
 								</div>
 							</div>
 						</div>
 						
 						<div id = "daySelect" class = "hiddenNone" style="margin-bottom:3rem;">
-							<h2>일 선택</h2>
+							<h2>날짜 선택</h2>
 							<c:forEach var = "j" items = "${dayList }">
 								<label><input type="radio" name="reserveTime_day" value="${j }" class="form-check-input">${j }일</label>
 							</c:forEach>
@@ -80,7 +78,7 @@
 						class = "w3-button w3-display-topright">&times;</span>
 						<h2>&nbsp;&nbsp;&nbsp;</h2>
 					</header>
-					<div class = "w3-container">
+					<div class = "w3-container" style = "padding-top: 10px; padding-bottom: 10px;">
 						<button class = "btn btn-primary btn-sm" id = "originalAddressSelectBtn">
 							${login.person_address }
 						</button>
@@ -96,12 +94,12 @@
 						<h2>Modal Header</h2>
 					</header>
 					<label>주소</label><br>
-					<input type="text" id="postcode" placeholder="우편번호" readonly class="form-control" style = "width: 10%; display: inline;">
-					<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-sm" style = "width: 10%;"><br>
-					<input type="text" id="address" name = "address" placeholder="주소" readonly class="form-control" style = "width: 20%;"><br>
-					<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소" class="form-control" style = "width: 9.8%; display: inline;">
-					<input type="text" id="extraAddress" placeholder="참고항목" readonly class="form-control" style = "width: 9.8%; display: inline;">
-					<button class = "btn btn-primary btn-sm" id = "thisAddressSelectBtn">이 주소로 선택</button> <!-- 클릭하는 순간 위 버튼에 innerText하고 모든 모달창 닫기 -->
+					<input type="text" id="postcode" placeholder="우편번호" readonly class="form-control" style = "width: 15%; display: inline;">
+					<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;"><br>
+					<input type="text" id="address" name = "address" placeholder="주소" readonly class="form-control" style = "width: 27%;"><br>
+					<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소" class="form-control" style = "width: 13.3%; display: inline;">
+					<input type="text" id="extraAddress" placeholder="참고항목" readonly class="form-control" style = "width: 13.3%; display: inline;">
+					<button class = "btn btn-primary btn-sm" id = "thisAddressSelectBtn" style = "height: 37px; margin-bottom: 3px;">이 주소로 선택</button> <!-- 클릭하는 순간 위 버튼에 innerText하고 모든 모달창 닫기 -->
 				</div>
 			</div>
 			<button class = "btn btn-primary btn-lg" id = "submitBtn" type = "submit" disabled="disabled">다음</button>
@@ -178,6 +176,7 @@ function check(event){
 				//회사명, 이름, 아이디, 활동지역(주소)
 				const table = document.createElement('table')
 				table.classList.add('engiListTable')
+				table.classList.add('table', 'dataTable-table')
 				const headTr = document.createElement('tr')
 				const nameTh = document.createElement('th')
 				const idTh = document.createElement('th')

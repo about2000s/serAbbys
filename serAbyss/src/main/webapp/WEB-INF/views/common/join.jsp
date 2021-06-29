@@ -102,7 +102,7 @@
 					</div>
 					<div id = "injungSuccessDiv"></div>
 				</div>
-				
+				<hr>
 				 휴대폰번호 입력<br>
 				<input type="text" name="person_phone" class = "form-control" style = "width: 20%; display: inline;"><!-- 나중에 문자열 스플릿 해서 내보내면 된다! -->
 		        <button class = "btn btn-primary btn-sm" id = "phoneInjungBtn" style = "height: 37px;">인증번호 받기</button>

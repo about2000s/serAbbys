@@ -4,79 +4,78 @@
 <!-- style hiddenNone있던거 삭제하고 css로 옮겼습니다. 정재훈6월10일 9:42 -->
 <section class="page-section">
 	<div class = "container">
-	<h2>개인정보 수정</h2>
-		이메일: ${login.person_email }<a class = "email btn btn-primary btn-sm">수정</a>
+		이메일: ${login.person_email }<a class = "email btn btn-primary btn-sm" style = "margin-left: 5px;">수정</a>
 		<div class = "email main hiddenNone">
-			<h2>이메일 변경을 위해서 인증이 필요합니다</h2>
+			<h4>이메일 변경을 위해서 인증이 필요합니다</h4>
 			<form action = "${cpath}/common/replaceEmail" method = "post">
-				<input type = "email" name = "newEmail" placeholder="새로운 이메일을 입력 후 인증이 필요합니다" class = "form-control" style = "width: 20%">
-				<button id = "receiveAuthBtn" class = "btn btn-primary btn-sm">인증번호 받기</button>
+				<input type = "email" name = "newEmail" placeholder="새 이메일을 입력 후 인증이 필요합니다" class = "form-control" style = "width: 27%; display: inline;">
+				<button id = "receiveAuthBtn" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">인증번호 받기</button>
 				
 				<div class = "check_font" id = "email_checkDiv"></div>
 				
 				<div class = "hiddenNone" id = "authMailDiv">
-					<h2>인증번호 입력</h2>
+					<h4>인증번호 입력</h4>
 					<div>
-						<input type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호를 입력하시오" class = "form-control" style = "width: 20%">
-						<button id = "injung" class = "btn btn-primary btn-sm">인증하기</button>
+						<input type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호를 입력하시오" class = "form-control" style = "width: 20% display: inline;">
+						<button id = "injung" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">인증하기</button>
 					</div>
 					<div id = "injungSuccessDiv"></div>
 					<div class = "hiddenNone" id = "injungform">
-						<button type = "submit" class = "btn btn-primary btn-sm">변경하기</button>
+						<button type = "submit" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">변경하기</button>
 					</div>
 				</div>
 			</form>
 		</div>
 	<hr>
 	<div>
-		폰번호: ${login.person_phone }<a class = "phone btn btn-primary btn-sm">수정</a>
+		폰번호: ${login.person_phone }<a class = "phone btn btn-primary btn-sm" style = "margin-left: 5px;">수정</a>
 		<div class = "phone main hiddenNone">
-			<h2>폰번호 변경을 위해서 새로운 폰번호를 입력 후 인증이 필요합니다</h2>
+			<h4>폰번호 변경을 위해서 새로운 폰번호를 입력 후 인증이 필요합니다</h4>
 			<input type = "email" name = "newPhone" class = "form-control" style = "width: 20%; display: inline;">
-			<button class = "btn btn-primary btn-sm">인증번호 받기</button>
+			<button class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">인증번호 받기</button>
 		</div>
 	<hr>
 	</div>
 	<div>
 		<c:if test="${login.person_call != null }">
-			유선전화번호: ${login.person_call }<a class = "call btn btn-primary btn-sm">수정</a>
+			유선전화번호: ${login.person_call }<a class = "call btn btn-primary btn-sm" style = "margin-left: 5px;">수정</a>
 		</c:if>
 		<c:if test="${login.person_call == null }">
-			유선전화가 없습니다! <a class = "call btn btn-primary btn-sm">추가하기</a>
+			유선전화가 없습니다! <a class = "call btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px; margin-left: 5px;">추가하기 </a>
 		</c:if>
 		<div class = "call main hiddenNone">
 			<form action = "${cpath}/common/replaceCall" method = "post">
-				<input type = "text" name = "newCall" placeholder="새로운 유선전화 입력" class= "form-control" style = "width: 20%">
-				<button type = "submit" class = "btn btn-primary btn-sm">다음</button>
+				<input type = "text" name = "newCall" placeholder="새로운 유선전화 입력" class= "form-control" style = "width: 20%; display: inline;">
+				<button type = "submit" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">다음</button>
 			</form>
 		</div>
 	<hr>
 	</div>
 	<div>
 		<c:if test="${login.person_fax != null }">
-			팩스: ${login.person_fax }<a class = "fax btn btn-primary btn-sm">수정</a>
+			팩스: ${login.person_fax }<a class = "fax btn btn-primary btn-sm" style = "margin-left: 5px;">수정</a>
 		</c:if>
 		<c:if test="${login.person_fax == null }">
-			팩스가 없습니다! <a class = "fax btn btn-primary btn-sm">추가하기</a>
+			팩스가 없습니다! <a class = "fax btn btn-primary btn-sm" style = "margin-left: 5px;">추가하기 </a>
 		</c:if>
 		<div class = "fax main hiddenNone">
 			<form action = "${cpath}/common/replaceFax" method = "post">
-				<input type = "text" name = "newFax" placeholder="새로운 팩스 입력" class= "form-control" style = "width: 20%">
-				<input type = "submit" value = "다음" class = "btn btn-primary btn-sm">
+				<input type = "text" name = "newFax" placeholder="새로운 팩스 입력" class= "form-control" style = "width: 20%; display: inline;">
+				<input type = "submit" value = "다음" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">
 			</form>
 		</div>
 		<hr>
 	</div>
 	<div>
-		주소: ${login.person_address }<a class = "address btn btn-primary btn-sm">수정</a>
+		주소: ${login.person_address }<a class = "address btn btn-primary btn-sm" style = "margin-left: 5px;">수정</a>
 		<div class = "address main hiddenNone">
 			<form action = "${cpath}/common/replaceAddress" method = "post">
 				<label>주소</label><br>
-				<input type="text" id="postcode" placeholder="우편번호" class= "form-control" style = "width: 10%; display: inline;">
-				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-sm" style = "width: 10%;">
-				<input type="text" id="address" name = "address" placeholder="주소" class= "form-control" style = "width: 20%;"><br>
-				<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소" class= "form-control" style = "width: 9.8%; display: inline;">
-				<input type="text" id="extraAddress" placeholder="참고항목" class= "form-control" style = "width: 9.8%; display: inline;">
+				<input type="text" id="postcode" placeholder="우편번호" class= "form-control" style = "width: 15%; display: inline;" readonly>
+				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">
+				<input type="text" id="address" name = "address" placeholder="주소" class= "form-control" style = "width: 25%; margin-bottom: 3px;" readonly>
+				<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소" class= "form-control" style = "width: 12.3%; display: inline;">
+				<input type="text" id="extraAddress" placeholder="참고항목" class= "form-control" style = "width: 12.3%; display: inline;" readonly>
 				<button type = "submit" class = "btn btn-primary btn-sm">수정</button>
 			</form>
 		</div>
@@ -104,7 +103,7 @@
 			document.querySelector('div.' + className).classList.remove('hiddenNone')
 		}
 		if(status == '취소 '){
-			document.querySelector('a.' + className).innerText = '수정'
+			document.querySelector('a.' + className).innerText = '추가하기'
 			document.querySelector('div.' + className).classList.add('hiddenNone')
 		}
 		

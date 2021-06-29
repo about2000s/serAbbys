@@ -2,15 +2,12 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
 <section class = "page-section">
-	<div class = "container">
-		<a href = "${cpath }/board/faq?page=1" class = "btn btn-primary btn-lg">자주 묻는 질문</a>
+	<div class = "container" >
+		<a href = "${cpath }/board/faq?page=1" class = "btn btn-primary btn-lg" style = "background-color: #16a085">자주 묻는 질문</a>
 		<a href = "${cpath }/board/notice?page=1" class = "btn btn-primary btn-lg">공지사항</a>
 	</div>
 	
-	<div class="card mb-4 container">
-	<h2>FAQ</h2>
-	<hr/>
-		
+	<div class="card mb-4 container" style = "margin-top: 20px;">
 		<div class="card-body">
 			<table class = "table dataTable-table">
 				<thead>

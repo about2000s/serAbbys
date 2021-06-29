@@ -3,8 +3,6 @@
 <%@ include file="../layout/header.jsp" %>
 <section class="page-section">
 	<div class="container">
-		<h2>수리기사가 서비스 신청하기</h2>
-		<hr/>
 		<form method="post">
 			<input type = "hidden" name = "reserve_status" value = "예약완료">
 			<input type = "hidden" name = "reserve_compBelong" value = "${login.person_belong }">
@@ -20,32 +18,31 @@
 					<td>
 						<label>주소</label><br>
 						<input type="text" id="postcode" placeholder="우편번호" readonly class = "form-control" style = "width: 15%; display:inline;">
-						<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-						<input type="text" id="address" name = "address" placeholder="주소" readonly class = "form-control" style = "width: 30%;">
-						<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소" class = "form-control" style = "width: 15%; display:inline;">
-						<input type="text" id="extraAddress" placeholder="참고항목" readonly class = "form-control" style = "width: 15%; display:inline;">
+						<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;"><br>
+						<input type="text" id="address" name = "address" placeholder="주소" readonly class = "form-control" style = "width: 25%; margin-bottom: 2px;">
+						<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소" class = "form-control" style = "width: 12.3%; display:inline;">
+						<input type="text" id="extraAddress" placeholder="참고항목" readonly class = "form-control" style = "width: 12.3%; display:inline;">
 					</td>
 				</tr>
 				<tr>
-					<td><textarea class="form-control" name="reserve_content" required>모델명: ...</textarea></td>
+					<td><textarea class="form-control" name="reserve_content" required style = "height: 100px;">모델명: ...</textarea></td>
 				</tr>
 				<tr>
 					<td>
-						<div>
-							<h2>기사 선택</h2>
+						<div style="margin-bottom:3rem;">
 							<c:forEach var = "dto" items = "${engiList }">
 								<label><input type = "radio" name = "reserveTime_engiId" value = "${dto.person_id }" class = "form-check-input" checked="checked">${dto.person_name }(${dto.person_id })</label>
 							</c:forEach>
 						</div>
 						
-						<div>
+						<div style="margin-bottom:3rem;">
 							<h2>날짜 선택</h2>
 							<c:forEach var = "j" items = "${dayList }">
-								<label><input type = "radio" name = "reserveTime_day" value = "${j }" class = "form-check-input">${j }</label>
+								<label><input type = "radio" name = "reserveTime_day" value = "${j }" class = "form-check-input">${j }일</label>
 							</c:forEach>
 						</div>
 						
-						<div>
+						<div id = "hourSelect" class = "hiddenNone">
 							<h2>시간 선택(이미 예약이 되어있는 시간은 비어있습니다)</h2>
 	<%-- 						<c:forEach var = "i" items = "${engiIdList }"> --%>
 								<c:forEach var = "j" items = "${dayList }">
@@ -142,6 +139,8 @@ let classFullName
 // });
 
 document.querySelectorAll('input[name="reserveTime_day"]').forEach(input => input.onclick = function(event){
+	const reserveTime_day = event.target.value
+	if(reserveTime_day) document.getElementById('hourSelect').classList.remove('hiddenNone')
 	className2 = event.target.value
 	classFullName = 'day' + className2
 	document.querySelectorAll('div.' + 'main').forEach(div => div.classList.add('hiddenNone'))

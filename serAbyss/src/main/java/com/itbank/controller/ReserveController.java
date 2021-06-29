@@ -123,7 +123,7 @@ public class ReserveController {
 	//미완성. 아직 더 봐야 해
 	@GetMapping("statusChange/{reserve_idx}")
 	public ModelAndView statusChange(@PathVariable int reserve_idx, String nextStatus) {
-		ModelAndView mav = new ModelAndView("redirect:/reserve/read/" + reserve_idx);
+		ModelAndView mav = new ModelAndView("redirect:/reserve/read/" + reserve_idx + "?page=1");
 		
 		System.out.println("nextStatus: " + nextStatus);
 		ReserveDTO dto = rs.selectOne(reserve_idx);

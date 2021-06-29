@@ -207,4 +207,26 @@ public class BoardController {
 		System.out.println("댓글 작성 성공");
 		return mav;
 	}
+	
+	@GetMapping("/reviewDelete/{review_idx}")
+	public ModelAndView reviewDelete(@PathVariable int review_idx) {
+		ModelAndView mav = new ModelAndView("redirect:/board/review_list_all");
+		int row = bs.reviewDelete(review_idx);
+		System.out.println("리뷰 삭제 성공");
+		
+		return mav;
+	}
+	
+	@GetMapping("/replyDelete/{reply_idx}")
+	public ModelAndView replyDelete(@PathVariable int reply_idx) {
+		System.out.println(reply_idx);
+		int review_idx = bs.selectReview_idx(reply_idx);
+		ModelAndView mav = new ModelAndView("redirect:/board/reviewRead/" + review_idx + "?page=1");
+		int row = bs.replyDelete(reply_idx);
+		System.out.println("리뷰 삭제 성공");
+		
+		return mav;
+	}
+	
+	
 }

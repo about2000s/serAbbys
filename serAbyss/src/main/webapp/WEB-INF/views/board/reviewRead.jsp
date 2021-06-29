@@ -10,8 +10,8 @@
 				</tr>
 				<tr>
 					<td>${dto.review_custId }</td>
-					<td>${dto.review_reg }</td>
-					<td>조회수: ${dto.review_viewCount }</td>
+					<td width = "10%">조회수: ${dto.review_viewCount }</td>
+					<td width = "15%">${dto.review_reg }</td>
 				</tr>
 				<tr>
 					<td colspan="3">
@@ -23,7 +23,7 @@
 			 			<button onclick = "location.href='${cpath }/board/review_list_all?page=${map.page }&type=${map.type }&keyword=${map.keyword}'" class = "btn btn-primary btn-lg">목록</button>
 			 			<c:if test="${login.person_id == dto.review_custId }">
 				 			<button onclick = "location.href='${cpath }/board/reviewModify/${dto.review_idx}?page=${map.page }&type=${map.type }&keyword=${map.keyword}'" class = "btn btn-primary btn-lg">수정</button>
-							<button id = "deleteBtn" class = "btn btn-primary btn-lg">삭제</button>
+<!-- 							<button id = "deleteBtn" class = "btn btn-primary btn-lg">삭제</button> -->
 						</c:if>
 					</td>
 				</tr>
@@ -42,15 +42,23 @@
 		</div>
 		<div style = "margin-left: 26%;">
 			<c:forEach var = "i" items = "${replyPageList }">
-				<c:forEach var = "dto" items = "${replyList }" begin = "${nowD*(i-1) }" end = "${nowD*(i-1) + (nowD - 1) }">
+				<c:forEach var = "reply" items = "${replyList }" begin = "${nowD*(i-1) }" end = "${nowD*(i-1) + (nowD - 1) }">
 					<div class = "k${nowD*(i-1) }reply${nowD*(i-1) + (nowD - 1) } hiddenNone main1">
 						<table class = "table dataTable-table" style = "width: 50%;">
 							<tr>
-								<td>${dto.reply_id }</td>
-								<td style = "text-align: right;">${dto.reply_reg }</td>
+								<td>${reply.reply_id }</td>
+								<td style = "text-align: right;">${reply.reply_reg }</td>
 							</tr>
 							<tr>
-								<td colspan="2"><pre>${dto.reply_content }</pre></td>
+								<td colspan="2"><pre>${reply.reply_content }</pre></td>
+							</tr>
+							<tr>
+								<c:if test="${login.person_id == reply.reply_id }">
+									<td colspan="2" align="right">
+										<button onclick = "location.href='${cpath}/board/replyUpdate/${reply.reply_idx}" class = "btn btn-primary btn-sm">수정</button>
+										<button id = "replyDeleteBtn" class = "${reply.reply_idx } btn btn-primary btn-sm" class = "">삭제</button>
+									</td>
+								</c:if>
 							</tr>
 						</table>
 					</div>
@@ -64,6 +72,21 @@
 			</div>
 		</div>
 </section>
+
+<script>
+// document.getElementById('deleteBtn').onclick = function(event){
+// 	if(confirm('정말 삭제하시겠습니까?')) {
+// 		location.replace('${cpath}/board/reviewDelete/' + ${dto.review_idx})
+// 	}
+// }
+document.getElementById('replyDeleteBtn').onclick = function(event){
+	const className = event.target.classList.item(0)
+	console.log('className: ' + className)
+	if(confirm('정말 삭제하시겠습니까?')) {
+		location.replace('${cpath}/board/replyDelete/' + className)
+	}
+}
+</script>
 
 <script>
 	const replySubmitBtn = document.getElementById('replySubmitBtn')
