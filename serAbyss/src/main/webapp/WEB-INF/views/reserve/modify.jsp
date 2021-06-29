@@ -12,10 +12,32 @@
 					담당기사: <input type="text" value="${dto.reserve_engiId}" readonly class="form-control" style = "width: 15%; display: inline;">
 				<textarea name="reserve_content" required class="form-control" style = "width: 50%;">${dto.reserve_content}</textarea>
 		</form>
-			<button type = "submit" id = "submitBtn" class = "btn btn-primary btn-xl" style = "display: inline;">수정</button>
+			<button type = "submit" id = "submitBtn" class = "btn btn-primary btn-xl" style = "display: inline;" disabled="disabled">수정</button>
 			<button class = "btn btn-primary btn-xl" onclick="history.go(-1)">취소</button>
 	</div>
 </section>
+
+<script>
+const contentFlag = false
+const content = document.querySelector('textarea[name="reserve_content"]')
+const submitBtn = document.getElementById('submitBtn')
+
+content.onkeyup = function(event){
+	if(content.value) contentFlag = true
+	else contentFlag = false
+	check()
+}
+
+function check(event){
+	if(contentFlag){
+		submitBtn.disabled = false
+	}
+	else{
+		submitBtn.disabled = true
+	}
+}
+</script>
+
 <script>
 	document.getElementById('submitBtn').onclick = function(event){
 		document.forms[0].submit()

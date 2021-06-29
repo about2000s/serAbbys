@@ -62,11 +62,73 @@
 					</td>
 				</tr>
 			</table>
-			<button class = "btn btn-primary btn-xl" type = "submit">다음</button>
+			<button class = "btn btn-primary btn-xl" id = "submitBtn" type = "submit" disabled="disabled">다음</button>
 			<button class = "btn btn-primary btn-xl" onclick="location.href='history(-1)'">취소</button>
 		</form>
 	</div>
 </section>
+
+<script>
+const submitBtn = document.getElementById('submitBtn')
+
+const phone = document.querySelector('input[name="reserve_phone"]')
+const name = document.querySelector('input[name="reserve_name"]')
+const address = document.querySelector('input[name="detailAddress"]')
+const content = document.querySelector('textarea[name="reserve_content"]')
+
+let phoneFlag = false
+let nameFlag = false
+let addressFlag = false
+let contentFlag = false
+let dayFlag = false
+let hourFlag = false
+
+
+phone.onkeyup = function(event){
+	if(phone.value) phoneFlag = true
+	else phoneFlag = false
+	check()
+}
+name.onkeyup = function(event){
+	if(name.value) nameFlag = true
+	else nameFlag = false
+	check()
+}
+address.onkeyup = function(event){
+	if(address.value) addressFlag = true
+	else addressFlag = false
+	check()
+}
+content.onkeyup = function(event){
+	if(content.value) contentFlag = true
+	else contentFlag = false
+	check()
+}
+
+
+$('input[name="reserveTime_day"]').change(function(event){
+	console.log($('input[name="reserveTime_day"]:checked').val())
+	if($('input[name="reserveTime_day"]:checked').val()) dayFlag = true
+	console.log('dayFlag: ' + dayFlag)
+	check()
+})
+$('input[name="reserveTime_hour"]').change(function(){
+	console.log($('input[name="reserveTime_hour"]:checked').val())
+	if($('input[name="reserveTime_hour"]:checked').val()) hourFlag = true
+	console.log('hourFlag: ' + hourFlag)
+	check()
+})
+
+function check(event){
+	if(phoneFlag && nameFlag && addressFlag && contentFlag && dayFlag && hourFlag){
+		submitBtn.disabled = false
+	}
+	else{
+		submitBtn.disabled = true
+	}
+}
+</script>
+
 <script>
 // let className1
 let className2

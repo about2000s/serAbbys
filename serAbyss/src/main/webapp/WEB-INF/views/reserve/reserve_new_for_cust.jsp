@@ -104,22 +104,41 @@
 					<button class = "btn btn-primary btn-sm" id = "thisAddressSelectBtn">이 주소로 선택</button> <!-- 클릭하는 순간 위 버튼에 innerText하고 모든 모달창 닫기 -->
 				</div>
 			</div>
-			<button class = "btn btn-primary btn-lg" type = "submit" disabled="disabled">다음</button>
+			<button class = "btn btn-primary btn-lg" id = "submitBtn" type = "submit" disabled="disabled">다음</button>
 		</form>
 	</div>
 	
 </section>
 
 <script>
-let engiIdFlag = false
-const engiId = document.getElementById('sss')
-engiId.change = function(event){
-	if(engiId.value) engiIdFlag = true
-	else engiIdFlag = false
-	console.log('engiIdFlag: ' + engiIdFlag)
-}
+const content = document.querySelector('textarea[name="reserve_content"]')
+const submitBtn = document.getElementById('submitBtn')
+let dayFlag = false
+let hourFlag = false
 
+$('input[name="reserveTime_day"]').change(function(event){
+	console.log($('input[name="reserveTime_day"]:checked').val())
+	if($('input[name="reserveTime_day"]:checked').val()) dayFlag = true
+	console.log('dayFlag: ' + dayFlag)
+	check()
+})
+$('input[name="reserveTime_hour"]').change(function(){
+	console.log($('input[name="reserveTime_hour"]:checked').val())
+	if($('input[name="reserveTime_hour"]:checked').val()) hourFlag = true
+	console.log('hourFlag: ' + hourFlag)
+	check()
+})
+
+function check(event){
+	if(dayFlag && hourFlag){
+		submitBtn.disabled = false
+	}
+	else{
+		submitBtn.disabled = true
+	}
+}
 </script>
+
 
 <script>
 	document.querySelectorAll('input[name="reserveTime_day"]').forEach(input => input.onclick = function(event){

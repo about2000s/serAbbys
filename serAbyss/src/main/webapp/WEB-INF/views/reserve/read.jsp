@@ -46,13 +46,7 @@
 						<pre>${dto.reserve_content }</pre>
 					</td>
 				</tr>
-				<c:forEach var="memo" items="${list}">
-					<tr>
-						<td colspan="4" height="200px">
-							<pre>${memo.custMemo_comments }</pre>
-						</td>
-					</tr>
-				</c:forEach>
+				
 				<tr>
 					<td align="right" colspan="4">
 			 			<button onclick = "location.href='${cpath }/reserve/statusList?page=${map.page }&type=${map.type }&keyword=${map.keyword}&reserve_status=${map.reserve_status}'" class = "btn btn-primary btn-sm">목록</button>
@@ -62,6 +56,21 @@
 					</td>
 				</tr>
 			</table>
+			<div style = "margin-top: 100px;">
+				<h3>응대 기록</h3>
+				<table class = "table dataTable-table">
+					<tr>
+						<th>코멘트</th>
+						<th>작성날짜</th>
+					</tr>
+					<c:forEach var = "memo" items = "${list }">
+						<tr>
+							<td><pre>${memo.custMemo_comments }</pre></td>
+							<td>${memo.custMemo_reg }</td>
+						</tr>
+					</c:forEach>
+				</table>
+			</div>
 		</div>
 	</div>
 </section>
