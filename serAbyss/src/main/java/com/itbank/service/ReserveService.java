@@ -297,4 +297,40 @@ public class ReserveService {
 		btnList.put("b2", b2);
 		return btnList;
 	}
+	
+	public void setBtn(ReserveDTO dto, String nextStatus) {
+		String b1 = "";
+		if(nextStatus.equals("서비스중")) {
+			b1 = "서비스중";
+		}
+		else if(nextStatus.equals("서비스완료")) {
+			b1 = "서비스완료";
+		}
+		else if(nextStatus.equals("결제완료")) {
+			b1 = "결제완료";
+		}
+		else if(nextStatus.equals("환불신청")){
+				b1 = "환불접수";
+			}
+		else if(nextStatus.equals("처리완료")) {
+			b1 = "처리완료";
+		}
+		dto.setReserve_status(b1);
+	}
+	
+	public void reserveTitleSetting(ReserveDTO reserveDTO, ReserveTimeDTO reserveTimeDTO) {
+		String title = null;
+		
+		if(reserveDTO.getReserve_custId() == null) {
+			title = String.format("[2021년 %d월 %d일 %d시 %s 고객님이 예약하셨습니다.]", 
+				reserveTimeDTO.getReserveTime_month(), reserveTimeDTO.getReserveTime_day(), 
+				reserveTimeDTO.getReserveTime_hour(), reserveDTO.getReserve_name());
+		}
+		else {
+			title = String.format("[2021년 %d월 %d일 %d시 %s(%s) 고객님이 예약하셨습니다.]", 
+				reserveTimeDTO.getReserveTime_month(), reserveTimeDTO.getReserveTime_day(), 
+				reserveTimeDTO.getReserveTime_hour(), reserveDTO.getReserve_name(), reserveDTO.getReserve_custId());
+		}
+		reserveDTO.setReserve_title(title);
+	}
 }

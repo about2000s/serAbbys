@@ -137,7 +137,6 @@ public class BoardController {
 				replyPageList.add(i);
 			}
 		}
-		
 		mav.addObject("replyCount", replyCount);
 		mav.addObject("replyPageList", replyPageList);
 		mav.addObject("nowD", nowD);

@@ -86,5 +86,8 @@ public interface PersonDAO {
 
 	@Select("select * from person where person_address like '%${keyword}%' and person_check='y'")
 	List<HashMap<String, String>> regionSearchList(String keyword);
+
+	@Update("update person set person_phone=#{person_phone} where person_idx=#{person_idx}")
+	int updatePhone(PersonDTO login);
 	
 }

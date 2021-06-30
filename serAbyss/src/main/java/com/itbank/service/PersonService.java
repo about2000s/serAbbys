@@ -29,6 +29,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.itbank.dao.PersonDAO;
 import com.itbank.dto.CompDTO;
@@ -372,8 +373,48 @@ public class PersonService {
        String result = new String(strByte);
        return result ;
    }
-public List<HashMap<String, String>> regionSearchList(String keyword) {
-	return dao.regionSearchList(keyword);
-}
+	public List<HashMap<String, String>> regionSearchList(String keyword) {
+		return dao.regionSearchList(keyword);
+	}
+	
+	public ModelAndView loginProcess(ModelAndView mav, PersonDTO login, HttpSession session) {
+		if(login != null) {
+			session.setAttribute("login", login);
+			// session으로 login을 등록하여 로그인 정보를 저장
+		}
+		else {
+			String msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
+			mav.addObject("msg", msg);
+			mav.addObject("value", "loginFail");
+			mav.setViewName("common/alert");//msg를 띄우고, value에 따른 페이지 이동을 하게 된다.
+		}
+		return mav;
+	}
+	
+	public void joinProcess(String address, String detailAddress, PersonDTO inputData, String any) {
+		String fullAddress = address + " " + detailAddress;// 넘겨받은 기본주소 + 상세주소를 합쳐서 완성된 주소를 저장
+		inputData.setPerson_address(fullAddress);// 입력받은 inputData의 주소를 위에서 완성한 주소로 수정
+		if(any != null) {
+			if(any.equals("comp")) {//회사대표계정 회원가입시 진행됨.
+				inputData.setPerson_belong(inputData.getPerson_belong().split(",")[0]);
+				// 가입 조건의 회사이름을 가져와서 belong으로 세팅
+				CompDTO comp = new CompDTO(inputData.getPerson_belong(), fullAddress);
+				// 입력값과 합쳐진 완성된 주소값을 통해 CompDTO 객체 생성
+				int row2 = companyAdd(comp);
+				// 생성된 객체를 PersonService로 넘겨 DB에 회사정보를 추가시킴
+			}
+			if(any.equals("empl")) {//회사직원 가입시 진행됨
+				inputData.setPerson_belong(inputData.getPerson_belong().split(",")[1]);
+				// 가입 조건에서 선택한 회사이름을 가져와서 belong으로 세팅
+			}
+			if(any.equals("mu")) {//회사직원 가입시 진행됨
+				inputData.setPerson_belong("무소속");
+				// 가입 조건에서 선택한 회사이름을 가져와서 belong으로 세팅
+			}
+		}
+	}
+	public int updatePhone(PersonDTO login) {
+		return dao.updatePhone(login);
+	}
 }
 

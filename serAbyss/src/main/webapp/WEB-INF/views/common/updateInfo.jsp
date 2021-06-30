@@ -4,110 +4,235 @@
 <!-- style hiddenNone있던거 삭제하고 css로 옮겼습니다. 정재훈6월10일 9:42 -->
 <section class="page-section">
 	<div class = "container">
-		이메일: ${login.person_email }<a class = "email btn btn-primary btn-sm" style = "margin-left: 5px;">수정</a>
-		<div class = "email main hiddenNone">
-			<h4>이메일 변경을 위해서 인증이 필요합니다</h4>
-			<form action = "${cpath}/common/replaceEmail" method = "post">
-				<input type = "email" name = "newEmail" placeholder="새 이메일을 입력 후 인증이 필요합니다" class = "form-control" style = "width: 27%; display: inline;">
-				<button id = "receiveAuthBtn" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">인증번호 받기</button>
-				
-				<div class = "check_font" id = "email_checkDiv"></div>
-				
-				<div class = "hiddenNone" id = "authMailDiv">
-					<h4>인증번호 입력</h4>
-					<div>
-						<input type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호를 입력하시오" class = "form-control" style = "width: 20% display: inline;">
-						<button id = "injung" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">인증하기</button>
+		<table class = "table dataTable-table">
+			<tr>
+				<td width="10%">이메일</td>
+				<td width="19%">${login.person_email }</td>
+				<td><a class = "email btn btn-primary btn-sm" style = "margin-left: 5px;">수정</a></td>
+			</tr>
+			<tr class = "email hiddenNone">
+				<td colspan = "3">
+					<div class = "email main hiddenNone">
+						<h4>이메일 변경을 위해서 인증이 필요합니다</h4>
+						<form action = "${cpath}/common/replaceEmail" method = "post">
+							<input type = "email" name = "newEmail" placeholder="새 이메일을 입력 후 인증이 필요합니다" class = "form-control" style = "width: 30%; display: inline;">
+							<button id = "receiveAuthBtn" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">인증번호 받기</button>
+							
+							<div class = "check_font" id = "email_checkDiv"></div>
+							
+							<div class = "hiddenNone" id = "authMailDiv">
+								<h4>인증번호 입력</h4>
+								<div>
+									<input type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호를 입력하시오" class = "form-control" style = "width: 30% display: inline;">
+									<button id = "injung" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">인증하기</button>
+								</div>
+								<div id = "injungSuccessDiv"></div>
+								<div class = "hiddenNone" id = "injungform">
+									<button type = "submit" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">변경하기</button>
+								</div>
+							</div>
+						</form>
 					</div>
-					<div id = "injungSuccessDiv"></div>
-					<div class = "hiddenNone" id = "injungform">
-						<button type = "submit" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">변경하기</button>
+				</td>
+			</tr>
+			<tr>
+				<td>휴대전화</td>
+				<td>${login.person_phone }</td>
+				<td><a class = "phone btn btn-primary btn-sm" style = "margin-left: 5px;">수정</a></td>
+			</tr>
+			<tr class = "phone hiddenNone">
+				<td colspan = "3">
+					<div class = "phone main hiddenNone">
+					<form method = "post" action = "${cpath }/common/replacePhone">
+						<div>
+							<h4>휴대전화 변경을 위해서 새로운 휴대전화를 입력 후 인증이 필요합니다</h4>
+							<input type = "text" name = "newPhone" class = "form-control" style = "width: 30%; display: inline;">
+							<button class = "btn btn-primary btn-sm" id = "phoneInjungBtn" style = "height: 37px; margin-bottom: 3px;">인증번호 받기</button>
+						</div>
+						<div class = "hiddenNone" id = "authMailDivPhone" style = "margin-top: 5px;">
+							<hr>
+							<input class = "form-control" type = "text" id = "authNumberPhone" name = "authNumberPhone" placeholder="인증번호를 입력하시오" style = "width: 30%; display: inline;">
+							<button class = "btn btn-primary btn-sm" id = "injungPhone1111" style = "height: 37px; margin-bottom: 3px;">인증하기</button>
+						</div>
+						<div id = "injungSuccessDivPhone"></div>
+						<button type = "submit" id = "phoneChangeSubmitBtn" class = "hiddenNone btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">변경하기</button>
+					</form>
+		        </div>
+				</td>
+			</tr>
+			<c:if test="${login.person_call != null }">
+				<tr>
+					<td>유선전화</td>
+					<td>${login.person_call }</td>
+					<td><a class = "call btn btn-primary btn-sm" style = "margin-left: 5px;">수정</a></td>
+				</tr>
+				<tr class = "call hiddenNone">
+					<td colspan = "3">
+						<div class = "call main hiddenNone">
+							<form action = "${cpath}/common/replaceCall" method = "post">
+								<input type = "text" name = "newCall" placeholder="새로운 유선전화 입력" class= "form-control" style = "width:30%; display: inline;">
+								<button type = "submit" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">다음</button>
+							</form>
+						</div>
+					</td>
+				</tr>
+			</c:if>
+			<c:if test="${login.person_call == null }">
+				<tr>
+					<td colspan = "2">유선전화가 없습니다!</td>
+					<td><a class = "call btn btn-primary btn-sm" style = "margin-left: 5px;">추가하기</a></td>
+				</tr>
+				<tr class = "call hiddenNone">
+					<td colspan = "3">
+						<div class = "call main hiddenNone">
+							<form action = "${cpath}/common/replaceCall" method = "post">
+								<input type = "text" name = "newCall" placeholder="새로운 유선전화 입력" class= "form-control" style = "width: 30%; display: inline;">
+								<button type = "submit" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">다음</button>
+							</form>
+						</div>
+					</td>
+				</tr>
+			</c:if>
+			<c:if test="${login.person_fax != null }">
+				<tr>
+					<td>팩스</td>
+					<td>${login.person_fax }</td>
+					<td><a class = "fax btn btn-primary btn-sm" style = "margin-left: 5px;">수정</a></td>
+				</tr>
+				<tr class = "fax hiddenNone">
+					<td colspan = "3">
+						<div class = "fax main hiddenNone">
+							<form action = "${cpath}/common/replaceFax" method = "post">
+								<input type = "text" name = "newFax" placeholder="새로운 팩스 입력" class= "form-control" style = "width: 30%; display: inline;">
+								<input type = "submit" value = "다음" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">
+							</form>
+						</div>
+					</td>
+				</tr>
+			</c:if>
+			<c:if test="${login.person_fax == null }">
+				<tr>
+					<td colspan = "2">팩스가 없습니다!</td>
+					<td><a class = "fax btn btn-primary btn-sm" style = "margin-left: 5px;">추가하기</a></td>
+				</tr>
+				<tr class = "fax hiddenNone">
+					<td colspan = "3">
+						<div class = "fax main hiddenNone">
+							<form action = "${cpath}/common/replaceFax" method = "post">
+								<input type = "text" name = "newFax" placeholder="새로운 팩스 입력" class= "form-control" style = "width: 30%; display: inline;">
+								<input type = "submit" value = "다음" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">
+							</form>
+						</div>
+					</td>
+				</tr>
+			</c:if>
+			<tr>
+				<td>주소</td>
+				<td>${login.person_address }</td>
+				<td><a class = "address btn btn-primary btn-sm" style = "margin-left: 5px;">수정</a></td>
+			</tr>
+			<tr class = "address hiddenNone">
+				<td colspan = "3">
+					<div class = "address main hiddenNone">
+						<form action = "${cpath}/common/replaceAddress" method = "post">
+							<input type="text" id="postcode" placeholder="우편번호" class= "form-control" style = "width: 30%; display: inline;" readonly>
+							<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">
+							<input type="text" id="address" name = "address" placeholder="주소" class= "form-control" style = "width: 30%; margin-bottom: 3px;" readonly>
+							<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소" class= "form-control" style = "width: 14.8%; display: inline;">
+							<input type="text" id="extraAddress" placeholder="참고항목" class= "form-control" style = "width: 14.8%; display: inline;" readonly>
+							<button type = "submit" class = "btn btn-primary btn-sm">수정</button>
+						</form>
 					</div>
-				</div>
-			</form>
-		</div>
-	<hr>
-	<div>
-		폰번호: ${login.person_phone }<a class = "phone btn btn-primary btn-sm" style = "margin-left: 5px;">수정</a>
-		<div class = "phone main hiddenNone">
-			<h4>폰번호 변경을 위해서 새로운 폰번호를 입력 후 인증이 필요합니다</h4>
-			<input type = "email" name = "newPhone" class = "form-control" style = "width: 20%; display: inline;">
-			<button class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">인증번호 받기</button>
-		</div>
-	<hr>
-	</div>
-	<div>
-		<c:if test="${login.person_call != null }">
-			유선전화번호: ${login.person_call }<a class = "call btn btn-primary btn-sm" style = "margin-left: 5px;">수정</a>
-		</c:if>
-		<c:if test="${login.person_call == null }">
-			유선전화가 없습니다! <a class = "call btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px; margin-left: 5px;">추가하기 </a>
-		</c:if>
-		<div class = "call main hiddenNone">
-			<form action = "${cpath}/common/replaceCall" method = "post">
-				<input type = "text" name = "newCall" placeholder="새로운 유선전화 입력" class= "form-control" style = "width: 20%; display: inline;">
-				<button type = "submit" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">다음</button>
-			</form>
-		</div>
-	<hr>
-	</div>
-	<div>
-		<c:if test="${login.person_fax != null }">
-			팩스: ${login.person_fax }<a class = "fax btn btn-primary btn-sm" style = "margin-left: 5px;">수정</a>
-		</c:if>
-		<c:if test="${login.person_fax == null }">
-			팩스가 없습니다! <a class = "fax btn btn-primary btn-sm" style = "margin-left: 5px;">추가하기 </a>
-		</c:if>
-		<div class = "fax main hiddenNone">
-			<form action = "${cpath}/common/replaceFax" method = "post">
-				<input type = "text" name = "newFax" placeholder="새로운 팩스 입력" class= "form-control" style = "width: 20%; display: inline;">
-				<input type = "submit" value = "다음" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">
-			</form>
-		</div>
-		<hr>
-	</div>
-	<div>
-		주소: ${login.person_address }<a class = "address btn btn-primary btn-sm" style = "margin-left: 5px;">수정</a>
-		<div class = "address main hiddenNone">
-			<form action = "${cpath}/common/replaceAddress" method = "post">
-				<input type="text" id="postcode" placeholder="우편번호" class= "form-control" style = "width: 15%; display: inline;" readonly>
-				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">
-				<input type="text" id="address" name = "address" placeholder="주소" class= "form-control" style = "width: 25%; margin-bottom: 3px;" readonly>
-				<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소" class= "form-control" style = "width: 12.3%; display: inline;">
-				<input type="text" id="extraAddress" placeholder="참고항목" class= "form-control" style = "width: 12.3%; display: inline;" readonly>
-				<button type = "submit" class = "btn btn-primary btn-sm">수정</button>
-			</form>
-		</div>
-	</div>
-	<button onclick = "history.go(-1);" class = "btn btn-primary btn-sm" style = "margin-top: 20px;">뒤로 가기</button>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+				<td><button onclick = "history.go(-1);" class = "btn btn-primary btn-sm" style = "margin-top: 20px;">뒤로 가기</button></td>
+			</tr>
+		</table>
 	</div>
 </section>
 
 <script>
-	document.querySelectorAll('a').forEach(a => a.onclick = function(event){
+	//입력한 전화번호에 인증번호 보내기
+	document.getElementById('phoneInjungBtn').onclick = function(event){
+		event.preventDefault()
+		const person_phone = document.querySelector('input[name="newPhone"]').value
+		console.log('newPhone: ' + person_phone)
+		const url = '${cpath}/phoneInjung/' + person_phone
+		const opt = {
+				method: 'GET'
+		}
+		fetch(url, opt).then(resp => resp.text())
+		.then(text => {
+			if(text){
+				document.getElementById('authMailDivPhone').classList.remove('hiddenNone')
+				
+			}
+		})
+	}
+
+	document.getElementById('injungPhone1111').onclick = function(event){
+		event.preventDefault()
+		const authNumberPhone = document.getElementById('authNumberPhone').value
+		
+		const url = '${cpath}/injungPhone1111/' + authNumberPhone
+		const opt = {
+				method: 'GET'
+		}
+		fetch(url, opt).then(resp => resp.text())
+		.then(text => {
+			console.log('text: ' + text)
+			if(text == '1'){
+				document.getElementById('injungSuccessDivPhone').innerText = '인증 성공'
+				document.getElementById('injungSuccessDivPhone').style.color = 'blue'
+				document.getElementById('phoneChangeSubmitBtn').classList.remove('hiddenNone')
+				phoneFlag = true
+			}
+			else{
+				document.getElementById('injungSuccessDivPhone').innerText = '인증 실패'
+				document.getElementById('injungSuccessDivPhone').style.color = 'red'
+				phoneFlag = false
+				document.getElementById('phoneChangeSubmitBtn').classList.add('hiddenNone')
+			}
+			document.getElementById('injungSuccessDivPhone').style.fontWeight = 'bold'
+				check()
+		})
+	}
+</script>
+
+<script>
+	document.querySelectorAll('tr > td > a').forEach(a => a.onclick = function(event){
 		const className = event.target.classList.item(0)
 		console.log(className)
-		var status = document.querySelector('a.' + className).innerText
+		var status = document.querySelector('tr > td > a.' + className).innerText
 		if(status == '수정'){
-			document.querySelector('a.' + className).innerText = '취소'
-			document.querySelector('div.' + className).classList.remove('hiddenNone')
+			document.querySelector('tr.' + className).classList.remove('hiddenNone')
+			
+			document.querySelector('tr > td > a.' + className).innerText = '취소'
+			document.querySelector('tr > td > div.' + className).classList.remove('hiddenNone')
 		}
 		if(status == '취소'){
-			document.querySelector('a.' + className).innerText = '수정'
-			document.querySelector('div.' + className).classList.add('hiddenNone')
+			document.querySelector('tr.' + className).classList.add('hiddenNone')
+			
+			document.querySelector('tr > td > a.' + className).innerText = '수정'
+			document.querySelector('tr > td > div.' + className).classList.add('hiddenNone')
 		}
 		
 		if(status == '추가하기'){
-			document.querySelector('a.' + className).innerText = '취소 '
-			document.querySelector('div.' + className).classList.remove('hiddenNone')
+			document.querySelector('tr.' + className).classList.remove('hiddenNone')
+			
+			document.querySelector('tr > td > a.' + className).innerText = '취 소'
+			document.querySelector('tr > td > div.' + className).classList.remove('hiddenNone')
 		}
-		if(status == '취소 '){
-			document.querySelector('a.' + className).innerText = '추가하기'
-			document.querySelector('div.' + className).classList.add('hiddenNone')
+		if(status == '취 소'){
+			document.querySelector('tr.' + className).classList.add('hiddenNone')
+			
+			document.querySelector('tr > td > a.' + className).innerText = '추가하기'
+			document.querySelector('tr > td > div.' + className).classList.add('hiddenNone')
 		}
-		
 	})
-	
 </script>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -229,12 +354,6 @@ const injungHandler = function(event){
 			injungSuccessDiv.style.fontWeight = 'bold'
 	})
 }
-
 document.getElementById('injung').onclick = injungHandler
-
 </script>
-
-
-
-
 <%@ include file="../layout/footer.jsp" %>
