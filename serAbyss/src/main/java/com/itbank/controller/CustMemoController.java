@@ -23,11 +23,7 @@ public class CustMemoController {
 	@Autowired
 	private CustMemoService cs;
 	
-	@GetMapping("/marketing")
-	public String marketing() {
-		return "custMemo/marketing";
-	}
-			
+		
 	@GetMapping("/crm")
 	public void crm() {}
 	
