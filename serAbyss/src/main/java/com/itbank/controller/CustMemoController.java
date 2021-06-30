@@ -22,7 +22,8 @@ public class CustMemoController {
 	
 	@Autowired
 	private CustMemoService cs;
-			
+	
+		
 	@GetMapping("/crm")
 	public void crm() {}
 	

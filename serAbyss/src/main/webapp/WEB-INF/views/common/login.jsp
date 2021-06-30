@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
-<section class = "page-section">
+<section class="page-section">
 	<div class="container">
 	<div class="row" style="margin-left:10%;">
 		<h2>Login</h2>
@@ -16,12 +16,12 @@
 				<button class="btn btn-primary btn-xl" id="indi_login" type = "submit" style = "height: 80px;" disabled="disabled">로그인</button>
 			</form>
 		</div>
-		<div class = "col-md-6">
+		<div class="col-md-6">
 			<h3>기업회원 로그인</h3>
-			<form method = "post" action = "${cpath }/common/companyLogin">
-				<div style = "float: left;">
-					<input type = "text" id = "comp_id" name = "person_id" placeholder="아이디" class = "form-control">
-					<input type = "password" id = "comp_pw" name = "person_pw" placeholder="비밀번호" class = "form-control">
+			<form method="post" action="${cpath }/common/companyLogin">
+				<div style="float: left;">
+					<input type="text" id="comp_id" name="person_id" placeholder="아이디" class="form-control">
+					<input type="password" id="comp_pw" name="person_pw" placeholder="비밀번호" class="form-control">
 				</div>
 				<button class = "btn btn-primary btn-xl" id = "comp_login" type = "submit" style = "height: 80px;" disabled="disabled">로그인</button>
 			</form>

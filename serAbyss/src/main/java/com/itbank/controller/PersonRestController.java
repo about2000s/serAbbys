@@ -66,7 +66,7 @@ public class PersonRestController  {
 	
 	@GetMapping(value = "/mailto/{person_email}/", produces = "application/text; charset=utf-8")
 	public String mailto(@PathVariable String person_email, HttpSession session) throws FileNotFoundException {
-		
+		 
 		String filePath = session.getServletContext().getRealPath("/WEB-INF/data/mailAccount.dat");
 		File file = new File(filePath);
 		if(!file.exists()) {
