@@ -66,7 +66,7 @@ public class PersonRestController  {
 	
 	@GetMapping(value = "/mailto/{person_email}/", produces = "application/text; charset=utf-8")
 	public String mailto(@PathVariable String person_email, HttpSession session) throws FileNotFoundException {
-		
+		 
 		String filePath = session.getServletContext().getRealPath("/WEB-INF/data/mailAccount.dat");
 		File file = new File(filePath);
 		if(!file.exists()) {
@@ -116,7 +116,6 @@ public class PersonRestController  {
 	public String phoneInjung(@PathVariable String person_phone, HttpSession session) throws Exception {
 		String authNumber = ps.getAuthNumber();
 		session.setAttribute("authNumber", authNumber);
-		System.out.println("sex");
 		System.out.println(person_phone);
 		String msg = ps.any(person_phone, authNumber);
 

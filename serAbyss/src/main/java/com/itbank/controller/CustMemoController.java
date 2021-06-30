@@ -22,11 +22,12 @@ public class CustMemoController {
 	
 	@Autowired
 	private CustMemoService cs;
-			
+	
+		
 	@GetMapping("/crm")
 	public void crm() {}
 	
-	@PostMapping("/crm")
+	@PostMapping("/crm") 
 	public ModelAndView crm(@RequestParam HashMap<String, String> map) {
 		ModelAndView mav = new ModelAndView();
 		System.out.println(map);

@@ -46,6 +46,7 @@
 				        		<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="${cpath }/reserve/reserve_new_for_engi">신청하기</a></li>
 				        		<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="${cpath }/reserve/statusList?page=1&reserve_status">예약목록보기</a></li>
 				        		<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="${cpath }/custMemo/crm">고객응대하기</a></li>
+				        		
 				        	</c:when>
 				        	<c:when test="${login.person_check == 'a' }">
 				        		<%-- 마스터 로그인시 --%>
@@ -56,6 +57,7 @@
 				        	</c:when>
 				        	<c:otherwise>
 				        		<%-- 고객 로그인시 --%>
+				        		<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="${cpath }/reserve/reserve_new_for_cust">신청하기</a></li>
 				        		<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="${cpath }/reserve/statusList?page=1&reserve_status=">내 서비스</a></li>
 				      	  	</c:otherwise>
                         </c:choose>

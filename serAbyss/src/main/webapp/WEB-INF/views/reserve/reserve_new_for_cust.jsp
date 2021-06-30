@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../layout/header.jsp" %>
 
-<link rel = "stylesheet" href = "https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href = "https://www.w3schools.com/w3css/4/w3.css">
 <section class="page-section">
 	<div class="container">
 		<h2>고객이 서비스 신청하기</h2>
@@ -20,26 +20,26 @@
 				</tr>
 				<tr>
 					<td>
-						<div>
+						<div style="margin-bottom:3rem;">
 							<h2>기사 선택</h2>
 							<c:forEach var = "dto" items = "${engiList }">
-								<label><input type = "radio" name = "reserveTime_engiId" value = "${dto.person_id }" class = "form-check-input">${dto.person_name }(${dto.person_id })</label>
+								<label><input type="radio" name="reserveTime_engiId" value="${dto.person_id }" class="form-check-input">${dto.person_name }(${dto.person_id })</label>
 							</c:forEach>
 						</div>
 						
-						<div>
+						<div style="margin-bottom:3rem;">
 							<h2>일 선택</h2>
 							<c:forEach var = "j" items = "${dayList }">
-								<label><input type = "radio" name = "reserveTime_day" value = "${j }" class = "form-check-input">${j }일</label>
+								<label><input type="radio" name="reserveTime_day" value="${j }" class="form-check-input">${j }일</label>
 							</c:forEach>
 						</div>
 						
 						<div>
 							<h2>시간 선택(이미 예약이 되어있는 시간은 비어있습니다)</h2>
-							<c:forEach var = "i" items = "${engiList }">
-								<c:forEach var = "j" items = "${dayList }">
-									<c:forEach var = "k" items = "${reserveTimeList }">
-										<c:if test="${k.engiId == i.person_id && k.day == j }">
+							<c:forEach var="i" items="${engiList }">
+								<c:forEach var="j" items="${dayList }">
+									<c:forEach var="k" items="${reserveTimeList }">
+										<c:if test="${k.engiId==i.person_id && k.day==j }">
 											<div class = "${i.person_id }day${j } hiddenNone main">
 												<label><input type = "radio" name = "reserveTime_hour" value = "${k.hour }" class = "form-check-input">${k.hour }:00</label>
 											</div>

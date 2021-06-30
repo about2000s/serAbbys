@@ -4,7 +4,7 @@
 <!-- style hiddenNone있던거 삭제하고 css로 옮겼습니다. 정재훈6월10일 9:42 -->
 <section class="page-section">
 	<div class = "container">
-	<h2>개인정보 수정하는 곳입니다.</h2>
+	<h2>개인정보 수정</h2>
 		이메일: ${login.person_email }<a class = "email btn btn-primary btn-sm">수정</a>
 		<div class = "email main hiddenNone">
 			<h2>이메일 변경을 위해서 인증이 필요합니다</h2>
@@ -28,7 +28,6 @@
 			</form>
 		</div>
 	<hr>
-	
 	<div>
 		폰번호: ${login.person_phone }<a class = "phone btn btn-primary btn-sm">수정</a>
 		<div class = "phone main hiddenNone">

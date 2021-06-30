@@ -4,7 +4,6 @@
 <!-- custom.css에 있습니다. -->
 		<div class="mainbanner">
 			<img width="100%" src="${cpath }/resources/img/main.jpg">
-	    	<h2 class="mainText">기술로 세상을 밝히다</h2>
  	    </div> 
         <!-- Engineer Section -->
         <section class="page-section">
