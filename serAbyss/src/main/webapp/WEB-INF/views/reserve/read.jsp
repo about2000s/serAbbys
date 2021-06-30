@@ -50,7 +50,7 @@
 				<tr>
 					<td align="right" colspan="4">
 			 			<button onclick = "location.href='${cpath }/reserve/statusList?page=${map.page }&type=${map.type }&keyword=${map.keyword}&reserve_status=${map.reserve_status}'" class = "btn btn-primary btn-sm">목록</button>
-			 			<c:if test="${dto.reserve_status == '예약완료 ' }">
+			 			<c:if test="${dto.reserve_status == '예약완료' }">
 				 			<button onclick = "location.href='${cpath }/reserve/modify/${dto.reserve_idx}?page=${map.page }&type=${map.type }&keyword=${map.keyword}&reserve_status=${map.reserve_status}'" class = "btn btn-primary btn-sm">수정</button>
 							<button onclick = "location.href='${cpath }/reserve/changeReserveTime/${dto.reserve_idx }'" class = "btn btn-primary btn-sm">예약시간 변경</button>
 							<button id = "deleteBtn" class = "btn btn-primary btn-sm">예약 취소</button>

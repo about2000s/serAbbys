@@ -276,13 +276,10 @@ public class ReserveController {
 	
 	// 고객이 서비스 글 쓰기
 	@PostMapping("/reserve_new_for_cust")
-	public ModelAndView reserve_new_for_cust(ReserveDTO reserveDTO, ReserveTimeDTO reserveTimeDTO){
+	public ModelAndView reserve_new_for_cust(ReserveDTO reserveDTO, 
+			ReserveTimeDTO reserveTimeDTO){
 		ModelAndView mav = new ModelAndView("reserve/alert");
-		PersonDTO cust = rs.selectOneById(reserveDTO.getReserve_custId());
 		PersonDTO engi = rs.selectOneById(reserveTimeDTO.getReserveTime_engiId());
-		
-		System.out.println("engi.comp: " + engi.getPerson_belong());
-		
 		
 		reserveDTO.setReserve_engiId(reserveTimeDTO.getReserveTime_engiId());
 		reserveDTO.setReserve_compBelong(engi.getPerson_belong());
@@ -305,7 +302,6 @@ public class ReserveController {
 			msg = "예약 성공";
 			value = "reserveSuccess";
 			mav.addObject("reserve_idx", reserve_idx);
-			
 		}
 		else {
 			msg = "예약 실패";

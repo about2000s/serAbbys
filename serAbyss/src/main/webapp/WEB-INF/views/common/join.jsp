@@ -317,6 +317,7 @@ document.getElementById('compSearchBtn').onclick = function(event){
 			
 			const table = document.createElement('table')
 			table.classList.add('compListTable')
+			table.classList.add('table', 'dataTable-table')
 			const headTr = document.createElement('tr')
 			const nameTh = document.createElement('th')
 			const addressTh = document.createElement('th')

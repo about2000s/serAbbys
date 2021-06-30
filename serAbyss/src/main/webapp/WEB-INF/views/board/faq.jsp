@@ -3,7 +3,7 @@
 <%@ include file="../layout/header.jsp" %>
 <section class = "page-section">
 	<div class = "container" >
-		<a href = "${cpath }/board/faq?page=1" class = "btn btn-primary btn-lg" style = "background-color: #16a085">자주 묻는 질문</a>
+		<a href = "${cpath }/board/faq?page=1" class = "btn btn-primary btn-lg" style = "background-color: #490000">자주 묻는 질문</a>
 		<a href = "${cpath }/board/notice?page=1" class = "btn btn-primary btn-lg">공지사항</a>
 	</div>
 	
@@ -37,7 +37,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div>
+		<div style = "margin-bottom: 10px;">
 			<form>
 				<input type = "hidden" name = "page" value = "1">
 				<select name = "type" class = "form-control" style = "width: 10%; display: inline;">

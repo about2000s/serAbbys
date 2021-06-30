@@ -10,14 +10,14 @@
 						<div>
 							<h2>담당 기사</h2>
 							<c:forEach var = "i" items = "${engiList }">
-								<label><input type = "radio" name = "reserveTime_engiId" value = "${i.person_id }" checked class = "form-check-input">${i.person_id }</label>
+								<label><input type = "radio" name = "reserveTime_engiId" value = "${i.person_id }" checked class = "form-check-input">${i.person_id }(${i.person_name })</label>
 							</c:forEach>
 						</div>
 						<hr>
 						<div style = "margin-top: 50px;">
 							<h2>날짜 선택</h2>
 							<c:forEach var = "j" items = "${dayList }">
-								<label><input type = "radio" name = "reserveTime_day" value = "${j }" class = "form-check-input">${j }</label>
+								<label><input type = "radio" name = "reserveTime_day" value = "${j }" class = "form-check-input">${j }일</label>
 							</c:forEach>
 						</div>
 						<hr>

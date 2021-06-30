@@ -3,27 +3,25 @@
 <%@ include file="../layout/header.jsp" %>
 <section class="page-section">
 	<div class="container">
-	<div class="row" style="margin-left:10%;">
-		<h2>Login</h2>
-		<hr>
+	<div class="row" style="margin-left:10%; margin-top: 10%;">
 		<div class="col-md-6">
 			<h3>개인회원 로그인</h3>
 			<form method="post" action="${cpath }/common/personLogin">
 				<div style="float: left;">
-					<input type = "text" id = "indi_id" name="person_id" placeholder="아이디" class="form-control">
+					<input type = "text" id = "indi_id" name="person_id" placeholder="아이디" class="form-control" style = "margin-bottom: 3px;">
 					<input type="password" id = "indi_pw" name = "person_pw" placeholder="비밀번호" class = "form-control">
 				</div>
-				<button class="btn btn-primary btn-xl" id="indi_login" type = "submit" style = "height: 80px;" disabled="disabled">로그인</button>
+				<button class="btn btn-primary btn-xl" id="indi_login" type = "submit" style = "height: 80px; margin-left: 5px;" disabled="disabled">로그인</button>
 			</form>
 		</div>
 		<div class="col-md-6">
 			<h3>기업회원 로그인</h3>
 			<form method="post" action="${cpath }/common/companyLogin">
 				<div style="float: left;">
-					<input type="text" id="comp_id" name="person_id" placeholder="아이디" class="form-control">
+					<input type="text" id="comp_id" name="person_id" placeholder="아이디" class="form-control" style = "margin-bottom: 3px;">
 					<input type="password" id="comp_pw" name="person_pw" placeholder="비밀번호" class="form-control">
 				</div>
-				<button class = "btn btn-primary btn-xl" id = "comp_login" type = "submit" style = "height: 80px;" disabled="disabled">로그인</button>
+				<button class = "btn btn-primary btn-xl" id = "comp_login" type = "submit" style = "height: 80px; margin-left: 5px;" disabled="disabled">로그인</button>
 			</form>
 		</div>
 		<div style = "margin-top: 20px;">

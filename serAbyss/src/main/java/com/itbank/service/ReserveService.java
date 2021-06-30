@@ -133,6 +133,11 @@ public class ReserveService {
 			int year = today.get(Calendar.YEAR);
 			int month = today.get(Calendar.MONTH) + 1;
 			int day = today.get(Calendar.DATE) + 1;
+			
+			if(today.get(Calendar.DATE) == today.getActualMaximum(Calendar.DATE)) {
+				day = 1;
+			}
+			
 			int hour = 6; // for문으로 반복문을 돌려놓고 숫자계산 후 "" 더해서 HashMap에 넣자!
 			for(int j=0;j<hourCount*(dayCount + 1);j++) {
 				HashMap<String, Object> map = new HashMap<String, Object>();

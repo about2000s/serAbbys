@@ -18,7 +18,7 @@
 					<td>
 						<label>주소</label><br>
 						<input type="text" id="postcode" placeholder="우편번호" readonly class = "form-control" style = "width: 15%; display:inline;">
-						<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;"><br>
+						<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-sm" style = "width:124px; height: 37px; margin-bottom: 3px;"><br>
 						<input type="text" id="address" name = "address" placeholder="주소" readonly class = "form-control" style = "width: 25%; margin-bottom: 2px;">
 						<input type="text" id="detailAddress" name = "detailAddress" placeholder="상세주소" class = "form-control" style = "width: 12.3%; display:inline;">
 						<input type="text" id="extraAddress" placeholder="참고항목" readonly class = "form-control" style = "width: 12.3%; display:inline;">

@@ -9,8 +9,24 @@
 		<form method = "post">
 			<input type = "hidden" name = "person_id" value = "${login.person_id }">
 			<input type = "password" name = "person_pw" class= "form-control" style = "width: 15%; display: inline;">
-			<input type = "submit" value = "다음" class = "btn btn-primary btn-sm" style = "height: 40px; margin-bottom: 3px;">
+			<input type = "submit" value = "다음" id = "submitBtn" class = "btn btn-primary btn-sm" style = "height: 40px; margin-bottom: 3px;" disabled="disabled">
 		</form>
 	</div>
 </section>
+
+<script>
+let pwFlag = false
+const submitBtn = document.getElementById('submitBtn')
+const pw = document.querySelector('input[name="person_pw"]')
+pw.onkeyup = function(event){
+	if(pw.value) pwFlag = true
+	else pwFlag = false
+	check()
+}
+function check(event){
+	if(pwFlag) submitBtn.disabled = false
+	else submitBtn.disabled = true
+}
+</script>
+
 <%@ include file="../layout/footer.jsp" %>

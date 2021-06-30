@@ -5,6 +5,7 @@
 <link rel="stylesheet" href = "https://www.w3schools.com/w3css/4/w3.css">
 <section class="page-section">
 	<div class="container">
+	
 		<form method="post">
 			<input type = "hidden" name = "reserve_status" value = "예약완료">
 			<input type = "hidden" name = "reserve_custId" value = "${login.person_id }">
@@ -28,7 +29,7 @@
 								<header class = "w3-container w3-teal">
 									<span onclick = "document.getElementById('id01').style.display='none'"
 									class = "w3-button w3-display-topright">&times;</span>
-									<h2>우리 지역의 가까운 수리기사를 찾아보세요!</h2>
+									<h2>우리 지역의 가까운 전문가를 찾아보세요!</h2>
 								</header>
 								<div class = "w2-container w3-container" style = "padding-top: 10px; padding-bottom: 10px;"><!-- 기사 검색폼 -->
 									<input class = "form-control" type = "text" id = "keyword" name = "keyword" style = "width: 20%; display: inline;">
@@ -60,7 +61,6 @@
 						</div>
 					</td>
 				</tr>
-				
 				<tr>
 					<td>
 						<button class = "btn btn-primary btn-sm" id = "goToSelectAddress">
