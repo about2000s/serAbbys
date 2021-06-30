@@ -65,7 +65,7 @@ public interface ReserveDAO {
 	@Select("select * from review where review_idx=#{reserve_idx}")
 	ReviewBoardDTO alreadyReviewWrite(int reserve_idx);
 
-	@Select("select * from custMemo where custMemo_reserve_idx=#{reserve_idx}")
+	@Select("select * from custMemo where custMemo_reserve_idx=#{reserve_idx} order by custMemo_reg desc")
 	ArrayList<CustMemoDTO> custMemoList(int reserve_idx);
 	
 	@Select("select max(reserve_idx) from (select * from reserve where reserve_engiId=#{reserve_engiId})")

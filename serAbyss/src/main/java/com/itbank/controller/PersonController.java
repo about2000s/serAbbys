@@ -199,15 +199,13 @@ public class PersonController {
 		ModelAndView mav = new ModelAndView("common/findResult");
 		int row = ps.emailIdCheck(inputData);
 		// 입력한 ID값과 Email값을 PersonService의 emailIdCheck으로 전달하여 일치하는 계정의 여부를 판단
-		String msg, value;
+		String msg;
 		if(row == 0) {	// ID 값과 Email 값이 일치하는 정보가 없을 경우
 			msg = "아이디 혹은 Email 주소가 잘못 입력되었습니다. 다시 확인해주세요";
 		} else {	// ID 값과 Email 값이 일치하는 정보가 있을 경우
 			String person_pw = ps.findPwByEmail(inputData);
 			// PersonService의 findPwByEmail으로 입력값을 전달하여 해당 계정의 pw를 재설정하고 발급한 임시 비밀번호 6자리를 반환
 			msg = "임시 비밀번호는 [" + person_pw + "] 입니다. 로그인 후 변경해주세요";
-			value = "rePwUpdateSuccess";
-			mav.addObject("value", value);
 		}
 		mav.addObject("msg", msg);
 		return mav;
@@ -259,13 +257,13 @@ public class PersonController {
 		if(row != 0) {
 			System.out.println("변경 성공");
 			msg = "비밀번호가 변경되었습니다.";
-			value = "pwUpdateSuccess";
-			mav.addObject("value", value);
+			value = "myPageUpdateSuccess";
 //			PersonDTO login = ps.selectOneById(inputData.getPerson_id());
 			session.setAttribute("login", login);
 		} else {
 			msg = "비밀번호 변경에 실패했습니다. 다시 시도해주세요";
 		}
+		mav.addObject("value", value);
 		mav.addObject("msg", msg);
 		return mav;
 	}

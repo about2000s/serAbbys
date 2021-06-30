@@ -9,7 +9,7 @@
 		<div class = "email main hiddenNone">
 			<h2>이메일 변경을 위해서 인증이 필요합니다</h2>
 			<form action = "${cpath}/common/replaceEmail" method = "post">
-				<input type = "email" name = "newEmail" placeholder="새로운 이메일을 입력 후 인증이 필요합니다" class = "form-control" style = "width: 20%">
+				<input type = "email" id = "newEmail" name = "newEmail" placeholder="새로운 이메일을 입력 후 인증이 필요합니다" class = "form-control" style = "width: 20%">
 				<button id = "receiveAuthBtn" class = "btn btn-primary btn-sm">인증번호 받기</button>
 				
 				<div class = "check_font" id = "email_checkDiv"></div>
