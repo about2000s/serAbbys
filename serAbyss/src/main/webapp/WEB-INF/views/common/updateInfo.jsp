@@ -70,7 +70,6 @@
 		주소: ${login.person_address }<a class = "address btn btn-primary btn-sm" style = "margin-left: 5px;">수정</a>
 		<div class = "address main hiddenNone">
 			<form action = "${cpath}/common/replaceAddress" method = "post">
-				<label>주소</label><br>
 				<input type="text" id="postcode" placeholder="우편번호" class= "form-control" style = "width: 15%; display: inline;" readonly>
 				<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">
 				<input type="text" id="address" name = "address" placeholder="주소" class= "form-control" style = "width: 25%; margin-bottom: 3px;" readonly>
@@ -80,7 +79,7 @@
 			</form>
 		</div>
 	</div>
-	<button onclick = "history.go(-1);" class = "btn btn-primary btn-sm">뒤로 가기</button>
+	<button onclick = "history.go(-1);" class = "btn btn-primary btn-sm" style = "margin-top: 20px;">뒤로 가기</button>
 	</div>
 </section>
 
