@@ -263,8 +263,8 @@ public class PersonController {
 		} else {
 			msg = "비밀번호 변경에 실패했습니다. 다시 시도해주세요";
 		}
-		mav.addObject("msg", msg);
 		mav.addObject("value", value);
+		mav.addObject("msg", msg);
 		return mav;
 	}
 	
