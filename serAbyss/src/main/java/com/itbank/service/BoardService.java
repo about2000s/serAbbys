@@ -73,7 +73,7 @@ public class BoardService {
 			for (int k = 0; k < starScore; k++) {
 				star += "★";
 			}
-			for (int j = 0; j < 10 - starScore; j++) {
+			for (int j = 0; j < 5 - starScore; j++) {
 				star += "☆";
 			}
 			list.get(i).setStar(star);

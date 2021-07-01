@@ -29,17 +29,19 @@
 				</tr>
 			</table>
 		</div>
-		<div style = "text-align: center;"><!-- 댓글 기능을 구현해 봅시다. -->
-			<form method = "post">
-				<input type = "hidden" name = "page" value = "${map.page }">
-				<input type = "hidden" name = "type" value = "${map.type }">
-				<input type = "hidden" name = "keyword" value = "${map.keyword }">
-				<input type = "hidden" name = "reply_bnum" value = "${dto.review_idx }">
-				<input type = "hidden" name = "reply_id" value = "${login.person_id }">
-				<textarea name = "reply_content" placeholder="바른말 고운말" class = "form-control" style="width: 40%; height: 100px; display: inline;"></textarea>
-				<button type = "submit" id = "replySubmitBtn" class = "btn btn-primary btn-lg" style = "margin-bottom: 4%;" disabled="disabled">댓글 작성</button>
-			</form>
-		</div>
+		<c:if test="${login != null }">
+			<div style = "text-align: center;"><!-- 댓글 기능을 구현해 봅시다. -->
+				<form method = "post">
+					<input type = "hidden" name = "page" value = "${map.page }">
+					<input type = "hidden" name = "type" value = "${map.type }">
+					<input type = "hidden" name = "keyword" value = "${map.keyword }">
+					<input type = "hidden" name = "reply_bnum" value = "${dto.review_idx }">
+					<input type = "hidden" name = "reply_id" value = "${login.person_id }">
+					<textarea name = "reply_content" placeholder="바른말 고운말" class = "form-control" style="width: 40%; height: 100px; display: inline;"></textarea>
+					<button type = "submit" id = "replySubmitBtn" class = "btn btn-primary btn-lg" style = "margin-bottom: 4%;" disabled="disabled">댓글 작성</button>
+				</form>
+			</div>
+		</c:if>
 		<div style = "margin-left: 26%;">
 			<c:forEach var = "i" items = "${replyPageList }">
 				<c:forEach var = "reply" items = "${replyList }" begin = "${nowD*(i-1) }" end = "${nowD*(i-1) + (nowD - 1) }">
