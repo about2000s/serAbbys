@@ -193,8 +193,8 @@ public class PersonController {
 			value = "myPageUpdateSuccess";
 			session.setAttribute("login", login);
 		}
-		mav.addObject("msg", msg);
 		mav.addObject("value", value);
+		mav.addObject("msg", msg);
 		return mav;
 	}
 	
