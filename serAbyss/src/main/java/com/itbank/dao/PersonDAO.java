@@ -89,5 +89,8 @@ public interface PersonDAO {
 
 	@Update("update person set person_phone=#{person_phone} where person_idx=#{person_idx}")
 	int updatePhone(PersonDTO login);
+
+	@Select("select nvl(count(*), 0) from person where person_phone=#{person_phone}")
+	int phoneCheck(String person_phone);
 	
 }

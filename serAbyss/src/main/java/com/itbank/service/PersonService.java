@@ -416,5 +416,8 @@ public class PersonService {
 	public int updatePhone(PersonDTO login) {
 		return dao.updatePhone(login);
 	}
+	public int phoneCheck(String person_phone) {
+		return dao.phoneCheck(person_phone);
+	}
 }
 

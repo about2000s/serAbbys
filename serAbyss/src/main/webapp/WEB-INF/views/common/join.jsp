@@ -108,6 +108,7 @@
 				<input type="text" name="person_phone" class = "form-control" style = "width: 20%; display: inline;"><!-- 나중에 문자열 스플릿 해서 내보내면 된다! -->
 		        <button class = "btn btn-primary btn-sm" id = "phoneInjungBtn" style = "height: 37px;">인증번호 받기</button>
 		    	
+		        <div class = "hiddenNone" id = "phoneFail" style = "color: red; font-weight: bold;">잘못된 휴대전화 형식이거나, 이미 가입된 번호가 있습니다.</div>
 		        <div class = "hiddenNone" id = "authMailDivPhone" style = "margin-top: 5px;">
 		        	<hr>
 					<input class = "form-control" type = "text" id = "authNumberPhone" name = "authNumberPhone" placeholder="인증번호를 입력하시오" style = "width: 20%; display: inline;">
@@ -161,9 +162,12 @@ function check(){
 		}
 		fetch(url, opt).then(resp => resp.text())
 		.then(text => {
-			if(text){
+			if(text != 'fail'){
 				document.getElementById('authMailDivPhone').classList.remove('hiddenNone')
-				
+			}
+			else if(text == 'fail'){
+				console.log('fail')
+				document.getElementById('phoneFail').classList.remove('hiddenNone')
 			}
 		})
 	}
@@ -255,7 +259,7 @@ const sendMailHandler = function(event){
 		}
 		else{
 			
-			email_checkDiv.innerText = '이메일 전송에 실패'
+			email_checkDiv.innerText = '이메일 전송에 실패했습니다. 이미 가입된 이메일일 가능성이 있습니다.'
 			email_checkDiv.style.color = 'red'
 		}
 		email_checkDiv.style.fontWeight = 'bold'
