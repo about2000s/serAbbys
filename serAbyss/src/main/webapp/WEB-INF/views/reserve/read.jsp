@@ -20,7 +20,7 @@
 			</c:if>
 			<table class = "table dataTable-table">
 				<tr>
-					<td colspan="4">${dto.reserve_title }</td>
+					<td colspan="5">${dto.reserve_title }</td>
 				</tr>
 				<tr>
 					<td>${dto.reserve_custId }</td>
@@ -40,15 +40,20 @@
 						</c:if>
 						</c:if>
 					</td>
+					<td>
+						<c:if test="${dto.reserve_price != 0 }">
+							결제 금액: ${dto.reserve_price }
+						</c:if>
+					</td>
 				</tr>
 				<tr>
-					<td colspan="4">
+					<td colspan="5">
 						<pre>${dto.reserve_content }</pre>
 					</td>
 				</tr>
 				
 				<tr>
-					<td align="right" colspan="4">
+					<td align="right" colspan="5">
 			 			<button onclick = "location.href='${cpath }/reserve/statusList?page=${map.page }&type=${map.type }&keyword=${map.keyword}&reserve_status=${map.reserve_status}'" class = "btn btn-primary btn-sm">목록</button>
 			 			<c:if test="${dto.reserve_status == '예약완료' }">
 				 			<button onclick = "location.href='${cpath }/reserve/modify/${dto.reserve_idx}?page=${map.page }&type=${map.type }&keyword=${map.keyword}&reserve_status=${map.reserve_status}'" class = "btn btn-primary btn-sm">수정</button>
@@ -93,8 +98,14 @@ const btnList = document.getElementsByClassName('statusChange')
 			console.log('nextStatus: ' + nextStatus)
 			
 			if(confirm('정말로 상태를 변경하시겠습니까?')){
-				location.replace('${cpath}/reserve/statusChange/${reserve_idx}?nextStatus=' + nextStatus)
+				if(nextStatus == '결제완료'){
+					const reserve_price = prompt('결제한 금액을 입력하세요')
+					location.replace('${cpath}/reserve/statusChange/${reserve_idx}?nextStatus=' + nextStatus + '&reserve_price=' + reserve_price)
+				}
+				location.replace('${cpath}/reserve/statusChange/${reserve_idx}?nextStatus=' + nextStatus + '&reserve_price=0')
 			}
+			
+			
 			
 		}
 	}

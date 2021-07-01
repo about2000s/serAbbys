@@ -57,6 +57,7 @@ public class PersonRestController  {
 		return json;
 	}
 	
+	//응대기록 리스트 보기
 	@GetMapping(value = "/crm/{reserve_idx}", produces = "application/json; charset=utf-8")
 	public String crm(@PathVariable int reserve_idx) throws JsonProcessingException {
 		List<HashMap<String, String>> list = cs.selectList(reserve_idx);
@@ -105,9 +106,9 @@ public class PersonRestController  {
 		return flag;
 	}
 	
-	
+	//응대기록 남기기
 	@PostMapping(value = "/record")
-	public int jjh(@RequestBody CustMemoDTO dto) {
+	public int record(@RequestBody CustMemoDTO dto) {
 		int row = cs.insert(dto);
 		return 0;
 	}

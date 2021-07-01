@@ -360,9 +360,6 @@ document.getElementById('compSearchBtn').onclick = function(event){
 		
 	})
 };
-</script>
-
-<script>
 function inputBelong(companyList_name){
 	console.log(companyList_name)
 	document.getElementById('person_belong').value = companyList_name

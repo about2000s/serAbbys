@@ -22,11 +22,11 @@ public class CustMemoController {
 	
 	@Autowired
 	private CustMemoService cs;
-	
 		
 	@GetMapping("/crm")
 	public void crm() {}
 	
+	//고객응대내용 가져오기
 	@PostMapping("/crm") 
 	public ModelAndView crm(@RequestParam HashMap<String, String> map) {
 		ModelAndView mav = new ModelAndView();
@@ -36,12 +36,5 @@ public class CustMemoController {
 		mav.addObject("map", map);
 		return mav;
 	}
-	
-	@GetMapping("/crm?custMemo_reserve_idx=${custMemo_reserve_idx}")
-	public String selectRecord(@PathVariable Integer custMemo_reserve_idx) {
-		System.out.println(custMemo_reserve_idx);
-		return "custMemo/crm";
-	}
-
 	
 }

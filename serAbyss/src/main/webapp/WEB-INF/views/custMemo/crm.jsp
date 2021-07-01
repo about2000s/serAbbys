@@ -139,7 +139,7 @@
 				document.querySelector('div.' + 'noServComment').remove()
 			}
 			document.querySelector('div.record').classList.remove('hiddenNone')
-		if(json != ''){ // 테이블을 만드는 과정이다. 일일이 설명하는 건 설명할 내용이 많으므로 모르시는 문법은 구글링 하시면 됩니다!
+		if(json != ''){ 
 			const table = document.createElement('table')
 			table.classList.add('counterListTable', 'table', 'dataTable-table')
 			const thead = document.createElement('thead')

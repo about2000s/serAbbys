@@ -249,7 +249,8 @@ public class ReserveService {
 		return statusList;
 	}
 	
-	public void addressAndTitleSetting(ReserveDTO reserveDTO, ReserveTimeDTO reserveTimeDTO, String address, String detailAddress) {
+	public void addressAndTitleSetting(ReserveDTO reserveDTO, ReserveTimeDTO reserveTimeDTO, String address, String detailAddress, HttpSession session) {
+		PersonDTO login = (PersonDTO)session.getAttribute("login");
 		String fullAddress = address + " " + detailAddress;
 		reserveDTO.setReserve_address(fullAddress);
 		
@@ -261,7 +262,8 @@ public class ReserveService {
 		reserveDTO.setReserve_title(title);
 		
 		try {
-			String msg = ps.any(reserveDTO.getReserve_phone(), title);
+			String msg1 = ps.any(reserveDTO.getReserve_phone(), title);
+			String msg2 = ps.any(login.getPerson_phone(), title);
 			
 		} catch (Exception e) {
 			e.printStackTrace();

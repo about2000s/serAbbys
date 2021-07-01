@@ -89,6 +89,8 @@ public class PersonController {
 		ModelAndView mav = new ModelAndView("common/selectIndiComp");
 		return mav;
 	}
+	
+	//아이디 찾기 및 비밀번호 재발급을 위해 개인 및 비회원을 선택하는 곳.
 	@PostMapping("/selectIndiComp")
 	public ModelAndView selectIndiComp(String say, String person_check) {
 		ModelAndView mav = new ModelAndView();

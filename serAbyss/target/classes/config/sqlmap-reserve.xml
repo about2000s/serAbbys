@@ -71,6 +71,15 @@
 			 #{reserve_status}, #{reserve_address}, #{reserve_engiId}, 
 			 #{reserve_compBelong}, #{reserve_name}, #{reserve_phone})
 	</insert>
+	
+	<update id="statusChange" parameterType="reserve">
+		update reserve set reserve_status=#{reserve_status}
+		<if test="reserve_price != null">
+			, reserve_price=#{reserve_price} 
+		</if>
+		 where reserve_idx=#{reserve_idx}
+	</update>
+	
 </mapper>
 
 

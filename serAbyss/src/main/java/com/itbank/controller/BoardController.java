@@ -146,6 +146,7 @@ public class BoardController {
 		mav.addObject("map", map);
 		return mav;
 	}
+	
 	// 리뷰 게시판에 댓글 쓰기
 	@PostMapping("/reviewRead/{review_idx}")
 	public ModelAndView replyWrite(@PathVariable int review_idx, ReplyDTO dto, @RequestParam HashMap<String, Object> map) {
@@ -170,6 +171,7 @@ public class BoardController {
 		mav.addObject("map", map);
 		return mav;
 	}
+	
 	//리뷰글 수정하기
 	@PostMapping("/reviewModify/{review_idx}")
 	public ModelAndView reviewUpdate(@PathVariable int review_idx, ReviewBoardDTO inputData, @RequestParam HashMap<String, Object> map) {
@@ -197,6 +199,7 @@ public class BoardController {
 		mav.addObject("dto", dto);
 		return mav;
 	}
+	
 	//리뷰글 작성하기
 	@PostMapping("/reviewWrite")
 	public ModelAndView reviewWrite(ReviewBoardDTO dto) {
@@ -207,6 +210,7 @@ public class BoardController {
 		return mav;
 	}
 	
+	//라뷰글 삭제하기
 	@GetMapping("/reviewDelete/{review_idx}")
 	public ModelAndView reviewDelete(@PathVariable int review_idx) {
 		ModelAndView mav = new ModelAndView("redirect:/board/review_list_all");
