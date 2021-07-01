@@ -72,8 +72,8 @@
 			<h2>기록 남기기</h2>
 				<form id="insertForm">
 					<input type="hidden" id = "a" name="custMemo_reserve_idx" value="">
-					<textarea id = "b" class="form-control" name="custMemo_comments"></textarea>
-					<input id="insertBtn" type="submit" value="다음" class = "btn btn-primary btn-sm">
+					<textarea id = "b" class="form-control" name="custMemo_comments" style = "width: 30%;" placeholder="여기에 기록을 남기시면 됩니다."></textarea>
+					<input id="insertBtn" type="submit" value="저장" class = "btn btn-primary btn-sm" style = "margin-top: 10px;">
 				</form>
 		</div>
 	</div>
@@ -139,7 +139,7 @@
 				document.querySelector('div.' + 'noServComment').remove()
 			}
 			document.querySelector('div.record').classList.remove('hiddenNone')
-		if(json != ''){ // 테이블을 만드는 과정이다. 일일이 설명하는 건 설명할 내용이 많으므로 모르시는 문법은 구글링 하시면 됩니다!
+		if(json != ''){ 
 			const table = document.createElement('table')
 			table.classList.add('counterListTable', 'table', 'dataTable-table')
 			const thead = document.createElement('thead')

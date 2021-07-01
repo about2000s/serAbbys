@@ -13,7 +13,7 @@
 				<label><input class = "company form-check-input" type = "radio" name = "person_check" value = "y">법인회원</label>
 			</p>
 			<div class = "company main hiddenNone">
-				<label><input type = "radio" name = "any" class = "radio1 form-check-input" >개인사업자</label>
+				<label><input type = "radio" name = "any" value = "mu" class = "radio1 form-check-input" >개인사업자</label>
 				<label><input type = "radio" name = "any" value = "comp" class = "radio2 form-check-input">법인사업자</label>
 				<label><input type = "radio" name = "any" value = "empl" class = "radio3 form-check-input">법인소속직원(기사)</label>
 				
@@ -95,25 +95,26 @@
 				<div class = "check_font" id = "email_checkDiv"></div>
 				
 				<div class = "hiddenNone" id = "authMailDiv">
+					<hr>
 					<span>인증번호 입력</span>
 					<div>
-						<input class = "form-control" type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호를 입력하시오">
+						<input class = "form-control" type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호를 입력하시오" style = "width: 20%; display: inline;">
 						<button class = "btn btn-primary btn-sm" id = "injung" style = "height: 37px;">인증하기</button>
 					</div>
 					<div id = "injungSuccessDiv"></div>
 				</div>
-				
+				<hr>
 				 휴대폰번호 입력<br>
 				<input type="text" name="person_phone" class = "form-control" style = "width: 20%; display: inline;"><!-- 나중에 문자열 스플릿 해서 내보내면 된다! -->
 		        <button class = "btn btn-primary btn-sm" id = "phoneInjungBtn" style = "height: 37px;">인증번호 받기</button>
-		        
 		    	
-		        <div class = "hiddenNone" id = "authMailDivPhone">
-		        	<span>휴대폰 인증번호 입력</span>
-					<input class = "form-control" type = "text" id = "authNumberPhone" name = "authNumberPhone" placeholder="인증번호를 입력하시오">
-					<button class = "btn btn-primary btn-sm" id = "injungPhone1111" style = "width: 20%; display: inline; height: 37px;">인증하기</button>
+		        <div class = "hiddenNone" id = "authMailDivPhone" style = "margin-top: 5px;">
+		        	<hr>
+					<input class = "form-control" type = "text" id = "authNumberPhone" name = "authNumberPhone" placeholder="인증번호를 입력하시오" style = "width: 20%; display: inline;">
+					<button class = "btn btn-primary btn-sm" id = "injungPhone1111" style = "height: 37px; margin-bottom: 3px;">인증하기</button>
 					<div id = "injungSuccessDivPhone"></div>
 		        </div>
+		        
 		        <div style = "text-align: center; margin-top: 30px;">
 					<button class = "btn btn-primary btn-xl" type = "submit" id = "reg_submit" disabled="disabled">회원가입</button>
 				</div>
@@ -317,6 +318,7 @@ document.getElementById('compSearchBtn').onclick = function(event){
 			
 			const table = document.createElement('table')
 			table.classList.add('compListTable')
+			table.classList.add('table', 'dataTable-table')
 			const headTr = document.createElement('tr')
 			const nameTh = document.createElement('th')
 			const addressTh = document.createElement('th')
@@ -358,9 +360,6 @@ document.getElementById('compSearchBtn').onclick = function(event){
 		
 	})
 };
-</script>
-
-<script>
 function inputBelong(companyList_name){
 	console.log(companyList_name)
 	document.getElementById('person_belong').value = companyList_name

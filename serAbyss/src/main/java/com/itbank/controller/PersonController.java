@@ -38,47 +38,18 @@ public class PersonController {
 	//개인회원 로그인
 	@PostMapping("/personLogin")
 	public ModelAndView personLogin(PersonDTO inputData, HttpSession session) {
-		System.out.println("fds");
 		ModelAndView mav = new ModelAndView("index");
-		PersonDTO login = ps.personLogin(inputData);
-		// PersonService의 personLogin으로 inputData를 넘겨 일치여부 확인.
-		// 일치하는 값이 있다면 login에 해당 정보가 들어가게 되고, 없다면 null이 들어가게 됨
-		if(login != null) {	// personLogin을 통해 넘어온 PersonDTO가 있을 경우
-			System.out.println("여기는 로그인 성공");
-			session.setAttribute("login", login);
-			// session으로 login을 등록하여 로그인 정보를 저장
-			mav.setViewName("index");
-		}
-		else {
-			System.out.println("여기는 로그인 실패");
-			String msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
-			mav.addObject("msg", msg);
-			// 등록한 메시지 msg를 저장하여 alert.jsp로 전달
-			mav.setViewName("common/alert");
-		}
+		PersonDTO login = ps.personLogin(inputData);//입력한 아이디 비밀번호를 바탕으로 회원객체를 반환한다
+		ps.loginProcess(mav, login, session);//login 객체의 유무에 따라 로그인을 처리하는 메서드
 		return mav;
 	}
 	
 	//기업회원 로그인
 	@PostMapping("/companyLogin")
 	public ModelAndView companyLogin(PersonDTO inputData, HttpSession session) {
-		System.out.println("apple");
-		ModelAndView mav = new ModelAndView();
-		PersonDTO login = ps.companyLogin(inputData);
-		// 기업회원의 login 정보값을 PersonService로 전달.
-		// 일반 회원 로그인과 이후 상황은 동일
-		if(login != null) {
-			session.setAttribute("login", login);
-			// session으로 login을 등록하여 로그인 정보를 저장
-			mav.setViewName("index");
-		}
-		else {
-			String msg = "아이디 또는 비밀번호가 일치하지 않습니다.";
-			mav.addObject("msg", msg);
-			mav.addObject("value", "loginFail");
-			// 등록한 메시지 msg를 저장하여 alert.jsp로 전달
-			mav.setViewName("common/alert");
-		}
+		ModelAndView mav = new ModelAndView("index");
+		PersonDTO login = ps.companyLogin(inputData);//입력한 아이디 비밀번호를 바탕으로 회원객체를 반환한다
+		ps.loginProcess(mav, login, session); //login 객체의 유무에 따라 로그인을 처리하는 메서드
 		return mav;
 	}
 	
@@ -87,32 +58,17 @@ public class PersonController {
 	public String join() {
 		return "common/join";
 	}
-//	@RequestParam HashMap<String, String> map
 	//회원가입 처리
 	@PostMapping("/join")
 	public ModelAndView join(PersonDTO inputData, String any, String address, String detailAddress) {
-		// 넘겨받은 기본주소 + 상세주소를 합쳐서 완성된 주소를 저장
-		String fullAddress = address + " " + detailAddress;
-		// 입력받은 inputData의 주소를 위에서 완성한 주소로 수정
-		inputData.setPerson_address(fullAddress);
 		ModelAndView mav = new ModelAndView("common/alert");
-		if(any != null) {
-			if(any.equals("comp")) {//회사대표계정 회원가입시 진행됨.
-				inputData.setPerson_belong(inputData.getPerson_belong().split(",")[0]);
-				// 가입 조건의 회사이름을 가져와서 belong으로 세팅
-				CompDTO comp = new CompDTO(inputData.getPerson_belong(), fullAddress);
-				// 입력값과 합쳐진 완성된 주소값을 통해 CompDTO 객체 생성
-				int row2 = ps.companyAdd(comp);
-				// 생성된 객체를 PersonService로 넘겨 DB에 회사정보를 추가시킴
-			}
-			if(any.equals("empl")) {//회사직원 가입시 진행됨
-				inputData.setPerson_belong(inputData.getPerson_belong().split(",")[1]);
-				// 가입 조건에서 선택한 회사이름을 가져와서 belong으로 세팅
-			}
-		}
+		
+		ps.joinProcess(address, detailAddress, inputData, any);
+		//주소 및 회사명 세팅
+		
+		int row = ps.join(inputData);
 		String msg = null;
 		String value = null;
-		int row = ps.join(inputData);
 		
 		if(row != 0) {
 			msg = "회원가입 성공";
@@ -127,34 +83,23 @@ public class PersonController {
 		return mav;
 	}
 	
+	//아이디 찾기 또는 비밀번호 재발급을 하기 위해 개인/기업 회원 여부를 따지는 페이지로 이동
 	@GetMapping("/selectIndiComp")
 	public ModelAndView selectIndiComp() {
 		ModelAndView mav = new ModelAndView("common/selectIndiComp");
 		return mav;
 	}
+	
+	//아이디 찾기 및 비밀번호 재발급을 위해 개인 및 비회원을 선택하는 곳.
 	@PostMapping("/selectIndiComp")
 	public ModelAndView selectIndiComp(String say, String person_check) {
-		// 개인회원/기업회원을 구분한 값과 id/pw 찾기 선택값을 전달받음
-		// say = id or pw 찾기 구분
-		// person_check = 개인회원/기업회원 구분
-		System.out.println("say: " + say);
-		System.out.println("person_check: " + person_check);
 		ModelAndView mav = new ModelAndView();
+		// 개인회원/기업회원을 구분한 값과 id/pw 찾기 선택값을 전달받음
+		// say = id or pw 구분
+		// person_check = 개인회원/기업회원 구분
 		if(say.equals("id,")) mav.setViewName("common/findId");
 		if(say.equals("pw,")) mav.setViewName("common/rePw");
 		mav.addObject("person_check", person_check);
-		return mav;
-	}
-	
-	//폰번호 입력에 의한 아이디 찾기 데이터 받아와서 처리
-	@PostMapping("/findIdByPhone")
-	public ModelAndView findIdByPhone(PersonDTO inputData) {
-		ModelAndView mav = new ModelAndView("common/findResult");
-		String person_id = ps.findIdByPhone(inputData);
-		if(person_id != null) {
-			String msg = "당신의 아이디는 [" + person_id + "] 입니다.";
-			mav.addObject("msg", msg);
-		}
 		return mav;
 	}
 	
@@ -162,8 +107,8 @@ public class PersonController {
 	@PostMapping("/findIdByEmail")
 	public ModelAndView findIdByEmail(PersonDTO inputData) {
 		ModelAndView mav = new ModelAndView("common/findResult");
-		int row = ps.emailNameCheck(inputData);
-		// 입력한 Email 값과 Name 값을 전달하여 일치하는 데이터의 유무를 파악
+		int row = ps.emailNameCheck(inputData);// 입력한 Email 값과 Name 값을 전달하여 일치하는 데이터의 유무를 파악
+		
 		String msg;
 		if(row == 0) {	// 입력한 Email과 Name과 일치하는 데이터가 없는 경우
 			msg = "이름 혹은 Email 주소가 잘못 입력되었습니다. 다시 확인해주세요";
@@ -172,23 +117,6 @@ public class PersonController {
 			// 입력한 Email과 Name값을 토대로 findIdByEmail을 통해 id값을 반환받음
 			msg = "당신의 아이디는 [" + person_id + "] 입니다.";
 		}
-		mav.addObject("msg", msg);
-		return mav;
-	}
-	
-//	//비밀번호 재발급 폼으로 이동
-//	@GetMapping("/rePw")
-//	public String rePw() {
-//		return "common/rePw";
-//	}
-	
-	//폰번호 입력에 의한 비밀번호 재발급 데이터 받아와서 처리
-	@PostMapping("/repwByPhone")
-	public ModelAndView repwByPhone(PersonDTO inputData) {
-		ModelAndView mav = new ModelAndView("common/findResult");
-		String repw = ps.repwByPhone(inputData);
-		// 입력한 정보값을 넘기고 PersonService의 repwByPhone를 통해 해당 계정의 pw를 재설정하고 임시로 발급한 비밀번호 6자리를 반환
-		String msg = "임시 발급받은 비밀번호는 [" + repw + "] 입니다.";
 		mav.addObject("msg", msg);
 		return mav;
 	}
@@ -211,6 +139,7 @@ public class PersonController {
 		return mav;
 	}
 
+	//마이페이지
 	@GetMapping("/myPage")
 	public ModelAndView myPage() {
 		ModelAndView mav = new ModelAndView("common/myPage");
@@ -219,15 +148,19 @@ public class PersonController {
 		return mav;
 	}
 	
+	//개인정보 수정 페이지로 이동
 	@GetMapping("/updateInfo")
 	public String updateInfo() {
 		return "common/updateInfo";
 	}
 	
+	//비밀번호 수정 페이지로 이동
 	@GetMapping("/updatePw")
 	public String updatePw() {
 		return "common/updatePw";
 	}
+	
+	//비밀번호 수정하기 위해 기존 비밀번호를 검증하는 절차
 	@PostMapping("/updatePw")
 	public ModelAndView updatePw(PersonDTO inputData) {
 		ModelAndView mav = new ModelAndView();
@@ -246,39 +179,37 @@ public class PersonController {
 		return mav;
 	}
 	
+	//비밀번호를 새로 변경하기
 	@PostMapping("/pwUpdateResult")
 	public ModelAndView pwUpdateResult(String person_pw, HttpSession session) {
 		ModelAndView mav = new ModelAndView("common/alert");
 		PersonDTO login = (PersonDTO)session.getAttribute("login");	// 로그인 된 session 값을 불러와서 PersonDTO로 저장
 		login.setPerson_pw(person_pw);	// session 값의 pw를 입력받은 person_pw로 변경
 		int row = ps.updatePw(login);	// pw가 변경된 PersonDTO 값을 전달하여 DB값을 Update시킴
-		String msg;
-		String value=null;
+		String msg = null;
+		String value = null;
 		if(row != 0) {
-			System.out.println("변경 성공");
 			msg = "비밀번호가 변경되었습니다.";
 			value = "myPageUpdateSuccess";
-//			PersonDTO login = ps.selectOneById(inputData.getPerson_id());
 			session.setAttribute("login", login);
-		} else {
-			msg = "비밀번호 변경에 실패했습니다. 다시 시도해주세요";
 		}
 		mav.addObject("value", value);
 		mav.addObject("msg", msg);
 		return mav;
 	}
 	
+	//아이디를 실시간으로 중복체크
 	@GetMapping(value = "/idCheck")
 	@ResponseBody
 	public int idCheck(@RequestParam("person_id") String person_id) {
 		return ps.idCheck(person_id);
 	}
 	
-	@GetMapping(value = "/emailCheck")
-	@ResponseBody
-	public int emailCheck(@RequestParam("person_email") String person_email) {
-		return ps.emailCheck(person_email);
-	}
+//	@GetMapping(value = "/emailCheck")
+//	@ResponseBody
+//	public int emailCheck(@RequestParam("person_email") String person_email) {
+//		return ps.emailCheck(person_email);
+//	}
 	
 	//이메일 변경
 	@PostMapping("/replaceEmail")
@@ -305,7 +236,7 @@ public class PersonController {
 	}
 	
 	// 주소 변경
-	@PostMapping("replaceAddress")
+	@PostMapping("/replaceAddress")
 	public ModelAndView addressUpdateResult(String address, String detailAddress, HttpSession session) {
 		ModelAndView mav = new ModelAndView("common/alert");
 		String realAddress = address + " " + detailAddress;
@@ -331,7 +262,7 @@ public class PersonController {
 	}
 	
 	// 유선전화 변경 및 추가
-	@PostMapping("replaceCall")
+	@PostMapping("/replaceCall")
 	public ModelAndView replaceCall(String newCall, HttpSession session) {
 		ModelAndView mav = new ModelAndView("common/alert");
 		PersonDTO login = (PersonDTO)session.getAttribute("login");
@@ -361,7 +292,7 @@ public class PersonController {
 	}
 	
 	// 팩스번호 변경 및 추가
-	@PostMapping("replaceFax")
+	@PostMapping("/replaceFax")
 	public ModelAndView replaceFax(String newFax, HttpSession session) {
 		ModelAndView mav = new ModelAndView("common/alert");
 		PersonDTO login = (PersonDTO)session.getAttribute("login");
@@ -387,6 +318,29 @@ public class PersonController {
 		session.setAttribute("login", login);
 		mav.addObject("msg", msg);
 		mav.addObject("value", value);
+		return mav;
+	}
+	
+	//휴대전화 변경
+	@PostMapping("/replacePhone")
+	public ModelAndView replacePhone(String newPhone, HttpSession session) {
+		ModelAndView mav = new ModelAndView("common/alert");
+		PersonDTO login = (PersonDTO)session.getAttribute("login");
+		login.setPerson_phone(newPhone);
+		int row = ps.updatePhone(login);
+		String msg = null;
+		String value = null;
+		if(row != 0) {
+			msg = "휴대전화가 변경되었습니다";
+			value = "myPageUpdateSuccess";
+		}
+		else {
+			msg = "휴대전화 변경 실패";
+		}
+		session.setAttribute("login", login);
+		mav.addObject("msg", msg);
+		mav.addObject("value", value);
+		
 		return mav;
 	}
 }

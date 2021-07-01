@@ -84,7 +84,7 @@ public interface ReserveDAO {
 	@Delete("delete from reserveTime where reserveTime_idx=#{reserveTime_idx}")
 	int deleteReserveTime(int reserveTime_idx);
 
-	@Update("update reserve set reserve_status=#{reserve_status} where reserve_idx=#{reserve_idx}")
+	// sqlmap-reserve.xml에 있습니다
 	int statusChange(ReserveDTO dto);
 
 	@Update("update reserve set reserve_viewCount = reserve_viewCount + 1 where reserve_idx=#{reserve_idx}")

@@ -3,26 +3,36 @@
 <%@ include file="../layout/header.jsp" %>
 <section class="page-section">
 	<div class = "email main container">
-		<h2>본인확인 이메일 주소와 입력한 이메일 주소가 같아야, 인증번호를 받을 수 있습니다.</h2>
-		아이디 : <input type = "text" name = "input_id" id = "input_id" class="form-control" style = "width: 20%; display: inline;"><br>
-		이메일 : <input type = "email" name = "input_email" id = "input_email" class="form-control" style = "width: 20%; display: inline;">
-		<button id = "receiveAuthBtn" class = "btn btn-primary btn-xl">인증번호 받기</button>
-		
-		<div class = "check_font" id = "email_checkDiv"></div>
-			
-		<div class = "hiddenNone" id = "authMailDiv">
-			<input type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호 입력" class="form-control" style = "width: 20%; display: inline;">
-			<button id = "injung" class = "btn btn-primary btn-xl">인증하기</button>
-			<div id = "injungSuccessDiv"></div>
-			<div class = "hiddenNone" id = "injungform">
-				<form method = "post" action = "${cpath }/common/repwByEmail">
-					<input type = "hidden" name = "person_check" value = "${person_check }">
-					<input type = "hidden" id = "person_id" name = "person_id">
-					<input type = "hidden" id = "person_email" name = "person_email">
-					<input type = "submit" value = "다음" class = "btn btn-primary btn-xl">
-				</form>
-			</div>
-		</div>
+		<h4>비밀번호 재발급하는 곳입니다.</h4>
+		<h4>본인확인 이메일 주소와 입력한 이메일 주소가 같아야, 인증번호를 받을 수 있습니다.</h4>
+		<hr>
+		<table class = "table dataTable-table">
+			<tr>
+				<td width="10%" style = "vertical-align: middle;">아이디</td>
+				<td><input type = "text" name = "input_id" id = "input_id" class="form-control" style = "width: 20%; display: inline;"></td>
+			</tr>
+			<tr>
+				<td width="10%" style = "vertical-align: middle;">이메일</td>
+				<td>
+					<input type = "email" name = "input_email" id = "input_email" class="form-control" style = "width: 20%; display: inline;">
+					<button id = "receiveAuthBtn" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">인증번호 받기</button>
+					<div class = "check_font" id = "email_checkDiv"></div>
+					<div class = "hiddenNone" id = "authMailDiv">
+						<input type = "text" id = "authNumber" name = "authNumber" placeholder="인증번호 입력" class="form-control" style = "width: 20%; display: inline;">
+						<button id = "injung" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">인증하기</button>
+						<div id = "injungSuccessDiv"></div>
+						<div class = "hiddenNone" id = "injungform">
+							<form method = "post" action = "${cpath }/common/repwByEmail">
+								<input type = "hidden" name = "person_check" value = "${person_check }">
+								<input type = "hidden" id = "person_id" name = "person_id">
+								<input type = "hidden" id = "person_email" name = "person_email">
+								<input type = "submit" value = "다음" class = "btn btn-primary btn-sm" style = "height: 37px; margin-bottom: 3px;">
+							</form>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
 	</div>
 </section>
 <script>

@@ -3,6 +3,7 @@ package com.itbank.dao;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
@@ -72,4 +73,13 @@ public interface BoardDAO {
 
 	@Update("update serCen set serCen_viewCount = serCen_viewCount + 1 where serCen_idx=#{serCen_idx}")
 	int serCenViewCountPlus(int serCen_idx);
+
+	@Delete("delete review where review_idx=#{review_idx}")
+	int reviewDelete(int review_idx);
+
+	@Delete("delete reply where reply_idx=#{reply_idx}")
+	int replyDelete(int reply_idx);
+
+	@Select("select reply_bnum from reply where reply_idx=#{reply_idx}")
+	int selectReview_idx(int reply_idx);
 }
