@@ -8,12 +8,12 @@
 			<form method = "post">
 				<input type = "hidden" name = "review_idx" value = "${dto.reserve_idx }">
 				<input type = "hidden" name = "review_engiId" value = "${dto.reserve_engiId }">
-				<input type = "text" name = "review_custId" value = "${dto.reserve_custId }">
+				<input type = "hidden" name = "review_custId" value = "${dto.reserve_custId }">
 				<input type = "hidden" name = "review_compBelong" value = "${dto.reserve_compBelong }">
 				<table class = "table dataTable-table">
 	
 				<tr>
-					<td><input type = "text" name = "review_title" placeholder="제목 입력" class = "form-control" style = "width: 20%;"></td>
+					<td><input type = "text" name = "review_title" placeholder="제목 입력" class = "form-control" style = "width: 30%;"></td>
 				</tr>
 				<tr>
 					<td><textarea name = "review_content" class = "form-control"></textarea></td>

@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
     
         <!-- Footer-->
-        <footer class="footer text-center">
+        <footer class="footer text-center" style = "margin-top: 100px;">
             <div class="container">
             <h2 class="page-section-heading text-center text-uppercase text-white">developer</h2>
                 <!-- Icon Divider-->

@@ -4,10 +4,9 @@
 <section class = "page-section">
 	<div class = "container">
 		<a href = "${cpath }/board/faq?page=1" class = "btn btn-primary btn-lg">자주 묻는 질문</a>
-		<a href = "${cpath }/board/notice?page=1" class = "btn btn-primary btn-lg">공지사항</a>
+		<a href = "${cpath }/board/notice?page=1" class = "btn btn-primary btn-lg" style = "background-color: #490000">공지사항</a>
 	</div>
-	<div class="card mb-4 container">
-		<h2>공지사항</h2>
+	<div class="card mb-4 container" style = "margin-top: 20px;">
 		<div class="card-body">
 			<table class = "table dataTable-table">
 				<thead>
@@ -37,7 +36,7 @@
 				</tbody>
 			</table>
 		</div>
-		<div>
+		<div style = "margin-bottom: 10px;">
 			<form>
 				<input type = "hidden" name = "page" value = "1">
 				<select name = "type" class = "form-control" style = "width: 10%; display: inline;">

@@ -19,6 +19,7 @@ import com.itbank.dto.ReserveDTO;
 import com.itbank.dto.CustMemoDTO;
 import com.itbank.dto.PersonDTO;
 import com.itbank.dto.ReserveTimeDTO;
+import com.itbank.service.PersonService;
 import com.itbank.service.ReserveService;
 
 @Controller
@@ -26,7 +27,9 @@ import com.itbank.service.ReserveService;
 public class ReserveController {
 	
 	@Autowired ReserveService rs;
+	@Autowired PersonService ps;
 	
+	//예약리스트
 	@GetMapping("/statusList")
 	public ModelAndView statusList(String reserve_status, String type, String keyword, int page, HttpSession session) {
 		ModelAndView mav = new ModelAndView("/reserve/list");
@@ -65,10 +68,9 @@ public class ReserveController {
 	
 	//기사가 서비스 글 작성
 	@PostMapping("/reserve_new_for_engi")
-	public ModelAndView reserve(ReserveDTO reserveDTO, ReserveTimeDTO reserveTimeDTO, String address, String detailAddress) {
+	public ModelAndView reserve(ReserveDTO reserveDTO, ReserveTimeDTO reserveTimeDTO, String address, String detailAddress, HttpSession session) {
 		ModelAndView mav = new ModelAndView("/reserve/alert");
-		
-		rs.addressAndTitleSetting(reserveDTO, reserveTimeDTO, address, detailAddress);
+		rs.addressAndTitleSetting(reserveDTO, reserveTimeDTO, address, detailAddress, session);
 		
 		int row1 = rs.reserve(reserveDTO);//예약하는 메서드
 		int reserve_idx = rs.selectMaxIdxInReserve(reserveDTO.getReserve_engiId());//막 예약한 글의 idx를 불러오는 메서드
@@ -92,60 +94,41 @@ public class ReserveController {
 	}
 	
 	
-	//글 읽기/${dto.reserve_idx}?page=${map.page}&type=${map.type}&keyword=${map.keyword}&reserve_status=${map.reserve_status}
+	//예약글 읽기
 	@GetMapping("/read/{reserve_idx}")
 	public ModelAndView read(@PathVariable int reserve_idx, @RequestParam HashMap<String, Object> map) {
+		ModelAndView mav = new ModelAndView("/reserve/read");
 		
 		Boolean flag = rs.alreadyReviewWrite(reserve_idx);//flag==true라면 리뷰글이 작성된 상태
 		List<CustMemoDTO> list = rs.custMemoList(reserve_idx);
-		System.out.println("리스트 출력확인");
-		System.out.println(list.toString());
-		System.out.println("flag: " + flag);
-		ModelAndView mav = new ModelAndView("/reserve/read");
 		int row = rs.reserveViewCountPlus(reserve_idx);//예약글의 조회수 증가시키는 메서드
 		ReserveDTO dto = rs.selectOne(reserve_idx);//idx값을 통해 예약글 하나를 받아오는 메서드
 		mav.addObject("list", list);
 		
-		String ment = "(으)로 처리 상태 변경하기";
-		
-		
 		HashMap<String, String> btnList = rs.statusChangeBtn(dto);//현재 상태에 따라 바꿀 상태값의 버튼 이름 정하는 메서드
-		System.out.println(dto.getReserve_status());
-		System.out.println("btnList: " + btnList);
 		
 		mav.addObject("btnList", btnList);
-		mav.addObject("ment", ment);
+		mav.addObject("ment", "(으)로 처리 상태 변경하기");
 		mav.addObject("dto", dto);
 		mav.addObject("map", map);
 		mav.addObject("flag", flag);
 		return mav;
 	}
-	//미완성. 아직 더 봐야 해
+	
+	//상태변환
 	@GetMapping("statusChange/{reserve_idx}")
-	public ModelAndView statusChange(@PathVariable int reserve_idx, String nextStatus) {
-		ModelAndView mav = new ModelAndView("redirect:/reserve/read/" + reserve_idx);
+	public ModelAndView statusChange(@PathVariable int reserve_idx, String nextStatus, int reserve_price) {
+		ModelAndView mav = new ModelAndView("redirect:/reserve/read/" + reserve_idx + "?page=1");
 		
-		System.out.println("nextStatus: " + nextStatus);
 		ReserveDTO dto = rs.selectOne(reserve_idx);
-		String b1 = "";
-		if(nextStatus.equals("서비스중")) {
-			b1 = "서비스중";
+		
+		rs.setBtn(dto, nextStatus);//다음 상태값으로 현재 상태가 변경된다.
+		
+		if(dto.getReserve_status().equals("결제완료")){
+			dto.setReserve_price(reserve_price);
 		}
-		else if(nextStatus.equals("서비스완료")) {
-			b1 = "서비스완료";
-		}
-		else if(nextStatus.equals("결제완료")) {
-			b1 = "결제완료";
-		}
-		else if(nextStatus.equals("환불신청")){
-				b1 = "환불접수";
-			}
-		else if(nextStatus.equals("처리완료")) {
-			b1 = "처리완료";
-		}
-		dto.setReserve_status(b1);
-		System.out.println("status: " + dto.getReserve_status());
-		int row = rs.statusChange(dto);
+		
+		int row = rs.statusChange(dto);//상태 변경하는 메서드
 		return mav;
 	}
 	
@@ -156,44 +139,33 @@ public class ReserveController {
 		int hourCount = 8;
 		int dayCount = 14;
 		PersonDTO engi = rs.selectEngiOneByIdx(reserve_idx);
+		
 		List<PersonDTO> engiList = new ArrayList<PersonDTO>();
-		engiList.add(engi);
+		engiList.add(engi);//엔지니어 리스트에 엔지니어를 담는다.
 		
-		List<Integer> dayList = rs.dayList(dayCount);
+		List<Integer> dayList = rs.dayList(dayCount);//날짜리스트 메서드
 		
-		List<HashMap<String, Object>> reserveTimeList = rs.reserveTimeList(engiList, hourCount, dayCount);
+		List<HashMap<String, Object>> reserveTimeList = rs.reserveTimeList(engiList, hourCount, dayCount);//예약날짜및시간 메서드
 		
 		mav.addObject("engiList", engiList);
 		mav.addObject("dayList", dayList);
 		mav.addObject("reserveTimeList", reserveTimeList);
 		return mav;
 	}
+	
 	//예약시간 변경
 	@PostMapping("/changeReserveTime/{reserve_idx}")
 	public ModelAndView changeReserveTime(@PathVariable int reserve_idx, ReserveTimeDTO reserveTimeDTO) {
 		ModelAndView mav = new ModelAndView("reserve/alert");
-		
 		ReserveDTO reserveDTO = rs.selectOne(reserve_idx);
 		
-		rs.monthAndCustIdSetForReserve(reserveDTO, reserveTimeDTO);
+		rs.monthAndCustIdSetForReserve(reserveDTO, reserveTimeDTO);//월과 고객 아이디를 예약테이블에 셋팅하는 메서드
+		rs.reserveTitleSetting(reserveDTO, reserveTimeDTO);//예약글의 제목을 셋팅하는 메서드
 		
-		String title = null;
-		
-		if(reserveDTO.getReserve_custId() == null) {
-			title = String.format("[2021년 %d월 %d일 %d시 %s 고객님이 예약하셨습니다.]", 
-				reserveTimeDTO.getReserveTime_month(), reserveTimeDTO.getReserveTime_day(), 
-				reserveTimeDTO.getReserveTime_hour(), reserveDTO.getReserve_name());
-		}
-		else {
-			title = String.format("[2021년 %d월 %d일 %d시 %s(%s) 고객님이 예약하셨습니다.]", 
-				reserveTimeDTO.getReserveTime_month(), reserveTimeDTO.getReserveTime_day(), 
-				reserveTimeDTO.getReserveTime_hour(), reserveDTO.getReserve_name(), reserveDTO.getReserve_custId());
-		}
-		reserveDTO.setReserve_title(title);
-		int row1 = rs.reserveTitleChange(reserveDTO);
+		int row1 = rs.reserveTitleChange(reserveDTO);//실제 DB에 제목을 변경하는 메서드
 		
 		reserveTimeDTO.setReserveTime_idx(reserve_idx);
-		int row2 = rs.changeReserveTime(reserveTimeDTO);
+		int row2 = rs.changeReserveTime(reserveTimeDTO);//예약시간을 변경하는 메서드
 		String msg = null;
 		String value = null;
 		if(row1 != 0 && row2 != 0) {
@@ -207,14 +179,12 @@ public class ReserveController {
 		}
 		mav.addObject("msg", msg);
 		mav.addObject("value", value);
-		
 		return mav;
 	}
 
-	//게시글 수정
+	//예약글 수정하는 폼으로 이동
 	@GetMapping("/modify/{reserve_idx}")
 	public ModelAndView modify(@PathVariable int reserve_idx, @RequestParam HashMap<String, Object> map) {
-		
 		ModelAndView mav = new ModelAndView("reserve/modify");
 		ReserveDTO dto = rs.selectOne(reserve_idx);
 		mav.addObject("dto", dto);
@@ -222,24 +192,23 @@ public class ReserveController {
 		return mav;
 	}
 	
-	//"redirect:/board/read/" + dto.getIdx() + "/?page=1";
+	//예약글 수정하기
 	@PostMapping("/modify/{reserve_idx}")
 	public String modify(@PathVariable int reserve_idx, ReserveDTO inputData, @RequestParam HashMap<String, Object> map) {
 		String path = "redirect:/reserve/read/" + reserve_idx + 
 				"?page=" + map.get("page") + "&type=" + map.get("type")+ 
 				"&keyword=" + map.get("keyword") + "&reserve_status=" + map.get("reserve_status");
-		System.out.println(path);
 		ModelAndView mav = new ModelAndView(path);
-		int row = rs.modify(inputData);
+		int row = rs.modify(inputData);//예약글 수정하는 메서드
 		return path;
 	}
 	
-	//글 삭제 및 예약 취소
+	//예약 취소
 	@GetMapping("/delete/{reserve_idx}")
 	public ModelAndView delete(@PathVariable int reserve_idx) {
 		ModelAndView mav = new ModelAndView("/reserve/alert");
-		int row2 = rs.deleteReserveTime(reserve_idx);
-		int row1 = rs.deleteReserve(reserve_idx);
+		int row2 = rs.deleteReserveTime(reserve_idx);//예약시간 테이블에서 삭제하는 메서드
+		int row1 = rs.deleteReserve(reserve_idx);//예약테이블에서 삭제하는 메서드
 		String msg;
 		String value = null;
 		if(row1 != 0 && row2 != 0) {
@@ -259,14 +228,12 @@ public class ReserveController {
 	@GetMapping("/reserve_new_for_cust")
 	public ModelAndView reserve_new_for_cust() {
 		ModelAndView mav = new ModelAndView("/reserve/reserve_new_for_cust");
-		
 		int hourCount = 8;
 		int dayCount = 14;
 		
-		List<PersonDTO> engiList = rs.selectEngiAll();
-		List<Integer> dayList = rs.dayList(dayCount);
-		
-		List<HashMap<String, Object>> reserveTimeList = rs.reserveTimeList(engiList, hourCount, dayCount);
+		List<PersonDTO> engiList = rs.selectEngiAll();//가입되어 있는 모든 기사들을 모두 담는 리스트
+		List<Integer> dayList = rs.dayList(dayCount);//날짜리스트
+		List<HashMap<String, Object>> reserveTimeList = rs.reserveTimeList(engiList, hourCount, dayCount);//예약날짜및시간 메서드
 		
 		mav.addObject("engiList", engiList);
 		mav.addObject("dayList", dayList);
@@ -274,38 +241,32 @@ public class ReserveController {
 		return mav;
 	}
 	
-	// 고객이 서비스 글 쓰기
+	// 고객이 서비스 예약하기
 	@PostMapping("/reserve_new_for_cust")
-	public ModelAndView reserve_new_for_cust(ReserveDTO reserveDTO, ReserveTimeDTO reserveTimeDTO){
+	public ModelAndView reserve_new_for_cust(ReserveDTO reserveDTO, ReserveTimeDTO reserveTimeDTO) throws Exception{
 		ModelAndView mav = new ModelAndView("reserve/alert");
-		PersonDTO cust = rs.selectOneById(reserveDTO.getReserve_custId());
-		PersonDTO engi = rs.selectOneById(reserveTimeDTO.getReserveTime_engiId());
-		
-		System.out.println("engi.comp: " + engi.getPerson_belong());
-		
+		PersonDTO engi = rs.selectOneById(reserveTimeDTO.getReserveTime_engiId());//엔지니어의 아이디로 엔지니어 객체 뽑기
 		
 		reserveDTO.setReserve_engiId(reserveTimeDTO.getReserveTime_engiId());
 		reserveDTO.setReserve_compBelong(engi.getPerson_belong());
 		
-		rs.monthAndCustIdSetForReserve(reserveDTO, reserveTimeDTO);
+		rs.monthAndCustIdSetForReserve(reserveDTO, reserveTimeDTO);//월과 고객 아이디를 예약테이블에 셋팅하는 메서드
+		rs.reserveTitleSetting(reserveDTO, reserveTimeDTO);//예약글의 제목을 셋팅하는 메서드
 		
-		String title = String.format("[2021년 %d월 %d일 %d시 %s(%s) 고객님이 예약하셨습니다.]", 
-				reserveTimeDTO.getReserveTime_month(), reserveTimeDTO.getReserveTime_day(), 
-				reserveTimeDTO.getReserveTime_hour(), reserveDTO.getReserve_name(), reserveDTO.getReserve_custId());
-		reserveDTO.setReserve_title(title);
+		String title = reserveDTO.getReserve_title();
+		String msg1 = ps.any(reserveDTO.getReserve_phone(), title);//고객에게 문자 전송
+		String msg2 = ps.any(engi.getPerson_phone(), title);//기사에게 문자 전송
 		
-		int row1 = rs.reserve(reserveDTO);
+		int row1 = rs.reserve(reserveDTO);//예약하기
 		int reserve_idx = rs.selectMaxIdxInReserve(reserveDTO.getReserve_engiId());
 		reserveTimeDTO.setReserveTime_idx(reserve_idx);
-		int row2 = rs.insertReserveTime(reserveTimeDTO);
-		
+		int row2 = rs.insertReserveTime(reserveTimeDTO);//예약시간 테이블에도 DB값 넣기
 		String msg = null;
 		String value = null;
 		if(row1 == 1 && row2 == 1) {
 			msg = "예약 성공";
 			value = "reserveSuccess";
 			mav.addObject("reserve_idx", reserve_idx);
-			
 		}
 		else {
 			msg = "예약 실패";

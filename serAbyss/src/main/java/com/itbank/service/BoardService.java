@@ -184,4 +184,16 @@ public class BoardService {
 	public int serCenViewCountPlus(int serCen_idx) {
 		return dao.serCenViewCountPlus(serCen_idx);
 	}
+
+	public int reviewDelete(int review_idx) {
+		return dao.reviewDelete(review_idx);
+	}
+
+	public int replyDelete(int reply_idx) {
+		return dao.replyDelete(reply_idx);
+	}
+
+	public int selectReview_idx(int reply_idx) {
+		return dao.selectReview_idx(reply_idx);
+	}
 }

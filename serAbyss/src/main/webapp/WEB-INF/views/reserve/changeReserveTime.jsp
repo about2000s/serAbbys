@@ -8,20 +8,20 @@
 				<tr>
 					<td>
 						<div>
-<!-- 							<h2>기사</h2> -->
-							<c:forEach var = "i" items = "${engiIdList }">
-								<label><input type = "radio" name = "reserveTime_engiId" value = "${i }" checked class = "form-check-input">${i }</label>
+							<h2>담당 기사</h2>
+							<c:forEach var = "i" items = "${engiList }">
+								<label><input type = "radio" name = "reserveTime_engiId" value = "${i.person_id }" checked class = "form-check-input">${i.person_id }(${i.person_name })</label>
 							</c:forEach>
 						</div>
-						
-						<div>
+						<hr>
+						<div style = "margin-top: 50px;">
 							<h2>날짜 선택</h2>
 							<c:forEach var = "j" items = "${dayList }">
-								<label><input type = "radio" name = "reserveTime_day" value = "${j }" class = "form-check-input">${j }</label>
+								<label><input type = "radio" name = "reserveTime_day" value = "${j }" class = "form-check-input">${j }일</label>
 							</c:forEach>
 						</div>
-						
-						<div>
+						<hr>
+						<div style = "margin-top: 50px;">
 							<h2>시간 선택(이미 예약이 되어있는 시간은 비어있습니다)</h2>
 	<%-- 						<c:forEach var = "i" items = "${engiIdList }"> --%>
 								<c:forEach var = "j" items = "${dayList }">
@@ -39,10 +39,39 @@
 				</tr>
 			</table>
 		</form>
-		<button class = "btn btn-primary btn-xl" type = "submit" id = "submitBtn">예약시간 변경하기</button>
+		<button class = "btn btn-primary btn-xl" type = "submit" id = "submitBtn" disabled="disabled">예약시간 변경하기</button>
 		<button class = "btn btn-primary btn-xl" onclick="history.back()">취소</button>
 	</div>
 </section>
+
+<script>
+const submitBtn = document.getElementById('submitBtn')
+let dayFlag = false
+let hourFlag = false
+
+$('input[name="reserveTime_day"]').change(function(event){
+	console.log($('input[name="reserveTime_day"]:checked').val())
+	if($('input[name="reserveTime_day"]:checked').val()) dayFlag = true
+	console.log('dayFlag: ' + dayFlag)
+	check()
+})
+$('input[name="reserveTime_hour"]').change(function(){
+	console.log($('input[name="reserveTime_hour"]:checked').val())
+	if($('input[name="reserveTime_hour"]:checked').val()) hourFlag = true
+	console.log('hourFlag: ' + hourFlag)
+	check()
+})
+
+function check(event){
+	if(dayFlag && hourFlag){
+		submitBtn.disabled = false
+	}
+	else{
+		submitBtn.disabled = true
+	}
+}
+</script>
+
 <script>
 
 document.getElementById('submitBtn').onclick = function(event){

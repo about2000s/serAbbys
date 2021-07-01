@@ -5,28 +5,34 @@
 
 <section class="page-section">
 	<div class="card mb-4 container">
-		<h2>리뷰보기</h2>
 		<div class="card-body">
 			<table class = "table dataTable-table" id="datatablesSimple">
 				<thead>
 					<tr>
-						<th width="10%">평점</th>
+						<th width="10%">별점</th>
 						<th width="50%">제목</th>
 						<th width="10%">작성자</th>
-						<th width="10%">날짜</th>
 						<th width="10%">조회수</th>
+						<th width="10%">날짜</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var = "dto" items = "${map.mapList }">
+					<c:if test="${!empty map.mapList }">
+						<c:forEach var = "dto" items = "${map.mapList }">
+							<tr>
+								<td>${dto.review_star }</td>
+								<td><a href="${cpath }/board/reviewRead/${dto.review_idx}?type=${map.type }&keyword=${map.keyword }&page=${map.page }">${dto.review_title}</a>&nbsp;[${dto.review_replyCount }]</td>
+								<td>${dto.review_custId}</td>
+								<td>${dto.review_viewCount }</td>
+								<td>${dto.review_reg }</td>
+							</tr>
+						</c:forEach>
+					</c:if>
+					<c:if test="${empty map.mapList }">
 						<tr>
-							<td>${dto.review_star }</td>
-							<td><a href="${cpath }/board/reviewRead/${dto.review_idx}?type=${map.type }&keyword=${map.keyword }&page=${map.page }">${dto.review_title}</a>&nbsp;[${dto.review_replyCount }]</td>
-							<td>${dto.review_custId}</td>
-							<td>${dto.review_reg }</td>
-							<td>${dto.review_viewCount }</td>
+							<td colspan="5" align="center"><h4>작성된 리뷰글이 없습니다.</h4></td>
 						</tr>
-					</c:forEach>
+					</c:if>
 				</tbody>
 			</table>
 		</div>

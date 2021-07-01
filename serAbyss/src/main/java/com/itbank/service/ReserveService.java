@@ -133,6 +133,11 @@ public class ReserveService {
 			int year = today.get(Calendar.YEAR);
 			int month = today.get(Calendar.MONTH) + 1;
 			int day = today.get(Calendar.DATE) + 1;
+			
+			if(today.get(Calendar.DATE) == today.getActualMaximum(Calendar.DATE)) {
+				day = 1;
+			}
+			
 			int hour = 6; // for문으로 반복문을 돌려놓고 숫자계산 후 "" 더해서 HashMap에 넣자!
 			for(int j=0;j<hourCount*(dayCount + 1);j++) {
 				HashMap<String, Object> map = new HashMap<String, Object>();
@@ -244,7 +249,8 @@ public class ReserveService {
 		return statusList;
 	}
 	
-	public void addressAndTitleSetting(ReserveDTO reserveDTO, ReserveTimeDTO reserveTimeDTO, String address, String detailAddress) {
+	public void addressAndTitleSetting(ReserveDTO reserveDTO, ReserveTimeDTO reserveTimeDTO, String address, String detailAddress, HttpSession session) {
+		PersonDTO login = (PersonDTO)session.getAttribute("login");
 		String fullAddress = address + " " + detailAddress;
 		reserveDTO.setReserve_address(fullAddress);
 		
@@ -256,7 +262,8 @@ public class ReserveService {
 		reserveDTO.setReserve_title(title);
 		
 		try {
-			String msg = ps.any(reserveDTO.getReserve_phone(), title);
+			String msg1 = ps.any(reserveDTO.getReserve_phone(), title);
+			String msg2 = ps.any(login.getPerson_phone(), title);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -291,5 +298,41 @@ public class ReserveService {
 		btnList.put("b1", b1);
 		btnList.put("b2", b2);
 		return btnList;
+	}
+	
+	public void setBtn(ReserveDTO dto, String nextStatus) {
+		String b1 = "";
+		if(nextStatus.equals("서비스중")) {
+			b1 = "서비스중";
+		}
+		else if(nextStatus.equals("서비스완료")) {
+			b1 = "서비스완료";
+		}
+		else if(nextStatus.equals("결제완료")) {
+			b1 = "결제완료";
+		}
+		else if(nextStatus.equals("환불신청")){
+				b1 = "환불접수";
+			}
+		else if(nextStatus.equals("처리완료")) {
+			b1 = "처리완료";
+		}
+		dto.setReserve_status(b1);
+	}
+	
+	public void reserveTitleSetting(ReserveDTO reserveDTO, ReserveTimeDTO reserveTimeDTO) {
+		String title = null;
+		
+		if(reserveDTO.getReserve_custId() == null) {
+			title = String.format("[2021년 %d월 %d일 %d시 %s 고객님이 예약하셨습니다.]", 
+				reserveTimeDTO.getReserveTime_month(), reserveTimeDTO.getReserveTime_day(), 
+				reserveTimeDTO.getReserveTime_hour(), reserveDTO.getReserve_name());
+		}
+		else {
+			title = String.format("[2021년 %d월 %d일 %d시 %s(%s) 고객님이 예약하셨습니다.]", 
+				reserveTimeDTO.getReserveTime_month(), reserveTimeDTO.getReserveTime_day(), 
+				reserveTimeDTO.getReserveTime_hour(), reserveDTO.getReserve_name(), reserveDTO.getReserve_custId());
+		}
+		reserveDTO.setReserve_title(title);
 	}
 }

@@ -8,6 +8,8 @@
 	if('${value}' == 'myPageUpdateSuccess') location.replace('${cpath}/common/myPage')
 	else if('${value}' == 'myPageUpdateFail' || '${value}' == 'loginFail' || '${value}' == 'joinFail') location.replace('javascript:history.go(-1)')
 	else if('${value}' == 'joinSuccess') location.replace('${cpath}')
+	else if('${value}' == 'myPageUpdateFail' || '${value}' == 'loginFail' || '${value}' == 'joinFail') location.replace('javascript:history.go(-1)')
+	else if('${value}' == 'joinSuccess') location.replace('${cpath}')
  	else location.replace('javascript:history.go(-1)')
 </script>
 
