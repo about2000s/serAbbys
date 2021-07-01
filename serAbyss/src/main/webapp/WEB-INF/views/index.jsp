@@ -134,10 +134,10 @@
                 <!-- About Section Content-->
                 <div class="row">
                     <div class="col-lg-4 ms-auto">
-                    	<p class="lead">고객 또는 고객사는 Sir-Abbys를 통해 엔지니어에게 직접 예약요청을 할 수 있습니다.또한 엔지니어의 기술적 해결능력을 
+                    	<p class="lead">고객 또는 고객사는 Sir-Abyss를 통해 엔지니어에게 직접 예약요청을 할 수 있습니다.또한 엔지니어의 기술적 해결능력을 
                     	리뷰로 남겨 공유하고 데이터를 쌓을 수 있습니다</p></div>
                     <div class="col-lg-4 me-auto">
-                    	<p class="lead">출장이 잦은 엔지니어와 백업조직은 Sir-abbys를 통해
+                    	<p class="lead">출장이 잦은 엔지니어와 백업조직은 Sir-Abyss를 통해
                     	고객의 서비스 요청 등을 영구적으로 데이터베이스에 기록하고 필요할 때 불러올 수 있습니다.</p></div>
                 </div>
                 <!-- About Section Button-->
