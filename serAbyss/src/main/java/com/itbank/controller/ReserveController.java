@@ -1,6 +1,7 @@
 package com.itbank.controller;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -102,16 +103,25 @@ public class ReserveController {
 		Boolean flag = rs.alreadyReviewWrite(reserve_idx);//flag==true라면 리뷰글이 작성된 상태
 		List<CustMemoDTO> list = rs.custMemoList(reserve_idx);
 		int row = rs.reserveViewCountPlus(reserve_idx);//예약글의 조회수 증가시키는 메서드
-		ReserveDTO dto = rs.selectOne(reserve_idx);//idx값을 통해 예약글 하나를 받아오는 메서드
+		ReserveDTO reserveDTO = rs.selectOne(reserve_idx);//idx값을 통해 예약글 하나를 받아오는 메서드
+		
+		ReserveTimeDTO reserveTimeDTO = rs.selectReserveTimeOne(reserve_idx);
+		Calendar today = Calendar.getInstance();
+		boolean isItToday = false;
+		if(today.get(Calendar.DATE) == reserveTimeDTO.getReserveTime_day()) {
+			isItToday = true;
+		}
+		
 		mav.addObject("list", list);
 		
-		HashMap<String, String> btnList = rs.statusChangeBtn(dto);//현재 상태에 따라 바꿀 상태값의 버튼 이름 정하는 메서드
+		HashMap<String, String> btnList = rs.statusChangeBtn(reserveDTO);//현재 상태에 따라 바꿀 상태값의 버튼 이름 정하는 메서드
 		
 		mav.addObject("btnList", btnList);
 		mav.addObject("ment", "(으)로 처리 상태 변경하기");
-		mav.addObject("dto", dto);
+		mav.addObject("reserveDTO", reserveDTO);
 		mav.addObject("map", map);
 		mav.addObject("flag", flag);
+		mav.addObject("isItToday", isItToday);
 		return mav;
 	}
 	

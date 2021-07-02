@@ -3,7 +3,6 @@
 <%@ include file="../layout/header.jsp"%>
 
 
-<link rel = "stylesheet" href = "https://www.w3schools.com/w3css/4/w3.css">
 <section class="page-section">
 	<div class="container">
 		<!-- 회원가입 폼 -->
@@ -49,24 +48,24 @@
 			</div>
 			<hr>
 			<div>
-				<span>아이디</span>
+				<span>*아이디</span>
 				<input class = "form-control" type = "text" id = "person_id" name = "person_id" style = "width: 20%;">
 				<div class = "check_font" id = "id_check"></div>
 				<hr>
-				<span>비밀번호</span>
+				<span>*비밀번호</span>
 				<input class = "form-control" type = "password" id = "person_pw" name = "person_pw" style = "width: 20%;">
 				<div class = "check_font" id = "pw_check"></div>
 				<hr>
-				<span>비밀번호 확인</span>
+				<span>*비밀번호 확인</span>
 				<input class = "form-control" type = "password" id = "person_pw2" name = "person_pw2" style = "width: 20%;">
 				<div class = "check_font" id = "pw2_check"></div>
 				<hr>
-				<span>이름</span>
+				<span>*이름</span>
 				<input class = "form-control" type = "text" id = "person_name" name = "person_name" style = "width: 20%;">
 				<div class = "check_font" id = "name_check"></div>
 				
 				<hr>
-				<span>생년월일 ex)980819</span>
+				<span>*생년월일 ex)980819</span>
 				<input class = "form-control" type = "text" id = "person_birth" name = "person_birth" style = "width: 20%;">
 				<div class = "check_font" id = "birth_check"></div>
 				<hr>
@@ -79,7 +78,7 @@
 				<div class = "check_font" id = "fax_check"></div>
 				<hr>
 				<div>
-					주소<br>
+					*주소<br>
 					<input class = "form-control" type="text" id="postcode" placeholder="우편번호" readonly style = "width: 10%; display: inline;">
 					<input type="button" onclick="execDaumPostcode()" value="우편번호 찾기" class = "btn btn-primary btn-sm" style = "height: 37px;"><br>
 					<input class = "form-control" type="text" id="address" readonly name = "address" placeholder="주소" style = "width: 20%; margin-top: 10px;"><br>
@@ -88,7 +87,7 @@
 				</div>
 			</div>
 			<hr>
-				이메일 입력<br>
+				*이메일<br>
 				<input class = "form-control" type = "text" id = "person_email" name = "person_email" style = "width: 20%; display: inline;">
 				<button class = "btn btn-primary btn-sm" id = "receiveAuthBtn" style = "height: 37px;">인증번호 받기</button>
 				
@@ -104,7 +103,7 @@
 					<div id = "injungSuccessDiv"></div>
 				</div>
 				<hr>
-				 휴대폰번호 입력<br>
+				 *휴대전화<br>
 				<input type="text" name="person_phone" class = "form-control" style = "width: 20%; display: inline;"><!-- 나중에 문자열 스플릿 해서 내보내면 된다! -->
 		        <button class = "btn btn-primary btn-sm" id = "phoneInjungBtn" style = "height: 37px;">인증번호 받기</button>
 		    	

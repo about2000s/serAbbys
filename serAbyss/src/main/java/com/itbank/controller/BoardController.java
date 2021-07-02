@@ -22,7 +22,7 @@ import com.itbank.service.BoardService;
 @Controller
 @RequestMapping("/board")
 public class BoardController {
-
+	
 	@Autowired
 	private BoardService bs;
 

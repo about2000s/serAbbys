@@ -20,8 +20,8 @@
 				</tr>
 				<tr>
 					<td>별점<br>
-						<c:forEach var = "i" begin="1" end = "10">
-							<label><input type = "radio" name = "review_starScore" value = "${i }" class = "form-check-input">${i }</label>
+						<c:forEach var = "i" begin="1" end = "5">
+							<label><input type = "radio" name = "review_starScore" value = "${i }" class = "form-check-input">${i }점</label>
 						</c:forEach>
 					</td>
 				</tr>

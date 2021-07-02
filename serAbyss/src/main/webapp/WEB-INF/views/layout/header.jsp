@@ -19,6 +19,7 @@
 <link href="https://fonts.googleapis.com/css?	family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="${cpath }/resources/css/styles.css" rel="stylesheet" />
+<link href="${cpath }/resources/css/w3school.css" rel="stylesheet" />
 <link href="${cpath }/resources/css/custum.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <title>엔지니어를 위한 플랫폼 써어-비스(SerAbbys)</title>
@@ -50,8 +51,8 @@
 				        	</c:when>
 				        	<c:when test="${login.person_check == 'a' }">
 				        		<%-- 마스터 로그인시 --%>
-                    	 	    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-1 rounded" href="${cpath }/reserve/reserve_new_for_cust">고객서비스신청</a></li>
-				        		<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-1 rounded" href="${cpath }/reserve/reserve_new_for_engi">예약하기</a></li>
+                    	 	    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-1 rounded" href="${cpath }/reserve/reserve_new_for_cust">고객예약</a></li>
+				        		<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-1 rounded" href="${cpath }/reserve/reserve_new_for_engi">기사예약</a></li>
 				        		<li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-1 rounded" href="${cpath }/reserve/statusList?page=1&reserve_status">예약목록보기</a></li>
                     	 	    <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="${cpath }/custMemo/crm">고객응대하기</a></li>
 				        	</c:when>

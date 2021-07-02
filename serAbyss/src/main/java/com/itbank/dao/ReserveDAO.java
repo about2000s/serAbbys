@@ -93,4 +93,7 @@ public interface ReserveDAO {
 	@Select("select * from person where person_id=#{engi_id}")
 	PersonDTO selectEngiById(String engiId);
 
+	@Select("select * from reserveTime where reserveTime_idx=#{reserve_idx}")
+	ReserveTimeDTO selectReserveTimeOne(int reserve_idx);
+
 }

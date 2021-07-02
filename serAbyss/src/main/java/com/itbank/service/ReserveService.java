@@ -335,4 +335,8 @@ public class ReserveService {
 		}
 		reserveDTO.setReserve_title(title);
 	}
+
+	public ReserveTimeDTO selectReserveTimeOne(int reserve_idx) {
+		return dao.selectReserveTimeOne(reserve_idx);
+	}
 }
